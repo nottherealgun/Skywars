@@ -1,0 +1,17 @@
+extends Node2D
+
+var players_in_vicinity = []
+
+func _process(delta):
+	if players_in_vicinity.size() > 0:
+		pass
+
+func _on_area_2d_area_entered(area):
+	var entity = area.get_parent()
+	if entity.is_in_group("player") and not entity in players_in_vicinity:
+		players_in_vicinity.append(entity)
+
+func _on_area_2d_area_exited(area):
+	var entity = area.get_parent()
+	if entity.is_in_group("player") and entity in players_in_vicinity:
+		players_in_vicinity.erase(entity)

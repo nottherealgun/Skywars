@@ -2,7 +2,7 @@ class_name Enemy extends Node2D
 
 @export var max_health = 2
 var health = max_health
-@export var speed = 2
+@export var speed = 1
 @export var damage = 1
 var move_vec := Vector2.ZERO
 

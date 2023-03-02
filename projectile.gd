@@ -1,7 +1,7 @@
 class_name Projectile extends Area2D
 
 var direction := Vector2.RIGHT
-var speed = 2
+var speed = 10
 @export var damage = 1
 
 func _process(delta):

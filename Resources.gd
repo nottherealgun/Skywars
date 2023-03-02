@@ -2,8 +2,9 @@ extends Node
 # Resources
 
 @onready var Main = get_node("/root/Main")
-@onready var Cam = get_node("/root/Main/MainCam")
 @onready var Map = get_node("/root/Main/TileMap")
+@onready var GUI = get_node("/root/Main/GUI")
+@onready var Dev = get_node("/root/Main/GUI/Dev")
 
 var active_entities = []
 
