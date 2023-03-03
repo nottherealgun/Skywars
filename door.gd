@@ -2,11 +2,9 @@
 extends Node2D
 
 @export var horizontal := true
+@export var room : PackedScene
 
 var players_in_vicinity = []
-var room : Dictionary
-var return_door = false
-var side
 
 func _ready():
 	PlayerManager.connect("interact",enter_room)
@@ -15,15 +13,7 @@ func _ready():
 
 func enter_room(player):
 	if player in players_in_vicinity:
-		if room == {}:
-			if return_door:
-				room = LevelManager.make_room()
-			else:
-				room = LevelManager.make_room(self)
-			$Dev.text = str(room)
-		else:
-			LevelManager.clear_level()
-			LevelManager.install_room(room)
+		pass
 
 func _on_area_2d_area_entered(area):
 	var entity = area.get_parent()

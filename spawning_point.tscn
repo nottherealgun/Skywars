@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://brteij4uvnd2i"]
+
+[ext_resource type="Texture2D" uid="uid://ba6ktq5eioywu" path="res://dwStill.png" id="1_njfg3"]
+
+[node name="SpawningPoint" type="Marker2D"]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.196078)
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_njfg3")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -46.0
+offset_top = -40.0
+offset_right = 46.0
+offset_bottom = -22.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 10
+text = "Spawnpoint"
+horizontal_alignment = 1
+vertical_alignment = 1

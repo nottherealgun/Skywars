@@ -5,7 +5,7 @@ signal interact(from_player)
 
 @export var max_health = 100
 var health = max_health
-@export var speed = 3
+@export var speed = 1
 var move_vec := Vector2.ZERO
 var aim_vec := Vector2.ZERO
 
@@ -45,9 +45,9 @@ func _move_update(delta):
 		move_vec.x -= 1
 	if Input.is_action_pressed("p1_right"):
 		move_vec.x += 1
-	player.position += move_vec.normalized()*delta*speed*100
-	player.position.x = clamp(player.position.x, 0, Global.Map.get_used_rect().size.x*128)
-	player.position.y = clamp(player.position.y, 0, Global.Map.get_used_rect().size.y*128)
+	player.position += move_vec.normalized()*delta*speed*200
+	player.position.x = clamp(player.position.x, 0, Global.MAP_RECT.x)
+	player.position.y = clamp(player.position.y, 0, Global.MAP_RECT.y)
 
 func shoot():
 	Global.spawn_projectile("projectile",player.position,aim_vec)

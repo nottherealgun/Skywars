@@ -2,9 +2,13 @@ extends Node
 # Resources
 
 @onready var Main = get_node("/root/Main")
-@onready var Map = get_node("/root/Main/TileMap")
+@onready var Map = get_node("/root/Main/Map")
 @onready var GUI = get_node("/root/Main/GUI")
 @onready var Dev = get_node("/root/Main/GUI/Dev")
+
+@onready var MAP_RECT : Vector2 = Map.get_used_rect().size*128
+
+# Entities
 
 var active_entities = []
 
@@ -32,6 +36,8 @@ func kill(entity:Node):
 func kill_all():
 	for e in active_entities:
 		kill(e)
+
+# Doors
 
 func get_map_perimeter():
 	var perimeter = Map.get_used_rect().size.x*2
@@ -75,3 +81,23 @@ func new_door(room_size=Map.get_used_rect().size):
 func install_door(node:Node):
 	active_doors.append(node)
 	Main.add_child(node)
+
+# Levels
+@onready var testmap = load("res://adit_building_1.tscn").instantiate()
+
+func sync_map():
+	var target_map = testmap
+	LevelManager.clear_level()
+	
+	for tile in target_map.get_node("Map").get_used_cells(0):
+		Map.set_cell(0,Vector2i(tile.x,tile.y),0,Vector2i(34,1))
+	MAP_RECT = Map.get_used_rect().size*128
+	
+	for entity in target_map.get_children():
+		if entity is TileMap or entity is Marker2D:
+			continue
+		target_map.remove_child(entity)
+		Main.add_child(entity)
+		
+		if entity.is_in_group("enemy"):
+			entity.target = Main.get_node("Player")

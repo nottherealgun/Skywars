@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b31mn2xrwcfkd" path="res://icon.svg" id="2_3u417"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bh81j"]
-size = Vector2(64, 64)
+size = Vector2(6, 6)
 
 [node name="Projectile" type="Area2D" groups=["projectile"]]
 y_sort_enabled = true
@@ -13,12 +13,13 @@ script = ExtResource("1_kv6im")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 1)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_3u417")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_bh81j")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." groups=["projectile"]]
+scale = Vector2(0.3, 0.3)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

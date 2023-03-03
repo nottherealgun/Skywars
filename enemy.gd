@@ -8,26 +8,30 @@ var move_vec := Vector2.ZERO
 
 var target : Node
 
+func _ready():
+	health = max_health
+
 func _process(delta):
 	_move_update(delta)
 	if health <= 0:
-		Global.destroy(self)
+		Global.kill(self)
 
 func _move_update(delta):
 	if is_instance_valid(target):
 		move_vec = position.direction_to(target.position)
 		var allies_vec := Vector2.ZERO
 		for ally in allies:
-			if ally.position.distance_to(position) <= 200:
-				allies_vec -= position.direction_to(ally.position)
-		position += move_vec * speed * delta * 100 + allies_vec
+			if ally.position.distance_to(position) <= 50:
+				allies_vec += position.direction_to(ally.position)/5
+		position += (move_vec-allies_vec) * speed * delta * 20
 
 var allies = []
 
 func _on_hitbox_area_entered(area):
 	if area.is_in_group("projectile"):
 		area.affect(self)
-		Global.destroy(area)
+		Global.kill(area)
+		$EffectsPlayer.play("injured")
 
 func _on_ally_detect_area_entered(area):
 	var ally = area.get_parent()
