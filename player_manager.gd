@@ -1,4 +1,5 @@
 extends Node
+signal interact(from_player)
 
 @onready var player = get_node("/root/Main/Player")
 
@@ -24,10 +25,15 @@ func _physics_process(delta):
 func _input_update():
 	aim_vec = Vector2(Input.get_action_strength("p1_right2") - Input.get_action_strength("p1_left2"),
 	Input.get_action_strength("p1_down2") - Input.get_action_strength("p1_up2")).normalized()
+	
 	player.get_node("Arrow").rotation = player.get_node("Arrow").position.angle_to_point(aim_vec)
+	player.get_node("Arrow").visible = (aim_vec != Vector2.ZERO)
+	
 	if Input.is_action_just_pressed("p1_primary"):
 			if aim_vec != Vector2.ZERO:
 				shoot()
+	if Input.is_action_just_pressed("p1_action"):
+		emit_signal("interact",player)
 				
 func _move_update(delta):
 	move_vec = Vector2.ZERO

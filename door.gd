@@ -1,10 +1,29 @@
+@tool
 extends Node2D
 
-var players_in_vicinity = []
+@export var horizontal := true
 
-func _process(delta):
-	if players_in_vicinity.size() > 0:
-		pass
+var players_in_vicinity = []
+var room : Dictionary
+var return_door = false
+var side
+
+func _ready():
+	PlayerManager.connect("interact",enter_room)
+	if !horizontal:
+		$Sprite.rotation_degrees = 90
+
+func enter_room(player):
+	if player in players_in_vicinity:
+		if room == {}:
+			if return_door:
+				room = LevelManager.make_room()
+			else:
+				room = LevelManager.make_room(self)
+			$Dev.text = str(room)
+		else:
+			LevelManager.clear_level()
+			LevelManager.install_room(room)
 
 func _on_area_2d_area_entered(area):
 	var entity = area.get_parent()

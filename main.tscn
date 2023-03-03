@@ -1,123 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://siwlpcy6tg40"]
+[gd_scene load_steps=7 format=3 uid="uid://siwlpcy6tg40"]
 
-[ext_resource type="Texture2D" uid="uid://wdq2gcr681a6" path="res://dwIdleSS.png" id="1_g850e"]
-[ext_resource type="Texture2D" uid="uid://bfn6ao7hsyee2" path="res://dwRunSS.png" id="2_m6euf"]
+[ext_resource type="SpriteFrames" uid="uid://bnvt35ic5s3ek" path="res://darwin.tres" id="1_gdtdo"]
 [ext_resource type="Texture2D" uid="uid://ceji5e5vk1khk" path="res://tileset x1.png" id="2_siqsm"]
 [ext_resource type="Texture2D" uid="uid://c8fdbjdlywnc" path="res://arrow.png" id="3_a1jw1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oscn4"]
 size = Vector2(128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v47ko"]
-atlas = ExtResource("1_g850e")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yirx0"]
-atlas = ExtResource("1_g850e")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2vb33"]
-atlas = ExtResource("1_g850e")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pgi3b"]
-atlas = ExtResource("1_g850e")
-region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3ll6i"]
-atlas = ExtResource("1_g850e")
-region = Rect2(256, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_81i22"]
-atlas = ExtResource("1_g850e")
-region = Rect2(320, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3oqdn"]
-atlas = ExtResource("2_m6euf")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g8gi6"]
-atlas = ExtResource("2_m6euf")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1gigu"]
-atlas = ExtResource("2_m6euf")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4rrvr"]
-atlas = ExtResource("2_m6euf")
-region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_msc8h"]
-atlas = ExtResource("2_m6euf")
-region = Rect2(256, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wngld"]
-atlas = ExtResource("2_m6euf")
-region = Rect2(320, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yf0w5"]
-atlas = ExtResource("2_m6euf")
-region = Rect2(384, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1rr1h"]
-atlas = ExtResource("2_m6euf")
-region = Rect2(448, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_j0xrl"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v47ko")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yirx0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2vb33")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pgi3b")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3ll6i")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_81i22")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3oqdn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g8gi6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1gigu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4rrvr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_msc8h")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wngld")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yf0w5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1rr1h")
-}],
-"loop": true,
-"name": &"run",
-"speed": 14.0
-}]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_buv47"]
 texture = ExtResource("2_siqsm")
@@ -373,10 +261,9 @@ shape = SubResource("RectangleShape2D_oscn4")
 [node name="Sprite" type="AnimatedSprite2D" parent="Player"]
 texture_filter = 1
 scale = Vector2(3, 3)
-sprite_frames = SubResource("SpriteFrames_j0xrl")
-animation = &"run"
+sprite_frames = ExtResource("1_gdtdo")
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.988586
 
 [node name="MainCam" type="Camera2D" parent="Player"]
 zoom = Vector2(1.2, 1.2)
@@ -389,6 +276,17 @@ texture_filter = 1
 scale = Vector2(4, 4)
 texture = ExtResource("3_a1jw1")
 offset = Vector2(25, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
@@ -409,3 +307,5 @@ texture_filter = 1
 scale = Vector2(4, 4)
 tile_set = SubResource("TileSet_o3yru")
 format = 2
+layer_0/tile_data = PackedInt32Array(0, 2228224, 1, 1, 2228224, 1, 65537, 2228224, 1, 65536, 2228224, 1, 131072, 2228224, 1, 131073, 2228224, 1, 131074, 2228224, 1, 65538, 2228224, 1, 2, 2228224, 1)
+metadata/_edit_lock_ = true

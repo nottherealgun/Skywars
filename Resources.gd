@@ -25,10 +25,53 @@ func spawn_enemy(enemy_name:String,pos:Vector2):
 	Main.add_child(new_enemy)
 	return new_enemy
 	
-func destroy(entity:Node):
+func kill(entity:Node):
 	active_entities.erase(entity)
 	entity.queue_free()
 
 func kill_all():
 	for e in active_entities:
-		destroy(e)
+		kill(e)
+
+func get_map_perimeter():
+	var perimeter = Map.get_used_rect().size.x*2
+	perimeter += Map.get_used_rect().size.y*2
+	return perimeter
+
+var active_doors = []
+
+func get_door_pos(size:Vector2i):
+	var door_pos : Vector2
+	var rand_pos = Vector2i(-1,-1)
+	var rand_side = ["left","top","right","bottom"][randi()%4]
+	var flip = true
+	match rand_side:
+		"left":
+			rand_pos.y = (randi()%size.y)
+			flip=false
+		"right":
+			rand_pos.x = size.x
+			rand_pos.y = (randi()%size.y)
+			flip=false
+		"top":
+			rand_pos.x = (randi()%size.x)
+		"bottom":
+			rand_pos.y = size.y
+			rand_pos.x = (randi()%size.x)
+		
+	door_pos = Map.map_to_local(rand_pos)
+	door_pos = Map.to_global(door_pos)
+		
+	return [door_pos,flip,rand_side]
+
+func new_door(room_size=Map.get_used_rect().size):
+	var new_door = load("res://door.tscn").instantiate()
+	var new = get_door_pos(room_size)
+	new_door.position = new[0]
+	new_door.horizontal = new[1]
+	new_door.side = new[2]
+	return new_door
+
+func install_door(node:Node):
+	active_doors.append(node)
+	Main.add_child(node)
