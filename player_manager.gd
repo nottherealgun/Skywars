@@ -50,4 +50,4 @@ func _move_update(delta):
 	player.position.y = clamp(player.position.y, 0, Global.MAP_RECT.y)
 
 func shoot():
-	Global.spawn_projectile("projectile",player.position,aim_vec)
+	Global.spawn_projectile("printer_proj_1",player.position,aim_vec)

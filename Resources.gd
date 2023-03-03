@@ -12,10 +12,11 @@ extends Node
 
 var active_entities = []
 
-func spawn_projectile(proj_name:String,pos:Vector2,dir:Vector2,dmg:=1):
+func spawn_projectile(proj_name:String,pos:Vector2,dir:Vector2,player_bullet=true,dmg:=1):
 	var new_proj = load("res://"+proj_name+".tscn").instantiate()
 	new_proj.position = pos
 	new_proj.direction = dir
+	new_proj.player_bullet = player_bullet
 	new_proj.damage = dmg
 	active_entities.append(new_proj)
 	Main.add_child(new_proj)
@@ -90,7 +91,8 @@ func sync_map():
 	LevelManager.clear_level()
 	
 	for tile in target_map.get_node("Map").get_used_cells(0):
-		Map.set_cell(0,Vector2i(tile.x,tile.y),0,Vector2i(34,1))
+		var tile_type = target_map.get_node("Map").get_cell_atlas_coords(0,tile)
+		Map.set_cell(0,Vector2i(tile.x,tile.y),0,tile_type)
 	MAP_RECT = Map.get_used_rect().size*128
 	
 	for entity in target_map.get_children():

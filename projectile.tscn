@@ -1,22 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://qnj5kja8he15"]
+[gd_scene load_steps=3 format=3 uid="uid://qnj5kja8he15"]
 
 [ext_resource type="Script" path="res://projectile.gd" id="1_kv6im"]
-[ext_resource type="Texture2D" uid="uid://b31mn2xrwcfkd" path="res://icon.svg" id="2_3u417"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bh81j"]
-size = Vector2(6, 6)
+size = Vector2(130, 80)
 
 [node name="Projectile" type="Area2D" groups=["projectile"]]
 y_sort_enabled = true
-collision_layer = 3
+scale = Vector2(0.2, 0.2)
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_kv6im")
 
-[node name="Sprite" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_3u417")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_bh81j")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." groups=["projectile"]]

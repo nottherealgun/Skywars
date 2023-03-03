@@ -12,26 +12,32 @@ func _ready():
 	health = max_health
 
 func _process(delta):
-	_move_update(delta)
+	$Sprite.flip_h = (move_vec.x > 0)
+	$Healthbar.value = (health*100)/max_health
 	if health <= 0:
 		Global.kill(self)
 
 func _move_update(delta):
-	if is_instance_valid(target):
-		move_vec = position.direction_to(target.position)
-		var allies_vec := Vector2.ZERO
-		for ally in allies:
-			if ally.position.distance_to(position) <= 50:
-				allies_vec += position.direction_to(ally.position)/5
-		position += (move_vec-allies_vec) * speed * delta * 20
+#	if is_instance_valid(target):
+#		move_vec = position.direction_to(target.position)
+#		var allies_vec := Vector2.ZERO
+#		for ally in allies:
+#			if ally.position.distance_to(position) <= 50:
+#				allies_vec += position.direction_to(ally.position)/5
+#		position += (move_vec-allies_vec) * speed * delta * 50
+	pass
 
 var allies = []
 
+func get_hurt(by:Node):
+	by.affect(self)
+	Global.kill(by)
+	$AnimationPlayer.stop()
+	$AnimationPlayer.play("injured")
+
 func _on_hitbox_area_entered(area):
 	if area.is_in_group("projectile"):
-		area.affect(self)
-		Global.kill(area)
-		$EffectsPlayer.play("injured")
+		get_hurt(area)
 
 func _on_ally_detect_area_entered(area):
 	var ally = area.get_parent()
