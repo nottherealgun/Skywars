@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3aeagmcx5qck"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_ncul4"]
+[ext_resource type="SpriteFrames" uid="uid://bnvt35ic5s3ek" path="res://darwin.tres" id="2_txiku"]
+[ext_resource type="Texture2D" uid="uid://c8fdbjdlywnc" path="res://arrow.png" id="3_uktuw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oscn4"]
+size = Vector2(24, 24)
+
+[node name="Player" type="Node2D" groups=["player"]]
+y_sort_enabled = true
+position = Vector2(192, 128)
+scale = Vector2(2, 2)
+script = ExtResource("1_ncul4")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_oscn4")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = ExtResource("2_txiku")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Arrow" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("3_uktuw")
+offset = Vector2(25, 0)
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

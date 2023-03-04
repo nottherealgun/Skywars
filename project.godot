@@ -20,7 +20,6 @@ config/icon="res://icon.svg"
 Global="*res://Resources.gd"
 GameManager="*res://game_manager.tscn"
 LevelManager="*res://level_manager.tscn"
-PlayerManager="*res://player_manager.tscn"
 
 [display]
 

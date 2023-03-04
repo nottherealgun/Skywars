@@ -93,6 +93,7 @@ func sync_map():
 	for tile in target_map.get_node("Map").get_used_cells(0):
 		var tile_type = target_map.get_node("Map").get_cell_atlas_coords(0,tile)
 		Map.set_cell(0,Vector2i(tile.x,tile.y),0,tile_type)
+	Map.set_cells_terrain_connect(0,Map.get_used_cells(0),0,0)
 	MAP_RECT = Map.get_used_rect().size*128
 	
 	for entity in target_map.get_children():

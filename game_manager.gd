@@ -1,5 +1,9 @@
 extends Node
 
+@onready var cam = get_node("/root/Main/MainCam")
+var cam_follow_target = Vector2.ZERO
+
 func _process(delta):
-	Global.Dev.text = "P_health: "+str(PlayerManager.health)
-	Global.Dev.text = "\n"+str(Global.MAP_RECT/64)
+	cam_follow_target = Global.Main.get_node("Player").position
+	cam.position = cam_follow_target
+	Global.Dev.text = str(Global.Main.get_node("Player").health)

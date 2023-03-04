@@ -1,5 +1,6 @@
 class_name Enemy extends Node2D
 
+@export_placeholder("enemy_name") var display_name = ""
 @export var max_health = 2
 var health = max_health
 @export var speed = 1
@@ -16,6 +17,10 @@ func _process(delta):
 	$Healthbar.value = (health*100)/max_health
 	if health <= 0:
 		Global.kill(self)
+	if is_instance_valid(target):
+		if target.is_in_group("player"):
+			if target.fainted:
+				target = null
 
 func _move_update(delta):
 #	if is_instance_valid(target):

@@ -276,8 +276,16 @@ _data = {
 }
 
 [node name="Printer" instance=ExtResource("1_1ynln")]
+y_sort_enabled = true
 script = ExtResource("2_owcnx")
+display_name = "MUIC Printer"
 max_health = 10
+speed = 3
+
+[node name="Healthbar" parent="." index="0"]
+visible = false
+offset_left = -112.0
+offset_right = 112.0
 
 [node name="Sprite" parent="." index="1"]
 self_modulate = Color(1, 1, 1, 1)
@@ -285,6 +293,9 @@ scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_o5emk")
 animation = &"static"
 autoplay = "static"
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(8, 0)
 
 [node name="PlayerDetect" type="Area2D" parent="." index="3"]
 collision_layer = 0
@@ -299,6 +310,11 @@ libraries = {
 
 [node name="Timer" type="Timer" parent="." index="5"]
 one_shot = true
+autostart = true
+
+[node name="NameTag" parent="." index="7"]
+visible = false
+text = "MUIC PRINTER"
 
 [connection signal="area_entered" from="PlayerDetect" to="." method="_on_player_detect_area_entered"]
 [connection signal="area_exited" from="PlayerDetect" to="." method="_on_player_detect_area_exited"]

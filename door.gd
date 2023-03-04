@@ -7,7 +7,7 @@ extends Node2D
 var players_in_vicinity = []
 
 func _ready():
-	PlayerManager.connect("interact",enter_room)
+#	PlayerManager.connect("interact",enter_room)
 	if !horizontal:
 		$Sprite.rotation_degrees = 90
 
