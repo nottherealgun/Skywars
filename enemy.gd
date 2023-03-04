@@ -43,6 +43,17 @@ func get_hurt(by:Node):
 func _on_hitbox_area_entered(area):
 	if area.is_in_group("projectile"):
 		get_hurt(area)
+		
+func _on_player_detect_area_entered(area):
+	var entity = area.get_parent()
+	if entity.is_in_group("player"):
+		if target == null:
+			target = entity
+
+func _on_player_detect_area_exited(area):
+	var entity = area.get_parent()
+	if entity == target:
+		target = null
 
 func _on_ally_detect_area_entered(area):
 	var ally = area.get_parent()

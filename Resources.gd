@@ -8,6 +8,8 @@ extends Node
 
 @onready var MAP_RECT : Vector2 = Map.get_used_rect().size*128
 
+var active_players = []
+
 # Entities
 
 var active_entities = []
@@ -25,7 +27,6 @@ func spawn_projectile(proj_name:String,pos:Vector2,dir:Vector2,player_bullet=tru
 func spawn_enemy(enemy_name:String,pos:Vector2):
 	var new_enemy = load("res://"+enemy_name+".tscn").instantiate()
 	new_enemy.position = pos
-	new_enemy.target = Main.get_node("Player")
 	active_entities.append(new_enemy)
 	Main.add_child(new_enemy)
 	return new_enemy

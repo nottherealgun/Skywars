@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://ddx64c6xw43f0"]
+[gd_scene load_steps=39 format=3 uid="uid://ddx64c6xw43f0"]
 
 [ext_resource type="PackedScene" uid="uid://bgqoepswjfvtv" path="res://enemy.tscn" id="1_1ynln"]
 [ext_resource type="Script" path="res://printer.gd" id="2_owcnx"]
@@ -239,9 +239,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pg22c"]
-radius = 512.25
-
 [sub_resource type="Animation" id="Animation_v3f6j"]
 resource_name = "injured"
 length = 0.5
@@ -297,12 +294,6 @@ autoplay = "static"
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2(8, 0)
 
-[node name="PlayerDetect" type="Area2D" parent="." index="3"]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetect" index="0"]
-shape = SubResource("CircleShape2D_pg22c")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
 libraries = {
 "": SubResource("AnimationLibrary_2oovj")
@@ -315,6 +306,3 @@ autostart = true
 [node name="NameTag" parent="." index="7"]
 visible = false
 text = "MUIC PRINTER"
-
-[connection signal="area_entered" from="PlayerDetect" to="." method="_on_player_detect_area_entered"]
-[connection signal="area_exited" from="PlayerDetect" to="." method="_on_player_detect_area_exited"]

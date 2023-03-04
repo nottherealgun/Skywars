@@ -125,6 +125,7 @@ metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_mhf8t")]
 position = Vector2(192, 128)
+character = "gun"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -166,6 +167,7 @@ offset_bottom = -896.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="Icon" type="TextureRect" parent="GUI/PlayerStats1"]
 layout_mode = 2
@@ -212,6 +214,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PlayerStats2" type="Control" parent="GUI"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -270,6 +273,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PlayerStats3" type="Control" parent="GUI"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -328,6 +332,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PlayerStats4" type="Control" parent="GUI"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

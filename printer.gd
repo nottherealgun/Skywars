@@ -3,7 +3,7 @@ extends Enemy
 enum States { IDLE, AWOKEN, CHASING, ATTACKING }
 var state = States.IDLE
 var awoken = false
-var range = 300
+var range = 200
 
 func _process(delta):
 	super(delta)
@@ -62,6 +62,7 @@ func get_hurt(by:Node):
 		super(by)
 
 func _on_player_detect_area_entered(area):
+	super(area)
 	var entity = area.get_parent()
 	if entity.is_in_group("player"):
 		if not awoken:
@@ -70,7 +71,4 @@ func _on_player_detect_area_entered(area):
 		else:
 			change_state(States.ATTACKING)
 
-func _on_player_detect_area_exited(area):
-	var entity = area.get_parent()
-#	if entity.is_in_group("player"):
-#		change_state(States.CHASING)
+

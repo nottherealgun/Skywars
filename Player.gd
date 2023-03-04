@@ -1,36 +1,43 @@
 extends Node2D
 
+# Player device settings
 @export var player_id = 1
 @export_enum("darwin","gun") var character = "darwin"
-var player_color = [Color.DODGER_BLUE,Color.CORAL,Color.DARK_GREEN,Color.MEDIUM_PURPLE][player_id-1]
+@onready var player_color = [Color.DODGER_BLUE,Color.CORAL,Color.DARK_GREEN,Color.MEDIUM_PURPLE][player_id-1]
+# Player stats
 @export var max_health = 10
 var health = max_health
 @export var stress = 0
 var max_stress = 100
 @export var speed = 1
-
+# Internal stats
 var move_vec := Vector2.ZERO
 var aim_vec := Vector2.ZERO
 var fainted = false
-
+# Player GUI setup
 @onready var stat_gui = Global.GUI.get_node("PlayerStats"+str(player_id))
 @onready var healthbar = stat_gui.get_node("Healthbar")
 @onready var stressbar = stat_gui.get_node("Stressbar")
+
 func _ready():
+	# Setup player appearance and GUI settings
 	$Arrow.modulate = player_color
+	$Sprite.sprite_frames = load("res://"+character+".tres")
+	$Sprite.play("idle")
 	stat_gui.show()
 	stat_gui.get_node("NameTag").set("theme_override_colors/font_color",player_color)
 	stat_gui.get_node("NameTag").text = character
 	
 func _process(delta):
-	_input_update()
-	_gui_update()
+	_input_update() # Update device input
+	_gui_update() # Update gui
 	var sprite = get_node("Sprite")
-	if health <= 0 and !fainted:
+	if health <= 0 and !fainted: # If player dies
 		sprite.play("faint")
 		fainted = true
-	if !fainted:
-		_move_update(delta)
+	if !fainted: # If player alive
+		_move_update(delta) # Update movement
+		# Sprite H flipping
 		if move_vec != Vector2.ZERO:
 			sprite.animation = "run"
 			if move_vec.x < 0:
@@ -41,10 +48,11 @@ func _process(delta):
 			sprite.animation = "idle"
 
 func _input_update():
+	# Get movement input strength
 	aim_vec = Vector2(Input.get_action_strength("p"+str(player_id)+"_right2") - Input.get_action_strength("p"+str(player_id)+"_left2"),
 	Input.get_action_strength("p"+str(player_id)+"_down2") - Input.get_action_strength("p"+str(player_id)+"_up2")).normalized()
 	
-	if !fainted:
+	if !fainted: # If player alive
 		get_node("Arrow").rotation = get_node("Arrow").position.angle_to_point(aim_vec)
 		get_node("Arrow").visible = (aim_vec != Vector2.ZERO)
 		if Input.is_action_just_pressed("p"+str(player_id)+"_primary"):
