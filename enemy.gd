@@ -1,7 +1,7 @@
 class_name Enemy extends Node2D
 
 @export_placeholder("enemy_name") var display_name = ""
-@export var max_health = 2
+@export var max_health = 5
 var health = max_health
 @export var speed = 1
 @export var damage = 1
@@ -10,10 +10,10 @@ var move_vec := Vector2.ZERO
 var target : Node
 
 func _ready():
+	$NameTag.text = display_name
 	health = max_health
 
 func _process(delta):
-	$Sprite.flip_h = (move_vec.x > 0)
 	$Healthbar.value = (health*100)/max_health
 	if health <= 0:
 		Global.kill(self)
@@ -28,7 +28,7 @@ func _move_update(delta):
 #		var allies_vec := Vector2.ZERO
 #		for ally in allies:
 #			if ally.position.distance_to(position) <= 50:
-#				allies_vec += position.direction_to(ally.position)/5
+#				allies_vec += (position.direction_to(ally.position)*50)/ally.position.distance_to(position)
 #		position += (move_vec-allies_vec) * speed * delta * 50
 	pass
 

@@ -1,8 +1,8 @@
-[gd_resource type="SpriteFrames" load_steps=26 format=3 uid="uid://de0p04kk4ppup"]
+[gd_resource type="SpriteFrames" load_steps=26 format=3]
 
-[ext_resource type="Texture2D" uid="uid://0sfdxjum3oaa" path="res://gunIdleSS.png" id="1_0rhtd"]
-[ext_resource type="Texture2D" uid="uid://j31ghulr3ekr" path="res://gunFaintSS.png" id="1_uouu3"]
-[ext_resource type="Texture2D" uid="uid://rihgbyk2tftm" path="res://gunRunSS.png" id="2_3k1lq"]
+[ext_resource type="Texture2D" uid="uid://0sfdxjum3oaa" path="res://gun_idle.png" id="1_0rhtd"]
+[ext_resource type="Texture2D" uid="uid://j31ghulr3ekr" path="res://gun_faint.png" id="1_uouu3"]
+[ext_resource type="Texture2D" uid="uid://rihgbyk2tftm" path="res://gun_run.png" id="2_3k1lq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_afdnn"]
 atlas = ExtResource("1_uouu3")

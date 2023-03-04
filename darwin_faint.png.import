@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ba6ktq5eioywu"
-path="res://.godot/imported/dwStill.png-45961667986d03d5c249a7cbf634c238.ctex"
+uid="uid://c7cpop6gpm177"
+path="res://.godot/imported/darwin_faint.png-c7604d0d096a3b6cdf14d99ff080821c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dwStill.png"
-dest_files=["res://.godot/imported/dwStill.png-45961667986d03d5c249a7cbf634c238.ctex"]
+source_file="res://darwin_faint.png"
+dest_files=["res://.godot/imported/darwin_faint.png-c7604d0d096a3b6cdf14d99ff080821c.ctex"]
 
 [params]
 

@@ -1,19 +1,20 @@
 extends Enemy
 
-enum States { IDLE, AWOKEN, CHASING, ATTACKING }
+enum States { IDLE, CHASING, ATTACKING }
 var state = States.IDLE
-var awoken = false
-var range = 200
+var range = 50
 
+func _ready():
+	super()
+	$Sprite.sprite_frames = load("res://student"+str((randi()%2)+1)+".tres")
+	$Sprite.play("idle")
+	
 func _process(delta):
 	super(delta)
-	$Sprite.flip_h = (move_vec.x > 0)
+	$Sprite.flip_h = !(move_vec.x > 0)
 	match state:
 		States.IDLE:
 			pass
-		States.AWOKEN:
-			if !$Sprite.is_playing():
-				change_state(States.ATTACKING)
 		States.CHASING:
 			_move_update(delta)
 			if is_instance_valid(target):
@@ -32,28 +33,21 @@ func _process(delta):
 					if rand_num == 0:
 						proj_id = 0
 					
-					Global.spawn_projectile(["printer_proj_1","printer_proj_2"][proj_id],position,position.direction_to(target.position),false)			
+#					Global.spawn_projectile(["printer_proj_1","printer_proj_2"][proj_id],position,position.direction_to(target.position),false)			
 					$Timer.start()
 
 func change_state(new_state):
-	# Check old state
-	match state:
-		States.AWOKEN:
-			$Healthbar.show()
-			$NameTag.show()
-	# Check new state
 	match new_state:
 		States.IDLE:
 			$Sprite.play("idle")
-		States.AWOKEN:
-			$Sprite.play("transform")
 		States.CHASING:
 			$Sprite.play("idle")
 		States.ATTACKING:
-			$Sprite.play("attack")
+			pass
 	state = new_state
 
 func _move_update(delta):
+	super(delta)
 	if is_instance_valid(target):
 		move_vec = position.direction_to(target.position)
 		var allies_vec := Vector2.ZERO
@@ -62,18 +56,8 @@ func _move_update(delta):
 				allies_vec += (position.direction_to(ally.position)*50)/ally.position.distance_to(position)
 		position += (move_vec-allies_vec) * speed * delta * 50
 
-func get_hurt(by:Node):
-	if awoken:
-		super(by)
-
 func _on_player_detect_area_entered(area):
 	super(area)
 	var entity = area.get_parent()
 	if entity.is_in_group("player"):
-		if not awoken:
-			change_state(States.AWOKEN)
-			awoken = true
-		else:
-			change_state(States.ATTACKING)
-
-
+		change_state(States.CHASING)

@@ -142,6 +142,7 @@ color = Color(0, 0, 0, 1)
 [node name="GUI" type="CanvasLayer" parent="."]
 
 [node name="Dev" type="Label" parent="GUI"]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -184,7 +185,7 @@ layout_mode = 2
 offset_left = 152.0
 offset_top = 48.0
 offset_right = 312.0
-offset_bottom = 88.0
+offset_bottom = 72.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_1axcx")
 value = 100.0
 show_percentage = false
@@ -192,9 +193,9 @@ show_percentage = false
 [node name="Stressbar" type="ProgressBar" parent="GUI/PlayerStats1"]
 layout_mode = 2
 offset_left = 152.0
-offset_top = 96.0
+offset_top = 80.0
 offset_right = 310.0
-offset_bottom = 136.0
+offset_bottom = 96.0
 value = 100.0
 show_percentage = false
 
@@ -210,6 +211,21 @@ theme_override_constants/outline_size = 20
 theme_override_fonts/font = ExtResource("3_d65se")
 theme_override_font_sizes/font_size = 30
 text = "DARWIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Money" type="Label" parent="GUI/PlayerStats1"]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 104.0
+offset_right = 312.0
+offset_bottom = 137.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("3_d65se")
+theme_override_font_sizes/font_size = 30
+text = "$ 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -243,7 +259,7 @@ layout_mode = 2
 offset_left = 152.0
 offset_top = 48.0
 offset_right = 312.0
-offset_bottom = 88.0
+offset_bottom = 72.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_1axcx")
 value = 100.0
 show_percentage = false
@@ -251,9 +267,9 @@ show_percentage = false
 [node name="Stressbar" type="ProgressBar" parent="GUI/PlayerStats2"]
 layout_mode = 2
 offset_left = 152.0
-offset_top = 96.0
+offset_top = 80.0
 offset_right = 310.0
-offset_bottom = 136.0
+offset_bottom = 96.0
 value = 100.0
 show_percentage = false
 
@@ -269,6 +285,20 @@ theme_override_constants/outline_size = 20
 theme_override_fonts/font = ExtResource("3_d65se")
 theme_override_font_sizes/font_size = 30
 text = "DARWIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Money" type="Label" parent="GUI/PlayerStats2"]
+offset_left = 152.0
+offset_top = 104.0
+offset_right = 312.0
+offset_bottom = 137.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("3_d65se")
+theme_override_font_sizes/font_size = 30
+text = "$ 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -302,7 +332,7 @@ layout_mode = 2
 offset_left = 152.0
 offset_top = 48.0
 offset_right = 312.0
-offset_bottom = 88.0
+offset_bottom = 72.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_1axcx")
 value = 100.0
 show_percentage = false
@@ -310,9 +340,9 @@ show_percentage = false
 [node name="Stressbar" type="ProgressBar" parent="GUI/PlayerStats3"]
 layout_mode = 2
 offset_left = 152.0
-offset_top = 96.0
+offset_top = 80.0
 offset_right = 310.0
-offset_bottom = 136.0
+offset_bottom = 96.0
 value = 100.0
 show_percentage = false
 
@@ -328,6 +358,20 @@ theme_override_constants/outline_size = 20
 theme_override_fonts/font = ExtResource("3_d65se")
 theme_override_font_sizes/font_size = 30
 text = "DARWIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Money" type="Label" parent="GUI/PlayerStats3"]
+offset_left = 152.0
+offset_top = 104.0
+offset_right = 312.0
+offset_bottom = 137.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("3_d65se")
+theme_override_font_sizes/font_size = 30
+text = "$ 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -361,7 +405,7 @@ layout_mode = 2
 offset_left = 152.0
 offset_top = 48.0
 offset_right = 312.0
-offset_bottom = 88.0
+offset_bottom = 72.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_1axcx")
 value = 100.0
 show_percentage = false
@@ -369,9 +413,9 @@ show_percentage = false
 [node name="Stressbar" type="ProgressBar" parent="GUI/PlayerStats4"]
 layout_mode = 2
 offset_left = 152.0
-offset_top = 96.0
+offset_top = 80.0
 offset_right = 310.0
-offset_bottom = 136.0
+offset_bottom = 96.0
 value = 100.0
 show_percentage = false
 
@@ -387,6 +431,20 @@ theme_override_constants/outline_size = 20
 theme_override_fonts/font = ExtResource("3_d65se")
 theme_override_font_sizes/font_size = 30
 text = "DARWIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Money" type="Label" parent="GUI/PlayerStats4"]
+offset_left = 152.0
+offset_top = 104.0
+offset_right = 312.0
+offset_bottom = 137.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("3_d65se")
+theme_override_font_sizes/font_size = 30
+text = "$ 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 

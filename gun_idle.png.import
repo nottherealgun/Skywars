@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7cpop6gpm177"
-path="res://.godot/imported/dwFaintSS.png-147ffd648a7d09596ffe18b4bba298b2.ctex"
+uid="uid://0sfdxjum3oaa"
+path="res://.godot/imported/gun_idle.png-65ac9b2fa77961f746740ab557f7601a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dwFaintSS.png"
-dest_files=["res://.godot/imported/dwFaintSS.png-147ffd648a7d09596ffe18b4bba298b2.ctex"]
+source_file="res://gun_idle.png"
+dest_files=["res://.godot/imported/gun_idle.png-65ac9b2fa77961f746740ab557f7601a.ctex"]
 
 [params]
 

@@ -10,6 +10,7 @@ var health = max_health
 @export var stress = 0
 var max_stress = 100
 @export var speed = 1
+@export var money = 0
 # Internal stats
 var move_vec := Vector2.ZERO
 var aim_vec := Vector2.ZERO
@@ -27,6 +28,7 @@ func _ready():
 	stat_gui.show()
 	stat_gui.get_node("NameTag").set("theme_override_colors/font_color",player_color)
 	stat_gui.get_node("NameTag").text = character
+	stat_gui.get_node("Money").text = "$ "+str(money)
 	
 func _process(delta):
 	_input_update() # Update device input
@@ -64,6 +66,7 @@ func _input_update():
 func _gui_update():
 	healthbar.value = (health*healthbar.max_value)/max_health
 	stressbar.value = (stress*stressbar.max_value)/max_stress
+	stat_gui.get_node("Money").text = "$ "+str(money)
 
 func _move_update(delta):
 	move_vec = Vector2.ZERO

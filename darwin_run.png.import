@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wdq2gcr681a6"
-path="res://.godot/imported/dwIdleSS.png-baf4a662ac1f3fef4a9a67de7ad8b4ae.ctex"
+uid="uid://bfn6ao7hsyee2"
+path="res://.godot/imported/darwin_run.png-99ad1311db2ae5eec5142410f02b542f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dwIdleSS.png"
-dest_files=["res://.godot/imported/dwIdleSS.png-baf4a662ac1f3fef4a9a67de7ad8b4ae.ctex"]
+source_file="res://darwin_run.png"
+dest_files=["res://.godot/imported/darwin_run.png-99ad1311db2ae5eec5142410f02b542f.ctex"]
 
 [params]
 

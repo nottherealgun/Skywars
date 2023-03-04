@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rihgbyk2tftm"
-path="res://.godot/imported/gunRunSS.png-378ada042962635b5c9f33a14168f670.ctex"
+uid="uid://j31ghulr3ekr"
+path="res://.godot/imported/gun_faint.png-e574ef61476cbf8979f82b892a5a4e23.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gunRunSS.png"
-dest_files=["res://.godot/imported/gunRunSS.png-378ada042962635b5c9f33a14168f670.ctex"]
+source_file="res://gun_faint.png"
+dest_files=["res://.godot/imported/gun_faint.png-e574ef61476cbf8979f82b892a5a4e23.ctex"]
 
 [params]
 
