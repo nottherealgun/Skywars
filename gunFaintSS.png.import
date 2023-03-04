@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8fdbjdlywnc"
-path="res://.godot/imported/Arrow.png-aa28165b179193f568f080dc108db1d2.ctex"
+uid="uid://j31ghulr3ekr"
+path="res://.godot/imported/gunFaintSS.png-eb8800000612b1ee75839cde9ff2acc3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Arrow.png"
-dest_files=["res://.godot/imported/Arrow.png-aa28165b179193f568f080dc108db1d2.ctex"]
+source_file="res://gunFaintSS.png"
+dest_files=["res://.godot/imported/gunFaintSS.png-eb8800000612b1ee75839cde9ff2acc3.ctex"]
 
 [params]
 
