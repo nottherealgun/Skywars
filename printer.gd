@@ -3,7 +3,7 @@ extends Enemy
 enum States { IDLE, AWOKEN, CHASING, ATTACKING }
 var state = States.IDLE
 var awoken = false
-var range = 200
+var range = 300
 
 func _process(delta):
 	super(delta)

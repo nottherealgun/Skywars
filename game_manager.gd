@@ -3,6 +3,7 @@ extends Node
 @onready var cam = get_node("/root/Main/MainCam")
 var cam_follow_target = Vector2.ZERO
 
+@onready var testmap = load("res://rooms/adit_building_1.tscn").instantiate()
 func _ready():
 	for n in Global.Main.get_children():
 		if n.is_in_group("player"):

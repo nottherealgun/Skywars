@@ -22,9 +22,8 @@ shape = SubResource("RectangleShape2D_oscn4")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = ExtResource("2_j3edc")
-animation = &"idle"
+animation = &"run"
 autoplay = "idle"
-frame_progress = 0.930711
 
 [node name="Arrow" type="Sprite2D" parent="."]
 texture_filter = 1

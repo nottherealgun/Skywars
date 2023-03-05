@@ -41,7 +41,7 @@ func change_state(new_state):
 		States.IDLE:
 			$Sprite.play("idle")
 		States.CHASING:
-			$Sprite.play("idle")
+			$Sprite.play("run")
 		States.ATTACKING:
 			pass
 	state = new_state

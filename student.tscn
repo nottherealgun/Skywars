@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bgqoepswjfvtv" path="res://enemy.tscn" id="1_u8cc3"]
 [ext_resource type="Script" path="res://student.gd" id="2_coljh"]
-[ext_resource type="SpriteFrames" uid="uid://7p7i6r26nu61" path="res://student1.tres" id="3_ortro"]
+[ext_resource type="SpriteFrames" uid="uid://cuffowhxin65n" path="res://student2.tres" id="3_ox7se"]
 
 [node name="Student" instance=ExtResource("1_u8cc3")]
 script = ExtResource("2_coljh")
@@ -14,9 +14,11 @@ offset_top = -106.0
 offset_bottom = -102.0
 
 [node name="Sprite" parent="." index="1"]
-sprite_frames = ExtResource("3_ortro")
+scale = Vector2(4, 4)
+sprite_frames = ExtResource("3_ox7se")
 animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.159534
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 visible = false

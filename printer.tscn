@@ -252,6 +252,7 @@ offset_left = -112.0
 offset_right = 112.0
 
 [node name="Sprite" parent="." index="1"]
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_o5emk")
 animation = &"attack"
 autoplay = "static"
@@ -273,3 +274,9 @@ visible = false
 [node name="NameTag" parent="." index="6"]
 visible = false
 text = "MUIC PRINTER"
+
+[node name="Label" parent="." index="8"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1.0
+offset_bottom = 42.0

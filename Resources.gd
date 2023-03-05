@@ -32,12 +32,15 @@ func spawn_enemy(enemy_name:String,pos:Vector2):
 	return new_enemy
 	
 func kill(entity:Node):
-	active_entities.erase(entity)
-	entity.queue_free()
+	if is_instance_valid(entity):
+		active_entities.erase(entity)
+		entity.queue_free()
 
 func kill_all():
-	for e in active_entities:
-		kill(e)
+	while not active_entities.is_empty():
+		var e = active_entities.front()
+		if is_instance_valid(e):
+			kill(e)
 
 # Doors
 
@@ -84,11 +87,12 @@ func install_door(node:Node):
 	active_doors.append(node)
 	Main.add_child(node)
 
-# Levels
-@onready var testmap = load("res://adit_building_1.tscn").instantiate()
+var map_spawnpoint : Vector2
 
-func sync_map():
-	var target_map = testmap
+# Levels
+func sync_map(map):
+	var target_map = map
+	Map.clear()
 	LevelManager.clear_level()
 	
 	for tile in target_map.get_node("Map").get_used_cells(0):
@@ -98,10 +102,15 @@ func sync_map():
 	MAP_RECT = Map.get_used_rect().size*128
 	
 	for entity in target_map.get_children():
-		if entity is TileMap or entity is Marker2D:
+		if entity.get_class() in ["TileMap","Marker2D"]:
+			match entity.get_class():
+				"Marker2D":
+					map_spawnpoint = entity.position
 			continue
 		target_map.remove_child(entity)
+		active_entities.append(entity)
 		Main.add_child(entity)
-		
-		if entity.is_in_group("enemy"):
-			entity.target = Main.get_node("Player")
+	
+	for p in active_players:
+		var radius = 10
+		p.position = map_spawnpoint+Vector2(randi()%radius,randi()%radius)

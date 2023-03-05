@@ -7,20 +7,24 @@ extends Node2D
 var players_in_vicinity = []
 
 func _ready():
-#	PlayerManager.connect("interact",enter_room)
 	if !horizontal:
 		$Sprite.rotation_degrees = 90
 
 func enter_room(player):
-	if player in players_in_vicinity:
-		pass
+	if not is_instance_valid(room):
+		var random_room_path = DirAccess.get_files_at("res://rooms")[randi()%DirAccess.get_files_at("res://rooms").size()]
+		room = load("res://rooms/"+random_room_path)
+	var room_instance = room.instantiate()
+	Global.sync_map(room_instance)
 
 func _on_area_2d_area_entered(area):
 	var entity = area.get_parent()
-	if entity.is_in_group("player") and not entity in players_in_vicinity:
-		players_in_vicinity.append(entity)
+	if entity.is_in_group("player"):
+		if !entity.is_connected("action",enter_room):
+			entity.connect("action",enter_room)
 
 func _on_area_2d_area_exited(area):
 	var entity = area.get_parent()
-	if entity.is_in_group("player") and entity in players_in_vicinity:
-		players_in_vicinity.erase(entity)
+	if entity.is_in_group("player"):
+		if entity.is_connected("action",enter_room):
+			entity.disconnect("action",enter_room)

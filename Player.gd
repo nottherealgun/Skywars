@@ -1,5 +1,7 @@
 extends Node2D
 
+signal action(by)
+
 # Player device settings
 @export var player_id = 1
 @export_enum("darwin","gun") var character = "darwin"
@@ -7,8 +9,7 @@ extends Node2D
 # Player stats
 @export var max_health = 10
 var health = max_health
-@export var stress = 0
-var max_stress = 100
+@export var brainpower = 0
 @export var speed = 1
 @export var money = 0
 # Internal stats
@@ -18,7 +19,7 @@ var fainted = false
 # Player GUI setup
 @onready var stat_gui = Global.GUI.get_node("PlayerStats"+str(player_id))
 @onready var healthbar = stat_gui.get_node("Healthbar")
-@onready var stressbar = stat_gui.get_node("Stressbar")
+@onready var brainbar = stat_gui.get_node("Brainbar")
 
 func _ready():
 	# Setup player appearance and GUI settings
@@ -26,6 +27,7 @@ func _ready():
 	$Sprite.sprite_frames = load("res://"+character+".tres")
 	$Sprite.play("idle")
 	stat_gui.show()
+	stat_gui.get_node("Icon").texture = load("res://"+character+"_head.png")
 	stat_gui.get_node("NameTag").set("theme_override_colors/font_color",player_color)
 	stat_gui.get_node("NameTag").text = character
 	stat_gui.get_node("Money").text = "$ "+str(money)
@@ -58,14 +60,16 @@ func _input_update():
 		get_node("Arrow").rotation = get_node("Arrow").position.angle_to_point(aim_vec)
 		get_node("Arrow").visible = (aim_vec != Vector2.ZERO)
 		if Input.is_action_just_pressed("p"+str(player_id)+"_primary"):
-				if aim_vec != Vector2.ZERO:
-					shoot()
+			# Primary
+			if aim_vec != Vector2.ZERO:
+				shoot()
 		if Input.is_action_just_pressed("p"+str(player_id)+"_action"):
-			pass
+			# Action1
+			emit_signal("action",self)
 
 func _gui_update():
 	healthbar.value = (health*healthbar.max_value)/max_health
-	stressbar.value = (stress*stressbar.max_value)/max_stress
+	brainbar.frame = 6-brainpower
 	stat_gui.get_node("Money").text = "$ "+str(money)
 
 func _move_update(delta):
@@ -83,7 +87,7 @@ func _move_update(delta):
 	position.y = clamp(position.y, 0, Global.MAP_RECT.y)
 
 func shoot():
-	Global.spawn_projectile("printer_proj_1",position,aim_vec)
+	var player_proj = Global.spawn_projectile("printer_proj_1",position,aim_vec)
 
 func _on_hitbox_area_entered(area):
 	if area.is_in_group("projectile"):

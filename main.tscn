@@ -1,9 +1,73 @@
-[gd_scene load_steps=8 format=3 uid="uid://siwlpcy6tg40"]
+[gd_scene load_steps=23 format=3 uid="uid://siwlpcy6tg40"]
 
 [ext_resource type="PackedScene" uid="uid://b04ngos1kl60i" path="res://player.tscn" id="1_mhf8t"]
+[ext_resource type="Texture2D" uid="uid://dv8c76rwlux0p" path="res://idCardGUI.png" id="2_5fx3s"]
+[ext_resource type="Texture2D" uid="uid://c5teeojme28q1" path="res://hpForeground.png" id="2_ftblp"]
 [ext_resource type="Texture2D" uid="uid://b31mn2xrwcfkd" path="res://icon.svg" id="2_y8330"]
+[ext_resource type="Texture2D" uid="uid://bffxtkyh5d2av" path="res://gun_head.png" id="3_5ew25"]
 [ext_resource type="FontFile" uid="uid://dqg68cyeyg3a5" path="res://DefaultFont.ttf" id="3_d65se"]
+[ext_resource type="Texture2D" uid="uid://dfl3oef8y6w4c" path="res://hpBackground.png" id="3_ji4ok"]
 [ext_resource type="Texture2D" uid="uid://c3mua8tnxy4fs" path="res://adithFirstFloor.png" id="3_y5y1w"]
+[ext_resource type="Texture2D" uid="uid://bfdd8ebmimg8k" path="res://hpFiller.png" id="4_jbadb"]
+[ext_resource type="Texture2D" uid="uid://csvvbeukbfvho" path="res://brainCellForeground.png" id="7_jcy3i"]
+[ext_resource type="Texture2D" uid="uid://ctw1jwlr8j8mn" path="res://brainCellFillerSS.png" id="8_n7ojb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kutjy"]
+atlas = ExtResource("8_n7ojb")
+region = Rect2(0, 0, 29, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3s33"]
+atlas = ExtResource("8_n7ojb")
+region = Rect2(29, 0, 29, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1jmg"]
+atlas = ExtResource("8_n7ojb")
+region = Rect2(58, 0, 29, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pkjd"]
+atlas = ExtResource("8_n7ojb")
+region = Rect2(87, 0, 29, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hfnwf"]
+atlas = ExtResource("8_n7ojb")
+region = Rect2(116, 0, 29, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6aaud"]
+atlas = ExtResource("8_n7ojb")
+region = Rect2(145, 0, 29, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxyv3"]
+atlas = ExtResource("8_n7ojb")
+region = Rect2(174, 0, 29, 6)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gu0rw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kutjy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3s33")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j1jmg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5pkjd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hfnwf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6aaud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxyv3")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1axcx"]
 bg_color = Color(1, 0.317647, 0.317647, 1)
@@ -170,41 +234,74 @@ grow_vertical = 2
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="Icon" type="TextureRect" parent="GUI/PlayerStats1"]
+[node name="BG" type="TextureRect" parent="GUI/PlayerStats1"]
+texture_filter = 1
 layout_mode = 2
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 144.0
-offset_bottom = 144.0
-texture = ExtResource("2_y8330")
+offset_left = -16.0
+offset_top = -8.0
+offset_right = 112.0
+offset_bottom = 160.0
+texture = ExtResource("2_5fx3s")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Healthbar" type="ProgressBar" parent="GUI/PlayerStats1"]
-layout_mode = 2
-offset_left = 152.0
-offset_top = 48.0
-offset_right = 312.0
-offset_bottom = 72.0
-theme_override_styles/fill = SubResource("StyleBoxFlat_1axcx")
-value = 100.0
-show_percentage = false
+[node name="Icon" type="TextureRect" parent="GUI/PlayerStats1"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -32.0
+offset_top = -24.0
+offset_right = 128.0
+offset_bottom = 176.0
+pivot_offset = Vector2(80, 96)
+texture = ExtResource("3_5ew25")
+stretch_mode = 6
 
-[node name="Stressbar" type="ProgressBar" parent="GUI/PlayerStats1"]
-layout_mode = 2
-offset_left = 152.0
-offset_top = 80.0
-offset_right = 310.0
-offset_bottom = 96.0
+[node name="Healthbar" type="TextureProgressBar" parent="GUI/PlayerStats1"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 169.0
+offset_top = 40.0
+offset_right = 314.0
+offset_bottom = 73.0
 value = 100.0
-show_percentage = false
+nine_patch_stretch = true
+texture_under = ExtResource("3_ji4ok")
+texture_progress = ExtResource("4_jbadb")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="TextureRect" type="TextureRect" parent="GUI/PlayerStats1/Healthbar"]
+layout_mode = 0
+offset_left = -49.0
+offset_top = -8.0
+offset_right = 151.0
+offset_bottom = 40.0
+texture = ExtResource("2_ftblp")
+
+[node name="BrainbarBG" type="TextureRect" parent="GUI/PlayerStats1"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 120.0
+offset_top = 80.0
+offset_right = 320.0
+offset_bottom = 123.0
+texture = ExtResource("7_jcy3i")
+stretch_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="Brainbar" type="AnimatedSprite2D" parent="GUI/PlayerStats1"]
+texture_filter = 1
+position = Vector2(249.732, 101.5)
+scale = Vector2(4.25739, 4.16667)
+sprite_frames = SubResource("SpriteFrames_gu0rw")
+frame = 6
+metadata/_edit_lock_ = true
 
 [node name="NameTag" type="Label" parent="GUI/PlayerStats1"]
 layout_mode = 0
-offset_left = 152.0
-offset_top = 8.0
-offset_right = 312.0
-offset_bottom = 41.0
+offset_left = 160.0
+offset_right = 320.0
+offset_bottom = 33.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 20
@@ -216,10 +313,10 @@ vertical_alignment = 1
 
 [node name="Money" type="Label" parent="GUI/PlayerStats1"]
 layout_mode = 0
-offset_left = 152.0
-offset_top = 104.0
-offset_right = 312.0
-offset_bottom = 137.0
+offset_left = 120.0
+offset_top = 128.0
+offset_right = 320.0
+offset_bottom = 161.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 20

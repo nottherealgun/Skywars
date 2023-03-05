@@ -5,17 +5,15 @@ extends Node
 var rooms = []
 var current_room
 
+@onready var testmap = load("res://rooms/adit_building_1.tscn").instantiate()
+
 func _ready():
-	Global.sync_map()
+	Global.sync_map(testmap)
 
 func clear_level():
-	map.clear()
-	for e in Global.active_entities:
-		if is_instance_valid(e):
-			Global.kill(e)
+	Global.kill_all()
 	for d in Global.active_doors:
-		if is_instance_valid(d):
-			Global.Main.remove_child(d)
+		Global.Main.remove_child(d)
 	
 	Global.active_entities.clear()
 	Global.active_doors.clear()

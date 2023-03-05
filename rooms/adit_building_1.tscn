@@ -1,14 +1,14 @@
 [gd_scene load_steps=9 format=3 uid="uid://c2mq5p6ka7ca5"]
 
-[ext_resource type="PackedScene" uid="uid://cy0o1fhi2htd6" path="res://level.tscn" id="1_4wexi"]
-[ext_resource type="PackedScene" uid="uid://cl5c0tpgecvxv" path="res://door.tscn" id="2_anvsa"]
-[ext_resource type="PackedScene" path="res://spawning_point.tscn" id="3_bdult"]
-[ext_resource type="PackedScene" uid="uid://ddx64c6xw43f0" path="res://printer.tscn" id="4_6j5g3"]
-[ext_resource type="Texture2D" uid="uid://c3mua8tnxy4fs" path="res://adithFirstFloor.png" id="4_xb1re"]
-[ext_resource type="PackedScene" uid="uid://mts5ge2oghrr" path="res://student.tscn" id="6_ighu7"]
+[ext_resource type="PackedScene" uid="uid://cy0o1fhi2htd6" path="res://level.tscn" id="1_iaiv3"]
+[ext_resource type="PackedScene" uid="uid://cl5c0tpgecvxv" path="res://door.tscn" id="2_l5bjk"]
+[ext_resource type="PackedScene" uid="uid://cu2kvup4253pa" path="res://spawning_point.tscn" id="3_3ut51"]
+[ext_resource type="Texture2D" uid="uid://c3mua8tnxy4fs" path="res://adithFirstFloor.png" id="4_eaeq5"]
+[ext_resource type="PackedScene" uid="uid://ddx64c6xw43f0" path="res://printer.tscn" id="5_e5832"]
+[ext_resource type="PackedScene" uid="uid://mts5ge2oghrr" path="res://student.tscn" id="6_u2hgu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vvejs"]
-texture = ExtResource("4_xb1re")
+texture = ExtResource("4_eaeq5")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/terrain_set = 0
@@ -111,26 +111,26 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_vvejs")
 
-[node name="AditBuilding1" instance=ExtResource("1_4wexi")]
+[node name="AditBuilding1" instance=ExtResource("1_iaiv3")]
 
-[node name="Door" parent="." index="0" instance=ExtResource("2_anvsa")]
+[node name="Door" parent="." index="0" instance=ExtResource("2_l5bjk")]
 position = Vector2(448, -64)
 
-[node name="SpawningPoint" parent="." index="1" instance=ExtResource("3_bdult")]
+[node name="SpawningPoint" parent="." index="1" instance=ExtResource("3_3ut51")]
 position = Vector2(64, 448)
 
 [node name="Map" parent="." index="2"]
 tile_set = SubResource("TileSet_a5s8h")
 layer_0/tile_data = PackedInt32Array(0, 65536, 0, 1, 131072, 0, 2, 131072, 0, 3, 131072, 0, 4, 131072, 0, 5, 131072, 0, 65536, 65536, 1, 131072, 65536, 1, 196608, 65536, 1, 262144, 65536, 1, 327680, 65536, 2, 327681, 131072, 2, 327682, 131072, 2, 327683, 131072, 2, 327684, 131072, 2, 327685, 131072, 2, 262149, 131072, 1, 65541, 131072, 1, 6, 131072, 0, 7, 131072, 0, 8, 131072, 0, 9, 131072, 0, 10, 131072, 0, 11, 196608, 0, 327686, 131072, 2, 327687, 131072, 2, 327688, 131072, 2, 327689, 131072, 2, 327690, 131072, 2, 327691, 196608, 2, 262155, 196608, 1, 196619, 196608, 1, 131083, 196608, 1, 65547, 196608, 1, 65546, 131072, 1, 65545, 131072, 1, 65544, 131072, 1, 65543, 131072, 1, 65542, 131072, 1, 65540, 131072, 1, 65539, 131072, 1, 65538, 131072, 1, 65537, 131072, 1, 131073, 131072, 1, 131074, 131072, 1, 131075, 131072, 1, 131076, 131072, 1, 131079, 131072, 1, 131080, 131072, 1, 131081, 131072, 1, 131082, 131072, 1, 196618, 131072, 1, 196617, 131072, 1, 196616, 131072, 1, 196612, 131072, 1, 196611, 131072, 1, 196610, 131072, 1, 196609, 131072, 1, 262145, 131072, 1, 262146, 131072, 1, 262147, 131072, 1, 262148, 131072, 1, 262152, 131072, 1, 262153, 131072, 1, 262154, 131072, 1, 196613, 131072, 1, 196614, 131072, 1, 196615, 131072, 1, 262151, 131072, 1, 262150, 131072, 1, 131077, 131072, 1, 131078, 131072, 1)
 
-[node name="Printer" parent="." index="3" instance=ExtResource("4_6j5g3")]
-position = Vector2(1464, 72)
+[node name="Printer" parent="." index="3" instance=ExtResource("5_e5832")]
+position = Vector2(768, 64)
 
-[node name="Printer2" parent="." index="4" instance=ExtResource("4_6j5g3")]
-position = Vector2(1464, 200)
+[node name="Printer2" parent="." index="4" instance=ExtResource("5_e5832")]
+position = Vector2(768, 192)
 
-[node name="Printer3" parent="." index="5" instance=ExtResource("4_6j5g3")]
-position = Vector2(1464, 328)
+[node name="Printer3" parent="." index="5" instance=ExtResource("5_e5832")]
+position = Vector2(768, 320)
 
-[node name="Student" parent="." index="6" instance=ExtResource("6_ighu7")]
+[node name="Student" parent="." index="6" instance=ExtResource("6_u2hgu")]
 position = Vector2(760, 336)
