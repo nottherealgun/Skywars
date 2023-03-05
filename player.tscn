@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b04ngos1kl60i"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_r3xrg"]
-[ext_resource type="SpriteFrames" path="res://gun.tres" id="2_j3edc"]
+[ext_resource type="SpriteFrames" uid="uid://c4by4obw2rvbt" path="res://gun.tres" id="2_j3edc"]
 [ext_resource type="Texture2D" uid="uid://c8fdbjdlywnc" path="res://Arrow.png" id="4_xqdyo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oscn4"]

@@ -289,6 +289,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Money" type="Label" parent="GUI/PlayerStats2"]
+layout_mode = 0
 offset_left = 152.0
 offset_top = 104.0
 offset_right = 312.0
@@ -362,6 +363,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Money" type="Label" parent="GUI/PlayerStats3"]
+layout_mode = 0
 offset_left = 152.0
 offset_top = 104.0
 offset_right = 312.0
@@ -435,6 +437,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Money" type="Label" parent="GUI/PlayerStats4"]
+layout_mode = 0
 offset_left = 152.0
 offset_top = 104.0
 offset_right = 312.0
