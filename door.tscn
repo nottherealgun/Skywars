@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cl5c0tpgecvxv"]
+[gd_scene load_steps=4 format=3 uid="uid://dkmbqxnkt7o08"]
 
 [ext_resource type="Script" path="res://door.gd" id="1_dfm2f"]
-[ext_resource type="Texture2D" uid="uid://dl08lnbyfru66" path="res://doorHorizontal.png" id="2_ppi37"]
+[ext_resource type="Texture2D" uid="uid://dl08lnbyfru66" path="res://door_horizontal.png" id="2_887vp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ccfh"]
 radius = 104.0
@@ -13,7 +13,7 @@ script = ExtResource("1_dfm2f")
 [node name="Sprite" type="Sprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(3, 3)
-texture = ExtResource("2_ppi37")
+texture = ExtResource("2_887vp")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0

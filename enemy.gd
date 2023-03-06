@@ -5,17 +5,28 @@ class_name Enemy extends Node2D
 var health = max_health
 @export var speed = 1
 @export var damage = 1
+
+@export var level = 1
+@export var points = 1
+var latest_shooter : Node
+
 var move_vec := Vector2.ZERO
 
 var target : Node
 
 func _ready():
 	$NameTag.text = display_name
+	$NameTag/LevelTag.text = "Lvl "+str(level)
+	$NameTag.modulate = Color8(255,255-(level*5),255-(level*5))
+	max_health += level*2
 	health = max_health
+	speed += level
+	points += level*2
 
 func _process(delta):
 	$Healthbar.value = (health*100)/max_health
 	if health <= 0:
+		latest_shooter.money += points
 		Global.kill(self)
 	if is_instance_valid(target):
 		if target.is_in_group("player"):

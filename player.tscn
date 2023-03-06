@@ -1,11 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://b04ngos1kl60i"]
+[gd_scene load_steps=9 format=3 uid="uid://b04ngos1kl60i"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_r3xrg"]
 [ext_resource type="SpriteFrames" uid="uid://c4by4obw2rvbt" path="res://gun.tres" id="2_j3edc"]
+[ext_resource type="FontFile" uid="uid://im11hs0xx7wu" path="res://RoadPixel.ttf" id="4_qgn86"]
 [ext_resource type="Texture2D" uid="uid://c8fdbjdlywnc" path="res://Arrow.png" id="4_xqdyo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oscn4"]
 size = Vector2(24, 24)
+
+[sub_resource type="Animation" id="Animation_245ad"]
+resource_name = "default"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1)]
+}
+
+[sub_resource type="Animation" id="Animation_j2gx7"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vmjxl"]
+_data = {
+"RESET": SubResource("Animation_j2gx7"),
+"default": SubResource("Animation_245ad")
+}
 
 [node name="Player" type="Node2D" groups=["player"]]
 y_sort_enabled = true
@@ -22,12 +49,53 @@ shape = SubResource("RectangleShape2D_oscn4")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = ExtResource("2_j3edc")
-animation = &"run"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="Arrow" type="Sprite2D" parent="."]
+visible = false
 texture_filter = 1
 texture = ExtResource("4_xqdyo")
 offset = Vector2(25, 0)
 
+[node name="Guide" type="CanvasGroup" parent="."]
+visible = false
+scale = Vector2(1.0144, 1.0144)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Guide"]
+root_node = NodePath("../Text")
+autoplay = "default"
+libraries = {
+"": SubResource("AnimationLibrary_vmjxl")
+}
+
+[node name="Text" type="Label" parent="Guide"]
+z_index = 1
+texture_filter = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.8081
+offset_top = -53.4499
+offset_right = 69.1919
+offset_bottom = -15.4499
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+pivot_offset = Vector2(68, 10)
+size_flags_horizontal = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_qgn86")
+text = "Press A 
+to Revive Friend"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

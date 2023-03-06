@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cy0o1fhi2htd6" path="res://level.tscn" id="1_d4fxr"]
 [ext_resource type="PackedScene" uid="uid://ddx64c6xw43f0" path="res://printer.tscn" id="2_2swjx"]
 [ext_resource type="PackedScene" uid="uid://mts5ge2oghrr" path="res://student.tscn" id="3_8o0k3"]
-[ext_resource type="PackedScene" uid="uid://cl5c0tpgecvxv" path="res://door.tscn" id="4_comsi"]
+[ext_resource type="PackedScene" uid="uid://dkmbqxnkt7o08" path="res://door.tscn" id="4_comsi"]
 [ext_resource type="PackedScene" uid="uid://cu2kvup4253pa" path="res://spawning_point.tscn" id="5_yx3dd"]
 
 [node name="adit_building_2" instance=ExtResource("1_d4fxr")]
@@ -45,7 +45,8 @@ position = Vector2(1008, 344)
 position = Vector2(1112, 472)
 
 [node name="Door" parent="." index="12" instance=ExtResource("4_comsi")]
-position = Vector2(552, 528)
+position = Vector2(48, 504)
+horizontal = false
 
 [node name="SpawningPoint" parent="." index="13" instance=ExtResource("5_yx3dd")]
-position = Vector2(312, 344)
+position = Vector2(136, 512)

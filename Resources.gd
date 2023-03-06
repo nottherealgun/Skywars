@@ -14,8 +14,9 @@ var active_players = []
 
 var active_entities = []
 
-func spawn_projectile(proj_name:String,pos:Vector2,dir:Vector2,player_bullet=true,dmg:=1):
+func spawn_projectile(shooter:Node,proj_name:String,pos:Vector2,dir:Vector2,player_bullet=true,dmg:=1):
 	var new_proj = load("res://"+proj_name+".tscn").instantiate()
+	new_proj.shooter = shooter
 	new_proj.position = pos
 	new_proj.direction = dir
 	new_proj.player_bullet = player_bullet
@@ -112,5 +113,12 @@ func sync_map(map):
 		Main.add_child(entity)
 	
 	for p in active_players:
-		var radius = 10
-		p.position = map_spawnpoint+Vector2(randi()%radius,randi()%radius)
+		var radius = 20
+		var spawn_pos = map_spawnpoint+Vector2(randi()%radius,randi()%radius)
+		p.position = spawn_pos
+		p.transporting = true
+		p.y_sort_enabled = false
+		var tween = create_tween().set_parallel().set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(p.get_node("Sprite"),"position",Vector2.ZERO,3).from(Vector2(0,-1000))
+		tween.chain().tween_property(p,"transporting",false,0.1)
+		tween.chain().tween_property(p,"y_sort_enabled",true,0.1)

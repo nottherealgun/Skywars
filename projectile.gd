@@ -1,13 +1,14 @@
 @icon("res://paperProjectile1.png")
 class_name Projectile extends Area2D
 
+var shooter : Node
+var health = 1
 var direction := Vector2.RIGHT
-
 var current_speed = 1
 
 @onready var tween = self.create_tween()
 @export var damage = 1
-var player_bullet = true 
+var player_bullet = false 
 
 func _enter_tree():
 	if !player_bullet:
@@ -25,6 +26,14 @@ func _process(delta):
 
 func affect(victim:Node):
 	victim.health -= damage
+	if player_bullet:
+		victim.latest_shooter = shooter
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	Global.kill(self)
+
+func _on_area_entered(area):
+	if area.is_in_group("projectile"):
+		if area.player_bullet != player_bullet:
+			Global.kill(area)
+			Global.kill(self)

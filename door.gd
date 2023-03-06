@@ -6,10 +6,6 @@ extends Node2D
 
 var players_in_vicinity = []
 
-func _ready():
-	if !horizontal:
-		$Sprite.rotation_degrees = 90
-
 func enter_room(player):
 	if not is_instance_valid(room):
 		var random_room_path = DirAccess.get_files_at("res://rooms")[randi()%DirAccess.get_files_at("res://rooms").size()]

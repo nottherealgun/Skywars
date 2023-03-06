@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dl08lnbyfru66"
-path="res://.godot/imported/doorHorizontal.png-4c9c9e62d18c59723873851192ff5503.ctex"
+uid="uid://dw0atemxc7pfe"
+path="res://.godot/imported/brain.png-8eaa03bc0c2075aff8a8229a416d3cd3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://doorHorizontal.png"
-dest_files=["res://.godot/imported/doorHorizontal.png-4c9c9e62d18c59723873851192ff5503.ctex"]
+source_file="res://brain.png"
+dest_files=["res://.godot/imported/brain.png-8eaa03bc0c2075aff8a8229a416d3cd3.ctex"]
 
 [params]
 

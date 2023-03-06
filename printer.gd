@@ -1,9 +1,14 @@
 extends Enemy
 
-enum States { IDLE, AWOKEN, CHASING, ATTACKING }
+enum States { IDLE, AWOKEN, ATTACKING }
 var state = States.IDLE
 var awoken = false
-var range = 300
+var range = 200
+var shoot_speed = 1
+
+func _ready():
+	super()
+	shoot_speed = level
 
 func _process(delta):
 	super(delta)
@@ -14,16 +19,8 @@ func _process(delta):
 		States.AWOKEN:
 			if !$Sprite.is_playing():
 				change_state(States.ATTACKING)
-		States.CHASING:
-			_move_update(delta)
-			if is_instance_valid(target):
-				if position.distance_to(target.position) <= range:
-					change_state(States.ATTACKING)
 		States.ATTACKING:
-			if is_instance_valid(target):
-				if position.distance_to(target.position) > range:
-					change_state(States.CHASING)
-			else:
+			if !is_instance_valid(target):
 				change_state(States.IDLE)
 			if $Timer.is_stopped():
 				if $Sprite.frame >= 8:
@@ -32,8 +29,8 @@ func _process(delta):
 					if rand_num == 0:
 						proj_id = 0
 					
-					Global.spawn_projectile(["printer_proj_1","printer_proj_2"][proj_id],position,position.direction_to(target.position),false)			
-					$Timer.start()
+					Global.spawn_projectile(self,["printer_proj_1","printer_proj_2"][proj_id],position,position.direction_to(target.position),false)			
+					$Timer.start(1.0/shoot_speed)
 
 func change_state(new_state):
 	# Check old state
@@ -47,8 +44,6 @@ func change_state(new_state):
 			$Sprite.play("idle")
 		States.AWOKEN:
 			$Sprite.play("transform")
-		States.CHASING:
-			$Sprite.play("idle")
 		States.ATTACKING:
 			$Sprite.play("attack")
 	state = new_state
