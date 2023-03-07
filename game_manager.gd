@@ -16,4 +16,4 @@ func _process(delta):
 	vec/=Global.active_players.size()
 	cam_follow_target = vec
 	cam.position = cam_follow_target
-	Global.Dev.text = str(Global.GUI.get_node("Transition").material.get("shader_parameter/progress"))
+	Global.Dev.text = str(Global.active_players[0].transporting)

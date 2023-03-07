@@ -7,7 +7,6 @@
 [node name="Student" instance=ExtResource("1_u8cc3")]
 script = ExtResource("2_coljh")
 display_name = "Student"
-speed = 2
 
 [node name="Healthbar" parent="." index="0"]
 offset_top = -106.0

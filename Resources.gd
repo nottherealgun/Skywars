@@ -1,10 +1,10 @@
 extends Node
 # Resources
 
-@onready var Main = get_node("/root/Main")
-@onready var Map = get_node("/root/Main/Map")
-@onready var GUI = get_node("/root/Main/GUI")
-@onready var Dev = get_node("/root/Main/GUI/Dev")
+@onready var Main := get_node("/root/Main")
+@onready var Map := get_node("/root/Main/Map")
+@onready var GUI := get_node("/root/Main/GUI")
+@onready var Dev := get_node("/root/Main/GUI/Dev")
 
 @onready var MAP_RECT : Vector2 = Map.get_used_rect().size*128
 
@@ -92,7 +92,9 @@ var map_spawnpoint : Vector2
 
 # Levels
 func sync_map(map):
-	var target_map = map
+	
+	# Prepare spawnpoints
+	var target_map = map as Node2D
 	var spawn_poses = []
 	map_spawnpoint = target_map.find_child("SpawningPoint").position
 	
@@ -102,26 +104,33 @@ func sync_map(map):
 		p.transporting = true
 		p.y_sort_enabled = false
 
+	# Transition
 	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(GUI.get_node("Transition").material,"shader_parameter/progress",1.0,2).from(0.0)
-	for p in active_players:
-		tween.chain().tween_property(p,"position",spawn_poses[active_players.find(p)],1)
-		p.transporting = false
-		p.y_sort_enabled = true
 	GUI.get_node("Title").text = target_map.name.capitalize()	
 	tween.tween_property(GUI.get_node("Transition").material,"shader_parameter/progress",0.0,2).from(1.0)		
-	tween.tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
-	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
+	tween.parallel().tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
+	for p in active_players:
+		tween.parallel().tween_property(p,"position",spawn_poses[active_players.find(p)],1)
+	tween.tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
+	
 	await tween.step_finished
+	
+	for p in active_players:
+		p.transporting = false
+		p.y_sort_enabled = true
+	# Clear old map tiles
 	Map.clear()
 	LevelManager.clear_level()
 	
+	# Install map tiles
 	for tile in target_map.get_node("Map").get_used_cells(0):
 		var tile_type = target_map.get_node("Map").get_cell_atlas_coords(0,tile)
 		Map.set_cell(0,Vector2i(tile.x,tile.y),0,tile_type)
 	Map.set_cells_terrain_connect(0,Map.get_used_cells(0),0,0)
 	MAP_RECT = Map.get_used_rect().size*128
 	
+	# Install map enemies
 	for entity in target_map.get_children():
 		if entity.get_class() in ["TileMap","Marker2D"]:
 			continue
