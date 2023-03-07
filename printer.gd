@@ -15,7 +15,10 @@ func _process(delta):
 	$Sprite.flip_h = (move_vec.x > 0)
 	match state:
 		States.IDLE:
-			pass
+			if is_instance_valid(target):
+				if !awoken and position.distance_to(target.position) < range:
+					change_state(States.AWOKEN)
+					awoken = true
 		States.AWOKEN:
 			if !$Sprite.is_playing():
 				change_state(States.ATTACKING)
@@ -58,17 +61,14 @@ func _move_update(delta):
 		position += (move_vec-allies_vec) * speed * delta * 50
 
 func get_hurt(by:Node):
-	if awoken:
+	if (awoken and state == States.IDLE) or (state == States.ATTACKING):
 		super(by)
 
 func _on_player_detect_area_entered(area):
 	super(area)
 	var entity = area.get_parent()
 	if entity.is_in_group("player"):
-		if not awoken:
-			change_state(States.AWOKEN)
-			awoken = true
-		else:
+		if awoken:
 			change_state(States.ATTACKING)
 
 

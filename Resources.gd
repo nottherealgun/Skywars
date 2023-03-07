@@ -93,23 +93,26 @@ var map_spawnpoint : Vector2
 # Levels
 func sync_map(map):
 	var target_map = map
+	var spawn_poses = []
 	map_spawnpoint = target_map.find_child("SpawningPoint").position
 	
 	for p in active_players:
 		var radius = 20
-		var spawn_pos = map_spawnpoint+Vector2(randi()%radius,randi()%radius)
+		spawn_poses.append(map_spawnpoint+Vector2(randi()%radius,randi()%radius))
 		p.transporting = true
 		p.y_sort_enabled = false
-		var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
-		tween.tween_property(GUI.get_node("Transition").material,"shader_parameter/progress",1.0,2).from(0.0)
-		tween.chain().tween_property(p,"position",spawn_pos,1)
+
+	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(GUI.get_node("Transition").material,"shader_parameter/progress",1.0,2).from(0.0)
+	for p in active_players:
+		tween.chain().tween_property(p,"position",spawn_poses[active_players.find(p)],1)
 		p.transporting = false
 		p.y_sort_enabled = true
-		tween.tween_property(GUI.get_node("Transition").material,"shader_parameter/progress",0.0,2).from(1.0)		
-		GUI.get_node("Title").text = target_map.name.capitalize()
-		tween.tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
-		tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
-
+	GUI.get_node("Title").text = target_map.name.capitalize()	
+	tween.tween_property(GUI.get_node("Transition").material,"shader_parameter/progress",0.0,2).from(1.0)		
+	tween.tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
+	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
+	await tween.step_finished
 	Map.clear()
 	LevelManager.clear_level()
 	
