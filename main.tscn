@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://siwlpcy6tg40"]
+[gd_scene load_steps=35 format=3 uid="uid://siwlpcy6tg40"]
 
 [ext_resource type="PackedScene" uid="uid://b04ngos1kl60i" path="res://player.tscn" id="1_mhf8t"]
 [ext_resource type="Texture2D" uid="uid://dv8c76rwlux0p" path="res://idCardGUI.png" id="2_5fx3s"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://ctw1jwlr8j8mn" path="res://brainCellFillerSS.png" id="8_n7ojb"]
 [ext_resource type="Texture2D" uid="uid://n23u1d7ugi8t" path="res://coinGUISS.png" id="10_dbjn3"]
 [ext_resource type="FontFile" uid="uid://im11hs0xx7wu" path="res://RoadPixel.ttf" id="11_6pkrc"]
+[ext_resource type="Shader" path="res://transition.gdshader" id="13_wjtoa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sr40o"]
 atlas = ExtResource("8_n7ojb")
@@ -134,6 +135,11 @@ animations = [{
 "name": &"default",
 "speed": 10.0
 }]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q6brm"]
+shader = ExtResource("13_wjtoa")
+shader_parameter/progress = 0.0
+shader_parameter/diamondPixelSize = 50.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vvejs"]
 texture = ExtResource("3_y5y1w")
@@ -266,21 +272,6 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="GUI" type="CanvasLayer" parent="."]
-
-[node name="Dev" type="Label" parent="GUI"]
-visible = false
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -128.0
-offset_right = 128.0
-offset_bottom = 39.0
-grow_horizontal = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-text = "Lorem Ipsum"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="PlayerStats1" type="Control" parent="GUI"]
 layout_mode = 3
@@ -566,6 +557,45 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
+
+[node name="Title" type="Label" parent="GUI"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -544.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 25
+theme_override_fonts/font = ExtResource("11_6pkrc")
+theme_override_font_sizes/font_size = 100
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Transition" type="ColorRect" parent="GUI"]
+material = SubResource("ShaderMaterial_q6brm")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Dev" type="Label" parent="GUI"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_right = 128.0
+offset_bottom = 39.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+text = "Lorem Ipsum"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Map" type="TileMap" parent="."]
 texture_filter = 1

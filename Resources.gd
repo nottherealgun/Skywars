@@ -93,6 +93,23 @@ var map_spawnpoint : Vector2
 # Levels
 func sync_map(map):
 	var target_map = map
+	map_spawnpoint = target_map.find_child("SpawningPoint").position
+	
+	for p in active_players:
+		var radius = 20
+		var spawn_pos = map_spawnpoint+Vector2(randi()%radius,randi()%radius)
+		p.transporting = true
+		p.y_sort_enabled = false
+		var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(GUI.get_node("Transition").material,"shader_parameter/progress",1.0,2).from(0.0)
+		tween.chain().tween_property(p,"position",spawn_pos,1)
+		p.transporting = false
+		p.y_sort_enabled = true
+		tween.tween_property(GUI.get_node("Transition").material,"shader_parameter/progress",0.0,2).from(1.0)		
+		GUI.get_node("Title").text = target_map.name.capitalize()
+		tween.tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
+		tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
+
 	Map.clear()
 	LevelManager.clear_level()
 	
@@ -104,21 +121,7 @@ func sync_map(map):
 	
 	for entity in target_map.get_children():
 		if entity.get_class() in ["TileMap","Marker2D"]:
-			match entity.get_class():
-				"Marker2D":
-					map_spawnpoint = entity.position
 			continue
 		target_map.remove_child(entity)
 		active_entities.append(entity)
 		Main.add_child(entity)
-	
-	for p in active_players:
-		var radius = 20
-		var spawn_pos = map_spawnpoint+Vector2(randi()%radius,randi()%radius)
-		p.position = spawn_pos
-		p.transporting = true
-		p.y_sort_enabled = false
-		var tween = create_tween().set_parallel().set_trans(Tween.TRANS_CUBIC)
-		tween.tween_property(p.get_node("Sprite"),"position",Vector2.ZERO,3).from(Vector2(0,-1000))
-		tween.chain().tween_property(p,"transporting",false,0.1)
-		tween.chain().tween_property(p,"y_sort_enabled",true,0.1)

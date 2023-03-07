@@ -14,6 +14,7 @@ func _enter_tree():
 	if !player_bullet:
 		set_collision_layer_value(2,false)
 		set_collision_layer_value(3,true)
+		$Sprite.modulate = Color.WHITE.blend(Color(1.0,0,0,0.2))
 
 func _ready():
 	var original_speed = current_speed

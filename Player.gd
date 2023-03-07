@@ -55,8 +55,7 @@ func _process(delta):
 
 func _input_update():
 	# Get movement input strength
-	aim_vec = Vector2(Input.get_action_strength("p"+str(player_id)+"_right2") - Input.get_action_strength("p"+str(player_id)+"_left2"),
-	Input.get_action_strength("p"+str(player_id)+"_down2") - Input.get_action_strength("p"+str(player_id)+"_up2")).normalized()
+	aim_vec = Input.get_vector("p"+str(player_id)+"_left2","p"+str(player_id)+"_right2","p"+str(player_id)+"_up2","p"+str(player_id)+"_down2")
 	
 	if !fainted and !transporting: # If player alive
 		get_node("Arrow").rotation = get_node("Arrow").position.angle_to_point(aim_vec)
@@ -75,15 +74,16 @@ func _gui_update():
 	stat_gui.get_node("Money").text = "$ "+str(money)
 
 func _move_update(delta):
-	move_vec = Vector2.ZERO
-	if Input.is_action_pressed("p"+str(player_id)+"_up"):
-		move_vec.y -= 1
-	if Input.is_action_pressed("p"+str(player_id)+"_down"):
-		move_vec.y += 1
-	if Input.is_action_pressed("p"+str(player_id)+"_left"):
-		move_vec.x -= 1
-	if Input.is_action_pressed("p"+str(player_id)+"_right"):
-		move_vec.x += 1
+	move_vec = Input.get_vector("p"+str(player_id)+"_left","p"+str(player_id)+"_right","p"+str(player_id)+"_up","p"+str(player_id)+"_down")
+#	move_vec = Vector2.ZERO
+#	if Input.is_action_pressed("p"+str(player_id)+"_up"):
+#		move_vec.y -= 1
+#	if Input.is_action_pressed("p"+str(player_id)+"_down"):
+#		move_vec.y += 1
+#	if Input.is_action_pressed("p"+str(player_id)+"_left"):
+#		move_vec.x -= 1
+#	if Input.is_action_pressed("p"+str(player_id)+"_right"):
+#		move_vec.x += 1
 	position += move_vec.normalized()*delta*speed*200
 	position.x = clamp(position.x, 0, Global.MAP_RECT.x)
 	position.y = clamp(position.y, 0, Global.MAP_RECT.y)
@@ -122,3 +122,15 @@ func _on_hitbox_area_exited(area):
 		var entity = area.get_parent()
 		if entity.is_in_group("player"):
 			$Guide.hide()
+
+var enemies_in_range = []
+
+func _on_enemy_detect_area_entered(area):
+	var entity = area.get_parent()
+	if entity.is_in_group("enemy") and not entity in enemies_in_range:
+		enemies_in_range.append(entity)
+
+func _on_enemy_detect_area_exited(area):
+	var entity = area.get_parent()
+	if entity.is_in_group("enemy") and entity in enemies_in_range:
+		enemies_in_range.erase(entity)

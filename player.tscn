@@ -1,12 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://b04ngos1kl60i"]
+[gd_scene load_steps=10 format=3 uid="uid://b04ngos1kl60i"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_r3xrg"]
 [ext_resource type="SpriteFrames" uid="uid://c4by4obw2rvbt" path="res://gun.tres" id="2_j3edc"]
 [ext_resource type="FontFile" uid="uid://im11hs0xx7wu" path="res://RoadPixel.ttf" id="4_qgn86"]
-[ext_resource type="Texture2D" uid="uid://c8fdbjdlywnc" path="res://Arrow.png" id="4_xqdyo"]
+[ext_resource type="Texture2D" uid="uid://c8fdbjdlywnc" path="res://arrow.png" id="4_xqdyo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oscn4"]
 size = Vector2(24, 24)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5rio8"]
+radius = 160.05
+
+[sub_resource type="Animation" id="Animation_j2gx7"]
+length = 0.001
 
 [sub_resource type="Animation" id="Animation_245ad"]
 resource_name = "default"
@@ -25,9 +31,6 @@ tracks/0/keys = {
 "values": [Vector2(1, 1), Vector2(1.1, 1.1)]
 }
 
-[sub_resource type="Animation" id="Animation_j2gx7"]
-length = 0.001
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vmjxl"]
 _data = {
 "RESET": SubResource("Animation_j2gx7"),
@@ -45,6 +48,12 @@ collision_mask = 5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_oscn4")
+
+[node name="EnemyDetect" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetect"]
+shape = SubResource("CircleShape2D_5rio8")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -99,3 +108,5 @@ uppercase = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
+[connection signal="area_entered" from="EnemyDetect" to="." method="_on_enemy_detect_area_entered"]
+[connection signal="area_exited" from="EnemyDetect" to="." method="_on_enemy_detect_area_exited"]

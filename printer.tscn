@@ -243,7 +243,6 @@ animations = [{
 y_sort_enabled = true
 script = ExtResource("2_owcnx")
 display_name = "MUIC Printer"
-max_health = 10
 speed = 3
 
 [node name="Healthbar" parent="." index="0"]

@@ -44,6 +44,10 @@ animations = [{
 [node name="PrinterProj2" instance=ExtResource("1_lj12i")]
 script = ExtResource("2_qv8gu")
 
+[node name="VisibleOnScreenNotifier2D" parent="." index="1"]
+position = Vector2(0, 75)
+scale = Vector2(9, 11.5)
+
 [node name="Shadow" type="Sprite2D" parent="." index="2"]
 self_modulate = Color(0, 0, 0, 0.392157)
 texture_filter = 1
