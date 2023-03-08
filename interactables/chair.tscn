@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://7h0dudlrgsm1"]
+
+[ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://interactables/interactable.tscn" id="1_ysfhv"]
+[ext_resource type="Texture2D" uid="uid://brsq6mehr8qmm" path="res://interactables/adithChair.png" id="2_041ar"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x7pi7"]
+radius = 17.2699
+
+[node name="Chair" instance=ExtResource("1_ysfhv")]
+
+[node name="Sprite" parent="." index="0"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_041ar")
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(0, 1.5)
+shape = SubResource("CircleShape2D_x7pi7")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

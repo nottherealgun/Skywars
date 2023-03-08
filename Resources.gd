@@ -15,7 +15,7 @@ var active_players = []
 var active_entities = []
 
 func spawn_projectile(shooter:Node,proj_name:String,pos:Vector2,dir:Vector2,player_bullet=true,dmg:=1):
-	var new_proj = load("res://"+proj_name+".tscn").instantiate()
+	var new_proj = load("res://projectiles/"+proj_name+".tscn").instantiate()
 	new_proj.shooter = shooter
 	new_proj.position = pos
 	new_proj.direction = dir
@@ -26,7 +26,7 @@ func spawn_projectile(shooter:Node,proj_name:String,pos:Vector2,dir:Vector2,play
 	return new_proj
 
 func spawn_enemy(enemy_name:String,pos:Vector2):
-	var new_enemy = load("res://"+enemy_name+".tscn").instantiate()
+	var new_enemy = load("res://enemies/"+enemy_name+".tscn").instantiate()
 	new_enemy.position = pos
 	active_entities.append(new_enemy)
 	Main.add_child(new_enemy)
@@ -77,7 +77,7 @@ func get_door_pos(size:Vector2i):
 	return [door_pos,flip,rand_side]
 
 func new_door(room_size=Map.get_used_rect().size):
-	var new_door = load("res://door.tscn").instantiate()
+	var new_door = load("res://objects/door.tscn").instantiate()
 	var new = get_door_pos(room_size)
 	new_door.position = new[0]
 	new_door.horizontal = new[1]
@@ -106,7 +106,7 @@ func sync_map(map):
 
 	# Transition
 	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(GUI.get_node("Transition").material,"shader_parameter/progress",1.0,2).from(0.0)
+	tween.tween_property(GUI.get_node("Transition").material,"shader_parameter/progress",1.0,3).from(0.0)
 	GUI.get_node("Title").text = target_map.name.capitalize()	
 	tween.tween_property(GUI.get_node("Transition").material,"shader_parameter/progress",0.0,2).from(1.0)		
 	tween.parallel().tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)

@@ -1,46 +1,46 @@
-[gd_scene load_steps=35 format=3 uid="uid://siwlpcy6tg40"]
+[gd_scene load_steps=33 format=3 uid="uid://n8ynv6dtp5w6"]
 
-[ext_resource type="PackedScene" uid="uid://b04ngos1kl60i" path="res://player.tscn" id="1_mhf8t"]
-[ext_resource type="Texture2D" uid="uid://dv8c76rwlux0p" path="res://idCardGUI.png" id="2_5fx3s"]
-[ext_resource type="Texture2D" uid="uid://c5teeojme28q1" path="res://hpForeground.png" id="2_ftblp"]
-[ext_resource type="Texture2D" uid="uid://bffxtkyh5d2av" path="res://gun_head.png" id="3_5ew25"]
-[ext_resource type="Texture2D" uid="uid://dfl3oef8y6w4c" path="res://hpBackground.png" id="3_ji4ok"]
-[ext_resource type="Texture2D" uid="uid://c3mua8tnxy4fs" path="res://adithFirstFloor.png" id="3_y5y1w"]
-[ext_resource type="Texture2D" uid="uid://bfdd8ebmimg8k" path="res://hpFiller.png" id="4_jbadb"]
-[ext_resource type="Texture2D" uid="uid://psxcw5u1kfcf" path="res://heart.png" id="4_l1131"]
-[ext_resource type="Texture2D" uid="uid://dw0atemxc7pfe" path="res://brain.png" id="5_n1pv3"]
-[ext_resource type="Texture2D" uid="uid://csvvbeukbfvho" path="res://brainCellForeground.png" id="7_jcy3i"]
-[ext_resource type="Texture2D" uid="uid://ctw1jwlr8j8mn" path="res://brainCellFillerSS.png" id="8_n7ojb"]
-[ext_resource type="Texture2D" uid="uid://n23u1d7ugi8t" path="res://coinGUISS.png" id="10_dbjn3"]
-[ext_resource type="FontFile" uid="uid://im11hs0xx7wu" path="res://RoadPixel.ttf" id="11_6pkrc"]
+[ext_resource type="PackedScene" uid="uid://caw6brh3py3mv" path="res://players/player.tscn" id="1_mhf8t"]
+[ext_resource type="Texture2D" uid="uid://dv8c76rwlux0p" path="res://items/idCardGUI.png" id="2_e4464"]
+[ext_resource type="Texture2D" uid="uid://bffxtkyh5d2av" path="res://players/gun_head.png" id="3_5ew25"]
+[ext_resource type="Texture2D" uid="uid://psxcw5u1kfcf" path="res://gui/heart.png" id="4_rfucy"]
+[ext_resource type="Texture2D" uid="uid://dw0atemxc7pfe" path="res://gui/brain.png" id="5_2hml2"]
+[ext_resource type="Texture2D" uid="uid://dfl3oef8y6w4c" path="res://gui/hpBackground.png" id="6_6j0f6"]
+[ext_resource type="Texture2D" uid="uid://c5teeojme28q1" path="res://gui/hpForeground.png" id="7_lstgi"]
+[ext_resource type="Texture2D" uid="uid://bfdd8ebmimg8k" path="res://gui/hpFiller.png" id="8_ne1ph"]
+[ext_resource type="Texture2D" uid="uid://csvvbeukbfvho" path="res://gui/brainCellForeground.png" id="9_70o5r"]
+[ext_resource type="Texture2D" uid="uid://ctw1jwlr8j8mn" path="res://gui/brainCellFillerSS.png" id="10_xahcf"]
+[ext_resource type="FontFile" uid="uid://im11hs0xx7wu" path="res://utility/RoadPixel.ttf" id="11_lksja"]
+[ext_resource type="Texture2D" uid="uid://n23u1d7ugi8t" path="res://gui/coinGUISS.png" id="12_su5dn"]
 [ext_resource type="Shader" path="res://transition.gdshader" id="13_wjtoa"]
+[ext_resource type="TileSet" path="res://default.tres" id="14_vmf2g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sr40o"]
-atlas = ExtResource("8_n7ojb")
+atlas = ExtResource("10_xahcf")
 region = Rect2(0, 0, 35, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_go7ol"]
-atlas = ExtResource("8_n7ojb")
+atlas = ExtResource("10_xahcf")
 region = Rect2(35, 0, 35, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_krhri"]
-atlas = ExtResource("8_n7ojb")
+atlas = ExtResource("10_xahcf")
 region = Rect2(70, 0, 35, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7j30l"]
-atlas = ExtResource("8_n7ojb")
+atlas = ExtResource("10_xahcf")
 region = Rect2(105, 0, 35, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qc4sn"]
-atlas = ExtResource("8_n7ojb")
+atlas = ExtResource("10_xahcf")
 region = Rect2(140, 0, 35, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5uxuf"]
-atlas = ExtResource("8_n7ojb")
+atlas = ExtResource("10_xahcf")
 region = Rect2(175, 0, 35, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kdgyn"]
-atlas = ExtResource("8_n7ojb")
+atlas = ExtResource("10_xahcf")
 region = Rect2(210, 0, 35, 10)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gu0rw"]
@@ -73,35 +73,35 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iafgu"]
-atlas = ExtResource("10_dbjn3")
+atlas = ExtResource("12_su5dn")
 region = Rect2(0, 0, 10, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_erb53"]
-atlas = ExtResource("10_dbjn3")
+atlas = ExtResource("12_su5dn")
 region = Rect2(10, 0, 10, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7ecpl"]
-atlas = ExtResource("10_dbjn3")
+atlas = ExtResource("12_su5dn")
 region = Rect2(20, 0, 10, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ilg4i"]
-atlas = ExtResource("10_dbjn3")
+atlas = ExtResource("12_su5dn")
 region = Rect2(30, 0, 10, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_py4ph"]
-atlas = ExtResource("10_dbjn3")
+atlas = ExtResource("12_su5dn")
 region = Rect2(40, 0, 10, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mx32a"]
-atlas = ExtResource("10_dbjn3")
+atlas = ExtResource("12_su5dn")
 region = Rect2(50, 0, 10, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mn3br"]
-atlas = ExtResource("10_dbjn3")
+atlas = ExtResource("12_su5dn")
 region = Rect2(60, 0, 10, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6ykwq"]
-atlas = ExtResource("10_dbjn3")
+atlas = ExtResource("12_su5dn")
 region = Rect2(70, 0, 10, 10)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_loydx"]
@@ -141,110 +141,6 @@ shader = ExtResource("13_wjtoa")
 shader_parameter/progress = 0.0
 shader_parameter/diamondPixelSize = 50.0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vvejs"]
-texture = ExtResource("3_y5y1w")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-0:0/0/terrain_set = 0
-0:0/0/terrain = 0
-0:0/0/terrains_peering_bit/bottom_side = 0
-1:0/0 = 0
-1:0/0/terrain_set = 0
-1:0/0/terrain = 0
-1:0/0/terrains_peering_bit/right_side = 0
-1:0/0/terrains_peering_bit/bottom_right_corner = 0
-1:0/0/terrains_peering_bit/bottom_side = 0
-2:0/0 = 0
-2:0/0/terrain_set = 0
-2:0/0/terrain = 0
-2:0/0/terrains_peering_bit/right_side = 0
-2:0/0/terrains_peering_bit/bottom_right_corner = 0
-2:0/0/terrains_peering_bit/bottom_side = 0
-2:0/0/terrains_peering_bit/bottom_left_corner = 0
-2:0/0/terrains_peering_bit/left_side = 0
-3:0/0 = 0
-3:0/0/terrain_set = 0
-3:0/0/terrain = 0
-3:0/0/terrains_peering_bit/bottom_side = 0
-3:0/0/terrains_peering_bit/bottom_left_corner = 0
-3:0/0/terrains_peering_bit/left_side = 0
-0:1/0 = 0
-0:1/0/terrain_set = 0
-0:1/0/terrain = 0
-0:1/0/terrains_peering_bit/bottom_side = 0
-0:1/0/terrains_peering_bit/top_side = 0
-1:1/0 = 0
-1:1/0/terrain_set = 0
-1:1/0/terrain = 0
-1:1/0/terrains_peering_bit/right_side = 0
-1:1/0/terrains_peering_bit/bottom_right_corner = 0
-1:1/0/terrains_peering_bit/bottom_side = 0
-1:1/0/terrains_peering_bit/top_side = 0
-1:1/0/terrains_peering_bit/top_right_corner = 0
-2:1/0 = 0
-2:1/0/terrain_set = 0
-2:1/0/terrain = 0
-2:1/0/terrains_peering_bit/right_side = 0
-2:1/0/terrains_peering_bit/bottom_right_corner = 0
-2:1/0/terrains_peering_bit/bottom_side = 0
-2:1/0/terrains_peering_bit/bottom_left_corner = 0
-2:1/0/terrains_peering_bit/left_side = 0
-2:1/0/terrains_peering_bit/top_left_corner = 0
-2:1/0/terrains_peering_bit/top_side = 0
-2:1/0/terrains_peering_bit/top_right_corner = 0
-3:1/0 = 0
-3:1/0/terrain_set = 0
-3:1/0/terrain = 0
-3:1/0/terrains_peering_bit/bottom_side = 0
-3:1/0/terrains_peering_bit/bottom_left_corner = 0
-3:1/0/terrains_peering_bit/left_side = 0
-3:1/0/terrains_peering_bit/top_left_corner = 0
-3:1/0/terrains_peering_bit/top_side = 0
-0:2/0 = 0
-0:2/0/terrain_set = 0
-0:2/0/terrain = 0
-0:2/0/terrains_peering_bit/top_side = 0
-1:2/0 = 0
-1:2/0/terrain_set = 0
-1:2/0/terrain = 0
-1:2/0/terrains_peering_bit/right_side = 0
-1:2/0/terrains_peering_bit/top_side = 0
-1:2/0/terrains_peering_bit/top_right_corner = 0
-2:2/0 = 0
-2:2/0/terrain_set = 0
-2:2/0/terrain = 0
-2:2/0/terrains_peering_bit/right_side = 0
-2:2/0/terrains_peering_bit/left_side = 0
-2:2/0/terrains_peering_bit/top_left_corner = 0
-2:2/0/terrains_peering_bit/top_side = 0
-2:2/0/terrains_peering_bit/top_right_corner = 0
-3:2/0 = 0
-3:2/0/terrain_set = 0
-3:2/0/terrain = 0
-3:2/0/terrains_peering_bit/left_side = 0
-3:2/0/terrains_peering_bit/top_left_corner = 0
-3:2/0/terrains_peering_bit/top_side = 0
-1:3/0 = 0
-1:3/0/terrain_set = 0
-1:3/0/terrain = 0
-1:3/0/terrains_peering_bit/right_side = 0
-2:3/0 = 0
-2:3/0/terrain_set = 0
-2:3/0/terrain = 0
-2:3/0/terrains_peering_bit/right_side = 0
-2:3/0/terrains_peering_bit/left_side = 0
-3:3/0 = 0
-3:3/0/terrain_set = 0
-3:3/0/terrain = 0
-3:3/0/terrains_peering_bit/left_side = 0
-
-[sub_resource type="TileSet" id="TileSet_0h34i"]
-tile_size = Vector2i(32, 32)
-terrain_set_0/mode = 0
-terrain_set_0/terrain_0/name = "Terrain 0"
-terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
-sources/0 = SubResource("TileSetAtlasSource_vvejs")
-
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
 
@@ -263,7 +159,6 @@ position = Vector2(192, 128)
 layer = -1
 
 [node name="Background" type="ColorRect" parent="CanvasLayer"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -294,7 +189,7 @@ offset_left = -16.0
 offset_top = -8.0
 offset_right = 112.0
 offset_bottom = 160.0
-texture = ExtResource("2_5fx3s")
+texture = ExtResource("2_e4464")
 expand_mode = 1
 stretch_mode = 5
 metadata/_edit_lock_ = true
@@ -318,7 +213,7 @@ offset_left = 120.0
 offset_top = 32.0
 offset_right = 160.0
 offset_bottom = 72.0
-texture = ExtResource("4_l1131")
+texture = ExtResource("4_rfucy")
 stretch_mode = 5
 
 [node name="BrainIcon" type="TextureRect" parent="GUI/PlayerStats1"]
@@ -328,7 +223,7 @@ offset_left = 120.0
 offset_top = 80.0
 offset_right = 160.0
 offset_bottom = 120.0
-texture = ExtResource("5_n1pv3")
+texture = ExtResource("5_2hml2")
 stretch_mode = 5
 
 [node name="Healthbar" type="TextureProgressBar" parent="GUI/PlayerStats1"]
@@ -340,9 +235,9 @@ offset_right = 304.0
 offset_bottom = 72.0
 value = 100.0
 nine_patch_stretch = true
-texture_under = ExtResource("3_ji4ok")
-texture_over = ExtResource("2_ftblp")
-texture_progress = ExtResource("4_jbadb")
+texture_under = ExtResource("6_6j0f6")
+texture_over = ExtResource("7_lstgi")
+texture_progress = ExtResource("8_ne1ph")
 
 [node name="BrainbarBG" type="TextureRect" parent="GUI/PlayerStats1"]
 texture_filter = 1
@@ -351,7 +246,7 @@ offset_left = 168.0
 offset_top = 80.0
 offset_right = 304.0
 offset_bottom = 120.0
-texture = ExtResource("7_jcy3i")
+texture = ExtResource("9_70o5r")
 stretch_mode = 5
 
 [node name="Brainbar" type="AnimatedSprite2D" parent="GUI/PlayerStats1"]
@@ -370,7 +265,7 @@ offset_bottom = 35.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("11_6pkrc")
+theme_override_fonts/font = ExtResource("11_lksja")
 theme_override_font_sizes/font_size = 40
 text = "PLAYER 1"
 horizontal_alignment = 1
@@ -385,7 +280,7 @@ offset_bottom = 160.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 20
-theme_override_fonts/font = ExtResource("11_6pkrc")
+theme_override_fonts/font = ExtResource("11_lksja")
 theme_override_font_sizes/font_size = 30
 text = "100"
 vertical_alignment = 1
@@ -422,7 +317,7 @@ offset_left = -16.0
 offset_top = -8.0
 offset_right = 112.0
 offset_bottom = 160.0
-texture = ExtResource("2_5fx3s")
+texture = ExtResource("2_e4464")
 expand_mode = 1
 stretch_mode = 5
 metadata/_edit_lock_ = true
@@ -446,7 +341,7 @@ offset_left = 120.0
 offset_top = 32.0
 offset_right = 160.0
 offset_bottom = 72.0
-texture = ExtResource("4_l1131")
+texture = ExtResource("4_rfucy")
 stretch_mode = 5
 
 [node name="BrainIcon" type="TextureRect" parent="GUI/PlayerStats2"]
@@ -456,7 +351,7 @@ offset_left = 120.0
 offset_top = 80.0
 offset_right = 160.0
 offset_bottom = 120.0
-texture = ExtResource("5_n1pv3")
+texture = ExtResource("5_2hml2")
 stretch_mode = 5
 
 [node name="Healthbar" type="TextureProgressBar" parent="GUI/PlayerStats2"]
@@ -468,9 +363,9 @@ offset_right = 304.0
 offset_bottom = 72.0
 value = 100.0
 nine_patch_stretch = true
-texture_under = ExtResource("3_ji4ok")
-texture_over = ExtResource("2_ftblp")
-texture_progress = ExtResource("4_jbadb")
+texture_under = ExtResource("6_6j0f6")
+texture_over = ExtResource("7_lstgi")
+texture_progress = ExtResource("8_ne1ph")
 
 [node name="BrainbarBG" type="TextureRect" parent="GUI/PlayerStats2"]
 texture_filter = 1
@@ -479,7 +374,7 @@ offset_left = 168.0
 offset_top = 80.0
 offset_right = 304.0
 offset_bottom = 120.0
-texture = ExtResource("7_jcy3i")
+texture = ExtResource("9_70o5r")
 stretch_mode = 5
 
 [node name="Brainbar" type="AnimatedSprite2D" parent="GUI/PlayerStats2"]
@@ -498,7 +393,7 @@ offset_bottom = 35.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("11_6pkrc")
+theme_override_fonts/font = ExtResource("11_lksja")
 theme_override_font_sizes/font_size = 40
 text = "PLAYER 1"
 horizontal_alignment = 1
@@ -513,7 +408,7 @@ offset_bottom = 160.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 20
-theme_override_fonts/font = ExtResource("11_6pkrc")
+theme_override_fonts/font = ExtResource("11_lksja")
 theme_override_font_sizes/font_size = 30
 text = "100"
 vertical_alignment = 1
@@ -568,7 +463,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 25
-theme_override_fonts/font = ExtResource("11_6pkrc")
+theme_override_fonts/font = ExtResource("11_lksja")
 theme_override_font_sizes/font_size = 100
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -583,6 +478,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Dev" type="Label" parent="GUI"]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -599,8 +495,7 @@ vertical_alignment = 1
 [node name="Map" type="TileMap" parent="."]
 texture_filter = 1
 scale = Vector2(4, 4)
-tile_set = SubResource("TileSet_0h34i")
+tile_set = ExtResource("14_vmf2g")
 format = 2
 layer_0/modulate = Color(0.784314, 0.784314, 0.784314, 1)
 layer_0/z_index = -1
-layer_0/tile_data = PackedInt32Array(0, 65537, 0, 65536, 65537, 1, 131073, 131073, 1, 131074, 131073, 1, 131075, 131073, 1, 196611, 131073, 1, 196610, 131073, 1, 196609, 131073, 1, 196608, 65537, 1, 131072, 65537, 1, 65537, 131073, 1, 65538, 131073, 1, 1, 131073, 0, 2, 131073, 0, 3, 131073, 0, 65539, 131073, 1, 65540, 131073, 1, 4, 131073, 0, 5, 196609, 0, 65541, 196609, 1, 131077, 196609, 1, 131076, 131073, 1, 196612, 131073, 1, 196613, 196609, 1, 262149, 196609, 1, 262148, 131073, 1, 262147, 131073, 1, 262146, 131073, 1, 262145, 131073, 1, 262144, 65537, 1, 327680, 65537, 2, 327681, 131073, 2, 327682, 131073, 2, 327683, 131073, 2, 327684, 131073, 2, 327685, 196609, 2)
