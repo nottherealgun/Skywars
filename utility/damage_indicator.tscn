@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct7j5b3ibp2be"]
+
+[ext_resource type="Script" path="res://DamageIndicator.gd" id="1_36i6h"]
+[ext_resource type="FontFile" uid="uid://im11hs0xx7wu" path="res://utility/RoadPixel.ttf" id="2_majt6"]
+
+[node name="DamageIndicator" type="Node2D"]
+z_index = 2
+y_sort_enabled = true
+script = ExtResource("1_36i6h")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 5
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -11.0
+offset_right = 64.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_majt6")
+text = "+0"
+horizontal_alignment = 1
+vertical_alignment = 1

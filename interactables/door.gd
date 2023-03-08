@@ -6,11 +6,18 @@ extends Node2D
 
 var players_in_vicinity = []
 
+func _enter_tree():
+	match horizontal:
+		false:
+			$Sprite.animation = "side"
+
 func enter_room(player):
 	if not is_instance_valid(room):
 		var random_room_path = DirAccess.get_files_at("res://rooms")[randi()%DirAccess.get_files_at("res://rooms").size()]
 		room = load("res://rooms/"+random_room_path)
-	var room_instance = room.instantiate()
+	var room_instance = room.instantiate()	
+	$Sprite.play()
+	await $Sprite.animation_finished
 	Global.sync_map(room_instance)
 
 func _on_area_2d_area_entered(area):

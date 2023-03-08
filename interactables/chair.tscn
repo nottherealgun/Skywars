@@ -15,6 +15,3 @@ texture = ExtResource("2_041ar")
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2(0, 1.5)
 shape = SubResource("CircleShape2D_x7pi7")
-
-[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
-[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

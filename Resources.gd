@@ -137,3 +137,9 @@ func sync_map(map):
 		target_map.remove_child(entity)
 		active_entities.append(entity)
 		Main.add_child(entity)
+
+func emit_indicator(amnt:float,pos:Vector2):
+	var new_indicator = load("res://utility/damage_indicator.tscn").instantiate()
+	new_indicator.position = pos
+	new_indicator.amount = roundi(amnt)
+	Main.add_child(new_indicator)

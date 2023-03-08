@@ -1,7 +1,63 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=12 format=3 uid="uid://6qdjvyw15lm4"]
 
 [ext_resource type="Script" path="res://interactables/door.gd" id="1_dfm2f"]
-[ext_resource type="Texture2D" uid="uid://dl08lnbyfru66" path="res://interactables/door_horizontal.png" id="2_887vp"]
+[ext_resource type="Texture2D" uid="uid://d2y2gnp4q0ti3" path="res://interactables/aniDoorHorizontalSS.png" id="2_6tbhk"]
+[ext_resource type="Texture2D" uid="uid://baceu1lu7581p" path="res://interactables/aniDoorVerticalSS.png" id="3_vulyk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vknpa"]
+atlas = ExtResource("2_6tbhk")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2mhs"]
+atlas = ExtResource("2_6tbhk")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5sxj"]
+atlas = ExtResource("2_6tbhk")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wq30d"]
+atlas = ExtResource("3_vulyk")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7k31v"]
+atlas = ExtResource("3_vulyk")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dltdp"]
+atlas = ExtResource("3_vulyk")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_er4a6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vknpa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2mhs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5sxj")
+}],
+"loop": false,
+"name": &"forward",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wq30d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7k31v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dltdp")
+}],
+"loop": false,
+"name": &"side",
+"speed": 2.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6ccfh"]
 radius = 104.0
@@ -10,12 +66,16 @@ radius = 104.0
 y_sort_enabled = true
 script = ExtResource("1_dfm2f")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
+position = Vector2(0, 16)
 scale = Vector2(3, 3)
-texture = ExtResource("2_887vp")
+sprite_frames = SubResource("SpriteFrames_er4a6")
+animation = &"forward"
+offset = Vector2(0, -13.3333)
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, -8)
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
