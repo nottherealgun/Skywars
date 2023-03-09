@@ -14,7 +14,7 @@ var active_players = []
 
 var active_entities = []
 
-func spawn_projectile(shooter:Node,proj_name:String,pos:Vector2,dir:Vector2,player_bullet=true,dmg:=1):
+func spawn_projectile(shooter:Node,proj_name:String,pos:Vector2,dir:Vector2,player_bullet=false,dmg:=1):
 	var new_proj = load("res://projectiles/"+proj_name+".tscn").instantiate()
 	new_proj.shooter = shooter
 	new_proj.position = pos

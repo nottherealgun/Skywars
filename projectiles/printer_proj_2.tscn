@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=10 format=3 uid="uid://8fqe4gtfqu7b"]
 
 [ext_resource type="PackedScene" uid="uid://cni0dsstdjde" path="res://projectiles/projectile.tscn" id="1_lj12i"]
 [ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://interactables/shadow.png" id="2_8xfp8"]

@@ -16,8 +16,9 @@ offset_bottom = -102.0
 scale = Vector2(4, 4)
 sprite_frames = ExtResource("3_ox7se")
 animation = &"idle"
-autoplay = "idle"
-frame_progress = 0.159534
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+visible = false
 
 [node name="CollisionShape2D" parent="PlayerDetect" index="0"]
 visible = false

@@ -13,7 +13,7 @@
 [ext_resource type="FontFile" uid="uid://im11hs0xx7wu" path="res://utility/RoadPixel.ttf" id="11_lksja"]
 [ext_resource type="Texture2D" uid="uid://n23u1d7ugi8t" path="res://gui/coinGUISS.png" id="12_su5dn"]
 [ext_resource type="Shader" path="res://transition.gdshader" id="13_wjtoa"]
-[ext_resource type="TileSet" path="res://default.tres" id="14_vmf2g"]
+[ext_resource type="TileSet" uid="uid://wuna8cwijtn6" path="res://default.tres" id="14_vmf2g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sr40o"]
 atlas = ExtResource("10_xahcf")

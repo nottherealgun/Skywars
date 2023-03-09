@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bhsvoj5kcuifg" path="res://spawning_point.tscn" id="3_3ut51"]
 [ext_resource type="PackedScene" uid="uid://6qdjvyw15lm4" path="res://interactables/door.tscn" id="3_kdace"]
 [ext_resource type="PackedScene" uid="uid://7h0dudlrgsm1" path="res://interactables/chair.tscn" id="5_7xayh"]
-[ext_resource type="PackedScene" uid="uid://bs0h2fmnb8ptq" path="res://enemies/student.tscn" id="5_qbweq"]
+[ext_resource type="PackedScene" uid="uid://cmhrf827nfpky" path="res://enemies/printer.tscn" id="5_73syp"]
 
 [node name="adit_building_2" instance=ExtResource("1_iaiv3")]
 
@@ -18,10 +18,9 @@ position = Vector2(136, 512)
 position = Vector2(48, 864)
 horizontal = false
 
-[node name="Student" parent="." index="3" instance=ExtResource("5_qbweq")]
-position = Vector2(784, 448)
-scale = Vector2(0.5, 0.5)
-
-[node name="Chair" parent="." index="4" instance=ExtResource("5_7xayh")]
+[node name="Chair" parent="." index="3" instance=ExtResource("5_7xayh")]
 y_sort_enabled = false
 position = Vector2(248, 304)
+
+[node name="Printer" parent="." index="4" instance=ExtResource("5_73syp")]
+position = Vector2(1048, 608)

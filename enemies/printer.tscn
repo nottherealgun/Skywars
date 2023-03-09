@@ -251,7 +251,7 @@ offset_left = -112.0
 offset_right = 112.0
 
 [node name="Sprite" parent="." index="1"]
-scale = Vector2(3, 3)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_o5emk")
 animation = &"static"
 autoplay = "static"

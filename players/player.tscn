@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://caw6brh3py3mv"]
 
 [ext_resource type="Script" path="res://players/player.gd" id="1_2rdnx"]
-[ext_resource type="SpriteFrames" path="res://players/gun.tres" id="2_gfowo"]
+[ext_resource type="SpriteFrames" uid="uid://ut4kvd8lo60w" path="res://players/gun.tres" id="2_gfowo"]
 [ext_resource type="Texture2D" uid="uid://c8fdbjdlywnc" path="res://players/arrow.png" id="3_j5x1p"]
 [ext_resource type="FontFile" uid="uid://im11hs0xx7wu" path="res://utility/RoadPixel.ttf" id="4_nv7os"]
 
@@ -42,7 +42,7 @@ y_sort_enabled = true
 script = ExtResource("1_2rdnx")
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 5
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 8)
@@ -71,7 +71,7 @@ offset = Vector2(25, 0)
 
 [node name="Guide" type="CanvasGroup" parent="."]
 visible = false
-scale = Vector2(1.0144, 1.0144)
+scale = Vector2(1.07352, 1.07352)
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 

@@ -17,6 +17,7 @@ var move_vec := Vector2.ZERO
 var aim_vec := Vector2.ZERO
 var fainted = false
 var transporting = false
+var latest_shooter
 # Player GUI setup
 @onready var stat_gui = Global.GUI.get_node("PlayerStats"+str(player_id))
 @onready var healthbar = stat_gui.get_node("Healthbar")
@@ -100,12 +101,12 @@ func _injured_effect():
 	var sprite = $Sprite
 	var tween = create_tween()
 	tween.tween_property(sprite,"modulate",Color.WHITE,0.5).from(Color.RED)
-	tween.parallel().tween_property(sprite,"scale",Vector2(1,1),0.5).from(Vector2.ONE*0.8).set_trans(Tween.TRANS_CUBIC)
+	tween.parallel().tween_property(sprite,"scale",Vector2(2,2),0.5).from(Vector2(2,2)*0.8).set_trans(Tween.TRANS_CUBIC)
 	Input.start_joy_vibration(player_id-1,1,0,0.2)
 
-func _on_hitbox_area_entered(area):
+func _on_hitbox_area_entered(area:Area2D):
 	if area.is_in_group("projectile"):
-		if !area.player_bullet:
+		if area.player_bullet == false:
 			# Get hit by bullet
 			_injured_effect()
 			area.affect(self)

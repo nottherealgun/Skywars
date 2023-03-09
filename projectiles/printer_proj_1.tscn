@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://c4e6noxnqja2k"]
 
 [ext_resource type="PackedScene" uid="uid://cni0dsstdjde" path="res://projectiles/projectile.tscn" id="1_4g6ad"]
 [ext_resource type="Script" path="res://projectiles/printer_proj_1.gd" id="2_3hya6"]
