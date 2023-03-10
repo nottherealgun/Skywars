@@ -15,6 +15,7 @@ func _enter_tree():
 	if player_bullet:
 		set_collision_layer_value(2,false)
 		set_collision_layer_value(3,true)
+	else:
 		$Sprite.modulate = Color.WHITE.blend(Color(1.0,0,0,0.2))
 
 func _ready():
@@ -24,7 +25,7 @@ func _ready():
 
 func _process(delta):
 	# Movement
-	position += direction * delta * current_speed * 150
+	position += direction * delta * current_speed * 250
 	$Dev.text = str(player_bullet)
 	
 func affect(victim:Node):

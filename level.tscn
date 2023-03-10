@@ -6,6 +6,7 @@
 
 [node name="Map" type="TileMap" parent="."]
 z_index = -1
+y_sort_enabled = true
 texture_filter = 1
 scale = Vector2(4, 4)
 tile_set = ExtResource("1_a0wxa")

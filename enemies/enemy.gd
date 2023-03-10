@@ -23,7 +23,6 @@ func _ready():
 	points += level*2
 
 func _process(delta):
-	$Healthbar.value = (health*100)/max_health
 	if health <= 0:
 		latest_shooter.money += points
 		Global.kill(self)
@@ -51,6 +50,7 @@ func get_hurt(by:Node):
 	Global.kill(by)
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("injured")
+	$Healthbar.value = (health*100)/max_health
 
 func get_knockback(direction:Vector2,strength:=1):
 	var tween := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)

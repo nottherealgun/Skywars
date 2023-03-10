@@ -42,6 +42,7 @@ animations = [{
 }]
 
 [node name="PrinterProj2" instance=ExtResource("1_lj12i")]
+position = Vector2(0, -32)
 script = ExtResource("2_qv8gu")
 
 [node name="VisibleOnScreenNotifier2D" parent="." index="1"]

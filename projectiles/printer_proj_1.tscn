@@ -21,6 +21,8 @@ animations = [{
 }]
 
 [node name="PrinterProj1" instance=ExtResource("1_4g6ad")]
+z_index = 1
+position = Vector2(0, -38)
 script = ExtResource("2_3hya6")
 
 [node name="VisibleOnScreenNotifier2D" parent="." index="1"]
@@ -35,4 +37,6 @@ scale = Vector2(15, 15)
 texture = ExtResource("4_xobxu")
 
 [node name="Sprite" parent="." index="3"]
+position = Vector2(0, -40)
 sprite_frames = SubResource("SpriteFrames_oe7od")
+offset = Vector2(0, 1.90735e-06)

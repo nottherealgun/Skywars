@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://ct7j5b3ibp2be"]
+[gd_scene load_steps=3 format=3 uid="uid://cb6eujjd84a2m"]
 
-[ext_resource type="Script" path="res://DamageIndicator.gd" id="1_36i6h"]
+[ext_resource type="Script" path="res://utility/DamageIndicator.gd" id="1_36i6h"]
 [ext_resource type="FontFile" uid="uid://im11hs0xx7wu" path="res://utility/RoadPixel.ttf" id="2_majt6"]
 
 [node name="DamageIndicator" type="Node2D"]

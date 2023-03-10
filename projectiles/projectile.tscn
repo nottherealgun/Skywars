@@ -29,15 +29,18 @@ collision_mask = 2
 script = ExtResource("1_kv6im")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -40)
 shape = SubResource("RectangleShape2D_bh81j")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." groups=["projectile"]]
-scale = Vector2(0.3, 0.3)
+position = Vector2(3.8147e-06, -40)
+scale = Vector2(6.5, 4)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_xiueh")
+offset = Vector2(0, -4)
 
 [node name="Dev" type="Label" parent="."]
 visible = false

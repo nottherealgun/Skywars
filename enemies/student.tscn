@@ -9,26 +9,29 @@ script = ExtResource("2_coljh")
 display_name = "Student"
 
 [node name="Healthbar" parent="." index="0"]
-offset_top = -106.0
-offset_bottom = -102.0
+offset_left = -32.0
+offset_top = -109.0
+offset_right = 32.0
+offset_bottom = -105.0
 
 [node name="Sprite" parent="." index="1"]
-scale = Vector2(4, 4)
+position = Vector2(0, -52)
+scale = Vector2(2, 2)
 sprite_frames = ExtResource("3_ox7se")
 animation = &"idle"
 
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
-visible = false
+[node name="Hitbox" parent="." index="2"]
+position = Vector2(0, -52)
 
-[node name="CollisionShape2D" parent="PlayerDetect" index="0"]
-visible = false
+[node name="PlayerDetect" parent="." index="3"]
+position = Vector2(0, -52)
 
-[node name="CollisionShape2D" parent="AllyDetect" index="0"]
-visible = false
+[node name="AllyDetect" parent="." index="4"]
+position = Vector2(0, -52)
 
 [node name="NameTag" parent="." index="5"]
-offset_top = -144.0
-offset_bottom = -105.0
+offset_top = -137.0
+offset_bottom = -98.0
 
 [node name="Timer" type="Timer" parent="." index="7"]
 one_shot = true

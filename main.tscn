@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://n8ynv6dtp5w6"]
+[gd_scene load_steps=34 format=3 uid="uid://n8ynv6dtp5w6"]
 
 [ext_resource type="PackedScene" uid="uid://caw6brh3py3mv" path="res://players/player.tscn" id="1_mhf8t"]
 [ext_resource type="Texture2D" uid="uid://dv8c76rwlux0p" path="res://items/idCardGUI.png" id="2_e4464"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bfdd8ebmimg8k" path="res://gui/hpFiller.png" id="8_ne1ph"]
 [ext_resource type="Texture2D" uid="uid://csvvbeukbfvho" path="res://gui/brainCellForeground.png" id="9_70o5r"]
 [ext_resource type="Texture2D" uid="uid://ctw1jwlr8j8mn" path="res://gui/brainCellFillerSS.png" id="10_xahcf"]
+[ext_resource type="FontFile" uid="uid://byk80lambns8u" path="res://utility/MiniPixel.ttf" id="11_2h1l6"]
 [ext_resource type="FontFile" uid="uid://im11hs0xx7wu" path="res://utility/RoadPixel.ttf" id="11_lksja"]
 [ext_resource type="Texture2D" uid="uid://n23u1d7ugi8t" path="res://gui/coinGUISS.png" id="12_su5dn"]
 [ext_resource type="Shader" path="res://transition.gdshader" id="13_wjtoa"]
@@ -153,7 +154,7 @@ position_smoothing_enabled = true
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_mhf8t")]
-position = Vector2(192, 128)
+position = Vector2(52, 48)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -180,7 +181,6 @@ offset_bottom = -896.0
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
 
 [node name="BG" type="TextureRect" parent="GUI/PlayerStats1"]
 texture_filter = 1
@@ -216,16 +216,6 @@ offset_bottom = 72.0
 texture = ExtResource("4_rfucy")
 stretch_mode = 5
 
-[node name="BrainIcon" type="TextureRect" parent="GUI/PlayerStats1"]
-texture_filter = 1
-layout_mode = 0
-offset_left = 120.0
-offset_top = 80.0
-offset_right = 160.0
-offset_bottom = 120.0
-texture = ExtResource("5_2hml2")
-stretch_mode = 5
-
 [node name="Healthbar" type="TextureProgressBar" parent="GUI/PlayerStats1"]
 texture_filter = 1
 layout_mode = 0
@@ -239,24 +229,35 @@ texture_under = ExtResource("6_6j0f6")
 texture_over = ExtResource("7_lstgi")
 texture_progress = ExtResource("8_ne1ph")
 
+[node name="BrainIcon" type="TextureRect" parent="GUI/PlayerStats1"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 120.0
+offset_top = 77.0
+offset_right = 160.0
+offset_bottom = 117.0
+texture = ExtResource("5_2hml2")
+stretch_mode = 5
+
 [node name="BrainbarBG" type="TextureRect" parent="GUI/PlayerStats1"]
 texture_filter = 1
 layout_mode = 0
 offset_left = 168.0
-offset_top = 80.0
+offset_top = 77.0
 offset_right = 304.0
-offset_bottom = 120.0
+offset_bottom = 117.0
 texture = ExtResource("9_70o5r")
 stretch_mode = 5
 
 [node name="Brainbar" type="AnimatedSprite2D" parent="GUI/PlayerStats1"]
 texture_filter = 1
-position = Vector2(236, 100)
+position = Vector2(236, 97)
 scale = Vector2(3.88571, 4)
 sprite_frames = SubResource("SpriteFrames_gu0rw")
 frame = 6
 
 [node name="NameTag" type="Label" parent="GUI/PlayerStats1"]
+texture_filter = 1
 layout_mode = 0
 offset_left = 120.0
 offset_top = -8.0
@@ -264,12 +265,10 @@ offset_right = 304.0
 offset_bottom = 35.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("11_lksja")
-theme_override_font_sizes/font_size = 40
-text = "PLAYER 1"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("11_2h1l6")
+theme_override_font_sizes/font_size = 44
+text = "Player 1"
 
 [node name="Money" type="Label" parent="GUI/PlayerStats1"]
 layout_mode = 0
@@ -499,3 +498,4 @@ tile_set = ExtResource("14_vmf2g")
 format = 2
 layer_0/modulate = Color(0.784314, 0.784314, 0.784314, 1)
 layer_0/z_index = -1
+metadata/_edit_lock_ = true

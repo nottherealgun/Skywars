@@ -9,8 +9,12 @@ radius = 17.2699
 [node name="Chair" instance=ExtResource("1_ysfhv")]
 
 [node name="Sprite" parent="." index="0"]
-scale = Vector2(3, 3)
 texture = ExtResource("2_041ar")
+offset = Vector2(0, -12)
+
+[node name="Hitbox" parent="." index="1"]
+position = Vector2(0, -36)
+collision_layer = 1
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2(0, 1.5)

@@ -1,4 +1,3 @@
-@tool
 class_name Interactable extends Node2D
 
 var surrounding_affectors = []

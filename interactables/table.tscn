@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbn41xawi3av5"]
+
+[ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://interactables/interactable.tscn" id="1_g1453"]
+[ext_resource type="Texture2D" uid="uid://dtv55qyl66qjq" path="res://interactables/adithTable.png" id="2_3dq54"]
+
+[node name="Table" instance=ExtResource("1_g1453")]
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2(0, -16)
+texture = ExtResource("2_3dq54")
+offset = Vector2(0, -16.6667)

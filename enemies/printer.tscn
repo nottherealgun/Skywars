@@ -240,36 +240,48 @@ animations = [{
 }]
 
 [node name="Printer" instance=ExtResource("1_1ynln")]
-y_sort_enabled = true
+position = Vector2(0, 0)
 script = ExtResource("2_owcnx")
 display_name = "MUIC Printer"
 speed = 3
 
 [node name="Healthbar" parent="." index="0"]
 visible = false
-offset_left = -112.0
-offset_right = 112.0
+offset_left = -51.0
+offset_top = -57.0
+offset_right = 51.0
+offset_bottom = -53.0
 
 [node name="Sprite" parent="." index="1"]
-scale = Vector2(1.5, 1.5)
+position = Vector2(0, -50)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_o5emk")
 animation = &"static"
 autoplay = "static"
 
+[node name="Hitbox" parent="." index="2"]
+position = Vector2(0, -50)
+
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
-visible = false
-position = Vector2(8, 0)
+position = Vector2(3, 9.5)
+
+[node name="PlayerDetect" parent="." index="3"]
+position = Vector2(0, -50)
 
 [node name="Timer" type="Timer" parent="." index="4"]
 one_shot = true
 
-[node name="CollisionShape2D" parent="AllyDetect" index="0"]
-visible = false
+[node name="AllyDetect" parent="." index="5"]
+position = Vector2(0, -50)
 
 [node name="NameTag" parent="." index="6"]
 visible = false
+offset_top = -87.0
+offset_bottom = -44.0
 text = "MUIC PRINTER"
 
 [node name="Dev" parent="." index="8"]
 visible = true
 z_index = 1
+offset_top = -98.0
+offset_bottom = -25.0
