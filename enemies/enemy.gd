@@ -50,7 +50,9 @@ func get_hurt(by:Node):
 	Global.kill(by)
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("injured")
-	$Healthbar.value = (health*100)/max_health
+	var tween := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property($Healthbar,"value",(health*100)/max_health,1.0).from_current()
+#	$Healthbar.value = (health*100)/max_health
 
 func get_knockback(direction:Vector2,strength:=1):
 	var tween := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)

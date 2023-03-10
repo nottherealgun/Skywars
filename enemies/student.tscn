@@ -26,6 +26,9 @@ position = Vector2(0, -52)
 [node name="PlayerDetect" parent="." index="3"]
 position = Vector2(0, -52)
 
+[node name="CollisionShape2D" parent="PlayerDetect" index="0"]
+visible = true
+
 [node name="AllyDetect" parent="." index="4"]
 position = Vector2(0, -52)
 

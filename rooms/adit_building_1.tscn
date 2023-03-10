@@ -19,145 +19,145 @@ layer_0/tile_data = PackedInt32Array(0, 65536, 0, 65536, 65536, 1, 65537, 131072
 [node name="SpawningPoint" parent="." index="1" instance=ExtResource("3_3ut51")]
 position = Vector2(88, 80)
 
-[node name="Book" parent="." index="2" instance=ExtResource("3_8sgnf")]
-position = Vector2(702, 110)
-scale = Vector2(4, 4)
-
-[node name="Book2" parent="." index="3" instance=ExtResource("3_8sgnf")]
-position = Vector2(661, 109)
-scale = Vector2(4, 4)
-
-[node name="Book3" parent="." index="4" instance=ExtResource("3_8sgnf")]
-position = Vector2(621, 109)
-scale = Vector2(4, 4)
-
-[node name="Door" parent="." index="5" instance=ExtResource("3_kdace")]
+[node name="Door" parent="." index="2" instance=ExtResource("3_kdace")]
 position = Vector2(2096, 58)
 horizontal = false
 
-[node name="Chair" parent="." index="6" instance=ExtResource("5_7xayh")]
+[node name="Chair" parent="." index="3" instance=ExtResource("5_7xayh")]
 position = Vector2(624, 208)
 
-[node name="Chair36" parent="." index="7" instance=ExtResource("5_7xayh")]
+[node name="Chair36" parent="." index="4" instance=ExtResource("5_7xayh")]
 position = Vector2(784, 96)
 
-[node name="Chair2" parent="." index="8" instance=ExtResource("5_7xayh")]
+[node name="Chair2" parent="." index="5" instance=ExtResource("5_7xayh")]
 position = Vector2(688, 208)
 
-[node name="Chair3" parent="." index="9" instance=ExtResource("5_7xayh")]
+[node name="Chair3" parent="." index="6" instance=ExtResource("5_7xayh")]
 position = Vector2(752, 208)
 
-[node name="Chair4" parent="." index="10" instance=ExtResource("5_7xayh")]
+[node name="Chair4" parent="." index="7" instance=ExtResource("5_7xayh")]
 position = Vector2(816, 208)
 
-[node name="Chair5" parent="." index="11" instance=ExtResource("5_7xayh")]
+[node name="Chair5" parent="." index="8" instance=ExtResource("5_7xayh")]
 position = Vector2(880, 208)
 
-[node name="Chair6" parent="." index="12" instance=ExtResource("5_7xayh")]
+[node name="Chair6" parent="." index="9" instance=ExtResource("5_7xayh")]
 position = Vector2(624, 272)
 
-[node name="Chair7" parent="." index="13" instance=ExtResource("5_7xayh")]
+[node name="Chair7" parent="." index="10" instance=ExtResource("5_7xayh")]
 position = Vector2(688, 272)
 
-[node name="Chair8" parent="." index="14" instance=ExtResource("5_7xayh")]
+[node name="Chair8" parent="." index="11" instance=ExtResource("5_7xayh")]
 position = Vector2(752, 272)
 
-[node name="Chair9" parent="." index="15" instance=ExtResource("5_7xayh")]
+[node name="Chair9" parent="." index="12" instance=ExtResource("5_7xayh")]
 position = Vector2(816, 272)
 
-[node name="Chair10" parent="." index="16" instance=ExtResource("5_7xayh")]
+[node name="Chair10" parent="." index="13" instance=ExtResource("5_7xayh")]
 position = Vector2(880, 272)
 
-[node name="Chair11" parent="." index="17" instance=ExtResource("5_7xayh")]
+[node name="Chair11" parent="." index="14" instance=ExtResource("5_7xayh")]
 position = Vector2(624, 336)
 
-[node name="Chair12" parent="." index="18" instance=ExtResource("5_7xayh")]
+[node name="Chair12" parent="." index="15" instance=ExtResource("5_7xayh")]
 position = Vector2(688, 336)
 
-[node name="Chair13" parent="." index="19" instance=ExtResource("5_7xayh")]
+[node name="Chair13" parent="." index="16" instance=ExtResource("5_7xayh")]
 position = Vector2(752, 336)
 
-[node name="Chair14" parent="." index="20" instance=ExtResource("5_7xayh")]
+[node name="Chair14" parent="." index="17" instance=ExtResource("5_7xayh")]
 position = Vector2(816, 336)
 
-[node name="Chair15" parent="." index="21" instance=ExtResource("5_7xayh")]
+[node name="Chair15" parent="." index="18" instance=ExtResource("5_7xayh")]
 position = Vector2(880, 336)
 
-[node name="Chair16" parent="." index="22" instance=ExtResource("5_7xayh")]
+[node name="Chair16" parent="." index="19" instance=ExtResource("5_7xayh")]
 position = Vector2(624, 400)
 
-[node name="Chair17" parent="." index="23" instance=ExtResource("5_7xayh")]
+[node name="Chair17" parent="." index="20" instance=ExtResource("5_7xayh")]
 position = Vector2(688, 400)
 
-[node name="Chair18" parent="." index="24" instance=ExtResource("5_7xayh")]
+[node name="Chair18" parent="." index="21" instance=ExtResource("5_7xayh")]
 position = Vector2(752, 400)
 
-[node name="Chair19" parent="." index="25" instance=ExtResource("5_7xayh")]
+[node name="Chair19" parent="." index="22" instance=ExtResource("5_7xayh")]
 position = Vector2(816, 400)
 
-[node name="Chair20" parent="." index="26" instance=ExtResource("5_7xayh")]
+[node name="Chair20" parent="." index="23" instance=ExtResource("5_7xayh")]
 position = Vector2(880, 400)
 
-[node name="Chair21" parent="." index="27" instance=ExtResource("5_7xayh")]
+[node name="Chair21" parent="." index="24" instance=ExtResource("5_7xayh")]
 position = Vector2(624, 464)
 
-[node name="Chair22" parent="." index="28" instance=ExtResource("5_7xayh")]
+[node name="Chair22" parent="." index="25" instance=ExtResource("5_7xayh")]
 position = Vector2(688, 464)
 
-[node name="Chair23" parent="." index="29" instance=ExtResource("5_7xayh")]
+[node name="Chair23" parent="." index="26" instance=ExtResource("5_7xayh")]
 position = Vector2(752, 464)
 
-[node name="Chair24" parent="." index="30" instance=ExtResource("5_7xayh")]
+[node name="Chair24" parent="." index="27" instance=ExtResource("5_7xayh")]
 position = Vector2(816, 464)
 
-[node name="Chair25" parent="." index="31" instance=ExtResource("5_7xayh")]
+[node name="Chair25" parent="." index="28" instance=ExtResource("5_7xayh")]
 position = Vector2(880, 464)
 
-[node name="Chair26" parent="." index="32" instance=ExtResource("5_7xayh")]
+[node name="Chair26" parent="." index="29" instance=ExtResource("5_7xayh")]
 position = Vector2(624, 528)
 
-[node name="Chair27" parent="." index="33" instance=ExtResource("5_7xayh")]
+[node name="Chair27" parent="." index="30" instance=ExtResource("5_7xayh")]
 position = Vector2(688, 528)
 
-[node name="Chair28" parent="." index="34" instance=ExtResource("5_7xayh")]
+[node name="Chair28" parent="." index="31" instance=ExtResource("5_7xayh")]
 position = Vector2(752, 528)
 
-[node name="Chair29" parent="." index="35" instance=ExtResource("5_7xayh")]
+[node name="Chair29" parent="." index="32" instance=ExtResource("5_7xayh")]
 position = Vector2(816, 528)
 
-[node name="Chair30" parent="." index="36" instance=ExtResource("5_7xayh")]
+[node name="Chair30" parent="." index="33" instance=ExtResource("5_7xayh")]
 position = Vector2(880, 528)
 
-[node name="Chair31" parent="." index="37" instance=ExtResource("5_7xayh")]
+[node name="Chair31" parent="." index="34" instance=ExtResource("5_7xayh")]
 position = Vector2(624, 592)
 
-[node name="Chair32" parent="." index="38" instance=ExtResource("5_7xayh")]
+[node name="Chair32" parent="." index="35" instance=ExtResource("5_7xayh")]
 position = Vector2(688, 592)
 
-[node name="Chair33" parent="." index="39" instance=ExtResource("5_7xayh")]
+[node name="Chair33" parent="." index="36" instance=ExtResource("5_7xayh")]
 position = Vector2(752, 592)
 
-[node name="Chair34" parent="." index="40" instance=ExtResource("5_7xayh")]
+[node name="Chair34" parent="." index="37" instance=ExtResource("5_7xayh")]
 position = Vector2(816, 592)
 
-[node name="Chair35" parent="." index="41" instance=ExtResource("5_7xayh")]
+[node name="Chair35" parent="." index="38" instance=ExtResource("5_7xayh")]
 position = Vector2(880, 592)
 
-[node name="Podium" parent="." index="42" instance=ExtResource("6_giqmr")]
+[node name="Podium" parent="." index="39" instance=ExtResource("6_giqmr")]
 position = Vector2(776, 120)
 
-[node name="Table" parent="." index="43" instance=ExtResource("6_e0weh")]
+[node name="Table" parent="." index="40" instance=ExtResource("6_e0weh")]
 position = Vector2(672, 184)
 
-[node name="Student" parent="." index="44" instance=ExtResource("7_t0e3c")]
-y_sort_enabled = false
-position = Vector2(968, 272)
+[node name="Book" parent="Table" index="2" instance=ExtResource("3_8sgnf")]
+position = Vector2(30, -74)
+scale = Vector2(4, 4)
 
-[node name="Box" parent="." index="45" instance=ExtResource("9_88cgp")]
+[node name="Book2" parent="Table" index="3" instance=ExtResource("3_8sgnf")]
+position = Vector2(-11, -75)
+scale = Vector2(4, 4)
+
+[node name="Book3" parent="Table" index="4" instance=ExtResource("3_8sgnf")]
+position = Vector2(-51, -75)
+scale = Vector2(4, 4)
+
+[node name="Student" parent="." index="41" instance=ExtResource("7_t0e3c")]
+y_sort_enabled = false
+position = Vector2(877, 188)
+
+[node name="Box" parent="." index="42" instance=ExtResource("9_88cgp")]
 position = Vector2(873, 118)
 
-[node name="Box2" parent="." index="46" instance=ExtResource("9_88cgp")]
+[node name="Box2" parent="." index="43" instance=ExtResource("9_88cgp")]
 position = Vector2(942, 125)
 
-[node name="Box3" parent="." index="47" instance=ExtResource("9_88cgp")]
+[node name="Box3" parent="." index="44" instance=ExtResource("9_88cgp")]
 position = Vector2(920, 95)

@@ -21,6 +21,8 @@ func _process(delta):
 			if is_instance_valid(target):
 				if position.distance_to(target.position) <= range:
 					change_state(States.ATTACKING)
+			else:
+				change_state(States.IDLE)
 		States.ATTACKING:
 			if is_instance_valid(target):
 				if position.distance_to(target.position) > range:

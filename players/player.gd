@@ -116,7 +116,7 @@ func _on_hitbox_area_entered(area:Area2D):
 		if entity.is_in_group("player"):
 			if entity.health <= 0:
 				$Guide.show()
-				await Input.is_action_just_pressed("p"+player_id+"_action")
+				await Input.is_action_just_pressed("p"+str(player_id)+"_action")
 				# Revived
 				$Guide.hide()
 				entity.health = entity.max_health

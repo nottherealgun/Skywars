@@ -108,7 +108,7 @@ func sync_map(map):
 	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(GUI.get_node("Transition").material,"shader_parameter/progress",1.0,3).from(0.0)
 	GUI.get_node("Title").text = target_map.name.capitalize()	
-	tween.tween_property(GUI.get_node("Transition").material,"shader_parameter/progress",0.0,2).from(1.0)		
+	tween.tween_property(GUI.get_node("Transition").material,"shader_parameter/progress",0.0,3).from(1.0)		
 	tween.parallel().tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
 	for p in active_players:
 		tween.parallel().tween_property(p,"position",spawn_poses[active_players.find(p)],1)
