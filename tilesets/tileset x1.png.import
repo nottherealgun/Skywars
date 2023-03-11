@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ifkymqv0iy2c"
-path="res://.godot/imported/ipadBlack.png-4fbef4cae6e5f7b9e101c2b690404f2d.ctex"
+uid="uid://ceji5e5vk1khk"
+path="res://.godot/imported/tileset x1.png-dd4e5a34c53396b6bb186cb52b6cd1e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ipadBlack.png"
-dest_files=["res://.godot/imported/ipadBlack.png-4fbef4cae6e5f7b9e101c2b690404f2d.ctex"]
+source_file="res://tilesets/tileset x1.png"
+dest_files=["res://.godot/imported/tileset x1.png-dd4e5a34c53396b6bb186cb52b6cd1e4.ctex"]
 
 [params]
 

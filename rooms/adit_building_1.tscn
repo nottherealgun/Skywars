@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dp1wmslqcfeh0"]
+[gd_scene load_steps=9 format=3 uid="uid://dp1wmslqcfeh0"]
 
 [ext_resource type="PackedScene" uid="uid://cx7imnf85vue8" path="res://level.tscn" id="1_iaiv3"]
 [ext_resource type="PackedScene" uid="uid://bhsvoj5kcuifg" path="res://spawning_point.tscn" id="3_3ut51"]
@@ -7,9 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://7h0dudlrgsm1" path="res://interactables/chair.tscn" id="5_7xayh"]
 [ext_resource type="PackedScene" uid="uid://bbn41xawi3av5" path="res://interactables/table.tscn" id="6_e0weh"]
 [ext_resource type="PackedScene" uid="uid://bakr387l46lfw" path="res://interactables/podium.tscn" id="6_giqmr"]
-[ext_resource type="PackedScene" uid="uid://bs0h2fmnb8ptq" path="res://enemies/student.tscn" id="7_t0e3c"]
 [ext_resource type="PackedScene" uid="uid://ebilckvtvye6" path="res://interactables/box.tscn" id="9_88cgp"]
-[ext_resource type="PackedScene" uid="uid://cmhrf827nfpky" path="res://enemies/printer.tscn" id="10_fqieg"]
 
 [node name="adit_building_2" instance=ExtResource("1_iaiv3")]
 y_sort_enabled = true
@@ -20,7 +18,7 @@ layer_1/tile_data = PackedInt32Array(-65505, 131073, 0, -65506, 65537, 0, -65507
 
 [node name="SpawningPoint" parent="." index="1" instance=ExtResource("3_3ut51")]
 y_sort_enabled = true
-position = Vector2(96, 77)
+position = Vector2(523, 143)
 
 [node name="Door" parent="." index="2" instance=ExtResource("3_kdace")]
 position = Vector2(2096, 58)
@@ -47,19 +45,13 @@ position = Vector2(880, 208)
 [node name="Podium" parent="." index="9" instance=ExtResource("6_giqmr")]
 position = Vector2(776, 120)
 
-[node name="Table" parent="." index="10" instance=ExtResource("6_e0weh")]
+[node name="CanvasGroup" type="CanvasGroup" parent="." index="10"]
 position = Vector2(672, 184)
 
-[node name="Book" parent="Table" index="2" instance=ExtResource("3_8sgnf")]
-position = Vector2(30, -74)
-scale = Vector2(4, 4)
+[node name="Table" parent="CanvasGroup" index="0" instance=ExtResource("6_e0weh")]
 
-[node name="Book2" parent="Table" index="3" instance=ExtResource("3_8sgnf")]
-position = Vector2(-11, -75)
-scale = Vector2(4, 4)
-
-[node name="Book3" parent="Table" index="4" instance=ExtResource("3_8sgnf")]
-position = Vector2(-51, -75)
+[node name="Book" parent="CanvasGroup" index="1" instance=ExtResource("3_8sgnf")]
+position = Vector2(31, -70)
 scale = Vector2(4, 4)
 
 [node name="Box" parent="." index="11" instance=ExtResource("9_88cgp")]
@@ -70,28 +62,3 @@ position = Vector2(942, 125)
 
 [node name="Box3" parent="." index="13" instance=ExtResource("9_88cgp")]
 position = Vector2(920, 95)
-
-[node name="Printer" parent="." index="14" instance=ExtResource("10_fqieg")]
-position = Vector2(1153, 119)
-
-[node name="Printer4" parent="." index="15" instance=ExtResource("10_fqieg")]
-position = Vector2(1830, 131)
-level = 5
-
-[node name="Printer2" parent="." index="16" instance=ExtResource("10_fqieg")]
-position = Vector2(1152, 285)
-
-[node name="Printer3" parent="." index="17" instance=ExtResource("10_fqieg")]
-position = Vector2(1155, 481)
-
-[node name="Student" parent="." index="18" instance=ExtResource("7_t0e3c")]
-position = Vector2(1068, 467)
-
-[node name="Student2" parent="." index="19" instance=ExtResource("7_t0e3c")]
-position = Vector2(755, 287)
-
-[node name="Student3" parent="." index="20" instance=ExtResource("7_t0e3c")]
-position = Vector2(764, 386)
-
-[node name="Student4" parent="." index="21" instance=ExtResource("7_t0e3c")]
-position = Vector2(1691, 232)

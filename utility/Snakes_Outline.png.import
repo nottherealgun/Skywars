@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5cj0xx160bls"
-path="res://.godot/imported/Rubber_Duck_Alone.png-678727b1d23c97bdf02e19acc1f0d365.ctex"
+uid="uid://gomlio8e7xu4"
+path="res://.godot/imported/Snakes_Outline.png-c221e67f696f2e64e8a33f06ee3ee972.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Rubber_Duck_Alone.png"
-dest_files=["res://.godot/imported/Rubber_Duck_Alone.png-678727b1d23c97bdf02e19acc1f0d365.ctex"]
+source_file="res://utility/Snakes_Outline.png"
+dest_files=["res://.godot/imported/Snakes_Outline.png-c221e67f696f2e64e8a33f06ee3ee972.ctex"]
 
 [params]
 

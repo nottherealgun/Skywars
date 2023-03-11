@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqjyiexgloh6b"
-path="res://.godot/imported/TransScreenBG.png-5530e33904b7ad4e07a15a2e06d23390.ctex"
+uid="uid://ifkymqv0iy2c"
+path="res://.godot/imported/ipadBlack.png-3e2170df90c869998ef9412878e85128.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TransScreenBG.png"
-dest_files=["res://.godot/imported/TransScreenBG.png-5530e33904b7ad4e07a15a2e06d23390.ctex"]
+source_file="res://items/ipadBlack.png"
+dest_files=["res://.godot/imported/ipadBlack.png-3e2170df90c869998ef9412878e85128.ctex"]
 
 [params]
 

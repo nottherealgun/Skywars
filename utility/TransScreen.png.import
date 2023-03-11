@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://beb3hcd6oi3e8"
-path="res://.godot/imported/2d_lights_and_shadows_neutral_point_light.webp-65502514064ef8af4bce05336c6482e4.ctex"
+uid="uid://c0el5h2ynals"
+path="res://.godot/imported/TransScreen.png-459afa866eb6b2ee959d8ce09145470e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://2d_lights_and_shadows_neutral_point_light.webp"
-dest_files=["res://.godot/imported/2d_lights_and_shadows_neutral_point_light.webp-65502514064ef8af4bce05336c6482e4.ctex"]
+source_file="res://utility/TransScreen.png"
+dest_files=["res://.godot/imported/TransScreen.png-459afa866eb6b2ee959d8ce09145470e.ctex"]
 
 [params]
 

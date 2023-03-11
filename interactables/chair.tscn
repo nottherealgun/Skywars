@@ -12,10 +12,6 @@ radius = 17.2699
 texture = ExtResource("2_041ar")
 offset = Vector2(0, -12)
 
-[node name="Hitbox" parent="." index="1"]
-position = Vector2(0, -36)
-collision_layer = 1
-
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
+[node name="Hitbox@CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, 1.5)
 shape = SubResource("CircleShape2D_x7pi7")

@@ -10,6 +10,3 @@ position = Vector2(0, 3.8147e-06)
 scale = Vector2(2, 2)
 texture = ExtResource("2_mvbmb")
 offset = Vector2(0, -20)
-
-[node name="Hitbox" parent="." index="1"]
-position = Vector2(0, -48)

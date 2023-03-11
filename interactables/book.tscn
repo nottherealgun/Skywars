@@ -5,9 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://c1x83ri8u8yb5" path="res://interactables/book1.png" id="2_i01us"]
 
 [node name="Book" instance=ExtResource("1_xni4f")]
-z_index = 1
 script = ExtResource("2_1mvkc")
 
 [node name="Sprite" parent="." index="0"]
+position = Vector2(0, 2)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_i01us")
+offset = Vector2(0, -4)

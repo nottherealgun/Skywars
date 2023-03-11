@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gomlio8e7xu4"
-path="res://.godot/imported/Snakes_Outline.png-37e7c0492b6e19052b346c31f0d71044.ctex"
+uid="uid://bqjyiexgloh6b"
+path="res://.godot/imported/TransScreenBG.png-9f2f65dc2d4b94cf54930279318ea568.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Snakes_Outline.png"
-dest_files=["res://.godot/imported/Snakes_Outline.png-37e7c0492b6e19052b346c31f0d71044.ctex"]
+source_file="res://utility/TransScreenBG.png"
+dest_files=["res://.godot/imported/TransScreenBG.png-9f2f65dc2d4b94cf54930279318ea568.ctex"]
 
 [params]
 

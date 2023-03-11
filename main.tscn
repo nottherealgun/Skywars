@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://n8ynv6dtp5w6"]
+[gd_scene load_steps=41 format=3 uid="uid://dlpndwnncnijn"]
 
 [ext_resource type="PackedScene" uid="uid://caw6brh3py3mv" path="res://players/player.tscn" id="1_mhf8t"]
 [ext_resource type="Texture2D" uid="uid://dv8c76rwlux0p" path="res://items/idCardGUI.png" id="2_e4464"]
@@ -14,12 +14,12 @@
 [ext_resource type="FontFile" uid="uid://im11hs0xx7wu" path="res://utility/RoadPixel.ttf" id="11_lksja"]
 [ext_resource type="Texture2D" uid="uid://n23u1d7ugi8t" path="res://gui/coinGUISS.png" id="12_su5dn"]
 [ext_resource type="Shader" path="res://transition.gdshader" id="13_wjtoa"]
-[ext_resource type="TileSet" uid="uid://wuna8cwijtn6" path="res://default.tres" id="14_vmf2g"]
-[ext_resource type="Texture2D" uid="uid://bqjyiexgloh6b" path="res://TransScreenBG.png" id="15_cec6f"]
-[ext_resource type="Texture2D" uid="uid://gomlio8e7xu4" path="res://Snakes_Outline.png" id="16_h6dkx"]
-[ext_resource type="Texture2D" uid="uid://c5cj0xx160bls" path="res://Rubber_Duck_Alone.png" id="17_0cv8e"]
-[ext_resource type="Texture2D" uid="uid://bck7mhprgygms" path="res://trans_text.png" id="17_6jcdw"]
-[ext_resource type="AudioStream" uid="uid://bl3tu345hbh37" path="res://Createch Clash_Aditayathorn_FullSong.mp3" id="19_lyga6"]
+[ext_resource type="TileSet" uid="uid://0c8knfi7rtne" path="res://default.tres" id="14_vmf2g"]
+[ext_resource type="Texture2D" uid="uid://bqjyiexgloh6b" path="res://utility/TransScreenBG.png" id="15_ln4oo"]
+[ext_resource type="Texture2D" uid="uid://gomlio8e7xu4" path="res://utility/Snakes_Outline.png" id="16_fvkyo"]
+[ext_resource type="Texture2D" uid="uid://c5cj0xx160bls" path="res://utility/Rubber_Duck_Alone.png" id="17_cc7h0"]
+[ext_resource type="Texture2D" uid="uid://bck7mhprgygms" path="res://utility/trans_text.png" id="18_x07fu"]
+[ext_resource type="AudioStream" uid="uid://bl3tu345hbh37" path="res://music/Createch Clash_Aditayathorn_FullSong.mp3" id="20_8uwgs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sr40o"]
 atlas = ExtResource("10_xahcf")
@@ -144,7 +144,7 @@ animations = [{
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q6brm"]
 shader = ExtResource("13_wjtoa")
-shader_parameter/progress = 1.0
+shader_parameter/progress = 0.0
 shader_parameter/diamondPixelSize = 50.0
 
 [sub_resource type="Animation" id="Animation_tj5m4"]
@@ -526,7 +526,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("15_cec6f")
+texture = ExtResource("15_ln4oo")
 metadata/_edit_group_ = true
 
 [node name="Control" type="Control" parent="GUI/Transition"]
@@ -561,7 +561,7 @@ grow_vertical = 2
 rotation = 3.1738
 scale = Vector2(0.25, 0.25)
 pivot_offset = Vector2(752, 656)
-texture = ExtResource("16_h6dkx")
+texture = ExtResource("16_fvkyo")
 expand_mode = 1
 stretch_mode = 5
 
@@ -579,7 +579,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.25, 0.25)
 pivot_offset = Vector2(481.541, 509.804)
-texture = ExtResource("17_0cv8e")
+texture = ExtResource("17_cc7h0")
 expand_mode = 1
 stretch_mode = 5
 
@@ -599,7 +599,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.4, 0.4)
 pivot_offset = Vector2(1140, 541.25)
-texture = ExtResource("17_6jcdw")
+texture = ExtResource("18_x07fu")
 expand_mode = 1
 stretch_mode = 5
 
@@ -666,7 +666,7 @@ layer_1/tile_data = PackedInt32Array()
 metadata/_edit_lock_ = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("19_lyga6")
+stream = ExtResource("20_8uwgs")
 volume_db = -25.0
 autoplay = true
 bus = &"Music"

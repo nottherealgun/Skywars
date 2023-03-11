@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0el5h2ynals"
-path="res://.godot/imported/TransScreen.png-6ac536ddc761a29316f0f7d72c89eeff.ctex"
+uid="uid://bck7mhprgygms"
+path="res://.godot/imported/trans_text.png-116b3d8738fd3b6ed020c56291ed456d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TransScreen.png"
-dest_files=["res://.godot/imported/TransScreen.png-6ac536ddc761a29316f0f7d72c89eeff.ctex"]
+source_file="res://utility/trans_text.png"
+dest_files=["res://.godot/imported/trans_text.png-116b3d8738fd3b6ed020c56291ed456d.ctex"]
 
 [params]
 

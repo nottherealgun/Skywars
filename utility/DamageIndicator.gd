@@ -18,6 +18,5 @@ func _ready():
 	tween.tween_property(self,"position",position+Vector2(0,-100),0.5)
 	tween.parallel().tween_property(self,"modulate",Color.TRANSPARENT,0.5).from_current()
 	tween.parallel().tween_property(self,"scale",Vector2(1,1),0.5).from(Vector2(1.5,1.5))
-#	tween.parallel().tween_property(self,"rotation",deg_to_rad(randf_range(-90,90)),0.5)
 	await tween.finished
 	queue_free()

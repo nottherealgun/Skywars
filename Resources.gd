@@ -119,16 +119,11 @@ func sync_map(map):
 	transition_screen.get_node("Tips").text = "Tip: "+str(tips[randi()%tips.size()])+"."
 	tween.tween_property(transition_screen.material,"shader_parameter/progress",1.0,3).from(0.0)
 	
-	GUI.get_node("Title").text = target_map.name.capitalize()	
-	
-	tween.tween_property(transition_screen.material,"shader_parameter/progress",0.0,3).from(1.0)		
-	tween.parallel().tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
-	for p in active_players:
-		tween.parallel().tween_property(p,"position",spawn_poses[active_players.find(p)],1)
-	tween.tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
-	
 	await tween.step_finished
 	
+	GUI.get_node("Title").text = target_map.name.capitalize()	
+	for p in active_players:
+		p.position = spawn_poses[active_players.find(p)]
 	for p in active_players:
 		p.transporting = false
 		p.y_sort_enabled = true
@@ -162,7 +157,12 @@ func sync_map(map):
 		target_map.remove_child(entity)
 		active_entities.append(entity)
 		Main.add_child(entity)
-
+	
+	tween = create_tween()
+	tween.tween_property(transition_screen.material,"shader_parameter/progress",0.0,3.0).from(1.0)
+	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
+	tween.tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
+	
 func emit_indicator(amnt:float,pos:Vector2,p_bullet=false):
 	var new_indicator = load("res://utility/damage_indicator.tscn").instantiate()
 	new_indicator.position = pos

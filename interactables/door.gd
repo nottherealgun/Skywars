@@ -1,4 +1,3 @@
-@tool
 extends Node2D
 
 @export var horizontal := true

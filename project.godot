@@ -11,11 +11,13 @@ config_version=5
 [application]
 
 config/name="Creative Clash"
-config/description="Createch Clash is a roguelike top-down/2.5D PvE video game based on the MUIC (Mahidol University International College) environment. It focuses on gamified exaggerations of the daily lives of Creative Technology Major students and the \"academic anarchy\" within the college. Students can become NPCs or enemies and Professors are seen as bosses of the game for entertainment purposes. This game has many unlockable items ranging from all the MUIC daily objects to individual-specific items related to our CT friends. This game is specifically made for the Open House event for advertising purposes. Please enjoy our game!"
+config/description="Createch Clash is a roguelike top-down/2.5D PvE video game based on the MUIC (Mahidol University International College) environment."
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
-boot_splash/image="res://TransScreen.png"
+boot_splash/image="res://utility/TransScreen.png"
+boot_splash/fullsize=false
+boot_splash/use_filter=false
 config/icon="res://players/darwin_head.png"
 
 [autoload]

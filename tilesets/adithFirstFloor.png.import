@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c3mua8tnxy4fs"
-path="res://.godot/imported/adithFirstFloor.png-e7d4583d0d54a5bd2022a76b37e679db.ctex"
+path="res://.godot/imported/adithFirstFloor.png-f2230aa76acecad75742d1e2a6756d78.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://interactables/tilesets/adithFirstFloor.png"
-dest_files=["res://.godot/imported/adithFirstFloor.png-e7d4583d0d54a5bd2022a76b37e679db.ctex"]
+source_file="res://tilesets/adithFirstFloor.png"
+dest_files=["res://.godot/imported/adithFirstFloor.png-f2230aa76acecad75742d1e2a6756d78.ctex"]
 
 [params]
 
