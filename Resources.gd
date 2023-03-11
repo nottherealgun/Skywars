@@ -90,6 +90,10 @@ func install_door(node:Node):
 
 var map_spawnpoint : Vector2
 
+const rooms = [
+	{"file":preload("res://rooms/adit_building_1.tscn"),"name":"Aditayathorn Building 1"}
+]
+
 const tips = [
 	"Be careful of the ICT",
 	"If you try really hard, you might be able to get an A"

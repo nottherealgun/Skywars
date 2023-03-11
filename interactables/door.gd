@@ -2,7 +2,7 @@
 extends Node2D
 
 @export var horizontal := true
-@export var room : PackedScene
+@export var room : Node2D
 
 var players_in_vicinity = []
 
@@ -12,13 +12,11 @@ func _enter_tree():
 			$Sprite.animation = "side"
 
 func enter_room(player):
-	if not is_instance_valid(room):
-		var random_room_path = DirAccess.get_files_at("res://rooms")[randi()%DirAccess.get_files_at("res://rooms").size()]
-		room = load("res://rooms/"+random_room_path)
-	var room_instance = room.instantiate()	
+#	if room == null:
+	room = Global.rooms[randi()%Global.rooms.size()]["file"].instantiate()
 	$Sprite.play()
 	await $Sprite.animation_finished
-	Global.sync_map(room_instance)
+	Global.sync_map(room)
 
 func _on_area_2d_area_entered(area):
 	var entity = area.get_parent()

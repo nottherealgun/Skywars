@@ -72,7 +72,26 @@ position = Vector2(942, 125)
 position = Vector2(920, 95)
 
 [node name="Printer" parent="." index="14" instance=ExtResource("10_fqieg")]
-position = Vector2(898, 319)
+position = Vector2(1153, 119)
 
-[node name="Student" parent="." index="15" instance=ExtResource("7_t0e3c")]
-position = Vector2(825, 368)
+[node name="Printer4" parent="." index="15" instance=ExtResource("10_fqieg")]
+position = Vector2(1830, 131)
+level = 5
+
+[node name="Printer2" parent="." index="16" instance=ExtResource("10_fqieg")]
+position = Vector2(1152, 285)
+
+[node name="Printer3" parent="." index="17" instance=ExtResource("10_fqieg")]
+position = Vector2(1155, 481)
+
+[node name="Student" parent="." index="18" instance=ExtResource("7_t0e3c")]
+position = Vector2(1068, 467)
+
+[node name="Student2" parent="." index="19" instance=ExtResource("7_t0e3c")]
+position = Vector2(755, 287)
+
+[node name="Student3" parent="." index="20" instance=ExtResource("7_t0e3c")]
+position = Vector2(764, 386)
+
+[node name="Student4" parent="." index="21" instance=ExtResource("7_t0e3c")]
+position = Vector2(1691, 232)
