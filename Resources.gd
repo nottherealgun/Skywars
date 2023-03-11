@@ -90,6 +90,11 @@ func install_door(node:Node):
 
 var map_spawnpoint : Vector2
 
+const tips = [
+	"Be careful of the ICT",
+	"If you try really hard, you might be able to get an A"
+]
+
 # Levels
 func sync_map(map):
 	
@@ -105,10 +110,14 @@ func sync_map(map):
 		p.y_sort_enabled = false
 
 	# Transition
+	var transition_screen = GUI.get_node("Transition")
 	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(GUI.get_node("Transition").material,"shader_parameter/progress",1.0,3).from(0.0)
+	transition_screen.get_node("Tips").text = "Tip: "+str(tips[randi()%tips.size()])+"."
+	tween.tween_property(transition_screen.material,"shader_parameter/progress",1.0,3).from(0.0)
+	
 	GUI.get_node("Title").text = target_map.name.capitalize()	
-	tween.tween_property(GUI.get_node("Transition").material,"shader_parameter/progress",0.0,3).from(1.0)		
+	
+	tween.tween_property(transition_screen.material,"shader_parameter/progress",0.0,3).from(1.0)		
 	tween.parallel().tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
 	for p in active_players:
 		tween.parallel().tween_property(p,"position",spawn_poses[active_players.find(p)],1)
@@ -124,10 +133,22 @@ func sync_map(map):
 	LevelManager.clear_level()
 	
 	# Install map tiles
+#set_cell(layer: int, coords: Vector2i, source_id: int = -1, atlas_coords: Vector2i = Vector2i(-1, -1), alternative_tile: int = 0)
+#set_cells_terrain_connect(layer: int, cells: Array[Vector2i], terrain_set: int, terrain: int, ignore_empty_terrains: bool = true)
+
 	for tile in target_map.get_node("Map").get_used_cells(0):
 		var tile_type = target_map.get_node("Map").get_cell_atlas_coords(0,tile)
-		Map.set_cell(0,Vector2i(tile.x,tile.y),0,tile_type)
-	Map.set_cells_terrain_connect(0,Map.get_used_cells(0),0,0)
+		Map.set_cell(0,tile,-1,tile_type)
+	Map.set_cells_terrain_connect(0,target_map.get_node("Map").get_used_cells(0),0,0)
+	
+	for tile in target_map.get_node("Map").get_used_cells(1):
+		var tile_type = target_map.get_node("Map").get_cell_atlas_coords(1,tile)
+		# layer, coords, source_id, atlas_coords, alt_tile
+		Map.set_cell(1,tile,-1,tile_type)
+		# layer, cells, terrain_set,terrain
+	Map.set_cells_terrain_connect(1,target_map.get_node("Map").get_used_cells(1),0,1)	
+#	Map.set_cells_terrain_connect(1,target_map.get_node("Map").get_used_cells(1),0,1)
+	
 	MAP_RECT = Map.get_used_rect().size*128
 	
 	# Install map enemies
@@ -138,8 +159,9 @@ func sync_map(map):
 		active_entities.append(entity)
 		Main.add_child(entity)
 
-func emit_indicator(amnt:float,pos:Vector2):
+func emit_indicator(amnt:float,pos:Vector2,p_bullet=false):
 	var new_indicator = load("res://utility/damage_indicator.tscn").instantiate()
 	new_indicator.position = pos
 	new_indicator.amount = roundi(amnt)
+	new_indicator.player_bullet = p_bullet
 	Main.add_child(new_indicator)

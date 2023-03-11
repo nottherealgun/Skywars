@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://n8ynv6dtp5w6"]
+[gd_scene load_steps=41 format=3 uid="uid://n8ynv6dtp5w6"]
 
 [ext_resource type="PackedScene" uid="uid://caw6brh3py3mv" path="res://players/player.tscn" id="1_mhf8t"]
 [ext_resource type="Texture2D" uid="uid://dv8c76rwlux0p" path="res://items/idCardGUI.png" id="2_e4464"]
@@ -17,6 +17,7 @@
 [ext_resource type="TileSet" uid="uid://wuna8cwijtn6" path="res://default.tres" id="14_vmf2g"]
 [ext_resource type="Texture2D" uid="uid://bqjyiexgloh6b" path="res://TransScreenBG.png" id="15_cec6f"]
 [ext_resource type="Texture2D" uid="uid://gomlio8e7xu4" path="res://Snakes_Outline.png" id="16_h6dkx"]
+[ext_resource type="Texture2D" uid="uid://c5cj0xx160bls" path="res://Rubber_Duck_Alone.png" id="17_0cv8e"]
 [ext_resource type="Texture2D" uid="uid://bck7mhprgygms" path="res://trans_text.png" id="17_6jcdw"]
 [ext_resource type="AudioStream" uid="uid://bl3tu345hbh37" path="res://Createch Clash_Aditayathorn_FullSong.mp3" id="19_lyga6"]
 
@@ -148,31 +149,43 @@ shader_parameter/diamondPixelSize = 50.0
 
 [sub_resource type="Animation" id="Animation_tj5m4"]
 resource_name = "default"
-length = 5.0
+length = 3.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Snakes:rotation")
-tracks/0/interp = 1
+tracks/0/path = NodePath("Control/Snakes:rotation")
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 5),
+"times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 6.28319]
+"values": [6.28319, 0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Snakes:scale")
+tracks/1/path = NodePath("Control:scale")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 2.5),
+"times": PackedFloat32Array(0, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0.75, 0.75), Vector2(0.9, 0.9)]
+"values": [Vector2(0.5, 0.5), Vector2(0.75, 0.75)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Tips:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.784314)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7xusl"]
@@ -504,24 +517,63 @@ theme_override_fonts/font = ExtResource("11_lksja")
 theme_override_font_sizes/font_size = 100
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_lock_ = true
 
 [node name="Transition" type="TextureRect" parent="GUI"]
 material = SubResource("ShaderMaterial_q6brm")
 texture = ExtResource("15_cec6f")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
-[node name="Snakes" type="TextureRect" parent="GUI/Transition"]
-modulate = Color(1, 1, 1, 0.0784314)
+[node name="Control" type="Control" parent="GUI/Transition"]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1536.0
+offset_top = 704.0
+offset_right = -40.0
+offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 2
-rotation = 2.23616
-scale = Vector2(0.869803, 0.869803)
-pivot_offset = Vector2(960, 536)
+scale = Vector2(0.690288, 0.690288)
+pivot_offset = Vector2(172, 172)
+
+[node name="Snakes" type="TextureRect" parent="GUI/Transition/Control"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -592.0
+offset_top = -496.0
+offset_right = 560.0
+offset_bottom = 472.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 3.6913
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(768, 672)
 texture = ExtResource("16_h6dkx")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Duck" type="TextureRect" parent="GUI/Transition/Control"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -296.0
+offset_right = 296.0
+offset_bottom = 328.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(498.153, 464.732)
+texture = ExtResource("17_0cv8e")
 expand_mode = 1
 stretch_mode = 5
 
@@ -531,15 +583,36 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 40.0
-offset_bottom = 40.0
+offset_top = -3.05176e-05
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
 pivot_offset = Vector2(960, 540)
 texture = ExtResource("17_6jcdw")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="Tips" type="Label" parent="GUI/Transition"]
+modulate = Color(1, 1, 1, 0.852868)
+texture_filter = 1
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = -312.0
+offset_right = 1536.0
+offset_bottom = -80.0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("11_2h1l6")
+theme_override_font_sizes/font_size = 50
+text = "Tip: Be careful of ICT."
+vertical_alignment = 2
+autowrap_mode = 3
+text_overrun_behavior = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GUI/Transition"]
 autoplay = "default"
@@ -563,12 +636,22 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Map" type="TileMap" parent="."]
+z_index = -1
+y_sort_enabled = true
 texture_filter = 1
-scale = Vector2(4, 4)
+scale = Vector2(2, 2)
 tile_set = ExtResource("14_vmf2g")
 format = 2
-layer_0/modulate = Color(0.784314, 0.784314, 0.784314, 1)
+layer_0/name = "Floor"
+layer_0/y_sort_enabled = true
 layer_0/z_index = -1
+layer_1/name = "Walls"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = true
+layer_1/y_sort_origin = 0
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()
 metadata/_edit_lock_ = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]

@@ -3,12 +3,15 @@ extends Node2D
 var amount = 0
 var sign = ""
 var heal = false
+var player_bullet = false
+
 func _ready():
 	if heal:
 		sign == "+"
 		$Label.set("theme_override_colors/font_color",Color.GREEN)
 	else:
-		$Label.set("theme_override_colors/font_color",Color.RED)
+		if !player_bullet:
+			$Label.set("theme_override_colors/font_color",Color.RED)
 		
 	$Label.text = sign+str(amount)
 	var tween := create_tween()

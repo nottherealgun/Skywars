@@ -40,8 +40,8 @@ func change_state(new_state):
 	# Check old state
 	match state:
 		States.AWOKEN:
-			$Healthbar.show()
-			$NameTag.show()
+#			$NameTag.show()
+			pass
 	# Check new state
 	match new_state:
 		States.IDLE:

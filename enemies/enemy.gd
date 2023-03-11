@@ -1,4 +1,4 @@
-class_name Enemy extends Node2D
+class_name Enemy extends CharacterBody2D
 
 @export_placeholder("enemy_name") var display_name = ""
 @export var max_health = 5
@@ -15,9 +15,9 @@ var move_vec := Vector2.ZERO
 var target : Node
 
 func _ready():
-	$NameTag.text = display_name
-	$NameTag/LevelTag.text = "Lvl "+str(level)
-	$NameTag.modulate = Color8(255,255-(level*5),255-(level*5))
+#	$NameTag.text = display_name
+#	$NameTag/LevelTag.text = "Lvl "+str(level)
+#	$NameTag.modulate = Color8(255,255-(level*5),255-(level*5))
 	max_health += level*2
 	health = max_health
 	points += level*2
@@ -30,8 +30,8 @@ func _process(delta):
 		if target.fainted:
 			target = null
 	
-	position.x = clampf(position.x, 0, Global.MAP_RECT.x)
-	position.y = clampf(position.y, 0, Global.MAP_RECT.y)
+#	position.x = clampf(position.x, 0, Global.MAP_RECT.x)
+#	position.y = clampf(position.y, 0, Global.MAP_RECT.y)
 
 func _move_update(delta):
 #	if is_instance_valid(target):
@@ -50,8 +50,9 @@ func get_hurt(by:Node):
 	Global.kill(by)
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("injured")
-	var tween := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.tween_property($Healthbar,"value",(health*100)/max_health,1.0).from_current()
+#	var tween := create_tween().set_trans(Tween.TRANS_LINEAR)
+#	tween.tween_property($Healthbar,"value",(health*100)/max_health,0.5).from_current()
+#	tween.parallel().tween_property($Healthbar,"scale:y",1.0,0.5).from(2.0)
 #	$Healthbar.value = (health*100)/max_health
 
 func get_knockback(direction:Vector2,strength:=1):

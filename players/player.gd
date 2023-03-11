@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 
 signal action(by)
 
@@ -76,18 +76,10 @@ func _gui_update():
 
 func _move_update(delta):
 	move_vec = Input.get_vector("p"+str(player_id)+"_left","p"+str(player_id)+"_right","p"+str(player_id)+"_up","p"+str(player_id)+"_down")
-#	move_vec = Vector2.ZERO
-#	if Input.is_action_pressed("p"+str(player_id)+"_up"):
-#		move_vec.y -= 1
-#	if Input.is_action_pressed("p"+str(player_id)+"_down"):
-#		move_vec.y += 1
-#	if Input.is_action_pressed("p"+str(player_id)+"_left"):
-#		move_vec.x -= 1
-#	if Input.is_action_pressed("p"+str(player_id)+"_right"):
-#		move_vec.x += 1
-	position += move_vec.normalized()*delta*speed*200
-	position.x = clampf(position.x, 0+32, Global.MAP_RECT.x-32)
-	position.y = clampf(position.y, 0, Global.MAP_RECT.y)
+#	position += move_vec.normalized()*delta*speed*200
+#	position.x = clampf(position.x, 0+32, Global.MAP_RECT.x-32)
+#	position.y = clampf(position.y, 0, Global.MAP_RECT.y)
+	move_and_collide(move_vec.normalized()*delta*speed*200)
 
 func shoot():
 	var player_proj = Global.spawn_projectile(self,"printer_proj_1",position,aim_vec.normalized(),true)
@@ -140,3 +132,7 @@ func _on_enemy_detect_area_exited(area):
 	var entity = area.get_parent()
 	if entity.is_in_group("enemy") and entity in enemies_in_range:
 		enemies_in_range.erase(entity)
+
+func _on_hitbox_body_entered(body):
+	if body == Global.Map:
+		pass

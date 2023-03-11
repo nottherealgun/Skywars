@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://b31mn2xrwcfkd" path="res://icon.svg" id="2_6lx2e"]
 [ext_resource type="FontFile" uid="uid://byk80lambns8u" path="res://utility/MiniPixel.ttf" id="3_f1tx1"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_abagd"]
-bg_color = Color(1, 0.211765, 0, 1)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xyaf1"]
+size = Vector2(128, 22)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8b4to"]
 animations = [{
@@ -19,7 +19,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_24rjy"]
-size = Vector2(70, 73)
+size = Vector2(128, 128)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_poao1"]
 radius = 448.018
@@ -60,19 +60,13 @@ _data = {
 "injured": SubResource("Animation_v3f6j")
 }
 
-[node name="Enemy" type="Node2D" groups=["enemy"]]
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 y_sort_enabled = true
 script = ExtResource("1_i1vkc")
 
-[node name="Healthbar" type="ProgressBar" parent="."]
-z_index = 1
-offset_left = -64.0
-offset_top = -74.0
-offset_right = 64.0
-offset_bottom = -70.0
-theme_override_styles/fill = SubResource("StyleBoxFlat_abagd")
-value = 100.0
-show_percentage = false
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, 52)
+shape = SubResource("RectangleShape2D_xyaf1")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -81,14 +75,13 @@ sprite_frames = SubResource("SpriteFrames_8b4to")
 [node name="Hitbox" type="Area2D" parent="." groups=["enemy"]]
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-visible = false
+[node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_24rjy")
 
 [node name="PlayerDetect" type="Area2D" parent="."]
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetect"]
+[node name="PlayerDetectShape" type="CollisionShape2D" parent="PlayerDetect"]
 visible = false
 shape = SubResource("CircleShape2D_poao1")
 
@@ -96,11 +89,12 @@ shape = SubResource("CircleShape2D_poao1")
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AllyDetect"]
+[node name="AllyDetectShape" type="CollisionShape2D" parent="AllyDetect"]
 visible = false
 shape = SubResource("CircleShape2D_w1166")
 
 [node name="NameTag" type="Label" parent="."]
+visible = false
 z_index = 2
 texture_filter = 1
 anchors_preset = 5

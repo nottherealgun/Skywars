@@ -1,10 +1,13 @@
-[gd_scene load_steps=37 format=3 uid="uid://cmhrf827nfpky"]
+[gd_scene load_steps=39 format=3 uid="uid://cmhrf827nfpky"]
 
 [ext_resource type="PackedScene" uid="uid://0anrpyccai4l" path="res://enemies/enemy.tscn" id="1_1ynln"]
 [ext_resource type="Script" path="res://enemies/printer.gd" id="2_owcnx"]
 [ext_resource type="Texture2D" uid="uid://mk0d1skckp7j" path="res://enemies/printerAttackSS.png" id="3_wgc6c"]
 [ext_resource type="Texture2D" uid="uid://bth4bvxjoej3q" path="res://enemies/printerIdleSS.png" id="4_xxh4f"]
 [ext_resource type="Texture2D" uid="uid://cotyq4yqnoypn" path="res://enemies/printerTransformSS.png" id="5_vgk5h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gdykf"]
+size = Vector2(72, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d01ip"]
 atlas = ExtResource("3_wgc6c")
@@ -239,42 +242,34 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ana4n"]
+size = Vector2(72, 72)
+
 [node name="Printer" instance=ExtResource("1_1ynln")]
 script = ExtResource("2_owcnx")
 display_name = "MUIC Printer"
 speed = 3
 
-[node name="Healthbar" parent="." index="0"]
-visible = false
-offset_left = -51.0
-offset_top = -57.0
-offset_right = 51.0
-offset_bottom = -53.0
+[node name="CollisionShape" parent="." index="0"]
+position = Vector2(4, 39)
+shape = SubResource("RectangleShape2D_gdykf")
 
 [node name="Sprite" parent="." index="1"]
-position = Vector2(0, -50)
+position = Vector2(0, 48)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_o5emk")
 animation = &"static"
 autoplay = "static"
+offset = Vector2(0, -24)
 
-[node name="Hitbox" parent="." index="2"]
-position = Vector2(0, -50)
-
-[node name="CollisionShape2D" parent="Hitbox" index="0"]
-position = Vector2(3, 9.5)
-
-[node name="PlayerDetect" parent="." index="3"]
-position = Vector2(0, -50)
+[node name="HitboxShape" parent="Hitbox" index="0"]
+position = Vector2(4, 12)
+shape = SubResource("RectangleShape2D_ana4n")
 
 [node name="Timer" type="Timer" parent="." index="4"]
 one_shot = true
 
-[node name="AllyDetect" parent="." index="5"]
-position = Vector2(0, -50)
-
 [node name="NameTag" parent="." index="6"]
-visible = false
 offset_top = -87.0
 offset_bottom = -44.0
 text = "MUIC PRINTER"
@@ -282,5 +277,3 @@ text = "MUIC PRINTER"
 [node name="Dev" parent="." index="8"]
 visible = true
 z_index = 1
-offset_top = -98.0
-offset_bottom = -25.0

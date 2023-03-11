@@ -12,7 +12,7 @@ func _ready():
 func _process(delta):
 	super(delta)
 	if is_instance_valid(target):
-		$Sprite.flip_h = (target.position.x > position.x)
+		$Sprite.flip_h = !(target.position.x > position.x)
 	match state:
 		States.IDLE:
 			pass
@@ -57,7 +57,8 @@ func _move_update(delta):
 		for ally in allies:
 			if ally.position.distance_to(position) <= 50:
 				allies_vec += (position.direction_to(ally.position)*50)/ally.position.distance_to(position)
-		position += (move_vec-allies_vec) * speed * delta * 50
+#		position += (move_vec-allies_vec) * speed * delta * 50
+		move_and_collide((move_vec-allies_vec) * speed * delta * 50)
 
 func _on_player_detect_area_entered(area):
 	super(area)

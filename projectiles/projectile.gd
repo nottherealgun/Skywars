@@ -33,7 +33,7 @@ func affect(victim:Node):
 	if player_bullet:
 		victim.latest_shooter = shooter
 	victim.get_knockback(direction,knockback)
-	Global.emit_indicator(damage,victim.position)
+	Global.emit_indicator(damage,victim.position,player_bullet)
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	Global.kill(self)
@@ -43,3 +43,7 @@ func _on_area_entered(area):
 		if area.player_bullet != player_bullet:
 			Global.kill(area)
 			Global.kill(self)
+
+func _on_body_entered(body):
+	if body == Global.Map:
+		Global.kill(self)
