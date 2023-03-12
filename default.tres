@@ -1,7 +1,9 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://0c8knfi7rtne"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://0c8knfi7rtne"]
 
 [ext_resource type="Texture2D" uid="uid://c3mua8tnxy4fs" path="res://tilesets/adithFirstFloor.png" id="1_metmx"]
 [ext_resource type="Texture2D" uid="uid://rkrex5ety0qp" path="res://tilesets/aditHLobbyWall.png" id="2_hfoia"]
+[ext_resource type="Texture2D" uid="uid://7yjqas6g5oba" path="res://tilesets/aditVerticalLobbyWall.png" id="3_yk7np"]
+[ext_resource type="Texture2D" uid="uid://256f1px7t0wm" path="res://tilesets/aditBottomLobbyWall.png" id="4_er318"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vvejs"]
 resource_name = "Adit_Floor"
@@ -161,6 +163,34 @@ texture_region_size = Vector2i(32, 72)
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, 18.5, 16, 18.5, 16, 36, -16, 36)
 2:0/0/terrains_peering_bit/left_side = 1
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rwula"]
+resource_name = "Adit_V_Wall"
+texture = ExtResource("3_yk7np")
+texture_region_size = Vector2i(32, 80)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pt1cq"]
+resource_name = "Adit_Bottom_wall"
+texture = ExtResource("4_er318")
+texture_region_size = Vector2i(32, 50)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+
 [resource]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 16
@@ -172,3 +202,5 @@ terrain_set_0/terrain_1/name = "Walls"
 terrain_set_0/terrain_1/color = Color(0.5, 0.4375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_vvejs")
 sources/1 = SubResource("TileSetAtlasSource_f7ovw")
+sources/3 = SubResource("TileSetAtlasSource_rwula")
+sources/4 = SubResource("TileSetAtlasSource_pt1cq")
