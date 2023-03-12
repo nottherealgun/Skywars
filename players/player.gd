@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 signal action(by)
 
@@ -8,7 +8,7 @@ signal action(by)
 @onready var player_color = [Color.DODGER_BLUE,Color.CORAL,Color.DARK_GREEN,Color.MEDIUM_PURPLE][player_id-1]
 # Player stats
 @export var max_health = 10
-var health = max_health
+@onready var health = max_health
 @export var brainpower = 0
 @export var speed = 1
 @export var money = 0
@@ -18,6 +18,7 @@ var aim_vec := Vector2.ZERO
 var fainted = false
 var transporting = false
 var latest_shooter
+var revival_target : Player
 # Player GUI setup
 @onready var stat_gui = Global.GUI.get_node("PlayerStats"+str(player_id))
 @onready var healthbar = stat_gui.get_node("Healthbar")
@@ -38,10 +39,17 @@ func _process(delta):
 	_input_update() # Update device input
 	_gui_update() # Update gui
 	var sprite = get_node("Sprite")
-	if health <= 0 and !fainted: # If player dies
-		sprite.play("faint")
-		fainted = true
-		$Arrow.hide()
+	if health <= 0: # If player dies
+		if !fainted:
+			sprite.play("faint")
+			fainted = true
+			$Arrow.hide()
+			$Revival.show()
+			
+	if fainted:
+		if $Revival.value == 100.0:
+			revive()
+				
 	if !fainted and !transporting: # If player alive
 		_move_update(delta) # Update movement
 		# Sprite H flipping
@@ -68,6 +76,13 @@ func _input_update():
 		if Input.is_action_just_pressed("p"+str(player_id)+"_action"):
 			# Action1
 			emit_signal("action",self)
+		if Input.is_action_pressed("p"+str(player_id)+"_action"):
+			if is_instance_valid(revival_target) and revival_target.fainted:
+				if revival_target.get_node("ReviveTimer").is_stopped():
+					revival_target.get_node("ReviveTimer").start()
+				
+				if !revival_target.fainted:
+					revival_target = null
 
 func _gui_update():
 	healthbar.value = (health*healthbar.max_value)/max_health
@@ -96,6 +111,22 @@ func _injured_effect():
 	tween.parallel().tween_property(sprite,"scale",Vector2(2,2),0.5).from(Vector2(2,2)*0.8).set_trans(Tween.TRANS_CUBIC)
 	Input.start_joy_vibration(player_id-1,1,0,0.2)
 
+func get_hurt(by:Node):
+	by.affect(self)
+	_injured_effect()
+
+func revive():
+	$Guide.hide()
+	health = max_health
+	get_node("Sprite").play("idle")
+	fainted = false
+	get_node("Revival").hide()
+
+func get_surround_pos() -> Vector2:
+	var new_surr_pos := position+Vector2(0,1)
+	new_surr_pos.rotated(deg_to_rad(randf()*360.0))
+	return new_surr_pos
+
 func _on_hitbox_area_entered(area:Area2D):
 	if area.is_in_group("projectile"):
 		if area.player_bullet == false:
@@ -106,20 +137,15 @@ func _on_hitbox_area_entered(area:Area2D):
 	else:
 		var entity = area.get_parent()
 		if entity.is_in_group("player"):
-			if entity.health <= 0:
-				$Guide.show()
-				await Input.is_action_just_pressed("p"+str(player_id)+"_action")
-				# Revived
-				$Guide.hide()
-				entity.health = entity.max_health
-				entity.get_node("Sprite").play("idle")
-				entity.fainted = false
+			if entity.fainted:
+				revival_target = entity
 				
 func _on_hitbox_area_exited(area):
 	if area.is_in_group("projectile"):
 		var entity = area.get_parent()
 		if entity.is_in_group("player"):
-			$Guide.hide()
+			if entity == revival_target:
+				revival_target = null
 
 var enemies_in_range = []
 
@@ -136,3 +162,6 @@ func _on_enemy_detect_area_exited(area):
 func _on_hitbox_body_entered(body):
 	if body == Global.Map:
 		pass
+
+func _on_revive_timer_timeout():
+	$Revival.value += 1

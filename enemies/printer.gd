@@ -3,14 +3,14 @@ extends Enemy
 enum States { IDLE, AWOKEN, ATTACKING }
 var state = States.IDLE
 var awoken = false
-var range = 200
+var range = 300
 var shoot_speed = 1
 
 func _ready():
 	super()
 	shoot_speed = level
 
-func _process(delta):
+func _physics_process(delta):
 	super(delta)
 	if awoken and is_instance_valid(target):
 		$Sprite.flip_h = (target.position.x > position.x)

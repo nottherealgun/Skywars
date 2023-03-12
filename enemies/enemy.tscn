@@ -62,6 +62,7 @@ _data = {
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 y_sort_enabled = true
+collision_layer = 0
 script = ExtResource("1_i1vkc")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]

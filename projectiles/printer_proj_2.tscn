@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://8fqe4gtfqu7b"]
+[gd_scene load_steps=10 format=3 uid="uid://7bcbymaw5nvn"]
 
 [ext_resource type="PackedScene" uid="uid://cni0dsstdjde" path="res://projectiles/projectile.tscn" id="1_lj12i"]
-[ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://interactables/shadow.png" id="2_8xfp8"]
+[ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://utility/shadow.png" id="2_8xfp8"]
 [ext_resource type="Texture2D" uid="uid://ctsdlagghjwfv" path="res://projectiles/paperProjectile2SS.png" id="2_46k0q"]
 [ext_resource type="Script" path="res://projectiles/printer_proj_2.gd" id="2_qv8gu"]
 
@@ -51,7 +51,6 @@ scale = Vector2(9, 11.5)
 
 [node name="Shadow" type="Sprite2D" parent="." index="2"]
 self_modulate = Color(0, 0, 0, 0.392157)
-texture_filter = 1
 position = Vector2(0, 160)
 scale = Vector2(15, 15)
 texture = ExtResource("2_8xfp8")

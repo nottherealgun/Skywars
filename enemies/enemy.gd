@@ -2,7 +2,7 @@ class_name Enemy extends CharacterBody2D
 
 @export_placeholder("enemy_name") var display_name = ""
 @export var max_health = 5
-var health = max_health
+@onready var health = max_health
 @export var speed = 1
 @export var damage = 1
 
@@ -12,6 +12,7 @@ var latest_shooter : Node
 
 var move_vec := Vector2.ZERO
 
+var targets_in_range = []
 var target : Node
 
 func _ready():
@@ -22,25 +23,27 @@ func _ready():
 	health = max_health
 	points += level*2
 
-func _process(delta):
+func _physics_process(delta):
 	if health <= 0:
 		latest_shooter.money += points
 		Global.kill(self)
 	if is_instance_valid(target):
 		if target.fainted:
 			target = null
-	
-#	position.x = clampf(position.x, 0, Global.MAP_RECT.x)
-#	position.y = clampf(position.y, 0, Global.MAP_RECT.y)
+			
+	if !targets_in_range.is_empty():
+#			target = targets_in_range[0]
+		var dist = INF
+		var closest
+		for t in targets_in_range:
+			if targets_in_range.is_empty() or t.fainted:
+				break
+			if t.position.distance_to(position) < dist:
+				dist = t.position.distance_to(position)
+				closest = t
+		target = closest
 
 func _move_update(delta):
-#	if is_instance_valid(target):
-#		move_vec = position.direction_to(target.position)
-#		var allies_vec := Vector2.ZERO
-#		for ally in allies:
-#			if ally.position.distance_to(position) <= 50:
-#				allies_vec += (position.direction_to(ally.position)*50)/ally.position.distance_to(position)
-#		position += (move_vec-allies_vec) * speed * delta * 50
 	pass
 
 var allies = []
@@ -66,18 +69,19 @@ func _on_hitbox_area_entered(area):
 func _on_player_detect_area_entered(area):
 	var entity = area.get_parent()
 	if entity.is_in_group("player"):
-		if target == null:
-			target = entity
+		target = entity
+		targets_in_range.append(entity)
 
 func _on_player_detect_area_exited(area):
 	var entity = area.get_parent()
 	if entity == target:
-		target = null
+		targets_in_range.erase(entity)
 
 func _on_ally_detect_area_entered(area):
 	var ally = area.get_parent()
-	if not ally in allies and ally.is_in_group("enemy"):
-		allies.append(ally)
+	if not ally in allies:
+		if ally.is_in_group("enemy") or ally.is_in_group("interactable"):
+			allies.append(ally)
 
 func _on_ally_detect_area_exited(area):
 	var ally = area.get_parent()

@@ -5,7 +5,7 @@
 
 [node name="Podium" instance=ExtResource("1_nrl1p")]
 
-[node name="Sprite" parent="." index="0"]
+[node name="Sprite" parent="." index="1"]
 position = Vector2(0, 3.8147e-06)
 scale = Vector2(2, 2)
 texture = ExtResource("2_mvbmb")

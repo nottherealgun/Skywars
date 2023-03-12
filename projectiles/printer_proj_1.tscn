@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4e6noxnqja2k"]
+[gd_scene load_steps=7 format=3 uid="uid://cu2op054wp2nv"]
 
 [ext_resource type="PackedScene" uid="uid://cni0dsstdjde" path="res://projectiles/projectile.tscn" id="1_4g6ad"]
 [ext_resource type="Script" path="res://projectiles/printer_proj_1.gd" id="2_3hya6"]
 [ext_resource type="Texture2D" uid="uid://djdvskrx3w0id" path="res://projectiles/paperProjectile1.png" id="3_uvrym"]
-[ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://interactables/shadow.png" id="4_xobxu"]
+[ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://utility/shadow.png" id="4_xobxu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6wsp2"]
 atlas = ExtResource("3_uvrym")
@@ -31,7 +31,6 @@ scale = Vector2(9, 11.5)
 
 [node name="Shadow" type="Sprite2D" parent="." index="2"]
 self_modulate = Color(0, 0, 0, 0.392157)
-texture_filter = 1
 position = Vector2(0, 160)
 scale = Vector2(15, 15)
 texture = ExtResource("4_xobxu")

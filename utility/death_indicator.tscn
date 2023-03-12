@@ -1,0 +1,84 @@
+[gd_scene load_steps=13 format=3 uid="uid://c871lfpv46eyd"]
+
+[ext_resource type="Script" path="res://utility/death_indicator.gd" id="1_1s707"]
+[ext_resource type="Texture2D" uid="uid://ckrvmed8gak1t" path="res://explosionSS.png" id="2_qdh2m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tfrw"]
+atlas = ExtResource("2_qdh2m")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ne65"]
+atlas = ExtResource("2_qdh2m")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6pufh"]
+atlas = ExtResource("2_qdh2m")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wu6kx"]
+atlas = ExtResource("2_qdh2m")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qc6c"]
+atlas = ExtResource("2_qdh2m")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bs7jy"]
+atlas = ExtResource("2_qdh2m")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mywn1"]
+atlas = ExtResource("2_qdh2m")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dg7vk"]
+atlas = ExtResource("2_qdh2m")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgwcw"]
+atlas = ExtResource("2_qdh2m")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m5mql"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tfrw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ne65")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6pufh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wu6kx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qc6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bs7jy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mywn1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dg7vk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgwcw")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="DeathIndicator" type="Node2D"]
+script = ExtResource("1_1s707")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_m5mql")
+autoplay = "default"

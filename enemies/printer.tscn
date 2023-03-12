@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cmhrf827nfpky"]
+[gd_scene load_steps=40 format=3 uid="uid://cmhrf827nfpky"]
 
 [ext_resource type="PackedScene" uid="uid://0anrpyccai4l" path="res://enemies/enemy.tscn" id="1_1ynln"]
 [ext_resource type="Script" path="res://enemies/printer.gd" id="2_owcnx"]
@@ -245,6 +245,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ana4n"]
 size = Vector2(72, 72)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hd58e"]
+load_path = "res://.godot/imported/shadow.png-082447c8104d7e41b151de040f9b86ac.ctex"
+
 [node name="Printer" instance=ExtResource("1_1ynln")]
 script = ExtResource("2_owcnx")
 display_name = "MUIC Printer"
@@ -277,3 +280,9 @@ text = "MUIC PRINTER"
 [node name="Dev" parent="." index="8"]
 visible = true
 z_index = 1
+
+[node name="Shadow" type="Sprite2D" parent="." index="9"]
+z_index = -1
+position = Vector2(0, 45)
+scale = Vector2(6, 4.875)
+texture = SubResource("CompressedTexture2D_hd58e")

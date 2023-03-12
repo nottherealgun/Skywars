@@ -3,7 +3,6 @@ extends Node
 @onready var cam = get_node("/root/Main/MainCam")
 var cam_follow_target = Vector2.ZERO
 
-@onready var testmap = preload("res://rooms/adit_building_1.tscn").instantiate()
 func _ready():
 	for n in Global.Main.get_children():
 		if n.is_in_group("player"):
@@ -17,3 +16,10 @@ func _process(delta):
 	cam_follow_target = vec
 	cam.position = cam_follow_target
 	Global.Dev.text = str(Global.active_players[0].transporting)
+	
+	for p in Global.active_players:
+		if p.fainted == false:
+			break
+		else:
+			if p == Global.active_players.back():
+				Global.sync_map(LevelManager.testmap)

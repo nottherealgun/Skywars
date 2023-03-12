@@ -10,6 +10,7 @@ var current_room
 func _ready():
 	Global.sync_map(testmap)
 	pass
+	
 func clear_level():
 	Global.kill_all()
 	for d in Global.active_doors:

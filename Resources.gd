@@ -34,6 +34,8 @@ func spawn_enemy(enemy_name:String,pos:Vector2):
 	
 func kill(entity:Node):
 	if is_instance_valid(entity):
+		if !entity.is_in_group("projectile"):
+			emit_death_indicator(entity.position)
 		active_entities.erase(entity)
 		entity.queue_free()
 
@@ -103,7 +105,7 @@ const tips = [
 func sync_map(map):
 	
 	# Prepare spawnpoints
-	var target_map = map as Node2D
+	var target_map = map.duplicate() as Node2D
 	var spawn_poses = []
 	map_spawnpoint = target_map.find_child("SpawningPoint").position
 	
@@ -113,28 +115,33 @@ func sync_map(map):
 		p.transporting = true
 		p.y_sort_enabled = false
 
-	# Transition
+	# Entry Transition
 	var transition_screen = GUI.get_node("Transition")
 	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
 	transition_screen.get_node("Tips").text = "Tip: "+str(tips[randi()%tips.size()])+"."
 	tween.tween_property(transition_screen.material,"shader_parameter/progress",1.0,3).from(0.0)
-	
+
 	await tween.step_finished
 	
-	GUI.get_node("Title").text = target_map.name.capitalize()	
+	# Set level title name
+	for r in rooms:
+		if map.name == r["file"].instantiate().name:
+			GUI.get_node("Title").text = r["name"]
+			break
+#	GUI.get_node("Title").text = target_map.name.capitalize()
+	
+	# Set new player positions
 	for p in active_players:
 		p.position = spawn_poses[active_players.find(p)]
-	for p in active_players:
 		p.transporting = false
 		p.y_sort_enabled = true
+		if p.fainted:
+			p.revive()
 	# Clear old map tiles
 	Map.clear()
 	LevelManager.clear_level()
 	
 	# Install map tiles
-#set_cell(layer: int, coords: Vector2i, source_id: int = -1, atlas_coords: Vector2i = Vector2i(-1, -1), alternative_tile: int = 0)
-#set_cells_terrain_connect(layer: int, cells: Array[Vector2i], terrain_set: int, terrain: int, ignore_empty_terrains: bool = true)
-
 	for tile in target_map.get_node("Map").get_used_cells(0):
 		var tile_type = target_map.get_node("Map").get_cell_atlas_coords(0,tile)
 		Map.set_cell(0,tile,-1,tile_type)
@@ -157,11 +164,12 @@ func sync_map(map):
 		target_map.remove_child(entity)
 		active_entities.append(entity)
 		Main.add_child(entity)
-	
+		
+	# Exit Transition
 	tween = create_tween()
 	tween.tween_property(transition_screen.material,"shader_parameter/progress",0.0,3.0).from(1.0)
 	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
-	tween.tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
+	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
 	
 func emit_indicator(amnt:float,pos:Vector2,p_bullet=false):
 	var new_indicator = load("res://utility/damage_indicator.tscn").instantiate()
@@ -169,3 +177,8 @@ func emit_indicator(amnt:float,pos:Vector2,p_bullet=false):
 	new_indicator.amount = roundi(amnt)
 	new_indicator.player_bullet = p_bullet
 	Main.add_child(new_indicator)
+
+func emit_death_indicator(pos:Vector2):
+	var new_particle = load("res://utility/death_indicator.tscn").instantiate()
+	new_particle.position = pos
+	Main.add_child(new_particle)

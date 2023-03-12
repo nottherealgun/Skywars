@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://caw6brh3py3mv"]
+[gd_scene load_steps=11 format=3 uid="uid://caw6brh3py3mv"]
 
 [ext_resource type="Script" path="res://players/player.gd" id="1_2rdnx"]
 [ext_resource type="SpriteFrames" uid="uid://ut4kvd8lo60w" path="res://players/gun.tres" id="2_gfowo"]
+[ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://utility/shadow.png" id="2_ixn7o"]
 [ext_resource type="Texture2D" uid="uid://c8fdbjdlywnc" path="res://players/arrow.png" id="3_j5x1p"]
 [ext_resource type="FontFile" uid="uid://im11hs0xx7wu" path="res://utility/RoadPixel.ttf" id="4_nv7os"]
 
@@ -45,14 +46,15 @@ collision_mask = 16
 script = ExtResource("1_2rdnx")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 44)
 shape = SubResource("RectangleShape2D_oscn4")
 
 [node name="Hitbox" type="Area2D" parent="."]
-visible = false
 collision_mask = 3
 
 [node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
+visible = false
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_oscn4")
 
@@ -60,6 +62,7 @@ shape = SubResource("RectangleShape2D_oscn4")
 collision_layer = 0
 
 [node name="EnemyDetectShape" type="CollisionShape2D" parent="EnemyDetect"]
+visible = false
 shape = SubResource("CircleShape2D_5rio8")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
@@ -78,6 +81,12 @@ texture_filter = 1
 scale = Vector2(2, 2)
 texture = ExtResource("3_j5x1p")
 offset = Vector2(25, 0)
+
+[node name="Shadow" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(0, 52)
+scale = Vector2(5, 4)
+texture = ExtResource("2_ixn7o")
 
 [node name="Guide" type="CanvasGroup" parent="."]
 visible = false
@@ -118,8 +127,20 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
+[node name="ReviveTimer" type="Timer" parent="."]
+wait_time = 0.01
+
+[node name="Revival" type="ProgressBar" parent="."]
+visible = false
+z_index = 2
+offset_left = -64.0
+offset_top = -52.0
+offset_right = 64.0
+offset_bottom = -25.0
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="area_entered" from="EnemyDetect" to="." method="_on_enemy_detect_area_entered"]
 [connection signal="area_exited" from="EnemyDetect" to="." method="_on_enemy_detect_area_exited"]
+[connection signal="timeout" from="ReviveTimer" to="." method="_on_revive_timer_timeout"]
