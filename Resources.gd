@@ -1,10 +1,13 @@
 extends Node
+signal enemy_killed(enemy)
+
 # Resources
 
 @onready var Main := get_node("/root/Main")
 @onready var Map := get_node("/root/Main/Map")
 @onready var GUI := get_node("/root/Main/GUI")
 @onready var Dev := get_node("/root/Main/GUI/Dev")
+@onready var Music := get_node("/root/Main/Music") as AudioStreamPlayer
 
 @onready var MAP_RECT : Vector2 = Map.get_used_rect().size*128
 
@@ -38,6 +41,7 @@ func kill(entity:Node):
 			emit_death_indicator(entity.position)
 		active_entities.erase(entity)
 		entity.queue_free()
+		emit_signal("enemy_killed",entity)
 
 func kill_all():
 	while not active_entities.is_empty():
@@ -103,7 +107,7 @@ const tips = [
 
 # Levels
 func sync_map(map):
-	
+	music_play("combat")
 	# Prepare spawnpoints
 	var target_map = map.instantiate()
 	var spawn_poses = []
@@ -213,3 +217,21 @@ func emit_death_indicator(pos:Vector2):
 	var new_particle = load("res://utility/death_indicator.tscn").instantiate()
 	new_particle.position = pos
 	Main.add_child(new_particle)
+
+# Music
+
+const tracks = {
+	"default":"res://music/The Lobby_Loopable.mp3",	
+	"combat":"res://music/Combat_Music_Loopable.mp3",
+}
+
+func music_play(track_name:String):
+	var default_volume = -5.0
+	var tween := create_tween()
+	tween.tween_property(Music,"volume_db",-80.0,1.0).from(default_volume)
+	await tween.finished
+	Music.stream = load(tracks[track_name])
+	Music.playing = true
+	tween = create_tween()
+	tween.tween_property(Music,"volume_db",default_volume,1.0).from(-80.0)
+	
