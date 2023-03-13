@@ -246,7 +246,6 @@ animations = [{
 size = Vector2(72, 72)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hd58e"]
-load_path = "res://.godot/imported/shadow.png-082447c8104d7e41b151de040f9b86ac.ctex"
 
 [node name="Printer" instance=ExtResource("1_1ynln")]
 script = ExtResource("2_owcnx")

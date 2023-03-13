@@ -105,7 +105,7 @@ const tips = [
 func sync_map(map):
 	
 	# Prepare spawnpoints
-	var target_map = map.duplicate() as Node2D
+	var target_map = map.instantiate()
 	var spawn_poses = []
 	map_spawnpoint = target_map.find_child("SpawningPoint").position
 	
@@ -117,18 +117,18 @@ func sync_map(map):
 
 	# Entry Transition
 	var transition_screen = GUI.get_node("Transition")
-	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
-	transition_screen.get_node("Tips").text = "Tip: "+str(tips[randi()%tips.size()])+"."
-	tween.tween_property(transition_screen.material,"shader_parameter/progress",1.0,3).from(0.0)
-
-	await tween.step_finished
+#	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
+#	transition_screen.get_node("Tips").text = "Tip: "+str(tips[randi()%tips.size()])+"."
+#	tween.tween_property(transition_screen.material,"shader_parameter/progress",1.0,3).from(0.0)
+#
+#	await tween.step_finished
 	
 	# Set level title name
-	for r in rooms:
-		if map.name == r["file"].instantiate().name:
-			GUI.get_node("Title").text = r["name"]
-			break
-#	GUI.get_node("Title").text = target_map.name.capitalize()
+#	for r in rooms:
+#		if map.name == r["file"].instantiate().name:
+#			GUI.get_node("Title").text = r["name"]
+#			break
+	GUI.get_node("Title").text = target_map.name.capitalize()
 	
 	# Set new player positions
 	for p in active_players:
@@ -147,15 +147,45 @@ func sync_map(map):
 		Map.set_cell(0,tile,-1,tile_type)
 	Map.set_cells_terrain_connect(0,target_map.get_node("Map").get_used_cells(0),0,0)
 	
-	for tile in target_map.get_node("Map").get_used_cells(1):
-		var tile_type = target_map.get_node("Map").get_cell_atlas_coords(1,tile)
-		# layer, coords, source_id, atlas_coords, alt_tile
-		Map.set_cell(1,tile,-1,tile_type)
-		# layer, cells, terrain_set,terrain
-	Map.set_cells_terrain_connect(1,target_map.get_node("Map").get_used_cells(1),0,1)	
-#	Map.set_cells_terrain_connect(1,target_map.get_node("Map").get_used_cells(1),0,1)
+#	for tile in target_map.get_node("Map").get_used_cells(1):
+#		var tile_type = target_map.get_node("Map").get_cell_atlas_coords(1,tile)
+#		print(tile_type)
+#		# layer, coords, source_id, atlas_coords, alt_tile
+#		Map.set_cell(1,tile,-1,Vector2i(1,0))
+#		# layer, cells, terrain_set,terrain
+#	Map.set_cells_terrain_connect(1,target_map.get_node("Map").get_used_cells(1),1,0)	
+	var terrains = {}
+	var terrain_sets = {}
 	
-	MAP_RECT = Map.get_used_rect().size*128
+	for tile in target_map.get_node("Map").get_used_cells(1): # Layer 1
+		var tile_atlas = target_map.get_node("Map").get_cell_atlas_coords(1,tile)
+		var tile_data = target_map.get_node("Map").get_cell_tile_data(1,tile)
+		
+		terrains[tile] = {"atlas":tile_atlas,"terrain_set":tile_data.terrain_set,"terrain":tile_data.terrain}
+		
+	for t in terrains.keys():
+		Map.set_cell(1,t,-1,terrains[t].atlas)
+		if !terrain_sets.has(terrains[t].terrain_set):
+			terrain_sets[terrains[t].terrain_set] = {}
+			
+		if terrain_sets.has(terrains[t].terrain_set):
+			if terrain_sets[terrains[t].terrain_set].get(terrains[t].terrain) == null:
+#				print(terrains[t].terrain)
+				terrain_sets[terrains[t].terrain_set][terrains[t].terrain] = []
+			
+			if terrain_sets[terrains[t].terrain_set].get(terrains[t].terrain) != null:
+				terrain_sets[terrains[t].terrain_set].get(terrains[t].terrain).append(t)
+				
+#	print_rich(terrain_sets)
+	for terrain_set_id in terrain_sets.keys(): # Terrain Set
+		for terrain_id in terrain_sets.get(terrain_set_id).keys(): # Terrain
+			var tile_arr = []
+			for tile in terrain_sets.get(terrain_set_id).get(terrain_id): # Tile
+				tile_arr.append(tile)
+			
+			print(tile_arr,"+",terrain_set_id,"-",terrain_set_id)
+			print("\n")
+			Map.set_cells_terrain_connect(1,tile_arr,terrain_set_id,terrain_id)
 	
 	# Install map enemies
 	for entity in target_map.get_children():
@@ -166,10 +196,10 @@ func sync_map(map):
 		Main.add_child(entity)
 		
 	# Exit Transition
-	tween = create_tween()
-	tween.tween_property(transition_screen.material,"shader_parameter/progress",0.0,3.0).from(1.0)
-	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
-	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
+#	tween = create_tween()
+#	tween.tween_property(transition_screen.material,"shader_parameter/progress",0.0,3.0).from(1.0)
+#	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
+#	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
 	
 func emit_indicator(amnt:float,pos:Vector2,p_bullet=false):
 	var new_indicator = load("res://utility/damage_indicator.tscn").instantiate()

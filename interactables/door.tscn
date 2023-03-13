@@ -69,7 +69,7 @@ script = ExtResource("1_dfm2f")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, 16)
-scale = Vector2(3, 3)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_er4a6")
 animation = &"forward"
 offset = Vector2(0, -13.3333)

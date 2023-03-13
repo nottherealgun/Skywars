@@ -1,6 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://cx7imnf85vue8"]
-
-[ext_resource type="TileSet" uid="uid://0c8knfi7rtne" path="res://default.tres" id="1_a0wxa"]
+[gd_scene format=3 uid="uid://cx7imnf85vue8"]
 
 [node name="Level" type="Node2D"]
 
@@ -9,7 +7,6 @@ z_index = -1
 y_sort_enabled = true
 texture_filter = 1
 scale = Vector2(2, 2)
-tile_set = ExtResource("1_a0wxa")
 format = 2
 layer_0/name = "Floor"
 layer_0/y_sort_enabled = true
