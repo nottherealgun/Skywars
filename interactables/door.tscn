@@ -59,8 +59,8 @@ animations = [{
 "speed": 2.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6ccfh"]
-radius = 104.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_qbv4v"]
+radius = 128.25
 
 [node name="Door" type="Node2D"]
 y_sort_enabled = true
@@ -76,10 +76,11 @@ offset = Vector2(0, -13.3333)
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -8)
-collision_layer = 2
+collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_6ccfh")
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_qbv4v")
 
 [node name="Dev" type="Label" parent="."]
 anchors_preset = 5

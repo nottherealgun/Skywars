@@ -71,11 +71,14 @@ func _input_update():
 		get_node("Arrow").visible = (aim_vec != Vector2.ZERO)
 		if Input.is_action_just_pressed("p"+str(player_id)+"_primary"):
 			# Primary
+			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+				aim_vec = position.direction_to(get_global_mouse_position())
 			if aim_vec != Vector2.ZERO:
 				shoot()
 		if Input.is_action_just_pressed("p"+str(player_id)+"_action"):
 			# Action1
 			emit_signal("action",self)
+			
 		if Input.is_action_pressed("p"+str(player_id)+"_action"):
 			if is_instance_valid(revival_target) and revival_target.fainted:
 				if revival_target.get_node("ReviveTimer").is_stopped():

@@ -117,11 +117,11 @@ func sync_map(map):
 
 	# Entry Transition
 	var transition_screen = GUI.get_node("Transition")
-#	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
-#	transition_screen.get_node("Tips").text = "Tip: "+str(tips[randi()%tips.size()])+"."
-#	tween.tween_property(transition_screen.material,"shader_parameter/progress",1.0,3).from(0.0)
-#
-#	await tween.step_finished
+	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
+	transition_screen.get_node("Tips").text = "Tip: "+str(tips[randi()%tips.size()])+"."
+	tween.tween_property(transition_screen.material,"shader_parameter/progress",1.0,2).from(0.0)
+
+	await tween.step_finished
 	
 	# Set level title name
 #	for r in rooms:
@@ -154,6 +154,7 @@ func sync_map(map):
 #		Map.set_cell(1,tile,-1,Vector2i(1,0))
 #		# layer, cells, terrain_set,terrain
 #	Map.set_cells_terrain_connect(1,target_map.get_node("Map").get_used_cells(1),1,0)	
+	
 	var terrains = {}
 	var terrain_sets = {}
 	
@@ -196,10 +197,10 @@ func sync_map(map):
 		Main.add_child(entity)
 		
 	# Exit Transition
-#	tween = create_tween()
-#	tween.tween_property(transition_screen.material,"shader_parameter/progress",0.0,3.0).from(1.0)
-#	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
-#	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
+	tween = create_tween()
+	tween.tween_property(transition_screen.material,"shader_parameter/progress",0.0,1.5).from(1.0)
+	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
+	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
 	
 func emit_indicator(amnt:float,pos:Vector2,p_bullet=false):
 	var new_indicator = load("res://utility/damage_indicator.tscn").instantiate()

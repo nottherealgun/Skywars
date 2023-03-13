@@ -8,8 +8,7 @@ var current_room
 @onready var testmap = Global.rooms[0].file
 
 func _ready():
-#	Global.sync_map(testmap)
-	Global.call_deferred("sync_map",testmap)
+	Global.sync_map(testmap)
 	pass
 	
 func clear_level():
