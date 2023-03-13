@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bs0h2fmnb8ptq"]
+[gd_scene load_steps=7 format=3 uid="uid://bs0h2fmnb8ptq"]
 
 [ext_resource type="PackedScene" uid="uid://0anrpyccai4l" path="res://enemies/enemy.tscn" id="1_u8cc3"]
 [ext_resource type="Script" path="res://enemies/student.gd" id="2_coljh"]
+[ext_resource type="SpriteFrames" uid="uid://dk73utyosr1wa" path="res://enemies/student1.tres" id="3_n61ad"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cyl6t"]
 size = Vector2(48, 16)
@@ -23,9 +24,8 @@ shape = SubResource("RectangleShape2D_cyl6t")
 [node name="Sprite" parent="." index="1"]
 position = Vector2(0, 52)
 scale = Vector2(2, 2)
-sprite_frames = null
-animation = &""
-autoplay = "idle"
+sprite_frames = ExtResource("3_n61ad")
+animation = &"idle"
 offset = Vector2(0, -26)
 
 [node name="HitboxShape" parent="Hitbox" index="0"]

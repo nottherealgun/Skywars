@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dp1wmslqcfeh0"]
+[gd_scene load_steps=6 format=3 uid="uid://dp1wmslqcfeh0"]
 
 [ext_resource type="PackedScene" uid="uid://cx7imnf85vue8" path="res://level.tscn" id="1_iaiv3"]
 [ext_resource type="TileSet" uid="uid://0c8knfi7rtne" path="res://default.tres" id="2_syifg"]
 [ext_resource type="PackedScene" uid="uid://bhsvoj5kcuifg" path="res://spawning_point.tscn" id="3_3ut51"]
 [ext_resource type="PackedScene" uid="uid://6qdjvyw15lm4" path="res://interactables/door.tscn" id="3_kdace"]
+[ext_resource type="PackedScene" uid="uid://bs0h2fmnb8ptq" path="res://enemies/student.tscn" id="9_a8u4x"]
 
 [node name="adit_building_2" instance=ExtResource("1_iaiv3")]
 y_sort_enabled = true
@@ -15,8 +16,11 @@ layer_1/tile_data = PackedInt32Array(-65506, 65537, 0, -65507, 65537, 0, -65508,
 
 [node name="SpawningPoint" parent="." index="1" instance=ExtResource("3_3ut51")]
 y_sort_enabled = true
-position = Vector2(1844, 200)
+position = Vector2(72, 192)
 
 [node name="Door" parent="." index="2" instance=ExtResource("3_kdace")]
 position = Vector2(2080, 122)
 horizontal = false
+
+[node name="Student" parent="." index="3" instance=ExtResource("9_a8u4x")]
+position = Vector2(414, 167)
