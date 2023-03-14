@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bakr387l46lfw"]
+
+[ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://interactables/interactable.tscn" id="1_qf02v"]
+[ext_resource type="Texture2D" uid="uid://tnvx5837ukgb" path="res://interactables/adithPodium.png" id="2_h8uot"]
+
+[node name="AditPodium" instance=ExtResource("1_qf02v")]
+
+[node name="Sprite" parent="." index="1"]
+position = Vector2(-1, -2)
+scale = Vector2(2, 2)
+texture = ExtResource("2_h8uot")
+offset = Vector2(0, -20)

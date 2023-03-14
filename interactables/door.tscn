@@ -42,7 +42,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"forward",
-"speed": 2.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -56,7 +56,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"side",
-"speed": 2.0
+"speed": 8.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qbv4v"]

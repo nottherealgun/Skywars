@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://4dy6bn4kywy"]
+
+[ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://interactables/interactable.tscn" id="1_v0ksu"]
+[ext_resource type="Texture2D" uid="uid://cddx7qeykcyb5" path="res://interactables/adithWoodLongChair.png" id="2_46mga"]
+
+[node name="AditWoodChair" instance=ExtResource("1_v0ksu")]
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("2_46mga")
+offset = Vector2(0, -18)

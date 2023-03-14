@@ -34,5 +34,4 @@ func entity_killed(entity):
 	
 	if active_enemies.size() == 0:
 		if entity.is_in_group("enemy"):
-			print("ROOM CLEARED.")
 			Global.music_play("default")

@@ -96,8 +96,9 @@ func install_door(node:Node):
 
 var map_spawnpoint : Vector2
 
-const rooms = [
-	{"file":preload("res://rooms/adit_building_1.tscn"),"name":"Aditayathorn Building 1"}
+var rooms = [
+	{"file":load("res://rooms/lobby.tscn"),"name":"Aditayathorn Lobby"},
+	{"file":load("res://rooms/adit_building_2.tscn"),"name":"Aditayathorn Building 2"},
 ]
 
 const tips = [
@@ -109,7 +110,7 @@ const tips = [
 func sync_map(map):
 	music_play("combat")
 	# Prepare spawnpoints
-	var target_map = map.instantiate()
+	var target_map = map.instantiate().duplicate()
 	var spawn_poses = []
 	map_spawnpoint = target_map.find_child("SpawningPoint").position
 	
@@ -128,11 +129,11 @@ func sync_map(map):
 	await tween.step_finished
 	
 	# Set level title name
-#	for r in rooms:
-#		if map.name == r["file"].instantiate().name:
-#			GUI.get_node("Title").text = r["name"]
-#			break
-	GUI.get_node("Title").text = target_map.name.capitalize()
+	for r in rooms:
+		if map.instantiate().name == r["file"].instantiate().name:
+			GUI.get_node("Title").text = r["name"]
+			break
+#	GUI.get_node("Title").text = target_map.name.capitalize()
 	
 	# Set new player positions
 	for p in active_players:
@@ -146,51 +147,13 @@ func sync_map(map):
 	LevelManager.clear_level()
 	
 	# Install map tiles
-	for tile in target_map.get_node("Map").get_used_cells(0):
-		var tile_type = target_map.get_node("Map").get_cell_atlas_coords(0,tile)
-		Map.set_cell(0,tile,-1,tile_type)
-	Map.set_cells_terrain_connect(0,target_map.get_node("Map").get_used_cells(0),0,0)
-	
-#	for tile in target_map.get_node("Map").get_used_cells(1):
-#		var tile_type = target_map.get_node("Map").get_cell_atlas_coords(1,tile)
-#		print(tile_type)
-#		# layer, coords, source_id, atlas_coords, alt_tile
-#		Map.set_cell(1,tile,-1,Vector2i(1,0))
-#		# layer, cells, terrain_set,terrain
-#	Map.set_cells_terrain_connect(1,target_map.get_node("Map").get_used_cells(1),1,0)	
-	
-	var terrains = {}
-	var terrain_sets = {}
-	
-	for tile in target_map.get_node("Map").get_used_cells(1): # Layer 1
-		var tile_atlas = target_map.get_node("Map").get_cell_atlas_coords(1,tile)
-		var tile_data = target_map.get_node("Map").get_cell_tile_data(1,tile)
-		
-		terrains[tile] = {"atlas":tile_atlas,"terrain_set":tile_data.terrain_set,"terrain":tile_data.terrain}
-		
-	for t in terrains.keys():
-		Map.set_cell(1,t,-1,terrains[t].atlas)
-		if !terrain_sets.has(terrains[t].terrain_set):
-			terrain_sets[terrains[t].terrain_set] = {}
-			
-		if terrain_sets.has(terrains[t].terrain_set):
-			if terrain_sets[terrains[t].terrain_set].get(terrains[t].terrain) == null:
-#				print(terrains[t].terrain)
-				terrain_sets[terrains[t].terrain_set][terrains[t].terrain] = []
-			
-			if terrain_sets[terrains[t].terrain_set].get(terrains[t].terrain) != null:
-				terrain_sets[terrains[t].terrain_set].get(terrains[t].terrain).append(t)
-				
-#	print_rich(terrain_sets)
-	for terrain_set_id in terrain_sets.keys(): # Terrain Set
-		for terrain_id in terrain_sets.get(terrain_set_id).keys(): # Terrain
-			var tile_arr = []
-			for tile in terrain_sets.get(terrain_set_id).get(terrain_id): # Tile
-				tile_arr.append(tile)
-			
-			print(tile_arr,"+",terrain_set_id,"-",terrain_set_id)
-			print("\n")
-			Map.set_cells_terrain_connect(1,tile_arr,terrain_set_id,terrain_id)
+	var old_map = Map
+	var new_map = target_map.get_node("Map")
+	Map = new_map
+	Main.remove_child(old_map)
+	target_map.remove_child(new_map)
+	Main.add_child(new_map)
+	old_map.queue_free()
 	
 	# Install map enemies
 	for entity in target_map.get_children():

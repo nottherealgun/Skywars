@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4sdqwlakm0si"]
+
+[ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://interactables/interactable.tscn" id="1_j4lg7"]
+[ext_resource type="Texture2D" uid="uid://c7a6c3orutsv2" path="res://interactables/adithWoodTable.png" id="2_1sqq2"]
+
+[node name="AditWoodTable" instance=ExtResource("1_j4lg7")]
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("2_1sqq2")
+offset = Vector2(0, -22)

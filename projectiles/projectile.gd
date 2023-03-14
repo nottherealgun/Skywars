@@ -18,11 +18,6 @@ func _enter_tree():
 	else:
 		$Sprite.modulate = Color.WHITE.blend(Color(1.0,0,0,0.2))
 
-func _ready():
-	var original_speed = current_speed
-#	current_speed *= 4
-#	tween.call_deferred("tween_property",self,"current_speed",original_speed,0.25)
-
 func _process(delta):
 	# Movement
 	position += direction * delta * current_speed * 250

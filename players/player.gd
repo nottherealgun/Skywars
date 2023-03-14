@@ -100,7 +100,7 @@ func _move_update(delta):
 	move_and_collide(move_vec.normalized()*delta*speed*200)
 
 func shoot():
-	var player_proj = Global.spawn_projectile(self,"printer_proj_1",position,aim_vec.normalized(),true)
+	var player_proj = Global.spawn_projectile(self,"darwin_proj_1",position,aim_vec.normalized(),true)
 	player_proj.set("knockback",1)
 
 func get_knockback(direction:Vector2,strength:=1):

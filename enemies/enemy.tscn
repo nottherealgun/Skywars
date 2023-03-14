@@ -62,6 +62,7 @@ _data = {
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
 y_sort_enabled = true
 collision_layer = 0
+collision_mask = 16
 script = ExtResource("1_i1vkc")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
@@ -152,6 +153,10 @@ theme_override_constants/outline_size = 10
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PlayerViewRay" type="RayCast2D" parent="."]
+target_position = Vector2(0, 64)
+collision_mask = 16
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_entered" from="PlayerDetect" to="." method="_on_player_detect_area_entered"]
