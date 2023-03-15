@@ -185,7 +185,7 @@ func emit_death_indicator(pos:Vector2):
 
 const tracks = {
 	"default":"res://music/The Lobby_Loopable.mp3",	
-	"combat":"res://music/Combat_Music_Loopable.mp3",
+	"combat":"res://music/College Quarrel_Loopable.mp3",
 }
 
 func music_play(track_name:String):
