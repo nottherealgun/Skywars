@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://bcco2p0tgv3vr"]
+
+[ext_resource type="Texture2D" uid="uid://ckowmf2veae2h" path="res://npcs/orion_idle.png" id="1_vojqd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vp4r8"]
+atlas = ExtResource("1_vojqd")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xi7d"]
+atlas = ExtResource("1_vojqd")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48rp0"]
+atlas = ExtResource("1_vojqd")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bjqd"]
+atlas = ExtResource("1_vojqd")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86twy"]
+atlas = ExtResource("1_vojqd")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqvon"]
+atlas = ExtResource("1_vojqd")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gsmn4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vp4r8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xi7d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48rp0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bjqd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86twy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqvon")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tx7di"]
+size = Vector2(48, 16)
+
+[node name="OrionNPC" type="StaticBody2D"]
+y_sort_enabled = true
+collision_layer = 16
+collision_mask = 0
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 52)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_gsmn4")
+autoplay = "default"
+frame_progress = 0.14739
+offset = Vector2(0, -26)
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, 44)
+shape = SubResource("RectangleShape2D_tx7di")

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dp1wmslqcfeh0"]
+[gd_scene load_steps=6 format=3 uid="uid://dp1wmslqcfeh0"]
 
 [ext_resource type="PackedScene" uid="uid://cx7imnf85vue8" path="res://level.tscn" id="1_p1xgq"]
 [ext_resource type="TileSet" uid="uid://0c8knfi7rtne" path="res://default.tres" id="2_1i7dh"]
 [ext_resource type="PackedScene" uid="uid://bhsvoj5kcuifg" path="res://spawning_point.tscn" id="3_2cn4r"]
 [ext_resource type="PackedScene" uid="uid://dsx5fq2n5okv5" path="res://interactables/reception.tscn" id="4_oqpc4"]
+[ext_resource type="PackedScene" uid="uid://bcco2p0tgv3vr" path="res://npcs/orion_npc.tscn" id="5_f43xr"]
 
 [node name="lobby" instance=ExtResource("1_p1xgq")]
 y_sort_enabled = true
@@ -16,6 +17,11 @@ layer_1/tile_data = PackedInt32Array(-65506, 65537, 0, -65507, 65537, 0, -65508,
 [node name="SpawningPoint" parent="." index="1" instance=ExtResource("3_2cn4r")]
 y_sort_enabled = true
 position = Vector2(1472, 432)
+metadata/_edit_lock_ = true
 
 [node name="Reception" parent="." index="2" instance=ExtResource("4_oqpc4")]
 position = Vector2(1472, 300)
+metadata/_edit_lock_ = true
+
+[node name="OrionNPC" parent="." index="3" instance=ExtResource("5_f43xr")]
+position = Vector2(1721, 357)
