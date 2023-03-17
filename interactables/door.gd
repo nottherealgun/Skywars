@@ -1,4 +1,4 @@
-extends Node2D
+extends StaticBody2D
 
 @export var front_facing := true
 @export_file("*.tscn") var room
@@ -11,13 +11,16 @@ func _ready():
 	match front_facing:
 		false:
 			$Sprite.animation = "side"
+			
 		true:
 			$Sprite.animation = "forward"
+	$Wide.disabled = !front_facing
+	$Tall.disabled = front_facing
 
 func enter_room(player):
 	var room_scene : PackedScene
 	if room == null:
-		room_scene = load("res://rooms/"+Global.rooms[randi()%Global.rooms.size()]["file"])
+		room_scene = load("res://rooms/"+Global.rooms[randi()%(Global.rooms.size()+1)]["file"])
 	else:
 		room_scene = load(room)
 	$Sprite.play()

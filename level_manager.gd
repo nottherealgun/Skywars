@@ -8,8 +8,8 @@ var current_room
 @onready var testmap = load("res://rooms/"+Global.rooms[0].file)
 
 func _ready():
+	
 	Global.sync_map(testmap)
-	pass
 	
 func clear_level():
 	Global.kill_all()

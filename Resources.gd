@@ -98,7 +98,10 @@ var map_spawnpoint : Vector2
 
 var rooms = [
 	{"file":"lobby.tscn","name":"Aditayathorn Lobby"},
-	{"file":"adit_building_1.tscn","name":"Aditayathorn Floor 1"},
+	{"file":"test_map.tscn","name":"Test Map"},
+	{"file":"adit_single.tscn","name":"Single Room"},
+	{"file":"adit_double.tscn","name":"Double Room"},
+	{"file":"adit_l_shape_bl.tscn","name":"LShaped-BL Room"},
 ]
 
 const tips = [
@@ -109,12 +112,13 @@ const tips = [
 # Levels
 func sync_map(map:PackedScene):
 	# Prepare spawnpoints
-	var target_map = map.instantiate(1)
+	var target_map = map.instantiate().duplicate()
 	var spawn_poses = []
 	map_spawnpoint = target_map.find_child("SpawningPoint").position
 	
 	for p in active_players:
-		var radius = 20
+		var radius = 100
+		randomize()
 		spawn_poses.append(map_spawnpoint+Vector2(randi()%radius,randi()%radius))
 		p.transporting = true
 		p.y_sort_enabled = false
@@ -140,7 +144,7 @@ func sync_map(map:PackedScene):
 		p.y_sort_enabled = true
 		if p.fainted:
 			p.revive()
-			
+
 	# Clear old map tiles
 	Map.clear()
 	# Clear old entities

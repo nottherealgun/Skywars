@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwk52glm5umlq"]
+
+[ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://interactables/interactable.tscn" id="1_h8ye1"]
+[ext_resource type="Texture2D" uid="uid://bhk41scxkvvry" path="res://interactables/pillarRed.png" id="2_jmyq7"]
+
+[node name="PillarRed" instance=ExtResource("1_h8ye1")]
+
+[node name="Sprite" parent="." index="1"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_jmyq7")
+offset = Vector2(0, -55)
