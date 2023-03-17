@@ -83,12 +83,12 @@ func get_door_pos(size:Vector2i):
 	return [door_pos,flip,rand_side]
 
 func new_door(room_size=Map.get_used_rect().size):
-	var new_door = load("res://objects/door.tscn").instantiate()
+	var new_door_instance = load("res://objects/door.tscn").instantiate()
 	var new = get_door_pos(room_size)
-	new_door.position = new[0]
-	new_door.horizontal = new[1]
-	new_door.side = new[2]
-	return new_door
+	new_door_instance.position = new[0]
+	new_door_instance.horizontal = new[1]
+	new_door_instance.side = new[2]
+	return new_door_instance
 
 func install_door(node:Node):
 	active_doors.append(node)
@@ -97,8 +97,8 @@ func install_door(node:Node):
 var map_spawnpoint : Vector2
 
 var rooms = [
-	{"file":load("res://rooms/lobby.tscn"),"name":"Aditayathorn Lobby"},
-	{"file":load("res://rooms/adit_building_2.tscn"),"name":"Aditayathorn Building 2"},
+	{"file":"lobby.tscn","name":"Aditayathorn Lobby"},
+	{"file":"adit_building_1.tscn","name":"Aditayathorn Floor 1"},
 ]
 
 const tips = [
@@ -107,10 +107,10 @@ const tips = [
 ]
 
 # Levels
-func sync_map(map):
+func sync_map(map:PackedScene):
 	music_play("combat")
 	# Prepare spawnpoints
-	var target_map = map.instantiate().duplicate()
+	var target_map = map.instantiate(1)
 	var spawn_poses = []
 	map_spawnpoint = target_map.find_child("SpawningPoint").position
 	
@@ -125,12 +125,11 @@ func sync_map(map):
 	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
 	transition_screen.get_node("Tips").text = "Tip: "+str(tips[randi()%tips.size()])+"."
 	tween.tween_property(transition_screen.material,"shader_parameter/progress",1.0,2).from(0.0)
-
-	await tween.step_finished
 	
+	await tween.step_finished
 	# Set level title name
 	for r in rooms:
-		if map.instantiate().name == r["file"].instantiate().name:
+		if map.instantiate().name == load("res://rooms/"+r["file"]).instantiate().name:
 			GUI.get_node("Title").text = r["name"]
 			break
 #	GUI.get_node("Title").text = target_map.name.capitalize()
@@ -142,9 +141,13 @@ func sync_map(map):
 		p.y_sort_enabled = true
 		if p.fainted:
 			p.revive()
+			
 	# Clear old map tiles
 	Map.clear()
+	# Clear old entities
 	LevelManager.clear_level()
+	
+	await get_tree().create_timer(3.0).timeout
 	
 	# Install map tiles
 	var old_map = Map

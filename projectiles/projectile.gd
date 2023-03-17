@@ -18,6 +18,9 @@ func _enter_tree():
 	else:
 		$Sprite.modulate = Color.WHITE.blend(Color(1.0,0,0,0.2))
 
+func _ready():
+	pass
+
 func _process(delta):
 	# Movement
 	position += direction * delta * current_speed * 250

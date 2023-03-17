@@ -144,7 +144,7 @@ animations = [{
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q6brm"]
 shader = ExtResource("13_wjtoa")
-shader_parameter/progress = 0.0
+shader_parameter/progress = 1.0
 shader_parameter/diamondPixelSize = 50.0
 
 [sub_resource type="Animation" id="Animation_tj5m4"]
@@ -154,7 +154,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Control/Snakes:rotation")
+tracks/0/path = NodePath("LoadingIcon/Snakes:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -166,7 +166,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Control:scale")
+tracks/1/path = NodePath("LoadingIcon:scale")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -226,7 +226,9 @@ color = Color(0, 0, 0, 1)
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="PlayerStats1" type="Control" parent="GUI"]
+[node name="PlayerStats" type="Node" parent="GUI"]
+
+[node name="PlayerStats1" type="Control" parent="GUI/PlayerStats"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -239,7 +241,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="BG" type="TextureRect" parent="GUI/PlayerStats1"]
+[node name="BG" type="TextureRect" parent="GUI/PlayerStats/PlayerStats1"]
 texture_filter = 1
 layout_mode = 2
 offset_left = -16.0
@@ -251,7 +253,7 @@ expand_mode = 1
 stretch_mode = 5
 metadata/_edit_lock_ = true
 
-[node name="Icon" type="TextureRect" parent="GUI/PlayerStats1"]
+[node name="Icon" type="TextureRect" parent="GUI/PlayerStats/PlayerStats1"]
 texture_filter = 1
 layout_mode = 0
 offset_left = -32.0
@@ -263,7 +265,7 @@ texture = ExtResource("3_5ew25")
 stretch_mode = 6
 metadata/_edit_lock_ = true
 
-[node name="HealthIcon" type="TextureRect" parent="GUI/PlayerStats1"]
+[node name="HealthIcon" type="TextureRect" parent="GUI/PlayerStats/PlayerStats1"]
 texture_filter = 1
 layout_mode = 0
 offset_left = 120.0
@@ -273,7 +275,7 @@ offset_bottom = 72.0
 texture = ExtResource("4_rfucy")
 stretch_mode = 5
 
-[node name="Healthbar" type="TextureProgressBar" parent="GUI/PlayerStats1"]
+[node name="Healthbar" type="TextureProgressBar" parent="GUI/PlayerStats/PlayerStats1"]
 texture_filter = 1
 layout_mode = 0
 offset_left = 168.0
@@ -286,7 +288,7 @@ texture_under = ExtResource("6_6j0f6")
 texture_over = ExtResource("7_lstgi")
 texture_progress = ExtResource("8_ne1ph")
 
-[node name="BrainIcon" type="TextureRect" parent="GUI/PlayerStats1"]
+[node name="BrainIcon" type="TextureRect" parent="GUI/PlayerStats/PlayerStats1"]
 texture_filter = 1
 layout_mode = 0
 offset_left = 120.0
@@ -296,7 +298,7 @@ offset_bottom = 117.0
 texture = ExtResource("5_2hml2")
 stretch_mode = 5
 
-[node name="BrainbarBG" type="TextureRect" parent="GUI/PlayerStats1"]
+[node name="BrainbarBG" type="TextureRect" parent="GUI/PlayerStats/PlayerStats1"]
 texture_filter = 1
 layout_mode = 0
 offset_left = 168.0
@@ -306,14 +308,14 @@ offset_bottom = 117.0
 texture = ExtResource("9_70o5r")
 stretch_mode = 5
 
-[node name="Brainbar" type="AnimatedSprite2D" parent="GUI/PlayerStats1"]
+[node name="Brainbar" type="AnimatedSprite2D" parent="GUI/PlayerStats/PlayerStats1"]
 texture_filter = 1
 position = Vector2(236, 97)
 scale = Vector2(3.88571, 4)
 sprite_frames = SubResource("SpriteFrames_gu0rw")
 frame = 6
 
-[node name="NameTag" type="Label" parent="GUI/PlayerStats1"]
+[node name="NameTag" type="Label" parent="GUI/PlayerStats/PlayerStats1"]
 texture_filter = 1
 layout_mode = 0
 offset_left = 120.0
@@ -327,7 +329,7 @@ theme_override_fonts/font = ExtResource("11_2h1l6")
 theme_override_font_sizes/font_size = 44
 text = "Player 1"
 
-[node name="Money" type="Label" parent="GUI/PlayerStats1"]
+[node name="Money" type="Label" parent="GUI/PlayerStats/PlayerStats1"]
 layout_mode = 0
 offset_left = 168.0
 offset_top = 127.0
@@ -342,7 +344,7 @@ text = "100"
 vertical_alignment = 1
 metadata/_edit_group_ = true
 
-[node name="Sprite" type="AnimatedSprite2D" parent="GUI/PlayerStats1/Money"]
+[node name="Sprite" type="AnimatedSprite2D" parent="GUI/PlayerStats/PlayerStats1/Money"]
 texture_filter = 1
 position = Vector2(-47, -3.99998)
 scale = Vector2(3.7, 3.7)
@@ -351,7 +353,7 @@ autoplay = "default"
 frame_progress = 0.7199
 offset = Vector2(5, 5)
 
-[node name="PlayerStats2" type="Control" parent="GUI"]
+[node name="PlayerStats2" type="Control" parent="GUI/PlayerStats"]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -366,7 +368,7 @@ grow_vertical = 2
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="BG" type="TextureRect" parent="GUI/PlayerStats2"]
+[node name="BG" type="TextureRect" parent="GUI/PlayerStats/PlayerStats2"]
 texture_filter = 1
 layout_mode = 0
 offset_left = -16.0
@@ -378,7 +380,7 @@ expand_mode = 1
 stretch_mode = 5
 metadata/_edit_lock_ = true
 
-[node name="Icon" type="TextureRect" parent="GUI/PlayerStats2"]
+[node name="Icon" type="TextureRect" parent="GUI/PlayerStats/PlayerStats2"]
 texture_filter = 1
 layout_mode = 0
 offset_left = -32.0
@@ -390,7 +392,7 @@ texture = ExtResource("3_5ew25")
 stretch_mode = 6
 metadata/_edit_lock_ = true
 
-[node name="HealthIcon" type="TextureRect" parent="GUI/PlayerStats2"]
+[node name="HealthIcon" type="TextureRect" parent="GUI/PlayerStats/PlayerStats2"]
 texture_filter = 1
 layout_mode = 0
 offset_left = 120.0
@@ -400,7 +402,7 @@ offset_bottom = 72.0
 texture = ExtResource("4_rfucy")
 stretch_mode = 5
 
-[node name="BrainIcon" type="TextureRect" parent="GUI/PlayerStats2"]
+[node name="BrainIcon" type="TextureRect" parent="GUI/PlayerStats/PlayerStats2"]
 texture_filter = 1
 layout_mode = 0
 offset_left = 120.0
@@ -410,7 +412,7 @@ offset_bottom = 120.0
 texture = ExtResource("5_2hml2")
 stretch_mode = 5
 
-[node name="Healthbar" type="TextureProgressBar" parent="GUI/PlayerStats2"]
+[node name="Healthbar" type="TextureProgressBar" parent="GUI/PlayerStats/PlayerStats2"]
 texture_filter = 1
 layout_mode = 0
 offset_left = 168.0
@@ -423,7 +425,7 @@ texture_under = ExtResource("6_6j0f6")
 texture_over = ExtResource("7_lstgi")
 texture_progress = ExtResource("8_ne1ph")
 
-[node name="BrainbarBG" type="TextureRect" parent="GUI/PlayerStats2"]
+[node name="BrainbarBG" type="TextureRect" parent="GUI/PlayerStats/PlayerStats2"]
 texture_filter = 1
 layout_mode = 0
 offset_left = 168.0
@@ -433,14 +435,14 @@ offset_bottom = 120.0
 texture = ExtResource("9_70o5r")
 stretch_mode = 5
 
-[node name="Brainbar" type="AnimatedSprite2D" parent="GUI/PlayerStats2"]
+[node name="Brainbar" type="AnimatedSprite2D" parent="GUI/PlayerStats/PlayerStats2"]
 texture_filter = 1
 position = Vector2(236, 100)
 scale = Vector2(3.88571, 4)
 sprite_frames = SubResource("SpriteFrames_gu0rw")
 frame = 6
 
-[node name="NameTag" type="Label" parent="GUI/PlayerStats2"]
+[node name="NameTag" type="Label" parent="GUI/PlayerStats/PlayerStats2"]
 layout_mode = 0
 offset_left = 120.0
 offset_top = -8.0
@@ -455,7 +457,7 @@ text = "PLAYER 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Money" type="Label" parent="GUI/PlayerStats2"]
+[node name="Money" type="Label" parent="GUI/PlayerStats/PlayerStats2"]
 layout_mode = 0
 offset_left = 168.0
 offset_top = 127.0
@@ -470,7 +472,7 @@ text = "100"
 vertical_alignment = 1
 metadata/_edit_group_ = true
 
-[node name="Sprite" type="AnimatedSprite2D" parent="GUI/PlayerStats2/Money"]
+[node name="Sprite" type="AnimatedSprite2D" parent="GUI/PlayerStats/PlayerStats2/Money"]
 texture_filter = 1
 position = Vector2(-47, -3.99998)
 scale = Vector2(3.7, 3.7)
@@ -479,7 +481,7 @@ autoplay = "default"
 frame_progress = 0.7199
 offset = Vector2(5, 5)
 
-[node name="PlayerStats3" type="Control" parent="GUI"]
+[node name="PlayerStats3" type="Control" parent="GUI/PlayerStats"]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -494,7 +496,7 @@ grow_vertical = 2
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="PlayerStats4" type="Control" parent="GUI"]
+[node name="PlayerStats4" type="Control" parent="GUI/PlayerStats"]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -535,7 +537,7 @@ grow_vertical = 2
 texture = ExtResource("15_ln4oo")
 metadata/_edit_group_ = true
 
-[node name="Control" type="Control" parent="GUI/Transition"]
+[node name="LoadingIcon" type="Control" parent="GUI/Transition"]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 3
@@ -549,10 +551,10 @@ offset_right = -40.0
 offset_bottom = -32.0
 grow_horizontal = 0
 grow_vertical = 0
-scale = Vector2(0.749689, 0.749689)
+scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(172, 172)
 
-[node name="Snakes" type="TextureRect" parent="GUI/Transition/Control"]
+[node name="Snakes" type="TextureRect" parent="GUI/Transition/LoadingIcon"]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 15
@@ -564,14 +566,13 @@ offset_right = 580.0
 offset_bottom = 492.0
 grow_horizontal = 2
 grow_vertical = 2
-rotation = 3.1738
 scale = Vector2(0.25, 0.25)
 pivot_offset = Vector2(752, 656)
 texture = ExtResource("16_fvkyo")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Duck" type="TextureRect" parent="GUI/Transition/Control"]
+[node name="Duck" type="TextureRect" parent="GUI/Transition/LoadingIcon"]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 15
@@ -590,6 +591,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Title" type="TextureRect" parent="GUI/Transition"]
+self_modulate = Color(0.329412, 0.329412, 0.329412, 1)
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
@@ -610,7 +612,6 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Tips" type="Label" parent="GUI/Transition"]
-modulate = Color(1, 1, 1, 0.788735)
 texture_filter = 1
 use_parent_material = true
 layout_mode = 1
@@ -637,6 +638,25 @@ libraries = {
 "": SubResource("AnimationLibrary_7xusl")
 }
 
+[node name="Label" type="Label" parent="GUI/Transition"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.996
+anchor_bottom = 1.0
+offset_left = 312.0
+offset_top = 656.0
+offset_right = -273.32
+offset_bottom = -314.0
+rotation = -0.261799
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("11_lksja")
+theme_override_font_sizes/font_size = 100
+text = "<insert skywars logo lol>"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Dev" type="Label" parent="GUI"]
 visible = false
 anchors_preset = 5
@@ -651,6 +671,31 @@ theme_override_constants/outline_size = 10
 text = "Lorem Ipsum"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="DemoText" type="Label" parent="GUI"]
+modulate = Color(1, 1, 1, 0.588235)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+text = "SkyWars Demo
+Alpha V.2 | As of 17/3/2023
+
+If any bugs or errors are found,
+please report to the Dev Team.
+
+CONTROLS:
+WASD to move.
+E to Open Doors
+Mouse Left Click to Attack."
+horizontal_alignment = 2
 
 [node name="Map" type="TileMap" parent="."]
 z_index = -1

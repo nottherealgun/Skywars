@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://6qdjvyw15lm4"]
+[gd_scene load_steps=13 format=3 uid="uid://6qdjvyw15lm4"]
 
 [ext_resource type="Script" path="res://interactables/door.gd" id="1_dfm2f"]
 [ext_resource type="Texture2D" uid="uid://d2y2gnp4q0ti3" path="res://interactables/aniDoorHorizontalSS.png" id="2_6tbhk"]
 [ext_resource type="Texture2D" uid="uid://baceu1lu7581p" path="res://interactables/aniDoorVerticalSS.png" id="3_vulyk"]
+[ext_resource type="FontFile" uid="uid://dqg68cyeyg3a5" path="res://utility/DefaultFont.ttf" id="4_kw2fy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vknpa"]
 atlas = ExtResource("2_6tbhk")
@@ -60,7 +61,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qbv4v"]
-radius = 128.25
+radius = 72.4431
 
 [node name="Door" type="Node2D"]
 y_sort_enabled = true
@@ -68,11 +69,11 @@ script = ExtResource("1_dfm2f")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, 16)
+position = Vector2(0, 51)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_er4a6")
 animation = &"forward"
-offset = Vector2(0, -13.3333)
+offset = Vector2(0, -30.8333)
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -8)
@@ -83,14 +84,19 @@ position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_qbv4v")
 
 [node name="Dev" type="Label" parent="."]
+z_index = 2
+texture_filter = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -88.0
-offset_top = -96.0
+offset_top = -72.0
 offset_right = 88.0
-offset_bottom = -73.0
+offset_bottom = -49.0
 grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("4_kw2fy")
 horizontal_alignment = 1
 vertical_alignment = 1
 

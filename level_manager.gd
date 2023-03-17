@@ -5,7 +5,7 @@ extends Node
 var rooms = []
 var current_room
 
-@onready var testmap = Global.rooms[0].file
+@onready var testmap = load("res://rooms/"+Global.rooms[0].file)
 
 func _ready():
 	Global.sync_map(testmap)

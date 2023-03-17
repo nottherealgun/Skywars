@@ -9,6 +9,7 @@ func _ready():
 	for n in Global.Main.get_children():
 		if n.is_in_group("player"):
 			Global.active_players.append(n)
+			n.connect("player_killed",player_killed)
 
 func _process(delta):
 	var vec := Vector2.ZERO
@@ -18,13 +19,15 @@ func _process(delta):
 	cam_follow_target = vec
 	cam.position = cam_follow_target
 	Global.Dev.text = str(Global.active_players[0].transporting)
-	
+
+func player_killed(player):
 	for p in Global.active_players:
 		if p.fainted == false:
 			break
 		else:
 			if p == Global.active_players.back():
 				Global.sync_map(LevelManager.testmap)
+				break
 
 func entity_killed(entity):
 	var active_enemies = []

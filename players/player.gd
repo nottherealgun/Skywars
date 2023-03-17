@@ -1,6 +1,7 @@
 class_name Player extends CharacterBody2D
 
 signal action(by)
+signal player_killed(player)
 
 # Player device settings
 @export var player_id = 1
@@ -20,7 +21,7 @@ var transporting = false
 var latest_shooter
 var revival_target : Player
 # Player GUI setup
-@onready var stat_gui = Global.GUI.get_node("PlayerStats"+str(player_id))
+@onready var stat_gui = Global.GUI.get_node("PlayerStats/PlayerStats"+str(player_id))
 @onready var healthbar = stat_gui.get_node("Healthbar")
 @onready var brainbar = stat_gui.get_node("Brainbar")
 
@@ -45,6 +46,7 @@ func _process(delta):
 			fainted = true
 			$Arrow.hide()
 			$Revival.show()
+			emit_signal("player_killed",self)
 			
 	if fainted:
 		if $Revival.value == 100.0:

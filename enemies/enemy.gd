@@ -59,8 +59,9 @@ func get_hurt(by:Node):
 #	$Healthbar.value = (health*100)/max_health
 
 func get_knockback(direction:Vector2,strength:=1):
-	var tween := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.tween_property(self,"position",position+(direction*10*strength),0.2)
+	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+#	tween.tween_property(self,"position",position+(direction*10*strength),0.2)
+	tween.tween_method(move_and_collide,Vector2.ZERO,(direction*strength*5),0.1)
 
 func _on_hitbox_area_entered(area):
 	if area.is_in_group("projectile"):
