@@ -11,10 +11,7 @@ y_sort_enabled = true
 collision_layer = 16
 collision_mask = 0
 
-[node name="CanvasGroup" type="CanvasGroup" parent="."]
-y_sort_enabled = true
-
-[node name="BackPart" type="Sprite2D" parent="CanvasGroup"]
+[node name="BackPart" type="Sprite2D" parent="."]
 y_sort_enabled = true
 texture_filter = 1
 position = Vector2(0, -96)
@@ -22,13 +19,13 @@ scale = Vector2(3, 3)
 texture = ExtResource("3_8af6f")
 offset = Vector2(0, -32)
 
-[node name="FrontPart" type="Sprite2D" parent="CanvasGroup"]
+[node name="FrontPart" type="Sprite2D" parent="."]
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(0, -96)
+position = Vector2(0, -32)
 scale = Vector2(3, 3)
 texture = ExtResource("2_jh6hc")
-offset = Vector2(0, -32)
+offset = Vector2(0, -53.3333)
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
 position = Vector2(-0.899982, -201.226)

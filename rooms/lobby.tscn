@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dp1wmslqcfeh0"]
+[gd_scene load_steps=8 format=3 uid="uid://dp1wmslqcfeh0"]
 
 [ext_resource type="PackedScene" uid="uid://cx7imnf85vue8" path="res://level.tscn" id="1_p1xgq"]
 [ext_resource type="TileSet" uid="uid://0c8knfi7rtne" path="res://default.tres" id="2_1i7dh"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dsx5fq2n5okv5" path="res://interactables/reception.tscn" id="4_oqpc4"]
 [ext_resource type="PackedScene" uid="uid://bcco2p0tgv3vr" path="res://npcs/orion_npc.tscn" id="5_f43xr"]
 [ext_resource type="PackedScene" uid="uid://6qdjvyw15lm4" path="res://interactables/door.tscn" id="6_q45rr"]
+[ext_resource type="Texture2D" uid="uid://bu5eqnppfmrnc" path="res://misc/muicLobbyBoard.png" id="7_rg02r"]
 
 [node name="lobby" instance=ExtResource("1_p1xgq")]
 y_sort_enabled = true
@@ -25,9 +26,22 @@ position = Vector2(1472, 300)
 metadata/_edit_lock_ = true
 
 [node name="OrionNPC" parent="." index="3" instance=ExtResource("5_f43xr")]
-position = Vector2(1726, 337)
+position = Vector2(1584, 192)
 
 [node name="Door" parent="." index="4" instance=ExtResource("6_q45rr")]
-position = Vector2(1056, 313)
+position = Vector2(1112, 208)
 room = "res://rooms/adit_building_1.tscn"
 devtext = "Play A test level"
+
+[node name="MUIC Poster" type="Node2D" parent="." index="5"]
+y_sort_enabled = true
+position = Vector2(840, -8)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Sprite" type="Sprite2D" parent="MUIC Poster" index="0"]
+texture_filter = 1
+position = Vector2(-6.10352e-05, 80)
+scale = Vector2(2.525, 2.525)
+texture = ExtResource("7_rg02r")
+offset = Vector2(3.05176e-05, -30.1714)

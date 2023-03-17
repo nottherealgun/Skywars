@@ -1,7 +1,7 @@
 [gd_scene load_steps=41 format=3 uid="uid://dlpndwnncnijn"]
 
-[ext_resource type="AudioStream" uid="uid://cqjk3cp4fh2m7" path="res://music/College Quarrel_Loopable.mp3" id="1_608w7"]
 [ext_resource type="PackedScene" uid="uid://caw6brh3py3mv" path="res://players/player.tscn" id="1_mhf8t"]
+[ext_resource type="AudioStream" uid="uid://bnw73i68y41ik" path="res://music/The Lobby_Loopable.mp3" id="1_x207s"]
 [ext_resource type="Texture2D" uid="uid://dv8c76rwlux0p" path="res://items/idCardGUI.png" id="2_e4464"]
 [ext_resource type="Texture2D" uid="uid://bffxtkyh5d2av" path="res://players/gun_head.png" id="3_5ew25"]
 [ext_resource type="Texture2D" uid="uid://psxcw5u1kfcf" path="res://gui/heart.png" id="4_rfucy"]
@@ -144,7 +144,7 @@ animations = [{
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q6brm"]
 shader = ExtResource("13_wjtoa")
-shader_parameter/progress = 1.0
+shader_parameter/progress = 0.0
 shader_parameter/diamondPixelSize = 50.0
 
 [sub_resource type="Animation" id="Animation_tj5m4"]
@@ -197,9 +197,8 @@ _data = {
 y_sort_enabled = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_608w7")
+stream = ExtResource("1_x207s")
 volume_db = -5.0
-autoplay = true
 bus = &"Music"
 
 [node name="MainCam" type="Camera2D" parent="."]

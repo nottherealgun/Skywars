@@ -108,7 +108,6 @@ const tips = [
 
 # Levels
 func sync_map(map:PackedScene):
-	music_play("combat")
 	# Prepare spawnpoints
 	var target_map = map.instantiate(1)
 	var spawn_poses = []
@@ -165,7 +164,14 @@ func sync_map(map:PackedScene):
 		target_map.remove_child(entity)
 		active_entities.append(entity)
 		Main.add_child(entity)
-		
+	
+	if map == load("res://rooms/"+rooms[0].file):
+		if current_track != "lobby":
+			music_play("lobby")
+	else:
+		if current_track != "combat":
+			music_play("combat")
+	
 	# Exit Transition
 	tween = create_tween()
 	tween.tween_property(transition_screen.material,"shader_parameter/progress",0.0,1.5).from(1.0)
@@ -187,9 +193,11 @@ func emit_death_indicator(pos:Vector2):
 # Music
 
 const tracks = {
-	"default":"res://music/The Lobby_Loopable.mp3",	
+	"lobby":"res://music/The Lobby_Loopable.mp3",	
 	"combat":"res://music/College Quarrel_Loopable.mp3",
 }
+
+var current_track : String
 
 func music_play(track_name:String):
 	var default_volume = -5.0
@@ -198,6 +206,7 @@ func music_play(track_name:String):
 	await tween.finished
 	Music.stream = load(tracks[track_name])
 	Music.playing = true
+	current_track = track_name
 	tween = create_tween()
 	tween.tween_property(Music,"volume_db",default_volume,1.0).from(-80.0)
-	
+	return Music.stream

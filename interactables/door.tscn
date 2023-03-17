@@ -68,6 +68,7 @@ y_sort_enabled = true
 script = ExtResource("1_dfm2f")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
 texture_filter = 1
 position = Vector2(0, 51)
 scale = Vector2(2, 2)
@@ -84,7 +85,6 @@ position = Vector2(0, 8)
 shape = SubResource("CircleShape2D_qbv4v")
 
 [node name="Dev" type="Label" parent="."]
-z_index = 2
 texture_filter = 1
 anchors_preset = 5
 anchor_left = 0.5
