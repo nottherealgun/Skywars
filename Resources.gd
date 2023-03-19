@@ -106,19 +106,66 @@ var rooms = [
 
 const tips = [
 	"Be careful of the ICT",
-	"If you try really hard, you might be able to get an A"
+	"If you try really hard, you \"might\" be able to get an A.",
+	"Darwin said that \"Creative Technology\" is a weak name for our major.",
+	"Fun fact: This game\'s dev team has a podcast.",	
+	"Thank you Mr. Orion for making the game's music!",
+	"Thank you Mr. Darwin for making the game's sprites!",
+	"Thank you Mr. Ice for managing our project!",
+	"This is solid advice. Do not forget to do your EC outline.",
+	"Creeper. Aww man.",
+	"Co co co co co co co co nut.",
+	"I'm never gonna give you up, I'm never gonna let you down.",
+	"As a dev, I'm just putting random stuff here.",
+	"One of the inspirations for this game is a video game called \"Moonlighter\".",
+	"All of the music courses in ICCT has a single credit except Music Appreciation.",
+	"BOY. YOU'RE NOT.. READY.",
+	"Woah. Oh.. mai god.",
+	"Do not take Voldemort for EC1.",
+	"Do not take Analiza for EC3.",
+	"It's actually not a staff managing the ICT servers, it's actually a mini gorilla.",
+	"Join ICCT, we have cookies here. Accept them.",
+	"This game's dev team has two cursed beasts.",
+	"Please take Art History as fast as possible.",
+	"Aj. Pisit may or may not have a Zoog plushie on his bed.",
+	"Aj. Pilailuck has a PhD degree.",
+	"Do not try to argue with Orion about coffee.",
+	"EmOtIoNaL DaMaGe.",
+	"Aj. Nippon loves to cancel classes.",
+	"The national animal of MUIC is a monitor lizard.",
+	"Ice's glasses doesn't have lens.",
+	"SproutDude is actually not a plant.",
+	"If you like Computing Tech. We are not friends.",
+	"Poom is a SIGMA MALE.",
+	"Try to play Dennis' game, Archplan!",
+	"MUIC printers hates dark palettes.",
+	"One of Aj Dale's favorite places is The Louvre.",
+	"That's a PAEW PAEW PAEW moment.",
+	"Begin! Coding!",
+	"This game's name used to be \"Creative Clash\".",
+	"This project all started with two freshmen in a programming class.",
+	"Aj. Nik is able to bully you with his critical criticism.",
+	"Ice is actually Tadano-kun in disguise.",
+	"Shame on you. ComEn simpletons.",
+	"CDP is our cousin.",
+	"None of this game's tips are helpful.",
+	"Your culturedness level depends on how much anime you watch.",
+	"A stands for Average, B stands for STOOPID.",
+	"Co-working Space has air conditioning.",
+	"FreshMe is overpriced.",
+	"The Walker's Special is actually tea. Don't tell Orion.",
 ]
 
 # Levels
 func sync_map(map:PackedScene):
+	randomize()
 	# Prepare spawnpoints
 	var target_map = map.instantiate().duplicate()
 	var spawn_poses = []
 	map_spawnpoint = target_map.find_child("SpawningPoint").position
 	
 	for p in active_players:
-		var radius = 100
-		randomize()
+		var radius = 25
 		spawn_poses.append(map_spawnpoint+Vector2(randi()%radius,randi()%radius))
 		p.transporting = true
 		p.y_sort_enabled = false
@@ -126,7 +173,7 @@ func sync_map(map:PackedScene):
 	# Entry Transition
 	var transition_screen = GUI.get_node("Transition")
 	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
-	transition_screen.get_node("Tips").text = "Tip: "+str(tips[randi()%tips.size()])+"."
+	transition_screen.get_node("Tips").text = "Tip: "+str(tips[randi()%tips.size()])
 	tween.tween_property(transition_screen.material,"shader_parameter/progress",1.0,2).from(0.0)
 	
 	await tween.step_finished
@@ -204,7 +251,7 @@ const tracks = {
 var current_track : String
 
 func music_play(track_name:String):
-	var default_volume = -5.0
+	var default_volume = -15.0
 	var tween := create_tween()
 	tween.tween_property(Music,"volume_db",-80.0,1.0).from(default_volume)
 	await tween.finished

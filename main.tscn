@@ -17,9 +17,8 @@
 [ext_resource type="Shader" path="res://transition.gdshader" id="13_wjtoa"]
 [ext_resource type="TileSet" uid="uid://0c8knfi7rtne" path="res://default.tres" id="14_vmf2g"]
 [ext_resource type="Texture2D" uid="uid://bqjyiexgloh6b" path="res://utility/TransScreenBG.png" id="15_ln4oo"]
-[ext_resource type="Texture2D" uid="uid://gomlio8e7xu4" path="res://utility/Snakes_Outline.png" id="16_fvkyo"]
-[ext_resource type="Texture2D" uid="uid://c5cj0xx160bls" path="res://utility/Rubber_Duck_Alone.png" id="17_cc7h0"]
-[ext_resource type="Texture2D" uid="uid://bck7mhprgygms" path="res://utility/trans_text.png" id="18_x07fu"]
+[ext_resource type="Texture2D" uid="uid://syf78yg1sd4h" path="res://items/walkerSpecial.png" id="18_lgn5r"]
+[ext_resource type="Texture2D" uid="uid://dxwh08gt81dgh" path="res://utility/skywars_logo.png" id="19_f7762"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sr40o"]
 atlas = ExtResource("10_xahcf")
@@ -144,53 +143,57 @@ animations = [{
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q6brm"]
 shader = ExtResource("13_wjtoa")
-shader_parameter/progress = 0.0
+shader_parameter/progress = 1.0
 shader_parameter/diamondPixelSize = 50.0
 
-[sub_resource type="Animation" id="Animation_tj5m4"]
+[sub_resource type="Animation" id="Animation_aowxi"]
 resource_name = "default"
-length = 3.0
+length = 2.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("LoadingIcon/Snakes:rotation")
+tracks/0/path = NodePath("LoadingIcon:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 3),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [6.28319, 0.0]
+"values": [Vector2(1, 1), Vector2(0.5, 0.5)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("LoadingIcon:scale")
-tracks/1/interp = 2
+tracks/1/path = NodePath("LoadingIcon:rotation")
+tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.5),
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0.5, 0.5), Vector2(0.75, 0.75)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Tips:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.784314)]
+"values": [0.0, 6.28319]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7xusl"]
+[sub_resource type="Animation" id="Animation_u26ev"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LoadingIcon:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pdxw0"]
 _data = {
-"default": SubResource("Animation_tj5m4")
+"RESET": SubResource("Animation_u26ev"),
+"default": SubResource("Animation_aowxi")
 }
 
 [node name="Main" type="Node2D"]
@@ -198,7 +201,7 @@ y_sort_enabled = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_x207s")
-volume_db = -9.0
+volume_db = -15.0
 bus = &"Music"
 
 [node name="MainCam" type="Camera2D" parent="."]
@@ -536,62 +539,10 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("15_ln4oo")
 metadata/_edit_group_ = true
-
-[node name="LoadingIcon" type="Control" parent="GUI/Transition"]
-use_parent_material = true
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -384.0
-offset_top = -376.0
-offset_right = -40.0
-offset_bottom = -32.0
-grow_horizontal = 0
-grow_vertical = 0
-scale = Vector2(0.5, 0.5)
-pivot_offset = Vector2(172, 172)
-
-[node name="Snakes" type="TextureRect" parent="GUI/Transition/LoadingIcon"]
-use_parent_material = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -572.0
-offset_top = -476.0
-offset_right = 580.0
-offset_bottom = 492.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.25, 0.25)
-pivot_offset = Vector2(752, 656)
-texture = ExtResource("16_fvkyo")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Duck" type="TextureRect" parent="GUI/Transition/LoadingIcon"]
-use_parent_material = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -300.0
-offset_top = -332.0
-offset_right = 316.0
-offset_bottom = 292.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.25, 0.25)
-pivot_offset = Vector2(481.541, 509.804)
-texture = ExtResource("17_cc7h0")
-expand_mode = 1
-stretch_mode = 5
+metadata/_edit_lock_ = true
 
 [node name="Title" type="TextureRect" parent="GUI/Transition"]
-self_modulate = Color(0.329412, 0.329412, 0.329412, 1)
+texture_filter = 6
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
@@ -599,63 +550,70 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1140.0
-offset_top = -542.5
-offset_right = 1140.0
-offset_bottom = 542.5
+offset_left = -1576.0
+offset_top = -572.0
+offset_right = 1573.0
+offset_bottom = 430.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.4, 0.4)
-pivot_offset = Vector2(1140, 541.25)
-texture = ExtResource("18_x07fu")
+pivot_offset = Vector2(1575, 593.125)
+texture = ExtResource("19_f7762")
 expand_mode = 1
 stretch_mode = 5
+metadata/_edit_lock_ = true
 
 [node name="Tips" type="Label" parent="GUI/Transition"]
 texture_filter = 1
 use_parent_material = true
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 64.0
-offset_top = -312.0
-offset_right = 1536.0
-offset_bottom = -80.0
-grow_vertical = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -768.0
+offset_top = 164.0
+offset_right = 768.0
+offset_bottom = 484.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 16
 theme_override_fonts/font = ExtResource("11_2h1l6")
 theme_override_font_sizes/font_size = 50
 text = "Tip: Be careful of ICT."
-vertical_alignment = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 autowrap_mode = 3
 text_overrun_behavior = 3
+metadata/_edit_lock_ = true
+
+[node name="LoadingIcon" type="TextureRect" parent="GUI/Transition"]
+texture_filter = 1
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -312.0
+offset_right = -64.0
+offset_bottom = -56.0
+rotation = 5.92044
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(128, 152)
+texture = ExtResource("18_lgn5r")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GUI/Transition"]
 autoplay = "default"
 libraries = {
-"": SubResource("AnimationLibrary_7xusl")
+"": SubResource("AnimationLibrary_pdxw0")
 }
-
-[node name="Label" type="Label" parent="GUI/Transition"]
-use_parent_material = true
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.996
-anchor_bottom = 1.0
-offset_left = 312.0
-offset_top = 656.0
-offset_right = -273.32
-offset_bottom = -314.0
-rotation = -0.261799
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("11_lksja")
-theme_override_font_sizes/font_size = 100
-text = "<insert skywars logo lol>"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Dev" type="Label" parent="GUI"]
 visible = false
@@ -686,7 +644,7 @@ grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 text = "SkyWars Demo
-Alpha V.2 | As of 17/3/2023
+Alpha V.3 | As of 19/3/2023
 
 If any bugs or errors are found,
 please report to the Dev Team.

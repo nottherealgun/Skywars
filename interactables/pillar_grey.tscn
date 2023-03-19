@@ -3,16 +3,18 @@
 [ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://interactables/interactable.tscn" id="1_xhrkk"]
 [ext_resource type="Texture2D" uid="uid://d3tmcm0opjoo6" path="res://interactables/pillarBlackNoSeat.png" id="2_2narl"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rwbhm"]
-radius = 32.0
-height = 96.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ign08"]
+radius = 21.0
+height = 58.0
 
 [node name="PillarGrey" instance=ExtResource("1_xhrkk")]
+collision_layer = 16
 
 [node name="CollisionShape" parent="." index="0"]
-position = Vector2(0, -32)
+z_index = 1
+position = Vector2(0, -21)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_rwbhm")
+shape = SubResource("CapsuleShape2D_ign08")
 disabled = false
 
 [node name="Sprite" parent="." index="1"]

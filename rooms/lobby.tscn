@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dbun1tf3xdti6"]
+[gd_scene load_steps=22 format=3 uid="uid://dbun1tf3xdti6"]
 
 [ext_resource type="PackedScene" uid="uid://cx7imnf85vue8" path="res://level.tscn" id="1_p1xgq"]
 [ext_resource type="PackedScene" uid="uid://bhsvoj5kcuifg" path="res://spawning_point.tscn" id="3_2cn4r"]
@@ -16,8 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://b0hdjqdukved" path="res://interactables/pillar_white.tscn" id="13_iv0gb"]
 [ext_resource type="PackedScene" uid="uid://2pprua54q7h8" path="res://interactables/pillar_yellow.tscn" id="13_srk4e"]
 [ext_resource type="Texture2D" uid="uid://d07t3246r6ci6" path="res://interactables/glassDoubleDoorSS.png" id="15_jrld0"]
-[ext_resource type="Texture2D" uid="uid://syf78yg1sd4h" path="res://items/walkerSpecial.png" id="16_jv7vx"]
-[ext_resource type="Texture2D" uid="uid://bi8guvjep7ogh" path="res://items/icyboiIce.png" id="17_13l8g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wcjt0"]
 atlas = ExtResource("15_jrld0")
@@ -118,19 +116,19 @@ position = Vector2(2624, 160)
 metadata/_edit_lock_ = true
 
 [node name="PillarBlue" parent="." index="11" instance=ExtResource("10_ys8ck")]
-position = Vector2(321, 505)
+position = Vector2(321, 496)
 metadata/_edit_lock_ = true
 
 [node name="PillarOrange" parent="." index="12" instance=ExtResource("11_1ks2k")]
-position = Vector2(1024, 473)
+position = Vector2(1024, 464)
 metadata/_edit_lock_ = true
 
 [node name="PillarWhite" parent="." index="13" instance=ExtResource("13_iv0gb")]
-position = Vector2(1920, 505)
+position = Vector2(1920, 496)
 metadata/_edit_lock_ = true
 
 [node name="PillarBlackSeat" parent="." index="14" instance=ExtResource("9_r3aum")]
-position = Vector2(2624, 505)
+position = Vector2(2624, 496)
 metadata/_edit_lock_ = true
 
 [node name="GlassDoor" type="StaticBody2D" parent="." index="15"]
@@ -204,19 +202,3 @@ offset = Vector2(0, -40)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GlassDoor4" index="1"]
 position = Vector2(0, 59.5)
 shape = SubResource("RectangleShape2D_0jigo")
-
-[node name="Sprite2D" type="Sprite2D" parent="." index="19"]
-z_index = 1
-y_sort_enabled = true
-texture_filter = 1
-position = Vector2(1640, 200)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("16_jv7vx")
-
-[node name="Sprite2D2" type="Sprite2D" parent="." index="20"]
-z_index = 1
-y_sort_enabled = true
-texture_filter = 1
-position = Vector2(1536, 210)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("17_13l8g")

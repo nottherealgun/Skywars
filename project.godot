@@ -10,12 +10,12 @@ config_version=5
 
 [application]
 
-config/name="Creative Clash"
+config/name="Skywars"
 config/description="Createch Clash is a roguelike top-down/2.5D PvE video game based on the MUIC (Mahidol University International College) environment."
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
-boot_splash/image="res://utility/trans_text.png"
+boot_splash/image="res://utility/skywars_logo.png"
 boot_splash/fullsize=false
 boot_splash/use_filter=false
 config/icon="res://players/darwin_head.png"
@@ -30,7 +30,6 @@ LevelManager="*res://level_manager.tscn"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=2
 
 [input]
 

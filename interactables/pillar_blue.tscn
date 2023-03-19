@@ -1,9 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpdc7swp0t02s"]
+[gd_scene load_steps=4 format=3 uid="uid://cpdc7swp0t02s"]
 
 [ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://interactables/interactable.tscn" id="1_xhrkk"]
 [ext_resource type="Texture2D" uid="uid://bxtlpeue0bwcc" path="res://interactables/pillarBlue.png" id="2_5r152"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m3bj4"]
+radius = 40.0
+height = 102.0
+
 [node name="PillarBlue" instance=ExtResource("1_xhrkk")]
+collision_layer = 16
+
+[node name="CollisionShape" parent="." index="0"]
+z_index = 1
+position = Vector2(0, -40)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_m3bj4")
+disabled = false
 
 [node name="Sprite" parent="." index="1"]
 scale = Vector2(2, 2)

@@ -20,7 +20,10 @@ func _ready():
 func enter_room(player):
 	var room_scene : PackedScene
 	if room == null:
-		room_scene = load("res://rooms/"+Global.rooms[randi()%(Global.rooms.size()+1)]["file"])
+		var rand_room_id : int
+		while rand_room_id in [null,0]:
+			rand_room_id = randi()%Global.rooms.size()
+		room_scene = load("res://rooms/"+Global.rooms[rand_room_id]["file"])
 	else:
 		room_scene = load(room)
 	$Sprite.play()
