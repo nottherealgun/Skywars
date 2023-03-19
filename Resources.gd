@@ -11,6 +11,7 @@ signal enemy_killed(enemy)
 
 @onready var MAP_RECT : Vector2 = Map.get_used_rect().size*128
 
+var cached_rooms = []
 var active_players = []
 
 # Entities
@@ -36,11 +37,16 @@ func spawn_enemy(enemy_name:String,pos:Vector2):
 	return new_enemy
 	
 func kill(entity:Node):
-	if is_instance_valid(entity):
-		if !entity.is_in_group("projectile"):
-			emit_death_indicator(entity.position)
+	if is_instance_valid(entity) and entity in active_entities:
 		active_entities.erase(entity)
-		entity.queue_free()
+		var tween = create_tween()
+		tween.tween_property(entity,"scale",Vector2.ZERO,0.2)
+		tween.chain().tween_callback(entity.queue_free)
+		if entity.is_in_group("enemy"):
+			tween.parallel().tween_callback(emit_death_indicator.bind(entity.position))
+		elif entity.is_in_group("projectile"):
+			entity.current_speed = 0
+#		entity.queue_free()
 		emit_signal("enemy_killed",entity)
 
 func kill_all():
@@ -157,10 +163,10 @@ const tips = [
 ]
 
 # Levels
-func sync_map(map:PackedScene):
+func sync_map(map:Node2D):
 	randomize()
 	# Prepare spawnpoints
-	var target_map = map.instantiate().duplicate()
+	var target_map = map
 	var spawn_poses = []
 	map_spawnpoint = target_map.find_child("SpawningPoint").position
 	
@@ -179,7 +185,7 @@ func sync_map(map:PackedScene):
 	await tween.step_finished
 	# Set level title name
 	for r in rooms:
-		if map.instantiate().name == load("res://rooms/"+r["file"]).instantiate().name:
+		if map.name == load("res://rooms/"+r["file"]).instantiate().name:
 			GUI.get_node("Title").text = r["name"]
 			break
 #	GUI.get_node("Title").text = target_map.name.capitalize()
@@ -228,7 +234,64 @@ func sync_map(map:PackedScene):
 	tween.tween_property(transition_screen.material,"shader_parameter/progress",0.0,1.5).from(1.0)
 	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
 	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
+
+func sync_room(map:Node):
+	randomize()
+	# Prepare spawnpoints
+	var target_map = map
+	var spawn_poses = []
+	map_spawnpoint = target_map.find_child("SpawningPoint").position
 	
+	for p in active_players:
+		var radius = 25
+		spawn_poses.append(map_spawnpoint+Vector2(randi()%radius,randi()%radius))
+		p.transporting = true
+		p.y_sort_enabled = false
+
+	# Set level title name
+	for r in rooms:
+		if map.name == load("res://rooms/"+r["file"]).instantiate().name:
+			GUI.get_node("Title").text = r["name"]
+			break
+#	GUI.get_node("Title").text = target_map.name.capitalize()
+	
+	# Set new player positions
+	for p in active_players:
+		p.position = spawn_poses[active_players.find(p)]
+		p.transporting = false
+		p.y_sort_enabled = true
+		if p.fainted:
+			p.revive()
+
+	# Clear old map tiles
+	Map.clear()
+	# Clear old entities
+	LevelManager.clear_level()
+	
+	# Install map tiles
+	var old_map = Map
+	var new_map = target_map.get_node("Map")
+	Map = new_map
+	Main.remove_child(old_map)
+	target_map.remove_child(new_map)
+	Main.add_child(new_map)
+	old_map.queue_free()
+	
+	# Install map enemies
+	for entity in target_map.get_children():
+		if entity.get_class() in ["TileMap","Marker2D"]:
+			continue
+		target_map.remove_child(entity)
+		active_entities.append(entity)
+		Main.add_child(entity)
+	
+	if map == load("res://rooms/"+rooms[0].file):
+		if current_track != "lobby":
+			music_play("lobby")
+	else:
+		if current_track != "combat":
+			music_play("combat")
+
 func emit_indicator(amnt:float,pos:Vector2,p_bullet=false):
 	var new_indicator = load("res://utility/damage_indicator.tscn").instantiate()
 	new_indicator.position = pos

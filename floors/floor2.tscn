@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3bxkb32higit"]
+
+[ext_resource type="PackedScene" uid="uid://c2pkr1em2ahpn" path="res://rooms/test_map.tscn" id="1_okw45"]
+[ext_resource type="PackedScene" uid="uid://cks7aaj4cat7p" path="res://rooms/adit_double.tscn" id="2_l04wy"]
+
+[node name="Floor" type="Node2D"]
+metadata/_edit_lock_ = true
+
+[node name="TestMap" parent="." instance=ExtResource("1_okw45")]
+position = Vector2(64, 112)
+
+[node name="Adit_Double" parent="." instance=ExtResource("2_l04wy")]
+position = Vector2(1216, 112)

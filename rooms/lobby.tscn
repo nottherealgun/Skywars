@@ -72,6 +72,7 @@ position = Vector2(1584, 192)
 position = Vector2(1112, 208)
 room = "res://rooms/test_map.tscn"
 devtext = "Play A test level"
+synced_with_new_map = true
 
 [node name="MUIC Poster" type="Node2D" parent="." index="5"]
 y_sort_enabled = true

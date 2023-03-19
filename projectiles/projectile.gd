@@ -43,5 +43,4 @@ func _on_area_entered(area):
 			Global.kill(self)
 
 func _on_body_entered(body):
-	if body == Global.Map:
-		Global.kill(self)
+	Global.kill(self)
