@@ -55,6 +55,15 @@ func kill_all():
 		if is_instance_valid(e):
 			kill(e)
 
+# Bosses
+
+func spawn_boss(type:String,pos:Vector2):
+	var new_boss = load("res://enemies/bosses/"+type+".tscn").instantiate()
+	new_boss.position = pos
+	active_entities.append(new_boss)
+	Main.add_child(new_boss)
+	return new_boss
+
 # Doors
 
 func get_map_perimeter():
@@ -111,7 +120,7 @@ var rooms = [
 ]
 
 const tips = [
-	"Be careful of the ICT",
+	"Be careful of the ICT.",
 	"If you try really hard, you \"might\" be able to get an A.",
 	"Darwin said that \"Creative Technology\" is a weak name for our major.",
 	"Fun fact: This game\'s dev team has a podcast.",	
@@ -143,11 +152,10 @@ const tips = [
 	"SproutDude is actually not a plant.",
 	"If you like Computing Tech. We are not friends.",
 	"Poom is a SIGMA MALE.",
-	"Try to play Dennis' game, Archplan!",
+	"Try Dennis' game: Archplan!",
 	"MUIC printers hates dark palettes.",
 	"One of Aj Dale's favorite places is The Louvre.",
 	"That's a PAEW PAEW PAEW moment.",
-	"Begin! Coding!",
 	"This game's name used to be \"Creative Clash\".",
 	"This project all started with two freshmen in a programming class.",
 	"Aj. Nik is able to bully you with his critical criticism.",
@@ -160,6 +168,12 @@ const tips = [
 	"Co-working Space has air conditioning.",
 	"FreshMe is overpriced.",
 	"The Walker's Special is actually tea. Don't tell Orion.",
+	"Potatoes are vegetables.",
+	"Dennis has a bird nest on his balcony.",
+	"Plu is a natural enemy of CT. (Because he is in CDP)",
+	"I walked uphills both ways, on one foot. The other foot is starting a business.",
+	"Wong Jick is a man of focus, commitment, and sheer f-cking will.",
+	"WASD to walk.",
 ]
 
 # Levels
@@ -179,7 +193,7 @@ func sync_map(map:Node2D):
 	# Entry Transition
 	var transition_screen = GUI.get_node("Transition")
 	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
-	transition_screen.get_node("Tips").text = "Tip: "+str(tips[randi()%tips.size()])
+	transition_screen.get_node("Tips").text = "[center][wave amp=25 freq=10]\n"+"Tip: "+str(tips[randi()%tips.size()])
 	tween.tween_property(transition_screen.material,"shader_parameter/progress",1.0,2).from(0.0)
 	
 	await tween.step_finished

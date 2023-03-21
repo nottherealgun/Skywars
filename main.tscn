@@ -143,7 +143,7 @@ animations = [{
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q6brm"]
 shader = ExtResource("13_wjtoa")
-shader_parameter/progress = 1.0
+shader_parameter/progress = 0.0
 shader_parameter/diamondPixelSize = 50.0
 
 [sub_resource type="Animation" id="Animation_u26ev"]
@@ -563,7 +563,7 @@ expand_mode = 1
 stretch_mode = 5
 metadata/_edit_lock_ = true
 
-[node name="Tips" type="Label" parent="GUI/Transition"]
+[node name="Tips" type="RichTextLabel" parent="GUI/Transition"]
 texture_filter = 1
 use_parent_material = true
 layout_mode = 1
@@ -580,13 +580,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 16
-theme_override_fonts/font = ExtResource("11_2h1l6")
-theme_override_font_sizes/font_size = 50
-text = "Tip: Be careful of ICT."
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-text_overrun_behavior = 3
+theme_override_fonts/normal_font = ExtResource("11_2h1l6")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[center][wave amp=25 freq=10]
+
+Tip: Be careful of the ICT."
 metadata/_edit_lock_ = true
 
 [node name="LoadingIcon" type="TextureRect" parent="GUI/Transition"]

@@ -96,6 +96,7 @@ func _gui_update():
 
 func _move_update(delta):
 	move_vec = Input.get_vector("p"+str(player_id)+"_left","p"+str(player_id)+"_right","p"+str(player_id)+"_up","p"+str(player_id)+"_down")
+
 #	position += move_vec.normalized()*delta*speed*200
 #	position.x = clampf(position.x, 0+32, Global.MAP_RECT.x-32)
 #	position.y = clampf(position.y, 0, Global.MAP_RECT.y)

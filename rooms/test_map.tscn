@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2pkr1em2ahpn"]
+[gd_scene load_steps=5 format=3 uid="uid://c2pkr1em2ahpn"]
 
 [ext_resource type="PackedScene" uid="uid://cx7imnf85vue8" path="res://level.tscn" id="1_m5b3p"]
 [ext_resource type="PackedScene" uid="uid://bhsvoj5kcuifg" path="res://spawning_point.tscn" id="3_0rids"]
+[ext_resource type="PackedScene" uid="uid://cryhi5byg0s3p" path="res://enemies/printerovski_3000.tscn" id="4_lgv8n"]
 [ext_resource type="PackedScene" uid="uid://6qdjvyw15lm4" path="res://interactables/door.tscn" id="4_rui83"]
 
 [node name="TestMap" instance=ExtResource("1_m5b3p")]
@@ -25,4 +26,8 @@ position = Vector2(992, 315)
 front_facing = false
 room = "res://rooms/lobby.tscn"
 devtext = "Back to Lobby"
+synced_with_new_map = true
 metadata/_edit_lock_ = true
+
+[node name="Printerovski3000" parent="." index="4" instance=ExtResource("4_lgv8n")]
+position = Vector2(496, 341)

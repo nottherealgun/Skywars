@@ -9,7 +9,7 @@ var current_room
 
 func _ready():
 	
-	Global.sync_map(testmap)
+	Global.sync_room(testmap)
 	
 func clear_level():
 	Global.kill_all()
