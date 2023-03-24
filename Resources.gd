@@ -3,11 +3,12 @@ signal enemy_killed(enemy)
 
 # Resources
 
-@onready var Main := get_node("/root/Main")
-@onready var Map := get_node("/root/Main/Map")
-@onready var GUI := get_node("/root/Main/GUI")
-@onready var Dev := get_node("/root/Main/GUI/Dev")
+@onready var Main := get_node("/root/Main") as Node2D
+@onready var Map := get_node("/root/Main/Map") as TileMap
+@onready var GUI := get_node("/root/Main/GUI") as CanvasLayer
+@onready var Dev := get_node("/root/Main/GUI/Dev") as Label
 @onready var Music := get_node("/root/Main/Music") as AudioStreamPlayer
+@onready var Bossbar := get_node("/root/Main/GUI/BossBar") as Control
 
 @onready var MAP_RECT : Vector2 = Map.get_used_rect().size*128
 
@@ -58,10 +59,11 @@ func kill_all():
 # Bosses
 
 func spawn_boss(type:String,pos:Vector2):
-	var new_boss = load("res://enemies/bosses/"+type+".tscn").instantiate()
+	var new_boss = load("res://enemies/bosses/"+type+".tscn").instantiate().duplicate()
 	new_boss.position = pos
 	active_entities.append(new_boss)
 	Main.add_child(new_boss)
+	Bossbar.set_boss(new_boss)
 	return new_boss
 
 # Doors
@@ -177,10 +179,10 @@ const tips = [
 ]
 
 # Levels
-func sync_map(map:Node2D):
+func sync_map(map:Node2D,boss:=""):
 	randomize()
 	# Prepare spawnpoints
-	var target_map = map
+	var target_map = map.duplicate()
 	var spawn_poses = []
 	map_spawnpoint = target_map.find_child("SpawningPoint").position
 	
@@ -203,15 +205,7 @@ func sync_map(map:Node2D):
 			GUI.get_node("Title").text = r["name"]
 			break
 #	GUI.get_node("Title").text = target_map.name.capitalize()
-	
-	# Set new player positions
-	for p in active_players:
-		p.position = spawn_poses[active_players.find(p)]
-		p.transporting = false
-		p.y_sort_enabled = true
-		if p.fainted:
-			p.revive()
-
+		
 	# Clear old map tiles
 	Map.clear()
 	# Clear old entities
@@ -228,6 +222,8 @@ func sync_map(map:Node2D):
 	Main.add_child(new_map)
 	old_map.queue_free()
 	
+	MAP_RECT = Map.get_used_rect().size*128
+	
 	# Install map enemies
 	for entity in target_map.get_children():
 		if entity.get_class() in ["TileMap","Marker2D"]:
@@ -236,12 +232,29 @@ func sync_map(map:Node2D):
 		active_entities.append(entity)
 		Main.add_child(entity)
 	
-	if map == load("res://rooms/"+rooms[0].file):
+	if map.name == load("res://rooms/"+rooms[0].file).instantiate().name:
 		if current_track != "lobby":
 			music_play("lobby")
 	else:
-		if current_track != "combat":
-			music_play("combat")
+		if boss == "":
+			if current_track != "combat":
+				music_play("combat")
+		else:
+			match boss:
+				"printerovski_3000":
+					if current_track != "printerboss":
+						music_play("printerboss")
+	
+	if boss != "":
+		spawn_boss(boss,MAP_RECT/4)
+	
+		# Set new player positions
+	for p in active_players:
+		if p.fainted:
+			p.revive()
+		p.position = spawn_poses[active_players.find(p)]
+		p.transporting = false
+		p.y_sort_enabled = true
 	
 	# Exit Transition
 	tween = create_tween()
@@ -252,7 +265,7 @@ func sync_map(map:Node2D):
 func sync_room(map:Node):
 	randomize()
 	# Prepare spawnpoints
-	var target_map = map
+	var target_map = map.duplicate()
 	var spawn_poses = []
 	map_spawnpoint = target_map.find_child("SpawningPoint").position
 	
@@ -291,6 +304,8 @@ func sync_room(map:Node):
 	Main.add_child(new_map)
 	old_map.queue_free()
 	
+	MAP_RECT = Map.get_used_rect().size*128
+	
 	# Install map enemies
 	for entity in target_map.get_children():
 		if entity.get_class() in ["TileMap","Marker2D"]:
@@ -299,7 +314,7 @@ func sync_room(map:Node):
 		active_entities.append(entity)
 		Main.add_child(entity)
 	
-	if map == load("res://rooms/"+rooms[0].file):
+	if map.name == load("res://rooms/"+rooms[0].file).instantiate().name:
 		if current_track != "lobby":
 			music_play("lobby")
 	else:
@@ -323,6 +338,7 @@ func emit_death_indicator(pos:Vector2):
 const tracks = {
 	"lobby":"res://music/The Lobby_Loopable.mp3",	
 	"combat":"res://music/College Quarrel_Loopable.mp3",
+	"printerboss":"res://music/Printing Issue_Loopable.mp3",
 }
 
 var current_track : String

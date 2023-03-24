@@ -1,0 +1,123 @@
+[gd_scene load_steps=14 format=3 uid="uid://ml32p68ra5v1"]
+
+[ext_resource type="Script" path="res://projectiles/printerovski_proj.gd" id="1_qhdrf"]
+[ext_resource type="Texture2D" uid="uid://b20vors8clxa6" path="res://enemies/doubleASS.png" id="2_2uhla"]
+[ext_resource type="Texture2D" uid="uid://qoo81ukju437" path="res://enemies/bossArtilleryIndicator.png" id="3_d00gb"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_blrns"]
+radius = 59.0
+height = 224.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fb8gg"]
+atlas = ExtResource("2_2uhla")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8afxj"]
+atlas = ExtResource("2_2uhla")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jytj7"]
+atlas = ExtResource("2_2uhla")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3lew"]
+atlas = ExtResource("2_2uhla")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0y24r"]
+atlas = ExtResource("2_2uhla")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5o00"]
+atlas = ExtResource("2_2uhla")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vn1nf"]
+atlas = ExtResource("2_2uhla")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibp33"]
+atlas = ExtResource("2_2uhla")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pfuq2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fb8gg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8afxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jytj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3lew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0y24r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5o00")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vn1nf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ibp33")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="PrinterovskiProj" type="Node2D" groups=["printerovski"]]
+y_sort_enabled = true
+script = ExtResource("1_qhdrf")
+
+[node name="Body" type="Area2D" parent="." groups=["special_projectile"]]
+y_sort_enabled = true
+collision_layer = 2
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+position = Vector2(0, 13)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_blrns")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Body"]
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(0, 20)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_pfuq2")
+autoplay = "default"
+frame_progress = 0.647539
+offset = Vector2(0, -11.2)
+
+[node name="Dev" type="Label" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -80.0
+offset_right = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Indicator" type="Sprite2D" parent="."]
+z_index = -1
+texture_filter = 1
+position = Vector2(0, 12)
+scale = Vector2(5, 5)
+texture = ExtResource("3_d00gb")

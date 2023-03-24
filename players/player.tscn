@@ -7,7 +7,7 @@
 [ext_resource type="FontFile" uid="uid://im11hs0xx7wu" path="res://utility/RoadPixel.ttf" id="4_nv7os"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oscn4"]
-size = Vector2(48, 16)
+size = Vector2(40, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5rio8"]
 radius = 160.05
@@ -54,8 +54,7 @@ shape = SubResource("RectangleShape2D_oscn4")
 collision_mask = 3
 
 [node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
-visible = false
-position = Vector2(0, 8)
+position = Vector2(2, 44)
 shape = SubResource("RectangleShape2D_oscn4")
 
 [node name="EnemyDetect" type="Area2D" parent="."]

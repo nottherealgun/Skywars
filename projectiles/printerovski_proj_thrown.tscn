@@ -1,0 +1,107 @@
+[gd_scene load_steps=14 format=3 uid="uid://xm6igkoes8jp"]
+
+[ext_resource type="Texture2D" uid="uid://b20vors8clxa6" path="res://enemies/doubleASS.png" id="1_b4hln"]
+[ext_resource type="Script" path="res://projectiles/printerovski_proj_thrown.gd" id="1_ij2e0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwagq"]
+atlas = ExtResource("1_b4hln")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gbvac"]
+atlas = ExtResource("1_b4hln")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvojy"]
+atlas = ExtResource("1_b4hln")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ibwyk"]
+atlas = ExtResource("1_b4hln")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j64m3"]
+atlas = ExtResource("1_b4hln")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0dhc4"]
+atlas = ExtResource("1_b4hln")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amep8"]
+atlas = ExtResource("1_b4hln")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvt7t"]
+atlas = ExtResource("1_b4hln")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5nt3b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hwagq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbvac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fvojy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ibwyk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j64m3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0dhc4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_amep8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvt7t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="Animation" id="Animation_60387"]
+resource_name = "default"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2w6qo"]
+_data = {
+"default": SubResource("Animation_60387")
+}
+
+[node name="PrinterovskiProjThrown" type="Node2D"]
+z_index = 1
+script = ExtResource("1_ij2e0")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+rotation = 3.83117
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_5nt3b")
+autoplay = "default"
+frame_progress = 0.134789
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "default"
+libraries = {
+"": SubResource("AnimationLibrary_2w6qo")
+}

@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
 const display_name = "Printerovski 3000"
-@export var max_health = 100
+const display_desc = "MUIC Printer / Bane of Physical Copies"
+@export var max_health = 400
 @onready var health = max_health
 @export var speed = 1
 @export var damage = 1
@@ -15,13 +16,17 @@ var move_vec := Vector2.ZERO
 var targets_in_range = []
 var target : Node
 
+enum STATES {TRANSFORM,IDLE,MOVING,RELOADING,ATTACK1}
+var state = STATES.TRANSFORM
+
 func _ready():
 	var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUINT)
-	tween.tween_property($AnimatedSprite,"position:y",128.0,3.0).from(-500.0)
+	$AnimatedSprite.position.y = -500
+	tween.tween_property($AnimatedSprite,"position:y",128.0,1.0).from(-500.0).set_delay(4.0)
 	tween.chain().tween_callback($AnimatedSprite.play.bind("transform"))
 	await $AnimatedSprite.animation_finished
-	tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUINT)
-	tween.tween_callback($AnimatedSprite.play.bind("idle"))
+#	tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUINT)
+#	tween.tween_callback($AnimatedSprite.play.bind("idle"))
 	$Hitbox.monitoring = true
 #	$NameTag.text = display_name
 #	$NameTag/LevelTag.text = "Lvl "+str(level)
@@ -31,10 +36,15 @@ func _ready():
 	points += level*2
 
 func _physics_process(delta):
+	
 	if health <= 0:
 		latest_shooter.money += points
 		Global.kill(self)
+		
 	if is_instance_valid(target):
+		var dis_to_target = (position+Vector2(0,46)).distance_to(target.position)
+		$Pupil.position = Vector2(0,46)+((position+Vector2(0,46)).direction_to(target.position)*dis_to_target*20/500)
+		$Pupil.scale = Vector2.ONE*(4-(dis_to_target*3.8/500))
 		if target.fainted:
 			target = null
 			
@@ -49,9 +59,48 @@ func _physics_process(delta):
 				dist = t.position.distance_to(position)
 				closest = t
 		target = closest
+	
+	match state:
+		STATES.TRANSFORM:
+			await $AnimatedSprite.animation_finished
+			change_state(STATES.IDLE)
+		
+		STATES.IDLE:
+			if $Timer.is_stopped():
+				$Timer.start(2.0)
+		STATES.MOVING:
+			if is_instance_valid(target):
+				move_vec = position.direction_to(target.position)
+				move_and_collide(move_vec*delta*speed*100)
+				if $Timer.is_stopped():
+					$Timer.start(2.0)
+					# FIX
+				
+			else:
+				change_state(STATES.IDLE)
+		STATES.RELOADING:
+			for i in 2:
+				$AnimatedSprite.play("reload")
+				await $AnimatedSprite.animation_finished
+			change_state(STATES.IDLE)
+			
+		STATES.ATTACK1:
+			await $AnimatedSprite.animation_finished
+			change_state(STATES.RELOADING)
 
-func _move_update(delta):
-	pass
+func change_state(new_state):
+	match state:
+		STATES.MOVING:
+			$Pupil.hide()
+	state = new_state
+	match state:
+		STATES.IDLE:
+			$AnimatedSprite.play("idle")
+		STATES.MOVING:
+			$Pupil.show()
+			$AnimatedSprite.play("move")
+		STATES.ATTACK1:
+			$AnimatedSprite.play("artillery")
 
 var allies = []
 
@@ -86,13 +135,47 @@ func _on_player_detect_area_exited(area):
 	if entity == target:
 		targets_in_range.erase(entity)
 
-func _on_ally_detect_area_entered(area):
-	var ally = area.get_parent()
-	if not ally in allies:
-		if ally.is_in_group("enemy") or ally.is_in_group("interactable"):
-			allies.append(ally)
+#func _on_ally_detect_area_entered(area):
+#	var ally = area.get_parent()
+#	if not ally in allies:
+#		if ally.is_in_group("enemy") or ally.is_in_group("interactable"):
+#			allies.append(ally)
+#
+#func _on_ally_detect_area_exited(area):
+#	var ally = area.get_parent()
+#	if ally in allies:
+#		allies.erase(ally)
 
-func _on_ally_detect_area_exited(area):
-	var ally = area.get_parent()
-	if ally in allies:
-		allies.erase(ally)
+func artillery_shot():
+	var f_new_proj = load("res://projectiles/printerovski_proj_thrown.tscn").instantiate()
+	f_new_proj.position = position+Vector2(136,-80)
+	f_new_proj.start_pos = position+Vector2(136,-80)
+	Global.Main.add_child(f_new_proj)
+	Global.active_entities.append(f_new_proj)
+	await f_new_proj.thrown
+	
+	randomize()
+	var new_proj = load("res://projectiles/printerovski_proj.tscn").instantiate()
+	new_proj.land_pos = target.position+Vector2(randf_range(-300,300),randf_range(-300,300))
+	Global.active_entities.append(new_proj)
+	Global.Main.add_child(new_proj)
+
+func _on_animated_sprite_frame_changed():
+	if state == STATES.ATTACK1:
+		var a = $AnimatedSprite
+		if a.frame in [19,22,25]:
+			for i in 15:
+				artillery_shot()
+
+func _on_timer_timeout():
+	match state:
+		STATES.IDLE:
+			randomize()
+			match randi_range(0,1):
+				0:
+					change_state(STATES.MOVING)
+				1:
+					change_state(STATES.ATTACK1)
+					
+		STATES.MOVING:
+			change_state(STATES.IDLE)

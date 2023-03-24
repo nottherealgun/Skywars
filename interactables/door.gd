@@ -11,6 +11,8 @@ extends StaticBody2D
 @export var synced_room_door : Node
 @export var oneshot := false
 
+@export var boss := ""
+
 var players_in_vicinity = []
 
 func _ready():
@@ -37,7 +39,7 @@ func enter_room(player):
 	$Sprite.play()
 	await $Sprite.animation_finished
 	if synced_with_new_map:
-		Global.sync_map(room_scene)
+		Global.sync_map(room_scene,boss)
 	else:
 		Global.sync_room(room_scene)
 

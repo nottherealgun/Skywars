@@ -145,6 +145,11 @@ func _on_hitbox_area_entered(area:Area2D):
 		if entity.is_in_group("player"):
 			if entity.fainted:
 				revival_target = entity
+		
+		if area.is_in_group("special_projectile"):
+			_injured_effect()
+			if entity.is_in_group("printerovski"):
+				entity.affect(self)
 				
 func _on_hitbox_area_exited(area):
 	if area.is_in_group("projectile"):

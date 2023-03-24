@@ -59,7 +59,7 @@ layer_1/tile_data = PackedInt32Array(-65506, 65537, 0, -65507, 65537, 0, -65508,
 
 [node name="SpawningPoint" parent="." index="1" instance=ExtResource("3_2cn4r")]
 y_sort_enabled = true
-position = Vector2(2134, 388)
+position = Vector2(1472, 429)
 
 [node name="Reception" parent="." index="2" instance=ExtResource("4_oqpc4")]
 position = Vector2(1472, 300)
@@ -71,8 +71,9 @@ position = Vector2(1584, 192)
 [node name="Door" parent="." index="4" instance=ExtResource("6_q45rr")]
 position = Vector2(1112, 208)
 room = "res://rooms/test_map.tscn"
-devtext = "Play A test level"
+devtext = "Boss Room (Beware)"
 synced_with_new_map = true
+boss = "printerovski_3000"
 
 [node name="MUIC Poster" type="Node2D" parent="." index="5"]
 y_sort_enabled = true
