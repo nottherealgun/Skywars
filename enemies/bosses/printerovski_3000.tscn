@@ -936,7 +936,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e33vm"]
-size = Vector2(208, 174)
+size = Vector2(188, 174)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iidox"]
 radius = 448.018
@@ -989,7 +989,7 @@ texture = ExtResource("7_bpk5v")
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 5
 monitoring = false
 
 [node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]

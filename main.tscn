@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dlpndwnncnijn"]
+[gd_scene load_steps=58 format=3 uid="uid://dlpndwnncnijn"]
 
 [ext_resource type="PackedScene" uid="uid://caw6brh3py3mv" path="res://players/player.tscn" id="1_mhf8t"]
 [ext_resource type="AudioStream" uid="uid://bnw73i68y41ik" path="res://music/The Lobby_Loopable.mp3" id="1_x207s"]
@@ -23,6 +23,13 @@
 [ext_resource type="Texture2D" uid="uid://bqjyiexgloh6b" path="res://utility/TransScreenBG.png" id="15_ln4oo"]
 [ext_resource type="Texture2D" uid="uid://syf78yg1sd4h" path="res://items/walkerSpecial.png" id="18_lgn5r"]
 [ext_resource type="Texture2D" uid="uid://dxwh08gt81dgh" path="res://utility/skywars_logo.png" id="19_f7762"]
+[ext_resource type="Shader" path="res://pause_menu.gdshader" id="23_jl8kg"]
+[ext_resource type="Texture2D" uid="uid://uas65v7xroor" path="res://gui/iPadGUI.png" id="23_qefvt"]
+[ext_resource type="Script" path="res://PauseMenu.gd" id="23_yhhpu"]
+[ext_resource type="Texture2D" uid="uid://dt87a7n6trlcn" path="res://gui/resumeButton.png" id="25_yffer"]
+[ext_resource type="Texture2D" uid="uid://515cgx6i0ygs" path="res://gui/optionButton.png" id="26_diu8h"]
+[ext_resource type="Texture2D" uid="uid://bebfa5wjlu236" path="res://gui/homeButton.png" id="27_atwa6"]
+[ext_resource type="Texture2D" uid="uid://ttq5mrq4ae03" path="res://gui/exitButton.png" id="28_04hgl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sr40o"]
 atlas = ExtResource("10_xahcf")
@@ -200,6 +207,20 @@ _data = {
 "default": SubResource("Animation_aowxi")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ys8be"]
+shader = ExtResource("23_jl8kg")
+shader_parameter/blur_amount = 2.5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qojfl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3eo5v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2vqn0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_luix7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ghjbs"]
+
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
 
@@ -217,7 +238,6 @@ position_smoothing_enabled = true
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_mhf8t")]
-position = Vector2(52, 48)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -247,10 +267,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -44.5
-offset_top = 64.0
-offset_right = 44.5
-offset_bottom = 76.0
+offset_left = -44.4448
+offset_top = 936.0
+offset_right = 44.5552
+offset_bottom = 948.0
 grow_horizontal = 2
 scale = Vector2(9, 9)
 pivot_offset = Vector2(44.4444, 5.66667)
@@ -259,15 +279,14 @@ value = 1000.0
 texture_under = ExtResource("3_fdslt")
 texture_over = ExtResource("4_5lu23")
 texture_progress = ExtResource("5_qygbk")
-metadata/_edit_lock_ = true
 
 [node name="BossName" type="RichTextLabel" parent="GUI/BossBar"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 560.0
-offset_top = 112.0
-offset_right = 1360.0
-offset_bottom = 176.0
+offset_left = 560.055
+offset_top = 808.0
+offset_right = 1360.06
+offset_bottom = 872.0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_fonts/normal_font = ExtResource("11_2h1l6")
@@ -280,10 +299,10 @@ visible_ratio = 0.0
 [node name="BossDesc" type="RichTextLabel" parent="GUI/BossBar"]
 texture_filter = 1
 layout_mode = 0
-offset_left = 560.0
-offset_top = 160.0
-offset_right = 1360.0
-offset_bottom = 224.0
+offset_left = 560.055
+offset_top = 856.0
+offset_right = 1360.06
+offset_bottom = 920.0
 theme_override_colors/default_color = Color(1, 1, 1, 0.392157)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
@@ -564,6 +583,118 @@ grow_vertical = 2
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
+[node name="BG" type="TextureRect" parent="GUI/PlayerStats/PlayerStats3"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -16.0
+offset_top = -8.0
+offset_right = 112.0
+offset_bottom = 160.0
+texture = ExtResource("2_e4464")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="Icon" type="TextureRect" parent="GUI/PlayerStats/PlayerStats3"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -32.0
+offset_top = -24.0
+offset_right = 128.0
+offset_bottom = 176.0
+pivot_offset = Vector2(80, 96)
+texture = ExtResource("3_5ew25")
+stretch_mode = 6
+metadata/_edit_lock_ = true
+
+[node name="HealthIcon" type="TextureRect" parent="GUI/PlayerStats/PlayerStats3"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 120.0
+offset_top = 32.0
+offset_right = 160.0
+offset_bottom = 72.0
+texture = ExtResource("4_rfucy")
+stretch_mode = 5
+
+[node name="Healthbar" type="TextureProgressBar" parent="GUI/PlayerStats/PlayerStats3"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 168.0
+offset_top = 32.0
+offset_right = 304.0
+offset_bottom = 72.0
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("6_6j0f6")
+texture_over = ExtResource("7_lstgi")
+texture_progress = ExtResource("8_ne1ph")
+
+[node name="BrainIcon" type="TextureRect" parent="GUI/PlayerStats/PlayerStats3"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 120.0
+offset_top = 77.0
+offset_right = 160.0
+offset_bottom = 117.0
+texture = ExtResource("5_2hml2")
+stretch_mode = 5
+
+[node name="BrainbarBG" type="TextureRect" parent="GUI/PlayerStats/PlayerStats3"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 168.0
+offset_top = 77.0
+offset_right = 304.0
+offset_bottom = 117.0
+texture = ExtResource("9_70o5r")
+stretch_mode = 5
+
+[node name="Brainbar" type="AnimatedSprite2D" parent="GUI/PlayerStats/PlayerStats3"]
+texture_filter = 1
+position = Vector2(236, 97)
+scale = Vector2(3.88571, 4)
+sprite_frames = SubResource("SpriteFrames_gu0rw")
+frame = 6
+
+[node name="NameTag" type="Label" parent="GUI/PlayerStats/PlayerStats3"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 120.0
+offset_top = -8.0
+offset_right = 304.0
+offset_bottom = 35.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("11_2h1l6")
+theme_override_font_sizes/font_size = 44
+text = "Player 1"
+
+[node name="Money" type="Label" parent="GUI/PlayerStats/PlayerStats3"]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 127.0
+offset_right = 320.0
+offset_bottom = 160.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("11_lksja")
+theme_override_font_sizes/font_size = 30
+text = "100"
+vertical_alignment = 1
+metadata/_edit_group_ = true
+
+[node name="Sprite" type="AnimatedSprite2D" parent="GUI/PlayerStats/PlayerStats3/Money"]
+texture_filter = 1
+position = Vector2(-47, -3.99998)
+scale = Vector2(3.7, 3.7)
+sprite_frames = SubResource("SpriteFrames_loydx")
+autoplay = "default"
+frame_progress = 0.7199
+offset = Vector2(5, 5)
+
 [node name="PlayerStats4" type="Control" parent="GUI/PlayerStats"]
 visible = false
 layout_mode = 3
@@ -578,6 +709,118 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
+
+[node name="BG" type="TextureRect" parent="GUI/PlayerStats/PlayerStats4"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -16.0
+offset_top = -8.0
+offset_right = 112.0
+offset_bottom = 160.0
+texture = ExtResource("2_e4464")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="Icon" type="TextureRect" parent="GUI/PlayerStats/PlayerStats4"]
+texture_filter = 1
+layout_mode = 0
+offset_left = -32.0
+offset_top = -24.0
+offset_right = 128.0
+offset_bottom = 176.0
+pivot_offset = Vector2(80, 96)
+texture = ExtResource("3_5ew25")
+stretch_mode = 6
+metadata/_edit_lock_ = true
+
+[node name="HealthIcon" type="TextureRect" parent="GUI/PlayerStats/PlayerStats4"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 120.0
+offset_top = 32.0
+offset_right = 160.0
+offset_bottom = 72.0
+texture = ExtResource("4_rfucy")
+stretch_mode = 5
+
+[node name="Healthbar" type="TextureProgressBar" parent="GUI/PlayerStats/PlayerStats4"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 168.0
+offset_top = 32.0
+offset_right = 304.0
+offset_bottom = 72.0
+value = 100.0
+nine_patch_stretch = true
+texture_under = ExtResource("6_6j0f6")
+texture_over = ExtResource("7_lstgi")
+texture_progress = ExtResource("8_ne1ph")
+
+[node name="BrainIcon" type="TextureRect" parent="GUI/PlayerStats/PlayerStats4"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 120.0
+offset_top = 77.0
+offset_right = 160.0
+offset_bottom = 117.0
+texture = ExtResource("5_2hml2")
+stretch_mode = 5
+
+[node name="BrainbarBG" type="TextureRect" parent="GUI/PlayerStats/PlayerStats4"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 168.0
+offset_top = 77.0
+offset_right = 304.0
+offset_bottom = 117.0
+texture = ExtResource("9_70o5r")
+stretch_mode = 5
+
+[node name="Brainbar" type="AnimatedSprite2D" parent="GUI/PlayerStats/PlayerStats4"]
+texture_filter = 1
+position = Vector2(236, 97)
+scale = Vector2(3.88571, 4)
+sprite_frames = SubResource("SpriteFrames_gu0rw")
+frame = 6
+
+[node name="NameTag" type="Label" parent="GUI/PlayerStats/PlayerStats4"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 120.0
+offset_top = -8.0
+offset_right = 304.0
+offset_bottom = 35.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("11_2h1l6")
+theme_override_font_sizes/font_size = 44
+text = "Player 1"
+
+[node name="Money" type="Label" parent="GUI/PlayerStats/PlayerStats4"]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 127.0
+offset_right = 320.0
+offset_bottom = 160.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("11_lksja")
+theme_override_font_sizes/font_size = 30
+text = "100"
+vertical_alignment = 1
+metadata/_edit_group_ = true
+
+[node name="Sprite" type="AnimatedSprite2D" parent="GUI/PlayerStats/PlayerStats4/Money"]
+texture_filter = 1
+position = Vector2(-47, -3.99998)
+scale = Vector2(3.7, 3.7)
+sprite_frames = SubResource("SpriteFrames_loydx")
+autoplay = "default"
+frame_progress = 0.7199
+offset = Vector2(5, 5)
 
 [node name="Title" type="Label" parent="GUI"]
 modulate = Color(1, 1, 1, 0)
@@ -721,6 +964,156 @@ E to Open Doors
 Mouse Left Click to Attack."
 horizontal_alignment = 2
 
+[node name="PauseMenu" type="Control" parent="GUI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("23_yhhpu")
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="GUI/PauseMenu"]
+material = SubResource("ShaderMaterial_ys8be")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Ipad" type="TextureRect" parent="GUI/PauseMenu"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 92.0
+offset_right = -64.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("23_qefvt")
+
+[node name="Button1" type="TextureRect" parent="GUI/PauseMenu"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 344.0
+offset_top = 208.0
+offset_right = 960.0
+offset_bottom = 576.0
+pivot_offset = Vector2(304, 176)
+texture = ExtResource("25_yffer")
+stretch_mode = 5
+
+[node name="Button1" type="Button" parent="GUI/PauseMenu/Button1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 181.0
+offset_top = 58.0
+offset_right = -193.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qojfl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3eo5v")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2vqn0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_luix7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ghjbs")
+
+[node name="Button2" type="TextureRect" parent="GUI/PauseMenu"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 984.0
+offset_top = 208.0
+offset_right = 1576.0
+offset_bottom = 576.0
+pivot_offset = Vector2(291, 179)
+texture = ExtResource("26_diu8h")
+stretch_mode = 5
+
+[node name="Button2" type="Button" parent="GUI/PauseMenu/Button2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 168.0
+offset_top = 58.0
+offset_right = -182.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qojfl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3eo5v")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2vqn0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_luix7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ghjbs")
+
+[node name="Button3" type="TextureRect" parent="GUI/PauseMenu"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 344.0
+offset_top = 552.0
+offset_right = 936.0
+offset_bottom = 920.0
+pivot_offset = Vector2(302, 178)
+texture = ExtResource("27_atwa6")
+stretch_mode = 5
+
+[node name="Button3" type="Button" parent="GUI/PauseMenu/Button3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 181.0
+offset_top = 56.0
+offset_right = -169.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qojfl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3eo5v")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2vqn0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_luix7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ghjbs")
+
+[node name="Button4" type="TextureRect" parent="GUI/PauseMenu"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 960.0
+offset_top = 552.0
+offset_right = 1576.0
+offset_bottom = 920.0
+pivot_offset = Vector2(314, 184)
+texture = ExtResource("28_04hgl")
+stretch_mode = 5
+
+[node name="Button4" type="Button" parent="GUI/PauseMenu/Button4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 193.0
+offset_top = 57.0
+offset_right = -182.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qojfl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3eo5v")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2vqn0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_luix7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ghjbs")
+
 [node name="Map" type="TileMap" parent="."]
 z_index = -1
 y_sort_enabled = true
@@ -739,3 +1132,16 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array()
 metadata/_edit_lock_ = true
+
+[connection signal="mouse_entered" from="GUI/PauseMenu/Button1/Button1" to="GUI/PauseMenu" method="_on_button_1_mouse_entered"]
+[connection signal="mouse_exited" from="GUI/PauseMenu/Button1/Button1" to="GUI/PauseMenu" method="_on_button_1_mouse_exited"]
+[connection signal="pressed" from="GUI/PauseMenu/Button1/Button1" to="GUI/PauseMenu" method="_on_button_1_pressed"]
+[connection signal="mouse_entered" from="GUI/PauseMenu/Button2/Button2" to="GUI/PauseMenu" method="_on_button_2_mouse_entered"]
+[connection signal="mouse_exited" from="GUI/PauseMenu/Button2/Button2" to="GUI/PauseMenu" method="_on_button_2_mouse_exited"]
+[connection signal="pressed" from="GUI/PauseMenu/Button2/Button2" to="GUI/PauseMenu" method="_on_button_2_pressed"]
+[connection signal="mouse_entered" from="GUI/PauseMenu/Button3/Button3" to="GUI/PauseMenu" method="_on_button_3_mouse_entered"]
+[connection signal="mouse_exited" from="GUI/PauseMenu/Button3/Button3" to="GUI/PauseMenu" method="_on_button_3_mouse_exited"]
+[connection signal="pressed" from="GUI/PauseMenu/Button3/Button3" to="GUI/PauseMenu" method="_on_button_3_pressed"]
+[connection signal="mouse_entered" from="GUI/PauseMenu/Button4/Button4" to="GUI/PauseMenu" method="_on_button_4_mouse_entered"]
+[connection signal="mouse_exited" from="GUI/PauseMenu/Button4/Button4" to="GUI/PauseMenu" method="_on_button_4_mouse_exited"]
+[connection signal="pressed" from="GUI/PauseMenu/Button4/Button4" to="GUI/PauseMenu" method="_on_button_4_pressed"]

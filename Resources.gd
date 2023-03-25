@@ -9,8 +9,13 @@ signal enemy_killed(enemy)
 @onready var Dev := get_node("/root/Main/GUI/Dev") as Label
 @onready var Music := get_node("/root/Main/Music") as AudioStreamPlayer
 @onready var Bossbar := get_node("/root/Main/GUI/BossBar") as Control
+@onready var PauseMenu := get_node("/root/Main/GUI/PauseMenu")
 
 @onready var MAP_RECT : Vector2 = Map.get_used_rect().size*128
+
+var current_map_uninit
+var current_map
+var current_map_boss
 
 var cached_rooms = []
 var active_players = []
@@ -37,12 +42,13 @@ func spawn_enemy(enemy_name:String,pos:Vector2):
 	Main.add_child(new_enemy)
 	return new_enemy
 	
-func kill(entity:Node):
+func kill(entity:Node,immediate=false):
 	if is_instance_valid(entity) and entity in active_entities:
 		active_entities.erase(entity)
 		var tween = create_tween()
-		tween.tween_property(entity,"scale",Vector2.ZERO,0.2)
-		tween.chain().tween_callback(entity.queue_free)
+		if immediate == false:
+			tween.tween_property(entity,"scale",Vector2.ZERO,0.2)
+			tween.chain().tween_callback(entity.queue_free)
 		if entity.is_in_group("enemy"):
 			tween.parallel().tween_callback(emit_death_indicator.bind(entity.position))
 		elif entity.is_in_group("projectile"):
@@ -183,6 +189,10 @@ func sync_map(map:Node2D,boss:=""):
 	randomize()
 	# Prepare spawnpoints
 	var target_map = map.duplicate()
+	current_map_uninit = map
+	current_map = target_map
+	current_map_boss = boss
+	
 	var spawn_poses = []
 	map_spawnpoint = target_map.find_child("SpawningPoint").position
 	
@@ -262,10 +272,13 @@ func sync_map(map:Node2D,boss:=""):
 	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
 	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
 
-func sync_room(map:Node):
+func sync_room(map:Node,boss=""):
 	randomize()
 	# Prepare spawnpoints
 	var target_map = map.duplicate()
+	current_map_uninit = map
+	current_map = target_map
+	current_map_boss = boss
 	var spawn_poses = []
 	map_spawnpoint = target_map.find_child("SpawningPoint").position
 	
@@ -320,6 +333,17 @@ func sync_room(map:Node):
 	else:
 		if current_track != "combat":
 			music_play("combat")
+
+func is_out_of_map(pos:Vector2) -> bool:
+	var map_local_pos = Map.to_local(pos)
+	var cell = Map.local_to_map(map_local_pos)
+	var data = Map.get_cell_tile_data(0,cell)
+	if data:
+		return true
+	else:
+		return false
+
+# Utility
 
 func emit_indicator(amnt:float,pos:Vector2,p_bullet=false):
 	var new_indicator = load("res://utility/damage_indicator.tscn").instantiate()

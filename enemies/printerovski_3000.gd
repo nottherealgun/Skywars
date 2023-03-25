@@ -5,7 +5,7 @@ const display_desc = "MUIC Printer / Bane of Physical Copies"
 @export var max_health = 400
 @onready var health = max_health
 @export var speed = 1
-@export var damage = 1
+@export var damage = 3
 
 @export var level = 1
 @export var points = 1
@@ -68,16 +68,16 @@ func _physics_process(delta):
 		STATES.IDLE:
 			if $Timer.is_stopped():
 				$Timer.start(2.0)
+				
 		STATES.MOVING:
 			if is_instance_valid(target):
 				move_vec = position.direction_to(target.position)
 				move_and_collide(move_vec*delta*speed*100)
 				if $Timer.is_stopped():
 					$Timer.start(2.0)
-					# FIX
-				
 			else:
 				change_state(STATES.IDLE)
+				
 		STATES.RELOADING:
 			for i in 2:
 				$AnimatedSprite.play("reload")
@@ -121,9 +121,15 @@ func get_knockback(direction:Vector2,strength:=1):
 #	tween.tween_method(move_and_collide,Vector2.ZERO,(direction*strength*5),0.1)
 
 func _on_hitbox_area_entered(area):
+	var entity = area.get_parent()
 	if area.is_in_group("projectile"):
 		get_hurt(area)
-		
+	elif entity.is_in_group("player"):
+		entity._injured_effect()
+		entity.get_knockback(position.direction_to(entity.position),50)
+		entity.health -= damage
+		Global.emit_indicator(damage,entity.position,false)
+	
 func _on_player_detect_area_entered(area):
 	var entity = area.get_parent()
 	if entity.is_in_group("player"):
@@ -154,9 +160,14 @@ func artillery_shot():
 	Global.active_entities.append(f_new_proj)
 	await f_new_proj.thrown
 	
+	var rand_land_pos
+	while rand_land_pos == null or !Global.is_out_of_map(rand_land_pos):
+		rand_land_pos = target.position+Vector2(randf_range(-300,300),randf_range(-300,300))
+	
 	randomize()
 	var new_proj = load("res://projectiles/printerovski_proj.tscn").instantiate()
-	new_proj.land_pos = target.position+Vector2(randf_range(-300,300),randf_range(-300,300))
+	new_proj.land_pos = rand_land_pos
+	new_proj.printer_boss = self
 	Global.active_entities.append(new_proj)
 	Global.Main.add_child(new_proj)
 
@@ -165,7 +176,8 @@ func _on_animated_sprite_frame_changed():
 		var a = $AnimatedSprite
 		if a.frame in [19,22,25]:
 			for i in 15:
-				artillery_shot()
+				if is_instance_valid(target):
+					artillery_shot()
 
 func _on_timer_timeout():
 	match state:

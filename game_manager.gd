@@ -26,8 +26,7 @@ func player_killed(player):
 			break
 		else:
 			if p == Global.active_players.back():
-				Global.sync_map(LevelManager.testmap)
-				break
+				Global.sync_map(Global.current_map_uninit,Global.current_map_boss)
 
 func entity_killed(entity):
 	var active_enemies = []

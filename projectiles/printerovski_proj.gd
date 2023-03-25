@@ -2,7 +2,8 @@ extends Node2D
 
 var land_pos : Vector2
 
-var damage = 1
+var printer_boss : CharacterBody2D
+var damage = 3
 var landed = false
 
 func _ready():
@@ -14,15 +15,24 @@ func _ready():
 	tween.parallel().tween_property($Indicator,"modulate",Color.TRANSPARENT,3.0)
 	await tween.finished
 	$"Body/Sprite".stop()
-	landed = true
-	$Body.monitorable = false
-	await get_tree().create_timer(2.0).timeout
+#	landed = true
+#	$Body.monitorable = false
+	await get_tree().create_timer(0.3).timeout
+	randomize()
+	if randi_range(0,100) < 10:
+		if is_instance_valid(printer_boss.target):
+			if position.distance_to(printer_boss.target.position) < 150:
+				Global.spawn_enemy("printer",position)
+	Global.emit_death_indicator(position)
 	Global.kill(self)
 
 func _process(delta):
 #	$Dev.text = str($Body.position.y > -100.0 and landed == false)
-	if $Body.position.y > -100.0 and landed == false:
-		$Body.monitorable = true
+#	if $Body.position.y > -150.0:
+#		$Body.monitorable = true
+#	else:
+#		$Body.monitorable = false
+	$Body.monitorable = ($Body.position.y > -150.0)
 
 func affect(victim:Node):
 	victim.health -= damage

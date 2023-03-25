@@ -88,6 +88,14 @@ func _input_update():
 				
 				if !revival_target.fainted:
 					revival_target = null
+		
+		if Input.is_action_just_pressed("pause"):
+			Global.PauseMenu.visible = !Global.PauseMenu.visible
+			match Global.PauseMenu.visible:
+				true:
+					Engine.time_scale = 0.0
+				false:
+					Engine.time_scale = 1.0
 
 func _gui_update():
 	healthbar.value = (health*healthbar.max_value)/max_health
@@ -176,3 +184,4 @@ func _on_hitbox_body_entered(body):
 
 func _on_revive_timer_timeout():
 	$Revival.value += 1
+
