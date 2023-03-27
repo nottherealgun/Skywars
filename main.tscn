@@ -313,6 +313,18 @@ text = "[center][shake]MUIC Printer / Bane of Physical Copies"
 visible_characters = 0
 visible_ratio = 0.0
 
+[node name="BossHealth" type="Label" parent="GUI/BossBar"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 656.0
+offset_top = 896.0
+offset_right = 800.0
+offset_bottom = 992.0
+theme_override_fonts/font = ExtResource("11_2h1l6")
+theme_override_font_sizes/font_size = 40
+text = "100/100"
+vertical_alignment = 1
+
 [node name="PlayerStats" type="Node" parent="GUI"]
 
 [node name="PlayerStats1" type="Control" parent="GUI/PlayerStats"]

@@ -37,7 +37,7 @@ func _physics_process(delta):
 
 func affect(victim:Node):
 	victim.health -= damage
-	victim.get_knockback(position.direction_to(victim.position),knockback)
+#	victim.get_knockback(position.direction_to(victim.position),knockback)
 	Global.emit_indicator(damage,victim.position,false)
 
 func change_state(new_state):

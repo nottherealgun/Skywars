@@ -31,7 +31,7 @@ func _ready():
 #	$NameTag.text = display_name
 #	$NameTag/LevelTag.text = "Lvl "+str(level)
 #	$NameTag.modulate = Color8(255,255-(level*5),255-(level*5))
-	max_health += level*2
+#	max_health += level*2
 	health = max_health
 	points += level*2
 
@@ -126,7 +126,7 @@ func _on_hitbox_area_entered(area):
 		get_hurt(area)
 	elif entity.is_in_group("player"):
 		entity._injured_effect()
-		entity.get_knockback(position.direction_to(entity.position),50)
+#		entity.get_knockback(position.direction_to(entity.position),50)
 		entity.health -= damage
 		Global.emit_indicator(damage,entity.position,false)
 	
@@ -175,7 +175,7 @@ func _on_animated_sprite_frame_changed():
 	if state == STATES.ATTACK1:
 		var a = $AnimatedSprite
 		if a.frame in [19,22,25]:
-			for i in 15:
+			for i in 12:
 				if is_instance_valid(target):
 					artillery_shot()
 

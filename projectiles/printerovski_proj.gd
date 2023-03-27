@@ -20,9 +20,10 @@ func _ready():
 	await get_tree().create_timer(0.3).timeout
 	randomize()
 	if randi_range(0,100) < 10:
-		if is_instance_valid(printer_boss.target):
-			if position.distance_to(printer_boss.target.position) < 150:
-				Global.spawn_enemy("printer",position)
+		if is_instance_valid(printer_boss):
+			if is_instance_valid(printer_boss.target):
+				if position.distance_to(printer_boss.target.position) < 150:
+					Global.spawn_enemy("printer",position)
 	Global.emit_death_indicator(position)
 	Global.kill(self)
 

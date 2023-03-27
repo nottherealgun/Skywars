@@ -40,17 +40,16 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
-position = Vector2(0, -52)
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("1_2rdnx")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 44)
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_oscn4")
 
 [node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -52)
 collision_mask = 3
 
 [node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
@@ -58,6 +57,7 @@ position = Vector2(2, 44)
 shape = SubResource("RectangleShape2D_oscn4")
 
 [node name="EnemyDetect" type="Area2D" parent="."]
+position = Vector2(0, -52)
 collision_layer = 0
 
 [node name="EnemyDetectShape" type="CollisionShape2D" parent="EnemyDetect"]
@@ -66,7 +66,7 @@ shape = SubResource("CircleShape2D_5rio8")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, 48)
+position = Vector2(0, -4)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("2_gfowo")
 animation = &"idle"
@@ -74,16 +74,15 @@ autoplay = "idle"
 offset = Vector2(0, -24)
 
 [node name="Arrow" type="Sprite2D" parent="."]
-visible = false
 z_index = 1
 texture_filter = 1
+position = Vector2(0, -48)
 scale = Vector2(2, 2)
 texture = ExtResource("3_j5x1p")
 offset = Vector2(25, 0)
 
 [node name="Shadow" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(0, 52)
 scale = Vector2(5, 4)
 texture = ExtResource("2_ixn7o")
 
@@ -101,7 +100,6 @@ libraries = {
 }
 
 [node name="Text" type="Label" parent="Guide"]
-z_index = 1
 texture_filter = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -136,6 +134,31 @@ offset_left = -64.0
 offset_top = -52.0
 offset_right = 64.0
 offset_bottom = -25.0
+
+[node name="dev" type="Label" parent="."]
+visible = false
+texture_filter = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.0
+offset_top = -128.0
+offset_right = 90.0
+offset_bottom = -90.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+pivot_offset = Vector2(68, 10)
+size_flags_horizontal = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_nv7os")
+text = "test"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

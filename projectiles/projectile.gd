@@ -30,7 +30,7 @@ func affect(victim:Node):
 	victim.health -= damage
 	if player_bullet:
 		victim.latest_shooter = shooter
-	victim.get_knockback(direction,knockback)
+#		victim.get_knockback(direction,knockback)
 	Global.emit_indicator(damage,victim.position,player_bullet)
 
 func _on_visible_on_screen_notifier_2d_screen_exited():

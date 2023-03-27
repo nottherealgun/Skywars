@@ -18,12 +18,17 @@ var move_vec := Vector2.ZERO
 var aim_vec := Vector2.ZERO
 var fainted = false
 var transporting = false
+var iframed = false
+
 var latest_shooter
 var revival_target : Player
 # Player GUI setup
 @onready var stat_gui = Global.GUI.get_node("PlayerStats/PlayerStats"+str(player_id))
 @onready var healthbar = stat_gui.get_node("Healthbar")
 @onready var brainbar = stat_gui.get_node("Brainbar")
+
+# Tweens
+@onready var injury_tween : Tween
 
 func _ready():
 	# Setup player appearance and GUI settings
@@ -37,6 +42,7 @@ func _ready():
 	stat_gui.get_node("Money").text = "$ "+str(money)
 	
 func _process(delta):
+	$dev.text = str(iframed)
 	_input_update() # Update device input
 	_gui_update() # Update gui
 	var sprite = get_node("Sprite")
@@ -111,23 +117,30 @@ func _move_update(delta):
 	move_and_collide(move_vec.normalized()*delta*speed*200)
 
 func shoot():
-	var player_proj = Global.spawn_projectile(self,"darwin_proj_1",position,aim_vec.normalized(),true)
+	var player_proj = Global.spawn_projectile(self,"darwin_proj_1",position+Vector2(0,-50),aim_vec.normalized(),true)
 	player_proj.set("knockback",1)
 
-func get_knockback(direction:Vector2,strength:=1):
-	var tween := create_tween()
-	tween.tween_property(self,"position",position+(direction*strength),0.2)
+#func get_knockback(direction:Vector2,strength:=1):
+#	var tween := create_tween()
+#	tween.tween_property(self,"position",position+(direction*strength),0.2)
 
 func _injured_effect():
 	var sprite = $Sprite
-	var tween = create_tween()
-	tween.tween_property(sprite,"modulate",Color.WHITE,0.5).from(Color.RED)
-	tween.parallel().tween_property(sprite,"scale",Vector2(2,2),0.5).from(Vector2(2,2)*0.8).set_trans(Tween.TRANS_CUBIC)
+	injury_tween = create_tween()
+	injury_tween.tween_property(sprite,"modulate",Color.WHITE,0.5).from(Color.RED)
+	injury_tween.parallel().tween_property(sprite,"scale",Vector2(2,2),0.5).from(Vector2(2,2)*0.8).set_trans(Tween.TRANS_CUBIC)
 	Input.start_joy_vibration(player_id-1,1,0,0.2)
+	
+	injury_tween = create_tween().set_loops(2).bind_node(self)
+	injury_tween.tween_property(sprite,"modulate",Color.WHITE,0.5).from(Color.TRANSPARENT)
 
 func get_hurt(by:Node):
-	by.affect(self)
-	_injured_effect()
+	if !iframed:
+		iframed = true
+		by.affect(self)
+		_injured_effect()
+		await injury_tween.finished
+		iframed = false
 
 func revive():
 	$Guide.hide()
@@ -145,19 +158,19 @@ func _on_hitbox_area_entered(area:Area2D):
 	if area.is_in_group("projectile"):
 		if area.player_bullet == false:
 			# Get hit by bullet
-			_injured_effect()
-			area.affect(self)
-			Global.kill(area)
+			if !iframed:
+				Global.kill(area)
+			get_hurt(area)
+			
 	else:
 		var entity = area.get_parent()
 		if entity.is_in_group("player"):
 			if entity.fainted:
 				revival_target = entity
-		
+				
 		if area.is_in_group("special_projectile"):
-			_injured_effect()
 			if entity.is_in_group("printerovski"):
-				entity.affect(self)
+				get_hurt(entity)
 				
 func _on_hitbox_area_exited(area):
 	if area.is_in_group("projectile"):
