@@ -30,6 +30,8 @@ var revival_target : Player
 # Tweens
 @onready var injury_tween : Tween
 
+var mouse_aim_offset = 50
+
 func _ready():
 	# Setup player appearance and GUI settings
 	$Arrow.modulate = player_color
@@ -80,7 +82,7 @@ func _input_update():
 		if Input.is_action_just_pressed("p"+str(player_id)+"_primary"):
 			# Primary
 			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-				aim_vec = position.direction_to(get_global_mouse_position())
+				aim_vec = position.direction_to(get_global_mouse_position()+Vector2(0,mouse_aim_offset))
 			if aim_vec != Vector2.ZERO:
 				shoot()
 		if Input.is_action_just_pressed("p"+str(player_id)+"_action"):
@@ -117,7 +119,7 @@ func _move_update(delta):
 	move_and_collide(move_vec.normalized()*delta*speed*200)
 
 func shoot():
-	var player_proj = Global.spawn_projectile(self,"darwin_proj_1",position+Vector2(0,-50),aim_vec.normalized(),true)
+	var player_proj = Global.spawn_projectile(self,"darwin_proj_1",position+Vector2(0,-mouse_aim_offset),aim_vec.normalized(),true)
 	player_proj.set("knockback",1)
 
 #func get_knockback(direction:Vector2,strength:=1):

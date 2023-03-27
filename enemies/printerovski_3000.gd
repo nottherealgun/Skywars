@@ -175,7 +175,7 @@ func _on_animated_sprite_frame_changed():
 	if state == STATES.ATTACK1:
 		var a = $AnimatedSprite
 		if a.frame in [19,22,25]:
-			for i in 12:
+			for i in 15:
 				if is_instance_valid(target):
 					artillery_shot()
 

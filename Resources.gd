@@ -373,6 +373,7 @@ func music_play(track_name:String):
 	tween.tween_property(Music,"volume_db",-80.0,1.0).from(default_volume)
 	await tween.finished
 	Music.stream = load(tracks[track_name])
+	Music.stream.set("loop",true)
 	Music.playing = true
 	current_track = track_name
 	tween = create_tween()
