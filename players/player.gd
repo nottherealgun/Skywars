@@ -20,6 +20,8 @@ var fainted = false
 var transporting = false
 var iframed = false
 
+const hitbox_anchor = Vector2(0,44)
+
 var latest_shooter
 var revival_target : Player
 # Player GUI setup
@@ -30,7 +32,7 @@ var revival_target : Player
 # Tweens
 @onready var injury_tween : Tween
 
-var mouse_aim_offset = 50
+var mouse_aim_offset = 0
 
 func _ready():
 	# Setup player appearance and GUI settings
@@ -79,7 +81,8 @@ func _input_update():
 	if !fainted and !transporting: # If player alive
 		get_node("Arrow").rotation = get_node("Arrow").position.angle_to_point(aim_vec)
 		get_node("Arrow").visible = (aim_vec != Vector2.ZERO)
-		if Input.is_action_just_pressed("p"+str(player_id)+"_primary"):
+		if Input.is_action_pressed("p"+str(player_id)+"_primary") and $RateOfFire.is_stopped():
+			$RateOfFire.start()
 			# Primary
 			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 				aim_vec = position.direction_to(get_global_mouse_position()+Vector2(0,mouse_aim_offset))
@@ -155,6 +158,9 @@ func get_surround_pos() -> Vector2:
 	var new_surr_pos := position+Vector2(0,1)
 	new_surr_pos.rotated(deg_to_rad(randf()*360.0))
 	return new_surr_pos
+
+func get_hitbox_anchor():
+	return position+hitbox_anchor
 
 func _on_hitbox_area_entered(area:Area2D):
 	if area.is_in_group("projectile"):

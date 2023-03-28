@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://caw6brh3py3mv"]
+[gd_scene load_steps=12 format=3 uid="uid://caw6brh3py3mv"]
 
 [ext_resource type="Script" path="res://players/player.gd" id="1_2rdnx"]
 [ext_resource type="SpriteFrames" uid="uid://ut4kvd8lo60w" path="res://players/gun.tres" id="2_gfowo"]
@@ -8,6 +8,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oscn4"]
 size = Vector2(40, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2i4hs"]
+size = Vector2(40, 24)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5rio8"]
 radius = 160.05
@@ -45,19 +48,17 @@ collision_mask = 16
 script = ExtResource("1_2rdnx")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, 44)
 shape = SubResource("RectangleShape2D_oscn4")
 
 [node name="Hitbox" type="Area2D" parent="."]
-position = Vector2(0, -52)
 collision_mask = 3
 
 [node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(2, 44)
-shape = SubResource("RectangleShape2D_oscn4")
+position = Vector2(0, 40)
+shape = SubResource("RectangleShape2D_2i4hs")
 
 [node name="EnemyDetect" type="Area2D" parent="."]
-position = Vector2(0, -52)
 collision_layer = 0
 
 [node name="EnemyDetectShape" type="CollisionShape2D" parent="EnemyDetect"]
@@ -66,7 +67,7 @@ shape = SubResource("CircleShape2D_5rio8")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, -4)
+position = Vector2(0, 48)
 scale = Vector2(2, 2)
 sprite_frames = ExtResource("2_gfowo")
 animation = &"idle"
@@ -74,16 +75,15 @@ autoplay = "idle"
 offset = Vector2(0, -24)
 
 [node name="Arrow" type="Sprite2D" parent="."]
-visible = false
 z_index = 1
 texture_filter = 1
-position = Vector2(0, -48)
 scale = Vector2(2, 2)
 texture = ExtResource("3_j5x1p")
 offset = Vector2(25, 0)
 
 [node name="Shadow" type="Sprite2D" parent="."]
 z_index = -1
+position = Vector2(0, 52)
 scale = Vector2(5, 4)
 texture = ExtResource("2_ixn7o")
 
@@ -127,6 +127,10 @@ uppercase = true
 
 [node name="ReviveTimer" type="Timer" parent="."]
 wait_time = 0.01
+
+[node name="RateOfFire" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
 
 [node name="Revival" type="ProgressBar" parent="."]
 visible = false

@@ -182,6 +182,7 @@ const tips = [
 	"I walked uphills both ways, on one foot. The other foot is starting a business.",
 	"Wong Jick is a man of focus, commitment, and sheer f-cking will.",
 	"WASD to walk.",
+	"Aj. Nik used to be a student at MUIC.",
 ]
 
 # Levels

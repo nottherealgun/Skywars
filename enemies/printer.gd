@@ -33,7 +33,7 @@ func _physics_process(delta):
 					if rand_num == 0:
 						proj_id = 0
 					
-					Global.spawn_projectile(self,["printer_proj_1","printer_proj_2"][proj_id],position,position.direction_to(target.position))			
+					Global.spawn_projectile(self,["printer_proj_1","printer_proj_2"][proj_id],position,position.direction_to(target.get_hitbox_anchor()))			
 					$Timer.start(1.0/shoot_speed)
 
 func change_state(new_state):

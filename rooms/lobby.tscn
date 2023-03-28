@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dbun1tf3xdti6"]
+[gd_scene load_steps=23 format=3 uid="uid://dbun1tf3xdti6"]
 
 [ext_resource type="PackedScene" uid="uid://cx7imnf85vue8" path="res://level.tscn" id="1_p1xgq"]
 [ext_resource type="PackedScene" uid="uid://bhsvoj5kcuifg" path="res://spawning_point.tscn" id="3_2cn4r"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://b0hdjqdukved" path="res://interactables/pillar_white.tscn" id="13_iv0gb"]
 [ext_resource type="PackedScene" uid="uid://2pprua54q7h8" path="res://interactables/pillar_yellow.tscn" id="13_srk4e"]
 [ext_resource type="Texture2D" uid="uid://d07t3246r6ci6" path="res://interactables/glassDoubleDoorSS.png" id="15_jrld0"]
+[ext_resource type="PackedScene" uid="uid://cmhrf827nfpky" path="res://enemies/printer.tscn" id="17_mis02"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wcjt0"]
 atlas = ExtResource("15_jrld0")
@@ -204,3 +205,6 @@ offset = Vector2(0, -40)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GlassDoor4" index="1"]
 position = Vector2(0, 59.5)
 shape = SubResource("RectangleShape2D_0jigo")
+
+[node name="Printer" parent="." index="19" instance=ExtResource("17_mis02")]
+position = Vector2(639, 208)

@@ -161,7 +161,7 @@ func artillery_shot():
 	await f_new_proj.thrown
 	
 	var rand_land_pos
-	while rand_land_pos == null or !Global.is_out_of_map(rand_land_pos):
+	while rand_land_pos == null or !Global.is_out_of_map(rand_land_pos) and is_instance_valid(target):
 		rand_land_pos = target.position+Vector2(randf_range(-300,300),randf_range(-300,300))
 	
 	randomize()
