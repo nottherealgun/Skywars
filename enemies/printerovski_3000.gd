@@ -16,13 +16,14 @@ var move_vec := Vector2.ZERO
 var targets_in_range = []
 var target : Node
 
-enum STATES {TRANSFORM,IDLE,MOVING,RELOADING,ATTACK1}
+enum STATES {TRANSFORM,IDLE,MOVING,RELOADING,ATTACK1,ATTACK2,FLYING,FALLING}
 var state = STATES.TRANSFORM
 
 func _ready():
 	var tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUINT)
 	$AnimatedSprite.position.y = -500
 	tween.tween_property($AnimatedSprite,"position:y",128.0,1.0).from(-500.0).set_delay(4.0)
+	tween.chain().tween_callback($Shockwave.play.bind("default"))
 	tween.chain().tween_callback($AnimatedSprite.play.bind("transform"))
 	await $AnimatedSprite.animation_finished
 #	tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUINT)
@@ -36,7 +37,7 @@ func _ready():
 	points += level*2
 
 func _physics_process(delta):
-	
+#	print(STATES.keys()[state])
 	if health <= 0:
 		latest_shooter.money += points
 		Global.kill(self)
@@ -44,7 +45,7 @@ func _physics_process(delta):
 	if is_instance_valid(target):
 		var dis_to_target = (position+Vector2(0,46)).distance_to(target.position)
 		$Pupil.position = Vector2(0,46)+((position+Vector2(0,46)).direction_to(target.position)*dis_to_target*20/500)
-		$Pupil.scale = Vector2.ONE*(4-(dis_to_target*3.8/500))
+		$Pupil.scale = Vector2.ONE*(4.5-(dis_to_target*3.8/500))
 		if target.fainted:
 			target = null
 			
@@ -87,6 +88,14 @@ func _physics_process(delta):
 		STATES.ATTACK1:
 			await $AnimatedSprite.animation_finished
 			change_state(STATES.RELOADING)
+			
+		STATES.ATTACK2:
+			await $AnimatedSprite.animation_finished
+			change_state(STATES.FLYING)
+			
+		STATES.FLYING:
+			$LandIndicator.modulate = Color.WHITE
+			$LandIndicator.position = target.position-position
 
 func change_state(new_state):
 	match state:
@@ -101,6 +110,34 @@ func change_state(new_state):
 			$AnimatedSprite.play("move")
 		STATES.ATTACK1:
 			$AnimatedSprite.play("artillery")
+		STATES.ATTACK2:
+			$AnimatedSprite.play("jump")
+			$Hitbox.monitoring = false
+			
+		STATES.FLYING:
+			$AnimatedSprite.play("fly")
+			var tween := create_tween()
+			tween.tween_property($AnimatedSprite,"position:y",-5000,3).from_current()
+			await tween.finished
+			change_state(STATES.FALLING)
+			
+		STATES.FALLING:
+			$LandIndicator.position = Vector2.ZERO
+			position = target.position
+			$AnimatedSprite.play("falling")
+			
+			var tween := create_tween()
+			tween.tween_property($AnimatedSprite,"position:y",128,2).from_current()
+			tween.parallel().tween_property($LandIndicator,"modulate",Color.TRANSPARENT,2).from(Color.WHITE)
+			await tween.finished
+			
+			$AnimatedSprite.play("crash")
+			$Shockwave.play("default")
+			Global.screen_shake(16)
+			await $AnimatedSprite.animation_finished
+			
+			$Hitbox.monitoring = true
+			change_state(STATES.IDLE)
 
 var allies = []
 
@@ -183,11 +220,14 @@ func _on_timer_timeout():
 	match state:
 		STATES.IDLE:
 			randomize()
-			match randi_range(0,1):
+			match randi_range(0,3):
+#			match 2:
 				0:
 					change_state(STATES.MOVING)
 				1:
 					change_state(STATES.ATTACK1)
+				2:
+					change_state(STATES.ATTACK2)
 					
 		STATES.MOVING:
 			change_state(STATES.IDLE)

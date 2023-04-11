@@ -10,6 +10,7 @@ signal enemy_killed(enemy)
 @onready var Music := get_node("/root/Main/Music") as AudioStreamPlayer
 @onready var Bossbar := get_node("/root/Main/GUI/BossBar") as Control
 @onready var PauseMenu := get_node("/root/Main/GUI/PauseMenu")
+@onready var Cam := get_node("/root/Main/MainCam") as Camera2D
 
 @onready var MAP_RECT : Vector2 = Map.get_used_rect().size*128
 
@@ -146,7 +147,7 @@ const tips = [
 	"Woah. Oh.. mai god.",
 	"Do not take Voldemort for EC1.",
 	"Do not take Analiza for EC3.",
-	"It's actually not a staff managing the ICT servers, it's actually a mini gorilla.",
+	"It's not a staff who's managing the ICT servers, it's actually a mini gorilla.",
 	"Join ICCT, we have cookies here. Accept them.",
 	"This game's dev team has two cursed beasts.",
 	"Please take Art History as fast as possible.",
@@ -183,6 +184,7 @@ const tips = [
 	"Wong Jick is a man of focus, commitment, and sheer f-cking will.",
 	"WASD to walk.",
 	"Aj. Nik used to be a student at MUIC.",
+	"Bro is here.",
 ]
 
 # Levels
@@ -380,3 +382,13 @@ func music_play(track_name:String):
 	tween = create_tween()
 	tween.tween_property(Music,"volume_db",default_volume,1.0).from(-80.0)
 	return Music.stream
+
+func screen_shake(amplitude=16):
+	var ShakeTween = create_tween().set_trans(Tween.TRANS_CUBIC)
+	for i in 10:
+		var rand = Vector2()
+		rand.x = randf_range(-amplitude, amplitude)
+		rand.y = randf_range(-amplitude, amplitude)
+
+		ShakeTween.tween_property(Cam, "offset", rand, 0.1)
+	ShakeTween.tween_property(Cam, "offset", Vector2.ZERO, 0.1)

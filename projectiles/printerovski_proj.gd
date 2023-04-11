@@ -33,7 +33,7 @@ func _ready():
 	Global.emit_death_indicator(position)
 	Global.kill(self)
 
-func _process(delta):
+func _process(_delta):
 #	$Dev.text = str($Body.position.y > -90.0)
 	if $Body.position.y > -90.0:
 		$Body.monitorable = true

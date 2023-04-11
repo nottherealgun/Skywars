@@ -11,7 +11,7 @@ func _ready():
 			Global.active_players.append(n)
 			n.connect("player_killed",player_killed)
 
-func _process(delta):
+func _process(_delta):
 	var vec := Vector2.ZERO
 	for p in Global.active_players:
 		vec += p.position

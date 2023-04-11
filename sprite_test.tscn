@@ -1,0 +1,298 @@
+[gd_scene load_steps=47 format=3 uid="uid://bwhlsymb11207"]
+
+[ext_resource type="PackedScene" uid="uid://cx7imnf85vue8" path="res://level.tscn" id="1_emc3i"]
+[ext_resource type="Texture2D" uid="uid://brsq6mehr8qmm" path="res://interactables/adithChair.png" id="2_gdwxo"]
+[ext_resource type="Texture2D" uid="uid://tnvx5837ukgb" path="res://interactables/adithPodium.png" id="3_wb2a6"]
+[ext_resource type="Texture2D" uid="uid://dtv55qyl66qjq" path="res://interactables/adithTable.png" id="4_rd0er"]
+[ext_resource type="Texture2D" uid="uid://cddx7qeykcyb5" path="res://interactables/adithWoodLongChair.png" id="5_3aioi"]
+[ext_resource type="Texture2D" uid="uid://c7a6c3orutsv2" path="res://interactables/adithWoodTable.png" id="6_v6p3t"]
+[ext_resource type="Texture2D" uid="uid://c3vcbk8xs4w7" path="res://interactables/aditReceptionBack.png" id="7_satbm"]
+[ext_resource type="Texture2D" uid="uid://b6ovgasjua5gn" path="res://interactables/aditReceptionFront.png" id="8_jkw83"]
+[ext_resource type="Texture2D" uid="uid://d2y2gnp4q0ti3" path="res://interactables/aniDoorHorizontalSS.png" id="9_1f32e"]
+[ext_resource type="Texture2D" uid="uid://baceu1lu7581p" path="res://interactables/aniDoorVerticalSS.png" id="10_f7dt0"]
+[ext_resource type="Texture2D" uid="uid://sfiumeyry23b" path="res://interactables/bin1.png" id="11_2sok2"]
+[ext_resource type="Texture2D" uid="uid://d4bbudu2mpftu" path="res://interactables/bin2.png" id="12_1hrdp"]
+[ext_resource type="Texture2D" uid="uid://0o3h6hvrsdyq" path="res://interactables/bin3.png" id="13_atvvu"]
+[ext_resource type="Texture2D" uid="uid://xysloqqh8rtf" path="res://interactables/bin4.png" id="14_k3wgs"]
+[ext_resource type="Texture2D" uid="uid://c1x83ri8u8yb5" path="res://interactables/book1.png" id="15_5uwbe"]
+[ext_resource type="Texture2D" uid="uid://clweuk4ldl7hn" path="res://interactables/book2.png" id="16_3wquv"]
+[ext_resource type="Texture2D" uid="uid://cttv34frspjdu" path="res://interactables/book3.png" id="17_nkgu2"]
+[ext_resource type="Texture2D" uid="uid://blb66sig18xx" path="res://interactables/box1.png" id="18_0d7oo"]
+[ext_resource type="Texture2D" uid="uid://dymh6x4qgxra5" path="res://interactables/box2.png" id="19_jx1ha"]
+[ext_resource type="Texture2D" uid="uid://b68aaaa2eqg0g" path="res://interactables/box3.png" id="20_578gf"]
+[ext_resource type="Texture2D" uid="uid://0qioafhv8nv6" path="res://interactables/bulletin1.png" id="21_qmpka"]
+[ext_resource type="Texture2D" uid="uid://d07t3246r6ci6" path="res://interactables/glassDoubleDoorSS.png" id="22_8kepm"]
+[ext_resource type="Texture2D" uid="uid://dqaajk3cq72fx" path="res://interactables/pillarBlack.png" id="23_3if8x"]
+[ext_resource type="Texture2D" uid="uid://d3tmcm0opjoo6" path="res://interactables/pillarBlackNoSeat.png" id="24_wycl2"]
+[ext_resource type="Texture2D" uid="uid://bxtlpeue0bwcc" path="res://interactables/pillarBlue.png" id="25_qms1j"]
+[ext_resource type="Texture2D" uid="uid://rdw5fm2cw60x" path="res://interactables/pillarGreen.png" id="26_axhf3"]
+[ext_resource type="Texture2D" uid="uid://demo5eyo1qvy8" path="res://interactables/pillarOrange.png" id="27_befm4"]
+[ext_resource type="Texture2D" uid="uid://bhk41scxkvvry" path="res://interactables/pillarRed.png" id="28_003tw"]
+[ext_resource type="Texture2D" uid="uid://dy0sb748yqm5y" path="res://interactables/pillarWhite.png" id="29_fx33l"]
+[ext_resource type="Texture2D" uid="uid://4ukoffqi2t3l" path="res://interactables/pillarYellow.png" id="30_p0amp"]
+[ext_resource type="Texture2D" uid="uid://dkimusc4n2qkm" path="res://enemies/corinthianPillar.png" id="31_q1578"]
+[ext_resource type="Texture2D" uid="uid://ud1uto31ioqt" path="res://enemies/doricPillar.png" id="32_0d1jy"]
+[ext_resource type="Texture2D" uid="uid://cusokkkejyaug" path="res://enemies/ionicPillar.png" id="33_i08i2"]
+[ext_resource type="Texture2D" uid="uid://d2cc42iqf5jg7" path="res://misc/infoAnime.png" id="34_8xix5"]
+[ext_resource type="Texture2D" uid="uid://bu5eqnppfmrnc" path="res://misc/muicLobbyBoard.png" id="35_vj5qc"]
+[ext_resource type="Texture2D" uid="uid://cidue6voqpmoh" path="res://coinGroundSS.png" id="36_r7paf"]
+[ext_resource type="PackedScene" uid="uid://cmhrf827nfpky" path="res://enemies/printer.tscn" id="37_mjcfy"]
+[ext_resource type="PackedScene" uid="uid://bs0h2fmnb8ptq" path="res://enemies/student.tscn" id="38_rhomp"]
+[ext_resource type="PackedScene" uid="uid://cryhi5byg0s3p" path="res://enemies/bosses/printerovski_3000.tscn" id="39_keenn"]
+[ext_resource type="PackedScene" uid="uid://bcco2p0tgv3vr" path="res://npcs/orion_npc.tscn" id="40_neqjy"]
+[ext_resource type="PackedScene" uid="uid://cu2op054wp2nv" path="res://projectiles/printer_proj_1.tscn" id="41_2unru"]
+[ext_resource type="PackedScene" uid="uid://caw6brh3py3mv" path="res://players/player.tscn" id="41_iaaok"]
+[ext_resource type="PackedScene" uid="uid://7bcbymaw5nvn" path="res://projectiles/printer_proj_2.tscn" id="42_hempo"]
+[ext_resource type="PackedScene" uid="uid://xm6igkoes8jp" path="res://projectiles/printerovski_proj_thrown.tscn" id="43_c8aph"]
+[ext_resource type="PackedScene" uid="uid://c8xgb6p7qsy45" path="res://projectiles/darwin_proj_1.tscn" id="44_48ht7"]
+[ext_resource type="Texture2D" uid="uid://ba6ktq5eioywu" path="res://players/darwin_still.png" id="45_j47ak"]
+
+[node name="Level" instance=ExtResource("1_emc3i")]
+y_sort_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Map" parent="." index="0"]
+layer_0/tile_data = PackedInt32Array(65536, 131072, 1, 131072, 131072, 1, 196608, 131072, 1, 262144, 131072, 1, 327680, 131072, 1, 65537, 131072, 1, 131073, 131072, 1, 196609, 131072, 1, 262145, 131072, 1, 327681, 131072, 1, 65538, 131072, 1, 131074, 131072, 1, 196610, 131072, 1, 262146, 131072, 1, 327682, 131072, 1, 65539, 131072, 1, 131075, 131072, 1, 196611, 131072, 1, 262147, 131072, 1, 327683, 131072, 1, 65540, 131072, 1, 131076, 131072, 1, 196612, 131072, 1, 262148, 131072, 1, 327684, 131072, 1, 65541, 131072, 1, 131077, 131072, 1, 196613, 131072, 1, 262149, 131072, 1, 327685, 131072, 1, 6, 131072, 1, 65542, 131072, 1, 131078, 131072, 1, 196614, 131072, 1, 262150, 131072, 1, 327686, 131072, 1, 7, 131072, 1, 65543, 131072, 1, 131079, 131072, 1, 196615, 131072, 1, 262151, 131072, 1, 327687, 131072, 1, 8, 131072, 1, 65544, 131072, 1, 131080, 131072, 1, 196616, 131072, 1, 262152, 131072, 1, 327688, 131072, 1, 9, 131072, 1, 65545, 131072, 1, 131081, 131072, 1, 196617, 131072, 1, 262153, 131072, 1, 327689, 131072, 1, 10, 131072, 1, 65546, 131072, 1, 131082, 131072, 1, 196618, 131072, 1, 262154, 131072, 1, 327690, 131072, 1, 327691, 131072, 1, 262155, 131072, 1, 196619, 131072, 1, 65547, 131072, 1, 11, 131072, 1, 65549, 131072, 1, 131085, 131072, 1, 196621, 131072, 1, 262157, 131072, 1, 196620, 131072, 1, 262156, 131072, 1, 327692, 131072, 1, 13, 131072, 1, 12, 131072, 1, 131083, 131072, 1, 131084, 131072, 1, 65548, 131072, 1, 327693, 131072, 1, 327694, 131072, 1, 262158, 131072, 1, 196622, 131072, 1, 131086, 131072, 1, 65550, 131072, 1, 14, 131072, 1, 0, 131072, 1, 1, 131072, 1, 2, 131072, 1, 3, 131072, 1, 4, 131072, 1, 5, 131072, 1, 917519, 131072, 1, 851983, 131072, 1, 786447, 131072, 1, 720911, 131072, 1, 655375, 131072, 1, 589839, 131072, 1, 524303, 131072, 1, 458767, 131072, 1, 393231, 131072, 1, 327695, 131072, 1, 262159, 131072, 1, 196623, 131072, 1, 131087, 131072, 1, 65551, 131072, 1, 15, 131072, 1, 917518, 131072, 1, 851982, 131072, 1, 786446, 131072, 1, 720910, 131072, 1, 655374, 131072, 1, 589838, 131072, 1, 524302, 131072, 1, 458766, 131072, 1, 393230, 131072, 1, 917517, 131072, 1, 851981, 131072, 1, 786445, 131072, 1, 720909, 131072, 1, 655373, 131072, 1, 589837, 131072, 1, 524301, 131072, 1, 458765, 131072, 1, 393229, 131072, 1, 917516, 131072, 1, 851980, 131072, 1, 786444, 131072, 1, 720908, 131072, 1, 655372, 131072, 1, 589836, 131072, 1, 524300, 131072, 1, 458764, 131072, 1, 393228, 131072, 1, 917515, 131072, 1, 851979, 131072, 1, 786443, 131072, 1, 720907, 131072, 1, 655371, 131072, 1, 589835, 131072, 1, 524299, 131072, 1, 458763, 131072, 1, 393227, 131072, 1, 917514, 131072, 1, 851978, 131072, 1, 786442, 131072, 1, 720906, 131072, 1, 655370, 131072, 1, 589834, 131072, 1, 524298, 131072, 1, 458762, 131072, 1, 393226, 131072, 1, 917513, 131072, 1, 851977, 131072, 1, 786441, 131072, 1, 720905, 131072, 1, 655369, 131072, 1, 589833, 131072, 1, 524297, 131072, 1, 458761, 131072, 1, 393225, 131072, 1, 917512, 131072, 1, 851976, 131072, 1, 786440, 131072, 1, 720904, 131072, 1, 655368, 131072, 1, 589832, 131072, 1, 524296, 131072, 1, 458760, 131072, 1, 393224, 131072, 1, 917511, 131072, 1, 851975, 131072, 1, 786439, 131072, 1, 720903, 131072, 1, 655367, 131072, 1, 589831, 131072, 1, 524295, 131072, 1, 458759, 131072, 1, 393223, 131072, 1, 917510, 131072, 1, 851974, 131072, 1, 786438, 131072, 1, 720902, 131072, 1, 655366, 131072, 1, 589830, 131072, 1, 524294, 131072, 1, 458758, 131072, 1, 393222, 131072, 1, 917509, 131072, 1, 851973, 131072, 1, 786437, 131072, 1, 720901, 131072, 1, 655365, 131072, 1, 589829, 131072, 1, 524293, 131072, 1, 458757, 131072, 1, 393221, 131072, 1, 917508, 131072, 1, 851972, 131072, 1, 786436, 131072, 1, 720900, 131072, 1, 655364, 131072, 1, 589828, 131072, 1, 524292, 131072, 1, 458756, 131072, 1, 393220, 131072, 1, 917507, 131072, 1, 851971, 131072, 1, 786435, 131072, 1, 720899, 131072, 1, 655363, 131072, 1, 589827, 131072, 1, 524291, 131072, 1, 458755, 131072, 1, 393219, 131072, 1, 917506, 131072, 1, 851970, 131072, 1, 786434, 131072, 1, 720898, 131072, 1, 655362, 131072, 1, 589826, 131072, 1, 524290, 131072, 1, 458754, 131072, 1, 393218, 131072, 1, 917505, 131072, 1, 851969, 131072, 1, 786433, 131072, 1, 720897, 131072, 1, 655361, 131072, 1, 589825, 131072, 1, 524289, 131072, 1, 458753, 131072, 1, 393217, 131072, 1, 917504, 131072, 1, 851968, 131072, 1, 786432, 131072, 1, 720896, 131072, 1, 655360, 131072, 1, 589824, 131072, 1, 524288, 131072, 1, 458752, 131072, 1, 393216, 131072, 1, 1048593, 131072, 1, 983057, 131072, 1, 917521, 131072, 1, 851985, 131072, 1, 786449, 131072, 1, 720913, 131072, 1, 655377, 131072, 1, 589841, 131072, 1, 524305, 131072, 1, 458769, 131072, 1, 393233, 131072, 1, 327697, 131072, 1, 262161, 131072, 1, 196625, 131072, 1, 131089, 131072, 1, 65553, 131072, 1, 17, 131072, 1, 1048592, 131072, 1, 983056, 131072, 1, 917520, 131072, 1, 851984, 131072, 1, 786448, 131072, 1, 720912, 131072, 1, 655376, 131072, 1, 589840, 131072, 1, 524304, 131072, 1, 458768, 131072, 1, 393232, 131072, 1, 327696, 131072, 1, 262160, 131072, 1, 196624, 131072, 1, 131088, 131072, 1, 65552, 131072, 1, 16, 131072, 1, 1048591, 131072, 1, 983055, 131072, 1, 1048590, 131072, 1, 983054, 131072, 1, 1048589, 131072, 1, 983053, 131072, 1, 1048588, 131072, 1, 983052, 131072, 1, 1048587, 131072, 1, 983051, 131072, 1, 1048586, 131072, 1, 983050, 131072, 1, 1048585, 131072, 1, 983049, 131072, 1, 1048584, 131072, 1, 983048, 131072, 1, 1048583, 131072, 1, 983047, 131072, 1, 1048582, 131072, 1, 983046, 131072, 1, 1048581, 131072, 1, 983045, 131072, 1, 1048580, 131072, 1, 983044, 131072, 1, 1048579, 131072, 1, 983043, 131072, 1, 1048578, 131072, 1, 983042, 131072, 1, 1048577, 131072, 1, 983041, 131072, 1, 1048576, 131072, 1, 983040, 131072, 1, 1048594, 131072, 1, 983058, 131072, 1, 917522, 131072, 1, 851986, 131072, 1, 786450, 131072, 1, 720914, 131072, 1, 655378, 131072, 1, 589842, 131072, 1, 524306, 131072, 1, 458770, 131072, 1, 393234, 131072, 1, 327698, 131072, 1, 262162, 131072, 1, 196626, 131072, 1, 131090, 131072, 1, 65554, 131072, 1, 18, 131072, 1, 1048595, 131072, 1, 983059, 131072, 1, 917523, 131072, 1, 851987, 131072, 1, 786451, 131072, 1, 720915, 131072, 1, 655379, 131072, 1, 589843, 131072, 1, 524307, 131072, 1, 458771, 131072, 1, 393235, 131072, 1, 327699, 131072, 1, 262163, 131072, 1, 196627, 131072, 1, 131091, 131072, 1, 65555, 131072, 1, 19, 131072, 1, 20, 131072, 1, 65557, 131072, 1, 131093, 131072, 1, 196629, 131072, 1, 262165, 131072, 1, 327701, 131072, 1, 393237, 131072, 1, 458773, 131072, 1, 524309, 131072, 1, 589845, 131072, 1, 655381, 131072, 1, 851989, 131072, 1, 917525, 131072, 1, 983061, 131072, 1, 1048597, 131072, 1, 1048596, 131072, 1, 983060, 131072, 1, 917524, 131072, 1, 851988, 131072, 1, 786452, 131072, 1, 720916, 131072, 1, 655380, 131072, 1, 589844, 131072, 1, 524308, 131072, 1, 458772, 131072, 1, 393236, 131072, 1, 327700, 131072, 1, 262164, 131072, 1, 196628, 131072, 1, 131092, 131072, 1, 65556, 131072, 1, 21, 131072, 1, 720917, 131072, 1, 786453, 131072, 1)
+layer_1/tile_data = PackedInt32Array(65551, 65538, 0, 65554, 2, 0, 65553, 131074, 0, 262160, 65539, 0, 262161, 131075, 0, 262162, 3, 0, 393234, 131073, 0, 393233, 65537, 0, 393232, 1, 0)
+
+[node name="AdithChair" type="Sprite2D" parent="." index="1"]
+texture_filter = 1
+position = Vector2(848, 784)
+scale = Vector2(3, 3)
+texture = ExtResource("2_gdwxo")
+
+[node name="AdithPodium" type="Sprite2D" parent="." index="2"]
+texture_filter = 1
+position = Vector2(920, 896)
+scale = Vector2(3, 3)
+texture = ExtResource("3_wb2a6")
+
+[node name="AdithTable" type="Sprite2D" parent="." index="3"]
+texture_filter = 1
+position = Vector2(888, 672)
+scale = Vector2(3, 3)
+texture = ExtResource("4_rd0er")
+
+[node name="AdithWoodLongChair" type="Sprite2D" parent="." index="4"]
+texture_filter = 1
+position = Vector2(720, 785)
+scale = Vector2(3, 3)
+texture = ExtResource("5_3aioi")
+
+[node name="AdithWoodTable" type="Sprite2D" parent="." index="5"]
+texture_filter = 1
+position = Vector2(723, 706)
+scale = Vector2(3, 3)
+texture = ExtResource("6_v6p3t")
+
+[node name="AditReceptionBack" type="Sprite2D" parent="." index="6"]
+texture_filter = 1
+position = Vector2(774, 440)
+scale = Vector2(3, 3)
+texture = ExtResource("7_satbm")
+
+[node name="AditReceptionFront" type="Sprite2D" parent="." index="7"]
+texture_filter = 1
+position = Vector2(774, 440)
+scale = Vector2(3, 3)
+texture = ExtResource("8_jkw83")
+
+[node name="AniDoorHorizontalSs" type="Sprite2D" parent="." index="8"]
+texture_filter = 1
+position = Vector2(273, 404)
+scale = Vector2(2, 2)
+texture = ExtResource("9_1f32e")
+
+[node name="AniDoorVerticalSs" type="Sprite2D" parent="." index="9"]
+texture_filter = 1
+position = Vector2(274, 571)
+scale = Vector2(2, 2)
+texture = ExtResource("10_f7dt0")
+
+[node name="Bin1" type="Sprite2D" parent="." index="10"]
+texture_filter = 1
+position = Vector2(644, 889)
+scale = Vector2(3, 3)
+texture = ExtResource("11_2sok2")
+
+[node name="Bin2" type="Sprite2D" parent="." index="11"]
+texture_filter = 1
+position = Vector2(709, 889)
+scale = Vector2(3, 3)
+texture = ExtResource("12_1hrdp")
+
+[node name="Bin3" type="Sprite2D" parent="." index="12"]
+texture_filter = 1
+position = Vector2(768, 889)
+scale = Vector2(3, 3)
+texture = ExtResource("13_atvvu")
+
+[node name="Bin4" type="Sprite2D" parent="." index="13"]
+texture_filter = 1
+position = Vector2(831, 889)
+scale = Vector2(3, 3)
+texture = ExtResource("14_k3wgs")
+
+[node name="Book1" type="Sprite2D" parent="." index="14"]
+texture_filter = 1
+position = Vector2(536, 837)
+scale = Vector2(2, 2)
+texture = ExtResource("15_5uwbe")
+
+[node name="Book2" type="Sprite2D" parent="." index="15"]
+texture_filter = 1
+position = Vector2(480, 838)
+scale = Vector2(2, 2)
+texture = ExtResource("16_3wquv")
+
+[node name="Book3" type="Sprite2D" parent="." index="16"]
+texture_filter = 1
+position = Vector2(597, 840)
+scale = Vector2(2, 2)
+texture = ExtResource("17_nkgu2")
+
+[node name="Box1" type="Sprite2D" parent="." index="17"]
+texture_filter = 1
+position = Vector2(506, 764)
+scale = Vector2(3, 3)
+texture = ExtResource("18_0d7oo")
+
+[node name="Box2" type="Sprite2D" parent="." index="18"]
+texture_filter = 1
+position = Vector2(508, 689)
+scale = Vector2(3, 3)
+texture = ExtResource("19_jx1ha")
+
+[node name="Box3" type="Sprite2D" parent="." index="19"]
+texture_filter = 1
+position = Vector2(587, 727)
+scale = Vector2(3, 3)
+texture = ExtResource("20_578gf")
+
+[node name="Bulletin1" type="Sprite2D" parent="." index="20"]
+texture_filter = 1
+position = Vector2(1056, 688)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("21_qmpka")
+
+[node name="GlassDoubleDoorSs" type="Sprite2D" parent="." index="21"]
+texture_filter = 1
+position = Vector2(248, 737)
+scale = Vector2(2, 2)
+texture = ExtResource("22_8kepm")
+
+[node name="PillarBlack" type="Sprite2D" parent="." index="22"]
+texture_filter = 1
+position = Vector2(564, 126)
+scale = Vector2(2, 2)
+texture = ExtResource("23_3if8x")
+
+[node name="PillarBlackNoSeat" type="Sprite2D" parent="." index="23"]
+texture_filter = 1
+position = Vector2(689, 141)
+scale = Vector2(2, 2)
+texture = ExtResource("24_wycl2")
+
+[node name="PillarBlue" type="Sprite2D" parent="." index="24"]
+texture_filter = 1
+position = Vector2(438, 131)
+scale = Vector2(2, 2)
+texture = ExtResource("25_qms1j")
+
+[node name="PillarGreen" type="Sprite2D" parent="." index="25"]
+texture_filter = 1
+position = Vector2(903, 138)
+scale = Vector2(2, 2)
+texture = ExtResource("26_axhf3")
+
+[node name="PillarOrange" type="Sprite2D" parent="." index="26"]
+texture_filter = 1
+position = Vector2(791, 144)
+scale = Vector2(2, 2)
+texture = ExtResource("27_befm4")
+
+[node name="PillarRed" type="Sprite2D" parent="." index="27"]
+texture_filter = 1
+position = Vector2(311, 132)
+scale = Vector2(2, 2)
+texture = ExtResource("28_003tw")
+
+[node name="PillarWhite" type="Sprite2D" parent="." index="28"]
+texture_filter = 1
+position = Vector2(73, 124)
+scale = Vector2(2, 2)
+texture = ExtResource("29_fx33l")
+
+[node name="PillarYellow" type="Sprite2D" parent="." index="29"]
+texture_filter = 1
+position = Vector2(188, 128)
+scale = Vector2(2, 2)
+texture = ExtResource("30_p0amp")
+
+[node name="CorinthianPillar" type="Sprite2D" parent="." index="30"]
+texture_filter = 1
+position = Vector2(195, 967)
+scale = Vector2(2, 2)
+texture = ExtResource("31_q1578")
+
+[node name="DoricPillar" type="Sprite2D" parent="." index="31"]
+texture_filter = 1
+position = Vector2(322, 968)
+scale = Vector2(2, 2)
+texture = ExtResource("32_0d1jy")
+
+[node name="IonicPillar" type="Sprite2D" parent="." index="32"]
+texture_filter = 1
+position = Vector2(75, 964)
+scale = Vector2(2, 2)
+texture = ExtResource("33_i08i2")
+
+[node name="InfoAnime" type="Sprite2D" parent="." index="33"]
+texture_filter = 1
+position = Vector2(1005, 993)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("34_8xix5")
+
+[node name="MuicLobbyBoard" type="Sprite2D" parent="." index="34"]
+texture_filter = 1
+position = Vector2(1088, 872)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("35_vj5qc")
+
+[node name="CoinGroundSs" type="Sprite2D" parent="." index="35"]
+texture_filter = 1
+position = Vector2(522, 910)
+texture = ExtResource("36_r7paf")
+
+[node name="Printer" parent="." index="36" instance=ExtResource("37_mjcfy")]
+position = Vector2(488, 984)
+
+[node name="Student" parent="." index="37" instance=ExtResource("38_rhomp")]
+position = Vector2(593, 984)
+
+[node name="OrionNPC" parent="." index="38" instance=ExtResource("40_neqjy")]
+position = Vector2(688, 992)
+
+[node name="Player" parent="." index="39" instance=ExtResource("41_iaaok")]
+position = Vector2(784, 1000)
+
+[node name="PrinterProj1" parent="." index="40" instance=ExtResource("41_2unru")]
+position = Vector2(1080, 988)
+
+[node name="PrinterProj2" parent="." index="41" instance=ExtResource("42_hempo")]
+position = Vector2(1144, 984)
+
+[node name="PrinterovskiProjThrown" parent="." index="42" instance=ExtResource("43_c8aph")]
+position = Vector2(1135, 1050)
+
+[node name="DarwinProj1" parent="." index="43" instance=ExtResource("44_48ht7")]
+position = Vector2(1072, 1052)
+
+[node name="DarwinStill" type="Sprite2D" parent="." index="44"]
+texture_filter = 1
+position = Vector2(890, 1015)
+scale = Vector2(2, 2)
+texture = ExtResource("45_j47ak")
+
+[node name="Printerovski3000" parent="." index="45" instance=ExtResource("39_keenn")]
+position = Vector2(1248, 624)

@@ -2,7 +2,7 @@ extends Control
 
 var boss : Node
 
-func _process(delta):
+func _process(_delta):
 	visible = (is_instance_valid(boss))
 	if is_instance_valid(boss):
 		$BarProgress.value = (boss.health*1000)/boss.max_health

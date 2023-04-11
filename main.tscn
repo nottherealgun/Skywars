@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://dlpndwnncnijn"]
+[gd_scene load_steps=60 format=3 uid="uid://dlpndwnncnijn"]
 
 [ext_resource type="PackedScene" uid="uid://caw6brh3py3mv" path="res://players/player.tscn" id="1_mhf8t"]
 [ext_resource type="AudioStream" uid="uid://bnw73i68y41ik" path="res://music/The Lobby_Loopable.mp3" id="1_x207s"]
@@ -30,6 +30,8 @@
 [ext_resource type="Texture2D" uid="uid://515cgx6i0ygs" path="res://gui/optionButton.png" id="26_diu8h"]
 [ext_resource type="Texture2D" uid="uid://bebfa5wjlu236" path="res://gui/homeButton.png" id="27_atwa6"]
 [ext_resource type="Texture2D" uid="uid://ttq5mrq4ae03" path="res://gui/exitButton.png" id="28_04hgl"]
+[ext_resource type="Texture2D" uid="uid://cfhc31r667nck" path="res://utility/cursor.png" id="31_4q8pb"]
+[ext_resource type="Script" path="res://utility/Cursor.gd" id="32_o3cct"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sr40o"]
 atlas = ExtResource("10_xahcf")
@@ -252,6 +254,13 @@ color = Color(0, 0, 0, 1)
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
+[node name="Cursor" type="Sprite2D" parent="GUI"]
+z_index = 10
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("31_4q8pb")
+script = ExtResource("32_o3cct")
+
 [node name="BossBar" type="Control" parent="GUI"]
 layout_mode = 3
 anchors_preset = 15
@@ -434,7 +443,7 @@ stretch_mode = 5
 [node name="Brainbar" type="AnimatedSprite2D" parent="GUI/PlayerStats/PlayerStats1"]
 texture_filter = 1
 position = Vector2(236, 97)
-scale = Vector2(3.88571, 4)
+scale = Vector2(3.326, 3.402)
 sprite_frames = SubResource("SpriteFrames_gu0rw")
 frame = 6
 
@@ -561,24 +570,23 @@ stretch_mode = 5
 [node name="Brainbar" type="AnimatedSprite2D" parent="GUI/PlayerStats/PlayerStats2"]
 texture_filter = 1
 position = Vector2(236, 100)
-scale = Vector2(3.88571, 4)
+scale = Vector2(3.326, 3.402)
 sprite_frames = SubResource("SpriteFrames_gu0rw")
 frame = 6
 
 [node name="NameTag" type="Label" parent="GUI/PlayerStats/PlayerStats2"]
+texture_filter = 1
 layout_mode = 0
 offset_left = 120.0
 offset_top = -8.0
 offset_right = 304.0
-offset_bottom = 35.0
+offset_bottom = 39.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("11_lksja")
-theme_override_font_sizes/font_size = 40
-text = "PLAYER 1"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("11_2h1l6")
+theme_override_font_sizes/font_size = 44
+text = "Player 1"
 
 [node name="Money" type="Label" parent="GUI/PlayerStats/PlayerStats2"]
 layout_mode = 0
@@ -688,10 +696,11 @@ stretch_mode = 5
 
 [node name="Brainbar" type="AnimatedSprite2D" parent="GUI/PlayerStats/PlayerStats3"]
 texture_filter = 1
-position = Vector2(236, 97)
-scale = Vector2(3.88571, 4)
+position = Vector2(3.326, 3.402)
+scale = Vector2(3.31429, 3.4)
 sprite_frames = SubResource("SpriteFrames_gu0rw")
 frame = 6
+metadata/_edit_lock_ = true
 
 [node name="NameTag" type="Label" parent="GUI/PlayerStats/PlayerStats3"]
 texture_filter = 1
@@ -699,7 +708,7 @@ layout_mode = 0
 offset_left = 120.0
 offset_top = -8.0
 offset_right = 304.0
-offset_bottom = 35.0
+offset_bottom = 39.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
@@ -815,10 +824,11 @@ stretch_mode = 5
 
 [node name="Brainbar" type="AnimatedSprite2D" parent="GUI/PlayerStats/PlayerStats4"]
 texture_filter = 1
-position = Vector2(236, 97)
-scale = Vector2(3.88571, 4)
+position = Vector2(3.326, 3.402)
+scale = Vector2(3.31429, 3.4)
 sprite_frames = SubResource("SpriteFrames_gu0rw")
 frame = 6
+metadata/_edit_lock_ = true
 
 [node name="NameTag" type="Label" parent="GUI/PlayerStats/PlayerStats4"]
 texture_filter = 1
@@ -826,7 +836,7 @@ layout_mode = 0
 offset_left = 120.0
 offset_top = -8.0
 offset_right = 304.0
-offset_bottom = 35.0
+offset_bottom = 39.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12

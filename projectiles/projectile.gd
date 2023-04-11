@@ -42,5 +42,5 @@ func _on_area_entered(area):
 			Global.kill(area)
 			Global.kill(self)
 
-func _on_body_entered(body):
+func _on_body_entered(_body):
 	Global.kill(self)

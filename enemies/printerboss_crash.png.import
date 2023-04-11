@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dk5py4nxmx720"
-path="res://.godot/imported/IceInfographics.jpg-2b766f8d75f953b510982b6d55c0f653.ctex"
+uid="uid://fm665tnhj01v"
+path="res://.godot/imported/printerboss_crash.png-710044947c802b33041a482753d6b63a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://interactables/IceInfographics.jpg"
-dest_files=["res://.godot/imported/IceInfographics.jpg-2b766f8d75f953b510982b6d55c0f653.ctex"]
+source_file="res://enemies/printerboss_crash.png"
+dest_files=["res://.godot/imported/printerboss_crash.png-710044947c802b33041a482753d6b63a.ctex"]
 
 [params]
 
