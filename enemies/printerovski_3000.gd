@@ -25,6 +25,7 @@ func _ready():
 	tween.tween_property($AnimatedSprite,"position:y",128.0,1.0).from(-500.0).set_delay(4.0)
 	tween.chain().tween_callback($Shockwave.play.bind("default"))
 	tween.chain().tween_callback($AnimatedSprite.play.bind("transform"))
+	
 	await $AnimatedSprite.animation_finished
 #	tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUINT)
 #	tween.tween_callback($AnimatedSprite.play.bind("idle"))
@@ -89,34 +90,50 @@ func _physics_process(delta):
 			await $AnimatedSprite.animation_finished
 			change_state(STATES.RELOADING)
 			
-		STATES.ATTACK2:
-			await $AnimatedSprite.animation_finished
-			change_state(STATES.FLYING)
-			
+#		STATES.ATTACK2:
+#			await $AnimatedSprite.animation_finished
+#			change_state(STATES.FLYING)
+#
 		STATES.FLYING:
 			$LandIndicator.modulate = Color.WHITE
 			$LandIndicator.position = target.position-position
-
+			
+		
 func change_state(new_state):
+	print("CHANGED STATE TO: "+STATES.keys()[new_state])
 	match state:
 		STATES.MOVING:
 			$Pupil.hide()
+			$SFX.stop()
 	state = new_state
 	match state:
 		STATES.IDLE:
 			$AnimatedSprite.play("idle")
+			
 		STATES.MOVING:
 			$Pupil.show()
 			$AnimatedSprite.play("move")
+			$SFX.play()
+			
+			for i in 3:
+				var vec = -position.direction_to(target.get_hitbox_anchor()).rotated(deg_to_rad(-60))
+				for j in 5:
+					Global.spawn_projectile(self,"printer_proj_1",position,vec)
+					vec = vec.rotated(deg_to_rad(30))
+				await get_tree().create_timer(0.3).timeout
+			
 		STATES.ATTACK1:
 			$AnimatedSprite.play("artillery")
+			
 		STATES.ATTACK2:
 			$AnimatedSprite.play("jump")
 			$Hitbox.monitoring = false
+			await $AnimatedSprite.animation_finished
+			change_state(STATES.FLYING)
 			
 		STATES.FLYING:
 			$AnimatedSprite.play("fly")
-			var tween := create_tween()
+			var tween = create_tween()
 			tween.tween_property($AnimatedSprite,"position:y",-5000,3).from_current()
 			await tween.finished
 			change_state(STATES.FALLING)
@@ -134,11 +151,11 @@ func change_state(new_state):
 			$AnimatedSprite.play("crash")
 			$Shockwave.play("default")
 			Global.screen_shake(16)
+			crash_burst()
 			await $AnimatedSprite.animation_finished
-			
 			$Hitbox.monitoring = true
 			change_state(STATES.IDLE)
-
+			
 var allies = []
 
 func get_hurt(by:Node):
@@ -198,7 +215,7 @@ func artillery_shot():
 	await f_new_proj.thrown
 	
 	var rand_land_pos
-	while rand_land_pos == null or !Global.is_out_of_map(rand_land_pos) and is_instance_valid(target):
+	while (rand_land_pos == null or !Global.is_out_of_map(rand_land_pos)) and is_instance_valid(target):
 		rand_land_pos = target.position+Vector2(randf_range(-300,300),randf_range(-300,300))
 	
 	randomize()
@@ -207,6 +224,12 @@ func artillery_shot():
 	new_proj.printer_boss = self
 	Global.active_entities.append(new_proj)
 	Global.Main.add_child(new_proj)
+
+func crash_burst():
+	var vec = Vector2(0,1)
+	for i in 18:
+		Global.spawn_projectile(self,"printer_proj_1",position,vec)
+		vec = vec.rotated(deg_to_rad(20))
 
 func _on_animated_sprite_frame_changed():
 	if state == STATES.ATTACK1:
@@ -221,7 +244,6 @@ func _on_timer_timeout():
 		STATES.IDLE:
 			randomize()
 			match randi_range(0,3):
-#			match 2:
 				0:
 					change_state(STATES.MOVING)
 				1:

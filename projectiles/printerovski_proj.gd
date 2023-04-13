@@ -19,13 +19,9 @@ func _ready():
 	
 	await tween.finished
 	$"Body/Sprite".stop()
-	
-#	landed = true
-#	$Body.monitorable = false
-#	await get_tree().create_timer(0.3).timeout
 
 	randomize()
-	if randi_range(0,100) < 10:
+	if randi_range(0,100) < 5:
 		if is_instance_valid(printer_boss):
 			if is_instance_valid(printer_boss.target):
 				if position.distance_to(printer_boss.target.position) < 150:
@@ -34,12 +30,12 @@ func _ready():
 	Global.kill(self)
 
 func _process(_delta):
-#	$Dev.text = str($Body.position.y > -90.0)
-	if $Body.position.y > -90.0:
-		$Body.monitorable = true
-	else:
-		$Body.monitorable = false
-#	$Body.monitorable = ($Body.position.y > -150.0)
+	$Dev.text = str($Body.position.y > -110.0)
+#	if $Body.position.y > -90.0:
+#		$Body.monitorable = true
+#	else:
+#		$Body.monitorable = false
+	$Body.monitorable = ($Body.position.y > -110.0)
 
 func affect(victim:Node):
 	victim.health -= damage

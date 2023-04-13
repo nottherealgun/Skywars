@@ -78,7 +78,7 @@ func _input_update():
 	# Get movement input strength
 	aim_vec = Input.get_vector("p"+str(player_id)+"_left2","p"+str(player_id)+"_right2","p"+str(player_id)+"_up2","p"+str(player_id)+"_down2")
 	
-	if !fainted and !transporting: # If player alive
+	if !fainted and !transporting and !Global.PauseMenu.visible: # If player alive
 		get_node("Arrow").rotation = get_node("Arrow").position.angle_to_point(aim_vec)
 		get_node("Arrow").visible = (aim_vec != Vector2.ZERO)
 		if Input.is_action_pressed("p"+str(player_id)+"_primary") and $RateOfFire.is_stopped():
@@ -99,14 +99,6 @@ func _input_update():
 				
 				if !revival_target.fainted:
 					revival_target = null
-		
-		if Input.is_action_just_pressed("pause"):
-			Global.PauseMenu.visible = !Global.PauseMenu.visible
-			match Global.PauseMenu.visible:
-				true:
-					Engine.time_scale = 0.0
-				false:
-					Engine.time_scale = 1.0
 
 func _gui_update():
 	healthbar.value = (health*healthbar.max_value)/max_health
@@ -123,7 +115,7 @@ func _move_update(delta):
 
 func shoot():
 	var player_proj = Global.spawn_projectile(self,"darwin_proj_1",position+Vector2(0,-mouse_aim_offset),aim_vec.normalized(),true)
-	player_proj.set("knockback",1)
+#	player_proj.set("knockback",1)
 
 #func get_knockback(direction:Vector2,strength:=1):
 #	var tween := create_tween()

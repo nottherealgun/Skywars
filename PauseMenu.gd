@@ -1,5 +1,13 @@
 extends Control
 
+func _process(delta):
+	if Input.is_action_just_pressed("pause"):
+		visible = !visible
+		if visible:
+			Engine.time_scale = 0.0
+		else:
+			Engine.time_scale = 1.0
+
 func _on_button_1_mouse_entered():
 	$Button1.scale = Vector2(1.1,1.1)
 
@@ -7,7 +15,8 @@ func _on_button_1_mouse_exited():
 	$Button1.scale = Vector2(1,1)
 
 func _on_button_1_pressed():
-	pass # Replace with function body.
+	hide()
+	Engine.time_scale = 1.0
 
 func _on_button_2_mouse_entered():
 	$Button2.scale = Vector2(1.1,1.1)

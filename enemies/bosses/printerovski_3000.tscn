@@ -1,7 +1,6 @@
-[gd_scene load_steps=198 format=3 uid="uid://cryhi5byg0s3p"]
+[gd_scene load_steps=195 format=3 uid="uid://cryhi5byg0s3p"]
 
 [ext_resource type="Script" path="res://enemies/printerovski_3000.gd" id="1_u6nnc"]
-[ext_resource type="Texture2D" uid="uid://cnt05r78g8k80" path="res://enemies/printerboss_fallingparticle.png" id="2_2bgk0"]
 [ext_resource type="Texture2D" uid="uid://wnienomcqn25" path="res://enemies/printerboss_artillery.png" id="2_vfpup"]
 [ext_resource type="Texture2D" uid="uid://d3age7jkaei1l" path="res://enemies/printerboss_flying.png" id="3_6kev4"]
 [ext_resource type="Texture2D" uid="uid://4pxya2nukeu" path="res://enemies/printerboss_idle.png" id="3_122f4"]
@@ -14,34 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://dsf6s8pdsoeca" path="res://enemies/bossPupil.png" id="7_bpk5v"]
 [ext_resource type="Texture2D" uid="uid://cwlth80a3g0jf" path="res://enemies/printerboss_indicator.png" id="13_6xell"]
 [ext_resource type="Texture2D" uid="uid://b8t0w643gqb04" path="res://enemies/printerboss_shockwave.png" id="14_doid5"]
+[ext_resource type="AudioStream" uid="uid://d4d53uy87yhlp" path="res://sfx/printerboss_walk.mp3" id="15_vnm3k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aejoi"]
 size = Vector2(192, 224)
-
-[sub_resource type="Gradient" id="Gradient_660re"]
-interpolation_mode = 2
-colors = PackedColorArray(0.403735, 0.432453, 0.556135, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_dffh1"]
-gradient = SubResource("Gradient_660re")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nbtyf"]
-lifetime_randomness = 0.3
-emission_shape = 3
-emission_box_extents = Vector3(100, 1, 1)
-particle_flag_disable_z = true
-direction = Vector3(0, -1, 0)
-spread = 0.0
-gravity = Vector3(0, 0, 0)
-initial_velocity_min = 500.0
-initial_velocity_max = 1000.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-scale_min = 0.2
-scale_max = 4.0
-color = Color(1, 1, 1, 0.588235)
-color_ramp = SubResource("GradientTexture1D_dffh1")
-turbulence_noise_scale = 10.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_it2dj"]
 atlas = ExtResource("2_vfpup")
@@ -1352,17 +1327,6 @@ script = ExtResource("1_u6nnc")
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_aejoi")
 
-[node name="FallingParticles" type="GPUParticles2D" parent="."]
-emitting = false
-amount = 60
-process_material = SubResource("ParticleProcessMaterial_nbtyf")
-texture = ExtResource("2_2bgk0")
-lifetime = 0.5
-randomness = 1.0
-collision_base_size = 0.0
-visibility_rect = Rect2(-130.196, -498.375, 261.797, 531.361)
-metadata/_edit_lock_ = true
-
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." groups=["boss", "enemy"]]
 texture_filter = 1
 position = Vector2(0, 128)
@@ -1418,6 +1382,10 @@ texture_filter = 1
 position = Vector2(0, 21)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_cjycf")
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_vnm3k")
+bus = &"SFX"
 
 [connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_animated_sprite_frame_changed"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

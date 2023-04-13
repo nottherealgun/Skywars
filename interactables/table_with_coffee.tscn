@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://ceje6knjf6lby"]
+
+[ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://interactables/interactable.tscn" id="1_7w38u"]
+[ext_resource type="Texture2D" uid="uid://c31x2s6rh5027" path="res://interactables/orionBoothLeftSS.png" id="2_t6sjt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emsoc"]
+atlas = ExtResource("2_t6sjt")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djelp"]
+atlas = ExtResource("2_t6sjt")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i810m"]
+atlas = ExtResource("2_t6sjt")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n1fi2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_emsoc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djelp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i810m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[node name="TableWithCoffee" instance=ExtResource("1_7w38u")]
+
+[node name="CollisionShape" parent="." index="0"]
+visible = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_n1fi2")
+autoplay = "default"
+frame_progress = 0.0682169
+offset = Vector2(0, -27)
