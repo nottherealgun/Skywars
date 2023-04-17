@@ -27,6 +27,9 @@ func _physics_process(delta):
 	if health <= 0:
 		latest_shooter.money += points
 		Global.kill(self)
+	if !Global.is_out_of_map(position):
+		Global.kill(self)
+		
 	if is_instance_valid(target):
 		if target.fainted:
 			target = null

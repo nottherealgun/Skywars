@@ -11,6 +11,7 @@ signal enemy_killed(enemy)
 @onready var Bossbar := get_node("/root/Main/GUI/BossBar") as Control
 @onready var PauseMenu := get_node("/root/Main/GUI/PauseMenu")
 @onready var Cam := get_node("/root/Main/MainCam") as Camera2D
+@onready var Inventory := get_node("/root/Main/GUI/PlayerInventory") as Control
 
 @onready var MAP_RECT : Vector2 = Map.get_used_rect().size*128
 
@@ -185,6 +186,124 @@ const tips = [
 	"WASD to walk.",
 	"Aj. Nik used to be a student at MUIC.",
 	"Bro is here.",
+]
+
+const items = [
+	{ #0
+		"name":"NotTheRealGun",
+		"pic":"notTheRealGun.png",
+		"desc":"We don’t support school shootings. So, this is just a NERF gun.",
+	},
+	{
+		"name":"Amulet of Dood",
+		"pic":"amuletOfDood.png",
+		"desc":"A periapt forged by mother nature herself.",
+	},
+	{
+		"name":"The Ice of Ice",
+		"pic":"icyboiIce.png",
+		"desc":"This ice is Ice’s ice which belongs to Ice. Cooler than Ice himself.",
+	},
+	{
+		"name":"Walker's Special",
+		"pic":"walkerSpecial.png",
+		"desc":"A secret recipe passed down from the first ancestor of Walker’s family.",
+	},
+	{ 
+		"name":"Worrier Froge",
+		"pic":"",
+		"desc":"The most versatile emoji on Earth. When you look closely, it looks like Ken.",
+	},
+	{ #5
+		"name":"Ken’s Gachapon",
+		"pic":"",
+		"desc":"Pure sodium chloride.",
+	},
+	{
+		"name":"Bro Was Here",
+		"pic":"",
+		"desc":"I hate it here.",
+	},
+	{
+		"name":"Kouprey’s Horn",
+		"pic":"koupreyHorn.png",
+		"desc":"A forbidden ingredient for aphrodisiac.",
+	},
+	{
+		"name":"Moss",
+		"pic":"",
+		"desc":"A sacred beast tamed by Mr.Will.",
+	},
+	{
+		"name":"Archplan Copy",
+		"pic":"",
+		"desc":"A copy of Archplan; A game made by Dennis.",
+	},
+	{ #10
+		"name":"James’s Hoodie",
+		"pic":"",
+		"desc":"He was there. He was always there.",
+	},
+	{
+		"name":"AJ’s Basketball",
+		"pic":"",
+		"desc":"Traveled.",
+	},
+	{
+		"name":"Konit’s Brick",
+		"pic":"",
+		"desc":"Bricked.",
+	},
+	{
+		"name":"Tim’s Shakes",
+		"pic":"",
+		"desc":"We don't know what it is but it’s Tim’s.",
+	},
+	{
+		"name":"Advisor’s Approval",
+		"pic":"",
+		"desc":"On hold.",
+	},
+	{ #15
+		"name":"Salmon Nigiri",
+		"pic":"",
+		"desc":"It’s actually trout.",
+	},
+	{
+		"name":"Tonkatsu Curry",
+		"pic":"",
+		"desc":"If you’re planning to get MUIC’s curry, just don’t.",
+	},
+	{
+		"name":"Khao Mun Gai",
+		"pic":"",
+		"desc":"A delicacy from Hainan.",
+	},
+	{
+		"name":"Dispensed Water",
+		"pic":"",
+		"desc":"4oz. water.",
+	},
+	{
+		"name":"The Walker Espress",
+		"pic":"",
+		"desc":"Pure coffee juice.",
+	},
+	{ #20
+		"name":"American-O",
+		"pic":"",
+		"desc":"A bit of coffee and tons of water. A truly watered-down drink.",
+	},
+	{
+		"name":"Cap’s Mustache",
+		"pic":"",
+		"desc":"It’s-a me, Cappuccino.",
+	},
+	{
+		"name":"Ohm’s Gyoza",
+		"pic":"",
+		"desc":"Athit’s Gyoza.",
+	},
 ]
 
 # Levels

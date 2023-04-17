@@ -10,7 +10,9 @@ func _ready():
 		if n.is_in_group("player"):
 			Global.active_players.append(n)
 			n.connect("player_killed",player_killed)
-
+	
+	Global.Inventory.start()
+	
 func _process(_delta):
 	var vec := Vector2.ZERO
 	for p in Global.active_players:

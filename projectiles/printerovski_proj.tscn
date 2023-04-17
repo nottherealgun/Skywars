@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ml32p68ra5v1"]
+[gd_scene load_steps=14 format=3 uid="uid://cy2cce8rq0vks"]
 
 [ext_resource type="Script" path="res://projectiles/printerovski_proj.gd" id="1_qhdrf"]
 [ext_resource type="Texture2D" uid="uid://b20vors8clxa6" path="res://enemies/doubleASS.png" id="2_2uhla"]
@@ -98,6 +98,7 @@ frame_progress = 0.647539
 offset = Vector2(0, -11.2)
 
 [node name="Dev" type="Label" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -118,5 +119,7 @@ vertical_alignment = 1
 z_index = -1
 texture_filter = 1
 position = Vector2(0, 12)
-scale = Vector2(5, 5)
+scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("3_d00gb")
+
+[node name="Drop" type="AudioStreamPlayer" parent="."]

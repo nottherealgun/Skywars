@@ -62,7 +62,7 @@ func _process(delta):
 		if $Revival.value == 100.0:
 			revive()
 				
-	if !fainted and !transporting: # If player alive
+	if !fainted and !transporting and !Global.PauseMenu.visible and !Global.Inventory.visible: # If player alive
 		_move_update(delta) # Update movement
 		# Sprite H flipping
 		if move_vec != Vector2.ZERO:
@@ -79,26 +79,30 @@ func _input_update():
 	aim_vec = Input.get_vector("p"+str(player_id)+"_left2","p"+str(player_id)+"_right2","p"+str(player_id)+"_up2","p"+str(player_id)+"_down2")
 	
 	if !fainted and !transporting and !Global.PauseMenu.visible: # If player alive
-		get_node("Arrow").rotation = get_node("Arrow").position.angle_to_point(aim_vec)
-		get_node("Arrow").visible = (aim_vec != Vector2.ZERO)
-		if Input.is_action_pressed("p"+str(player_id)+"_primary") and $RateOfFire.is_stopped():
-			$RateOfFire.start()
-			# Primary
-			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-				aim_vec = position.direction_to(get_global_mouse_position()+Vector2(0,mouse_aim_offset))
-			if aim_vec != Vector2.ZERO:
-				shoot()
-		if Input.is_action_just_pressed("p"+str(player_id)+"_action"):
-			# Action1
-			emit_signal("action",self)
-			
-		if Input.is_action_pressed("p"+str(player_id)+"_action"):
-			if is_instance_valid(revival_target) and revival_target.fainted:
-				if revival_target.get_node("ReviveTimer").is_stopped():
-					revival_target.get_node("ReviveTimer").start()
+		if !Global.Inventory.visible:
+			get_node("Arrow").rotation = get_node("Arrow").position.angle_to_point(aim_vec)
+			get_node("Arrow").visible = (aim_vec != Vector2.ZERO)
+			if Input.is_action_pressed("p"+str(player_id)+"_primary") and $RateOfFire.is_stopped():
+				$RateOfFire.start()
+				# Primary
+				if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+					aim_vec = position.direction_to(get_global_mouse_position()+Vector2(0,mouse_aim_offset))
+				if aim_vec != Vector2.ZERO:
+					shoot()
+			if Input.is_action_just_pressed("p"+str(player_id)+"_action"):
+				# Action1
+				emit_signal("action",self)
 				
-				if !revival_target.fainted:
-					revival_target = null
+			if Input.is_action_pressed("p"+str(player_id)+"_action"):
+				if is_instance_valid(revival_target) and revival_target.fainted:
+					if revival_target.get_node("ReviveTimer").is_stopped():
+						revival_target.get_node("ReviveTimer").start()
+					
+					if !revival_target.fainted:
+						revival_target = null
+		
+		if Input.is_action_just_pressed("inventory"):
+			Global.Inventory.visible = !Global.Inventory.visible
 
 func _gui_update():
 	healthbar.value = (health*healthbar.max_value)/max_health

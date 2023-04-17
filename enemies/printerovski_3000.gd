@@ -5,6 +5,7 @@ const display_desc = "MUIC Printer / Bane of Physical Copies"
 @export var max_health = 400
 @onready var health = max_health
 @export var speed = 1
+var speed_modifier = 1
 @export var damage = 3
 
 @export var level = 1
@@ -25,6 +26,7 @@ func _ready():
 	tween.tween_property($AnimatedSprite,"position:y",128.0,1.0).from(-500.0).set_delay(4.0)
 	tween.chain().tween_callback($Shockwave.play.bind("default"))
 	tween.chain().tween_callback($AnimatedSprite.play.bind("transform"))
+	tween.parallel().tween_callback($Transform.play)
 	
 	await $AnimatedSprite.animation_finished
 #	tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUINT)
@@ -74,17 +76,11 @@ func _physics_process(delta):
 		STATES.MOVING:
 			if is_instance_valid(target):
 				move_vec = position.direction_to(target.position)
-				move_and_collide(move_vec*delta*speed*100)
+				move_and_collide(move_vec*delta*speed*150*speed_modifier)
 				if $Timer.is_stopped():
 					$Timer.start(2.0)
 			else:
 				change_state(STATES.IDLE)
-				
-		STATES.RELOADING:
-			for i in 2:
-				$AnimatedSprite.play("reload")
-				await $AnimatedSprite.animation_finished
-			change_state(STATES.IDLE)
 			
 		STATES.ATTACK1:
 			await $AnimatedSprite.animation_finished
@@ -100,11 +96,11 @@ func _physics_process(delta):
 			
 		
 func change_state(new_state):
-	print("CHANGED STATE TO: "+STATES.keys()[new_state])
+#	print("CHANGED STATE TO: "+STATES.keys()[new_state])
 	match state:
 		STATES.MOVING:
 			$Pupil.hide()
-			$SFX.stop()
+
 	state = new_state
 	match state:
 		STATES.IDLE:
@@ -113,17 +109,29 @@ func change_state(new_state):
 		STATES.MOVING:
 			$Pupil.show()
 			$AnimatedSprite.play("move")
-			$SFX.play()
+			var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
+			tween.tween_property(self,"speed_modifier",2.0,2.0).from(0.1)
 			
 			for i in 3:
-				var vec = -position.direction_to(target.get_hitbox_anchor()).rotated(deg_to_rad(-60))
-				for j in 5:
-					Global.spawn_projectile(self,"printer_proj_1",position,vec)
-					vec = vec.rotated(deg_to_rad(30))
-				await get_tree().create_timer(0.3).timeout
+				if is_instance_valid(target):
+					var vec = -position.direction_to(target.get_hitbox_anchor()).rotated(deg_to_rad(-60))
+					for j in 5:
+						Global.spawn_projectile(self,"printer_proj_1",position,vec)
+						vec = vec.rotated(deg_to_rad(30))
+					await get_tree().create_timer(0.3).timeout
+		
+		STATES.RELOADING:
+			for i in range(0,3):
+				
+				$AnimatedSprite.play("reload")
+				$Reload.play()
+				
+				await $AnimatedSprite.animation_finished
+			change_state(STATES.IDLE)
 			
 		STATES.ATTACK1:
 			$AnimatedSprite.play("artillery")
+			$Artillery.play()
 			
 		STATES.ATTACK2:
 			$AnimatedSprite.play("jump")
@@ -150,11 +158,21 @@ func change_state(new_state):
 			
 			$AnimatedSprite.play("crash")
 			$Shockwave.play("default")
+			$Crash.play()
 			Global.screen_shake(16)
-			crash_burst()
+			for i in 2:
+				var minion = Global.spawn_enemy("printer",position)
+				var min_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+				min_tween.tween_property(minion,"position",position+position.direction_to(target.position).rotated(deg_to_rad(randf_range(-90.0,90.0)))*300,1.0)
+				
 			await $AnimatedSprite.animation_finished
+				
 			$Hitbox.monitoring = true
 			change_state(STATES.IDLE)
+			
+			for i in 5:
+				crash_burst(i*45)
+				await get_tree().create_timer(0.3).timeout
 			
 var allies = []
 
@@ -225,10 +243,10 @@ func artillery_shot():
 	Global.active_entities.append(new_proj)
 	Global.Main.add_child(new_proj)
 
-func crash_burst():
-	var vec = Vector2(0,1)
+func crash_burst(angle_mod=0):
+	var vec = Vector2(0,1).rotated(deg_to_rad(angle_mod))
 	for i in 18:
-		Global.spawn_projectile(self,"printer_proj_1",position,vec)
+		Global.spawn_projectile(self,"printer_proj_2",position,vec)
 		vec = vec.rotated(deg_to_rad(20))
 
 func _on_animated_sprite_frame_changed():
@@ -243,13 +261,13 @@ func _on_timer_timeout():
 	match state:
 		STATES.IDLE:
 			randomize()
-			match randi_range(0,3):
-				0:
-					change_state(STATES.MOVING)
-				1:
-					change_state(STATES.ATTACK1)
-				2:
-					change_state(STATES.ATTACK2)
+			var r = randi_range(1,100)
+			if r in range(1,45):
+				change_state(STATES.MOVING)
+			elif r in range(45,90):
+				change_state(STATES.ATTACK1)
+			elif r in range(90,100):
+				change_state(STATES.ATTACK2)
 					
 		STATES.MOVING:
 			change_state(STATES.IDLE)

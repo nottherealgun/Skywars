@@ -12,25 +12,23 @@ func _ready():
 	
 	position = land_pos
 	$Body.position = Vector2(0,-1000)
+	tween.tween_property($Indicator,"scale",Vector2.ONE*5,1.0).from(Vector2.ZERO).set_trans(Tween.TRANS_ELASTIC)
 	# Projectile Falling
-	tween.tween_property($Body,"position",Vector2(0,0),3.0).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.chain().tween_property($Body,"position",Vector2(0,0),3.0).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	# Red Indicator Fading
 	tween2.tween_property($Indicator,"modulate",Color.TRANSPARENT,4.0)
 	
 	await tween.finished
+	$Drop.stream = load("res://sfx/a4_drop/a4_drop"+str(randi_range(1,4))+".mp3")
+	$Drop.play()
+	await $Drop.finished
 	$"Body/Sprite".stop()
 
-	randomize()
-	if randi_range(0,100) < 5:
-		if is_instance_valid(printer_boss):
-			if is_instance_valid(printer_boss.target):
-				if position.distance_to(printer_boss.target.position) < 150:
-					Global.spawn_enemy("printer",position)
 	Global.emit_death_indicator(position)
 	Global.kill(self)
 
 func _process(_delta):
-	$Dev.text = str($Body.position.y > -110.0)
+#	$Dev.text = str($Body.position.y > -110.0)
 #	if $Body.position.y > -90.0:
 #		$Body.monitorable = true
 #	else:

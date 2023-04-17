@@ -1,4 +1,4 @@
-[gd_scene load_steps=195 format=3 uid="uid://cryhi5byg0s3p"]
+[gd_scene load_steps=198 format=3 uid="uid://cryhi5byg0s3p"]
 
 [ext_resource type="Script" path="res://enemies/printerovski_3000.gd" id="1_u6nnc"]
 [ext_resource type="Texture2D" uid="uid://wnienomcqn25" path="res://enemies/printerboss_artillery.png" id="2_vfpup"]
@@ -13,7 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://dsf6s8pdsoeca" path="res://enemies/bossPupil.png" id="7_bpk5v"]
 [ext_resource type="Texture2D" uid="uid://cwlth80a3g0jf" path="res://enemies/printerboss_indicator.png" id="13_6xell"]
 [ext_resource type="Texture2D" uid="uid://b8t0w643gqb04" path="res://enemies/printerboss_shockwave.png" id="14_doid5"]
-[ext_resource type="AudioStream" uid="uid://d4d53uy87yhlp" path="res://sfx/printerboss_walk.mp3" id="15_vnm3k"]
+[ext_resource type="AudioStream" uid="uid://bnu5x8c03eaoa" path="res://sfx/printerboss_transform.mp3" id="14_istcn"]
+[ext_resource type="AudioStream" uid="uid://0ao8mp0vhqqf" path="res://sfx/printerboss_artillery2.mp3" id="15_1fy7e"]
+[ext_resource type="AudioStream" uid="uid://dyn0yvfy6fjn3" path="res://sfx/printerboss_reload.mp3" id="16_kt8ol"]
+[ext_resource type="AudioStream" uid="uid://bou1mt4cg1jn1" path="res://sfx/printerboss_crash.mp3" id="17_gce0l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aejoi"]
 size = Vector2(192, 224)
@@ -824,7 +827,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4d6p6")
 }],
-"loop": false,
+"loop": true,
 "name": &"artillery",
 "speed": 12.0
 }, {
@@ -1332,7 +1335,8 @@ texture_filter = 1
 position = Vector2(0, 128)
 scale = Vector2(3.8, 3.8)
 sprite_frames = SubResource("SpriteFrames_kt6i4")
-animation = &"transform"
+animation = &"artillery"
+frame = 8
 offset = Vector2(0, -33.6842)
 
 [node name="Pupil" type="Sprite2D" parent="."]
@@ -1383,8 +1387,20 @@ position = Vector2(0, 21)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_cjycf")
 
-[node name="SFX" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("15_vnm3k")
+[node name="Transform" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_istcn")
+bus = &"SFX"
+
+[node name="Artillery" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_1fy7e")
+bus = &"SFX"
+
+[node name="Reload" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_kt8ol")
+bus = &"SFX"
+
+[node name="Crash" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_gce0l")
 bus = &"SFX"
 
 [connection signal="frame_changed" from="AnimatedSprite" to="." method="_on_animated_sprite_frame_changed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://dlpndwnncnijn"]
+[gd_scene load_steps=69 format=3 uid="uid://dlpndwnncnijn"]
 
 [ext_resource type="PackedScene" uid="uid://caw6brh3py3mv" path="res://players/player.tscn" id="1_mhf8t"]
 [ext_resource type="AudioStream" uid="uid://bnw73i68y41ik" path="res://music/The Lobby_Loopable.mp3" id="1_x207s"]
@@ -23,9 +23,13 @@
 [ext_resource type="Texture2D" uid="uid://bqjyiexgloh6b" path="res://utility/TransScreenBG.png" id="15_ln4oo"]
 [ext_resource type="Texture2D" uid="uid://syf78yg1sd4h" path="res://items/walkerSpecial.png" id="18_lgn5r"]
 [ext_resource type="Texture2D" uid="uid://dxwh08gt81dgh" path="res://utility/skywars_logo.png" id="19_f7762"]
+[ext_resource type="Script" path="res://PlayerInventory.gd" id="21_3xiss"]
+[ext_resource type="Texture2D" uid="uid://iu6iar47r7n0" path="res://gui/inventoryGUI.png" id="21_drtqb"]
+[ext_resource type="Texture2D" uid="uid://qk4xigecavl6" path="res://gui/inventoryHeadSlot.png" id="22_0aa0l"]
 [ext_resource type="Shader" path="res://pause_menu.gdshader" id="23_jl8kg"]
 [ext_resource type="Texture2D" uid="uid://uas65v7xroor" path="res://gui/iPadGUI.png" id="23_qefvt"]
 [ext_resource type="Script" path="res://PauseMenu.gd" id="23_yhhpu"]
+[ext_resource type="Texture2D" uid="uid://bghcrxm4th0pa" path="res://gui/inventoryGUIHover.png" id="24_vejm3"]
 [ext_resource type="Texture2D" uid="uid://dt87a7n6trlcn" path="res://gui/resumeButton.png" id="25_yffer"]
 [ext_resource type="Texture2D" uid="uid://515cgx6i0ygs" path="res://gui/optionButton.png" id="26_diu8h"]
 [ext_resource type="Texture2D" uid="uid://bebfa5wjlu236" path="res://gui/homeButton.png" id="27_atwa6"]
@@ -154,6 +158,16 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rsvsc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6fmfq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qjog4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7nme6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6lkfi"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q6brm"]
 shader = ExtResource("13_wjtoa")
 shader_parameter/progress = 0.0
@@ -250,6 +264,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="GUI" type="CanvasLayer" parent="."]
@@ -268,6 +283,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("3_r8jns")
 
 [node name="BarProgress" type="TextureProgressBar" parent="GUI/BossBar"]
@@ -286,6 +302,7 @@ grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(9, 9)
 pivot_offset = Vector2(44.4444, 5.66667)
+mouse_filter = 2
 max_value = 1000.0
 value = 1000.0
 texture_under = ExtResource("3_fdslt")
@@ -306,6 +323,7 @@ offset_right = 400.06
 offset_bottom = -208.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_fonts/normal_font = ExtResource("11_2h1l6")
@@ -329,6 +347,7 @@ offset_right = 400.06
 offset_bottom = -160.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 theme_override_colors/default_color = Color(1, 1, 1, 0.392157)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
@@ -868,6 +887,677 @@ autoplay = "default"
 frame_progress = 0.7199
 offset = Vector2(5, 5)
 
+[node name="PlayerInventory" type="Control" parent="GUI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("21_3xiss")
+metadata/_edit_lock_ = true
+
+[node name="Inventory" type="TextureRect" parent="GUI/PlayerInventory"]
+modulate = Color(0.745098, 0.745098, 0.745098, 1)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = -960.0
+offset_top = -487.6
+offset_right = 960.0
+offset_bottom = 464.4
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("21_drtqb")
+stretch_mode = 5
+
+[node name="PlayerSlot" type="TextureRect" parent="GUI/PlayerInventory"]
+texture_filter = 1
+layout_mode = 2
+offset_left = 748.0
+offset_top = 208.0
+offset_right = 1172.0
+offset_bottom = 632.0
+texture = ExtResource("22_0aa0l")
+expand_mode = 2
+stretch_mode = 5
+metadata/_edit_lock_ = true
+
+[node name="PlayerSlotIcon" type="TextureRect" parent="GUI/PlayerInventory/PlayerSlot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 84.0
+offset_top = 24.0
+offset_right = -84.0
+offset_bottom = -144.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="PlayerSlotItem" type="TextureRect" parent="GUI/PlayerInventory/PlayerSlot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 172.0
+offset_top = 278.0
+offset_right = -172.0
+offset_bottom = -66.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="HBox" type="HBoxContainer" parent="GUI/PlayerInventory"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = -616.0
+offset_top = -407.6
+offset_right = 616.0
+offset_bottom = 16.4
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = -140
+alignment = 1
+
+[node name="Selector" type="TextureRect" parent="GUI/PlayerInventory"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = -483.0
+offset_top = -18.6
+offset_right = -376.0
+offset_bottom = 88.4
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("24_vejm3")
+
+[node name="ItemSlot0" type="TextureRect" parent="GUI/PlayerInventory" groups=["item_slot"]]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = -483.0
+offset_top = -18.6
+offset_right = -376.2
+offset_bottom = 88.2
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="GUI/PlayerInventory/ItemSlot0"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 4.522
+anchor_top = 0.178
+anchor_right = 4.522
+anchor_bottom = 0.178
+offset_left = -482.95
+offset_top = -19.0104
+offset_right = -376.15
+offset_bottom = 87.7896
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rsvsc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7nme6")
+
+[node name="ItemSlot1" type="TextureRect" parent="GUI/PlayerInventory" groups=["item_slot"]]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = -364.0
+offset_top = -18.6
+offset_right = -257.2
+offset_bottom = 88.2
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="GUI/PlayerInventory/ItemSlot1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 3.408
+anchor_top = 0.178
+anchor_right = 3.408
+anchor_bottom = 0.178
+offset_left = -363.974
+offset_top = -19.0104
+offset_right = -257.174
+offset_bottom = 87.7896
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7nme6")
+
+[node name="ItemSlot2" type="TextureRect" parent="GUI/PlayerInventory" groups=["item_slot"]]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = -245.0
+offset_top = -18.6
+offset_right = -138.2
+offset_bottom = 88.2
+grow_horizontal = 0
+grow_vertical = 0
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="GUI/PlayerInventory/ItemSlot2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 2.294
+anchor_top = 0.178
+anchor_right = 2.294
+anchor_bottom = 0.178
+offset_left = -244.999
+offset_top = -19.0104
+offset_right = -138.199
+offset_bottom = 87.7896
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7nme6")
+
+[node name="ItemSlot3" type="TextureRect" parent="GUI/PlayerInventory" groups=["item_slot"]]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = -126.0
+offset_top = -18.6
+offset_right = -19.2
+offset_bottom = 88.2
+grow_horizontal = 0
+grow_vertical = 0
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="GUI/PlayerInventory/ItemSlot3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.18
+anchor_top = 0.178
+anchor_right = 1.18
+anchor_bottom = 0.178
+offset_left = -126.024
+offset_top = -19.0104
+offset_right = -19.224
+offset_bottom = 87.7896
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7nme6")
+
+[node name="ItemSlot4" type="TextureRect" parent="GUI/PlayerInventory" groups=["item_slot"]]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = -7.0
+offset_top = -18.6
+offset_right = 99.8
+offset_bottom = 88.2
+grow_horizontal = 0
+grow_vertical = 0
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="GUI/PlayerInventory/ItemSlot4"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.066
+anchor_top = 0.178
+anchor_right = 0.066
+anchor_bottom = 0.178
+offset_left = -7.04853
+offset_top = -19.0104
+offset_right = 99.7515
+offset_bottom = 87.7896
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7nme6")
+
+[node name="ItemSlot5" type="TextureRect" parent="GUI/PlayerInventory" groups=["item_slot"]]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = -483.0
+offset_top = 100.4
+offset_right = -376.2
+offset_bottom = 207.2
+grow_horizontal = 0
+grow_vertical = 0
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="GUI/PlayerInventory/ItemSlot5"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 4.522
+anchor_top = -0.936
+anchor_right = 4.522
+anchor_bottom = -0.936
+offset_left = -482.95
+offset_top = 99.9648
+offset_right = -376.15
+offset_bottom = 206.765
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7nme6")
+
+[node name="ItemSlot6" type="TextureRect" parent="GUI/PlayerInventory" groups=["item_slot"]]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = -364.0
+offset_top = 100.4
+offset_right = -257.2
+offset_bottom = 207.2
+grow_horizontal = 0
+grow_vertical = 0
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="GUI/PlayerInventory/ItemSlot6"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 3.408
+anchor_top = -0.936
+anchor_right = 3.408
+anchor_bottom = -0.936
+offset_left = -363.974
+offset_top = 99.9648
+offset_right = -257.174
+offset_bottom = 206.765
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7nme6")
+
+[node name="ItemSlot7" type="TextureRect" parent="GUI/PlayerInventory" groups=["item_slot"]]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = -245.0
+offset_top = 100.4
+offset_right = -138.2
+offset_bottom = 207.2
+grow_horizontal = 0
+grow_vertical = 0
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="GUI/PlayerInventory/ItemSlot7"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 2.294
+anchor_top = -0.936
+anchor_right = 2.294
+anchor_bottom = -0.936
+offset_left = -244.999
+offset_top = 99.9648
+offset_right = -138.199
+offset_bottom = 206.765
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7nme6")
+
+[node name="ItemSlot8" type="TextureRect" parent="GUI/PlayerInventory" groups=["item_slot"]]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = -126.0
+offset_top = 100.4
+offset_right = -19.2
+offset_bottom = 207.2
+grow_horizontal = 0
+grow_vertical = 0
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="GUI/PlayerInventory/ItemSlot8"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.18
+anchor_top = -0.936
+anchor_right = 1.18
+anchor_bottom = -0.936
+offset_left = -126.024
+offset_top = 99.9648
+offset_right = -19.224
+offset_bottom = 206.765
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7nme6")
+
+[node name="ItemSlot9" type="TextureRect" parent="GUI/PlayerInventory" groups=["item_slot"]]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = -7.0
+offset_top = 100.4
+offset_right = 99.8
+offset_bottom = 207.2
+grow_horizontal = 0
+grow_vertical = 0
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="GUI/PlayerInventory/ItemSlot9"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.066
+anchor_top = -0.936
+anchor_right = 0.066
+anchor_bottom = -0.936
+offset_left = -7.04853
+offset_top = 99.9648
+offset_right = 99.7515
+offset_bottom = 206.765
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7nme6")
+
+[node name="ItemSlot10" type="TextureRect" parent="GUI/PlayerInventory" groups=["item_slot"]]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = -483.0
+offset_top = 219.4
+offset_right = -376.2
+offset_bottom = 326.2
+grow_horizontal = 0
+grow_vertical = 0
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="GUI/PlayerInventory/ItemSlot10"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 4.522
+anchor_top = -2.051
+anchor_right = 4.522
+anchor_bottom = -2.051
+offset_left = -482.95
+offset_top = 219.047
+offset_right = -376.15
+offset_bottom = 325.847
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7nme6")
+
+[node name="ItemSlot11" type="TextureRect" parent="GUI/PlayerInventory" groups=["item_slot"]]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = -364.0
+offset_top = 219.4
+offset_right = -257.2
+offset_bottom = 326.2
+grow_horizontal = 0
+grow_vertical = 0
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="GUI/PlayerInventory/ItemSlot11"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 3.408
+anchor_top = -2.051
+anchor_right = 3.408
+anchor_bottom = -2.051
+offset_left = -363.974
+offset_top = 219.047
+offset_right = -257.174
+offset_bottom = 325.847
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7nme6")
+
+[node name="ItemSlot12" type="TextureRect" parent="GUI/PlayerInventory" groups=["item_slot"]]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = -245.0
+offset_top = 219.4
+offset_right = -138.2
+offset_bottom = 326.2
+grow_horizontal = 0
+grow_vertical = 0
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="GUI/PlayerInventory/ItemSlot12"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 2.294
+anchor_top = -2.051
+anchor_right = 2.294
+anchor_bottom = -2.051
+offset_left = -244.999
+offset_top = 219.047
+offset_right = -138.199
+offset_bottom = 325.847
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7nme6")
+
+[node name="ItemSlot13" type="TextureRect" parent="GUI/PlayerInventory" groups=["item_slot"]]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = -126.0
+offset_top = 219.4
+offset_right = -19.2
+offset_bottom = 326.2
+grow_horizontal = 0
+grow_vertical = 0
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="GUI/PlayerInventory/ItemSlot13"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.18
+anchor_top = -2.051
+anchor_right = 1.18
+anchor_bottom = -2.051
+offset_left = -126.024
+offset_top = 219.047
+offset_right = -19.224
+offset_bottom = 325.847
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7nme6")
+
+[node name="ItemSlot14" type="TextureRect" parent="GUI/PlayerInventory" groups=["item_slot"]]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = -7.0
+offset_top = 219.4
+offset_right = 99.8
+offset_bottom = 326.2
+grow_horizontal = 0
+grow_vertical = 0
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="GUI/PlayerInventory/ItemSlot14"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.066
+anchor_top = -2.051
+anchor_right = 0.066
+anchor_bottom = -2.051
+offset_left = -7.04853
+offset_top = 219.047
+offset_right = 99.7515
+offset_bottom = 325.847
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_7nme6")
+
+[node name="Prev" type="Button" parent="GUI/PlayerInventory"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = -549.0
+offset_top = 114.4
+offset_right = -509.0
+offset_bottom = 193.4
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
+
+[node name="Next" type="Button" parent="GUI/PlayerInventory"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = 482.0
+offset_top = 114.4
+offset_right = 522.0
+offset_bottom = 193.4
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
+
+[node name="ItemDescription" type="RichTextLabel" parent="GUI/PlayerInventory"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = 128.0
+offset_top = 0.399963
+offset_right = 440.0
+offset_bottom = 304.4
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/normal_font = ExtResource("11_2h1l6")
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+
+[node name="Page" type="Label" parent="GUI/PlayerInventory"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 477.0
+offset_top = 544.0
+offset_right = 579.0
+offset_bottom = 587.0
+theme_override_fonts/font = ExtResource("11_2h1l6")
+theme_override_font_sizes/font_size = 40
+text = "PAGE 1/1"
+
 [node name="Title" type="Label" parent="GUI"]
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
@@ -891,6 +1581,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("15_ln4oo")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
@@ -912,6 +1603,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.4, 0.4)
 pivot_offset = Vector2(1575, 593.125)
+mouse_filter = 2
 texture = ExtResource("19_f7762")
 expand_mode = 1
 stretch_mode = 5
@@ -932,6 +1624,7 @@ offset_right = 768.0
 offset_bottom = 484.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 16
 theme_override_fonts/normal_font = ExtResource("11_2h1l6")
@@ -960,6 +1653,7 @@ grow_vertical = 0
 rotation = 5.92044
 scale = Vector2(1e-05, 1e-05)
 pivot_offset = Vector2(128, 152)
+mouse_filter = 2
 texture = ExtResource("18_lgn5r")
 expand_mode = 1
 stretch_mode = 5
@@ -999,15 +1693,16 @@ grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 text = "SkyWars Demo
-Alpha V.5 | As of 27/3/2023
+Alpha V.6 | As of 15/4/2023
 
 If any bugs or errors are found,
 please report to the Dev Team.
 
 CONTROLS:
 WASD to move.
-E to Open Doors
-Mouse Left Click to Attack."
+E to Open Doors.
+Mouse Left Click to Attack.
+Tab to Open Inventory."
 horizontal_alignment = 2
 
 [node name="PauseMenu" type="Control" parent="GUI"]
@@ -1018,6 +1713,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("23_yhhpu")
 metadata/_edit_lock_ = true
 
@@ -1179,6 +1875,8 @@ layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array()
 metadata/_edit_lock_ = true
 
+[connection signal="pressed" from="GUI/PlayerInventory/Prev" to="GUI/PlayerInventory" method="_on_prev_pressed"]
+[connection signal="pressed" from="GUI/PlayerInventory/Next" to="GUI/PlayerInventory" method="_on_next_pressed"]
 [connection signal="mouse_entered" from="GUI/PauseMenu/Button1/Button1" to="GUI/PauseMenu" method="_on_button_1_mouse_entered"]
 [connection signal="mouse_exited" from="GUI/PauseMenu/Button1/Button1" to="GUI/PauseMenu" method="_on_button_1_mouse_exited"]
 [connection signal="pressed" from="GUI/PauseMenu/Button1/Button1" to="GUI/PauseMenu" method="_on_button_1_pressed"]
