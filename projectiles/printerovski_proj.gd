@@ -21,7 +21,7 @@ func _ready():
 	await tween.finished
 	$Drop.stream = load("res://sfx/a4_drop/a4_drop"+str(randi_range(1,4))+".mp3")
 	$Drop.play()
-	await $Drop.finished
+	
 	$"Body/Sprite".stop()
 
 	Global.emit_death_indicator(position)

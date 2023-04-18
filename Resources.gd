@@ -26,6 +26,11 @@ var active_players = []
 
 var active_entities = []
 
+func spawn_in(entity):
+	active_entities.append(entity)
+	Main.add_child(entity)
+	return entity
+
 func spawn_projectile(shooter:Node,proj_name:String,pos:Vector2,dir:Vector2,player_bullet=false,dmg:=1):
 	var new_proj = load("res://projectiles/"+proj_name+".tscn").instantiate()
 	new_proj.shooter = shooter
@@ -43,7 +48,23 @@ func spawn_enemy(enemy_name:String,pos:Vector2):
 	active_entities.append(new_enemy)
 	Main.add_child(new_enemy)
 	return new_enemy
-	
+
+func spawn_from_ability(entity:String,pos:Vector2,user:Node):
+	var new_entity = load("res://abilities/"+entity+".tscn").instantiate()
+	new_entity.position = pos
+	new_entity.master = user
+	user.minions.append(new_entity)
+	active_entities.append(new_entity)
+	Main.add_child(new_entity)
+	return new_entity
+
+func spawn_manual(entity_path:String,pos:Vector2):
+	var new_entity = load(entity_path).instantiate()
+	new_entity.position = pos
+	active_entities.append(new_entity)
+	Main.add_child(new_entity)
+	return new_entity
+
 func kill(entity:Node,immediate=false):
 	if is_instance_valid(entity) and entity in active_entities:
 		active_entities.erase(entity)
@@ -51,18 +72,30 @@ func kill(entity:Node,immediate=false):
 		if immediate == false:
 			tween.tween_property(entity,"scale",Vector2.ZERO,0.2)
 			tween.chain().tween_callback(entity.queue_free)
+			
 		if entity.is_in_group("enemy"):
 			tween.parallel().tween_callback(emit_death_indicator.bind(entity.position))
+			
 		elif entity.is_in_group("projectile"):
 			entity.current_speed = 0
 #		entity.queue_free()
 		emit_signal("enemy_killed",entity)
 
-func kill_all():
+func kill_all(exceptions:=[]):
 	while not active_entities.is_empty():
+		var released = false
 		var e = active_entities.front()
 		if is_instance_valid(e):
-			kill(e)
+			if exceptions != []:
+				for x in exceptions:
+					if e.is_in_group(x):
+						released = true
+			if !released:
+				kill(e)
+				continue
+				
+		if exceptions != []:
+			break
 
 # Bosses
 
@@ -216,7 +249,7 @@ const items = [
 	},
 	{ #5
 		"name":"Ken’s Gachapon",
-		"pic":"",
+		"pic":"froge.png",
 		"desc":"Pure sodium chloride.",
 	},
 	{
@@ -266,12 +299,12 @@ const items = [
 	},
 	{ #15
 		"name":"Salmon Nigiri",
-		"pic":"",
+		"pic":"salmonNigiri.png",
 		"desc":"It’s actually trout.",
 	},
 	{
 		"name":"Tonkatsu Curry",
-		"pic":"",
+		"pic":"curry.png",
 		"desc":"If you’re planning to get MUIC’s curry, just don’t.",
 	},
 	{
@@ -281,7 +314,7 @@ const items = [
 	},
 	{
 		"name":"Dispensed Water",
-		"pic":"",
+		"pic":"dispensed_water.png",
 		"desc":"4oz. water.",
 	},
 	{
@@ -301,7 +334,7 @@ const items = [
 	},
 	{
 		"name":"Ohm’s Gyoza",
-		"pic":"",
+		"pic":"gyoza.png",
 		"desc":"Athit’s Gyoza.",
 	},
 ]

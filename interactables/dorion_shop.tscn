@@ -1,0 +1,190 @@
+[gd_scene load_steps=12 format=3 uid="uid://b50cdoiu11fvs"]
+
+[ext_resource type="PackedScene" uid="uid://bcco2p0tgv3vr" path="res://npcs/orion_npc.tscn" id="1_ejp17"]
+[ext_resource type="Script" path="res://interactables/dorion_shop.gd" id="1_rjnau"]
+[ext_resource type="Texture2D" uid="uid://b5j86ttd5iqyt" path="res://interactables/orionBoothBack.png" id="2_7gkim"]
+[ext_resource type="Texture2D" uid="uid://o1su0un7m3q8" path="res://interactables/orionBoothFront.png" id="3_n68mp"]
+[ext_resource type="PackedScene" uid="uid://ceje6knjf6lby" path="res://interactables/table_with_coffee.tscn" id="4_cjmlg"]
+[ext_resource type="FontFile" uid="uid://byk80lambns8u" path="res://utility/MiniPixel.ttf" id="6_x0ky8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wggvf"]
+size = Vector2(237, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b6w1f"]
+size = Vector2(196.5, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yuwfl"]
+size = Vector2(248, 114)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rv34n"]
+size = Vector2(96, 114)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rewve"]
+bg_color = Color(1, 1, 1, 0.392157)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="DorionShop" type="StaticBody2D"]
+y_sort_enabled = true
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_rjnau")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-21.5, 14)
+shape = SubResource("RectangleShape2D_wggvf")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(3.25, 81.5)
+shape = SubResource("RectangleShape2D_b6w1f")
+
+[node name="OrionNPC" parent="." instance=ExtResource("1_ejp17")]
+position = Vector2(0, 8)
+
+[node name="DorionShelf" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 34)
+scale = Vector2(2, 2)
+texture = ExtResource("2_7gkim")
+offset = Vector2(0, -17)
+
+[node name="DorionTable" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 96)
+scale = Vector2(2, 2)
+texture = ExtResource("3_n68mp")
+offset = Vector2(0, -41)
+
+[node name="TableWithCoffee" parent="." instance=ExtResource("4_cjmlg")]
+position = Vector2(-117, 36)
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area"]
+position = Vector2(4, 89)
+shape = SubResource("RectangleShape2D_yuwfl")
+
+[node name="ItemInteract1" type="Area2D" parent="."]
+y_sort_enabled = true
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemInteract1"]
+position = Vector2(-72, 89)
+shape = SubResource("RectangleShape2D_rv34n")
+
+[node name="Item1" type="Sprite2D" parent="ItemInteract1"]
+unique_name_in_owner = true
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(-53, 96)
+scale = Vector2(1.5, 1.5)
+offset = Vector2(0, -37.333)
+
+[node name="Desc" type="Panel" parent="ItemInteract1"]
+z_index = 2
+y_sort_enabled = true
+texture_filter = 1
+offset_left = -227.0
+offset_right = -106.0
+offset_bottom = 82.0
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(121, 41)
+theme_override_styles/panel = SubResource("StyleBoxFlat_rewve")
+
+[node name="Label" type="Label" parent="ItemInteract1/Desc"]
+texture_filter = 1
+layout_mode = 2
+anchor_right = 0.992
+anchor_bottom = 0.976
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.03201
+offset_bottom = -8.03201
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_x0ky8")
+theme_override_font_sizes/font_size = 20
+text = "Lorem ipsum"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemInteract2" type="Area2D" parent="."]
+y_sort_enabled = true
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemInteract2"]
+position = Vector2(80, 89)
+shape = SubResource("RectangleShape2D_rv34n")
+
+[node name="Item2" type="Sprite2D" parent="ItemInteract2"]
+unique_name_in_owner = true
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(56, 96)
+scale = Vector2(1.5, 1.5)
+offset = Vector2(0, -37.3333)
+
+[node name="Desc" type="Panel" parent="ItemInteract2"]
+z_index = 2
+y_sort_enabled = true
+texture_filter = 1
+offset_left = 110.0
+offset_right = 231.0
+offset_bottom = 82.0
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(0, 41)
+theme_override_styles/panel = SubResource("StyleBoxFlat_rewve")
+
+[node name="Label" type="Label" parent="ItemInteract2/Desc"]
+texture_filter = 1
+layout_mode = 2
+anchor_right = 0.992
+anchor_bottom = 0.976
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.03201
+offset_bottom = -8.03201
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_x0ky8")
+theme_override_font_sizes/font_size = 20
+text = "Lorem ipsum"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+z_index = 1
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -72.0
+offset_right = 80.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(80, 26)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/line_spacing = -2
+theme_override_fonts/font = ExtResource("6_x0ky8")
+theme_override_font_sizes/font_size = 20
+text = "Welcome to D'Orion!
+Press E to Purchase"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[connection signal="area_entered" from="Area" to="." method="_on_area_area_entered"]
+[connection signal="area_exited" from="Area" to="." method="_on_area_area_exited"]
+[connection signal="area_entered" from="ItemInteract1" to="." method="_on_item_1_area_entered"]
+[connection signal="area_exited" from="ItemInteract1" to="." method="_on_item_interact_1_area_exited"]
+[connection signal="area_entered" from="ItemInteract2" to="." method="_on_item_2_area_entered"]
+[connection signal="area_exited" from="ItemInteract2" to="." method="_on_item_interact_2_area_exited"]

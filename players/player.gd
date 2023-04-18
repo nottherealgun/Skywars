@@ -8,11 +8,12 @@ signal player_killed(player)
 @export_enum("darwin","gun") var character = "darwin"
 @onready var player_color = [Color.DODGER_BLUE,Color.CORAL,Color.DARK_GREEN,Color.MEDIUM_PURPLE][player_id-1]
 # Player stats
-@export var max_health = 10
+@export var max_health = 1
 @onready var health = max_health
-@export var brainpower = 0
+@export var brainpower = 6
 @export var speed = 1
-@export var money = 0
+var minions = []
+
 # Internal stats
 var move_vec := Vector2.ZERO
 var aim_vec := Vector2.ZERO
@@ -43,7 +44,6 @@ func _ready():
 	stat_gui.get_node("Icon").texture = load("res://players/"+character+"_head.png")
 	stat_gui.get_node("NameTag").set("theme_override_colors/font_color",player_color)
 	stat_gui.get_node("NameTag").text = "Player "+str(player_id)
-	stat_gui.get_node("Money").text = "$ "+str(money)
 	
 func _process(delta):
 	$dev.text = str(iframed)
@@ -89,6 +89,11 @@ func _input_update():
 					aim_vec = position.direction_to(get_global_mouse_position()+Vector2(0,mouse_aim_offset))
 				if aim_vec != Vector2.ZERO:
 					shoot()
+			if Input.is_action_just_pressed("p"+str(player_id)+"_secondary"):
+				if brainpower > 0 and brainpower%2 == 0:
+					brainpower -= 2
+					var dood = Global.spawn_from_ability("dood",position,self)
+				
 			if Input.is_action_just_pressed("p"+str(player_id)+"_action"):
 				# Action1
 				emit_signal("action",self)
@@ -106,8 +111,7 @@ func _input_update():
 
 func _gui_update():
 	healthbar.value = (health*healthbar.max_value)/max_health
-	brainbar.frame = 6-brainpower
-	stat_gui.get_node("Money").text = "$ "+str(money)
+	brainbar.frame = brainpower
 
 func _move_update(delta):
 	move_vec = Input.get_vector("p"+str(player_id)+"_left","p"+str(player_id)+"_right","p"+str(player_id)+"_up","p"+str(player_id)+"_down")
@@ -202,3 +206,6 @@ func _on_hitbox_body_entered(body):
 func _on_revive_timer_timeout():
 	$Revival.value += 1
 
+func _on_brain_regen_timeout():
+	if brainpower < 6:
+		brainpower += 1

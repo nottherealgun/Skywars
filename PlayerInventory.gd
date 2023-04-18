@@ -31,6 +31,7 @@ func start():
 	add_item(Global.items[0])
 	add_item(Global.items[1])
 	add_item(Global.items[2])
+	add_item(Global.items[5])
 	
 func _process(_delta):
 	$Page.text = "Page " + str(inv_set_idx) + "/" + str(floor(inventory.size()/16)+1)

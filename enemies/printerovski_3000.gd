@@ -17,7 +17,7 @@ var move_vec := Vector2.ZERO
 var targets_in_range = []
 var target : Node
 
-enum STATES {TRANSFORM,IDLE,MOVING,RELOADING,ATTACK1,ATTACK2,FLYING,FALLING}
+enum STATES {TRANSFORM,IDLE,MOVING,RELOADING,ATTACK1,ATTACK2,FLYING,FALLING,DEATH}
 var state = STATES.TRANSFORM
 
 func _ready():
@@ -41,9 +41,9 @@ func _ready():
 
 func _physics_process(delta):
 #	print(STATES.keys()[state])
-	if health <= 0:
-		latest_shooter.money += points
-		Global.kill(self)
+	if health <= 0 and state != STATES.DEATH:
+		change_state(STATES.DEATH)
+#		$Hitbox.monitoring = false
 		
 	if is_instance_valid(target):
 		var dis_to_target = (position+Vector2(0,46)).distance_to(target.position)
@@ -71,7 +71,7 @@ func _physics_process(delta):
 		
 		STATES.IDLE:
 			if $Timer.is_stopped():
-				$Timer.start(2.0)
+				$Timer.start(5.0)
 				
 		STATES.MOVING:
 			if is_instance_valid(target):
@@ -81,15 +81,7 @@ func _physics_process(delta):
 					$Timer.start(2.0)
 			else:
 				change_state(STATES.IDLE)
-			
-		STATES.ATTACK1:
-			await $AnimatedSprite.animation_finished
-			change_state(STATES.RELOADING)
-			
-#		STATES.ATTACK2:
-#			await $AnimatedSprite.animation_finished
-#			change_state(STATES.FLYING)
-#
+				
 		STATES.FLYING:
 			$LandIndicator.modulate = Color.WHITE
 			$LandIndicator.position = target.position-position
@@ -132,6 +124,8 @@ func change_state(new_state):
 		STATES.ATTACK1:
 			$AnimatedSprite.play("artillery")
 			$Artillery.play()
+			await $AnimatedSprite.animation_finished
+			change_state(STATES.RELOADING)
 			
 		STATES.ATTACK2:
 			$AnimatedSprite.play("jump")
@@ -173,6 +167,9 @@ func change_state(new_state):
 			for i in 5:
 				crash_burst(i*45)
 				await get_tree().create_timer(0.3).timeout
+		
+		STATES.DEATH:
+			$AnimatedSprite.play("death")
 			
 var allies = []
 
@@ -196,7 +193,7 @@ func _on_hitbox_area_entered(area):
 	var entity = area.get_parent()
 	if area.is_in_group("projectile"):
 		get_hurt(area)
-	elif entity.is_in_group("player"):
+	elif entity.is_in_group("player") and state != STATES.DEATH:
 		entity._injured_effect()
 #		entity.get_knockback(position.direction_to(entity.position),50)
 		entity.health -= damage

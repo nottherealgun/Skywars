@@ -75,7 +75,7 @@ func _move_update(delta):
 				
 #		position += (move_vec-allies_vec) * speed * delta * 50
 	
-		$line.set_point_position(1,(move_vec+allies_vec) *100)
+#		$line.set_point_position(1,(move_vec+allies_vec) *100)
 		move_and_collide((move_vec+allies_vec).normalized() * speed * delta * 50)
 #		$Dev.text = str((move_vec-allies_vec) * speed * delta * 50)
 #		$Dev.text = str(allies_vec*10)

@@ -11,7 +11,7 @@ func _ready():
 	Global.sync_room(testmap)
 	
 func clear_level():
-	Global.kill_all()
+	Global.kill_all(["minion"])
 	for d in Global.active_doors:
 		Global.Main.remove_child(d)
 	

@@ -39,7 +39,8 @@ visible = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
 texture_filter = 1
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_n1fi2")
 autoplay = "default"
-frame_progress = 0.0682169
+frame_progress = 0.708871
 offset = Vector2(0, -27)

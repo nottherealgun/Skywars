@@ -132,6 +132,10 @@ wait_time = 0.01
 wait_time = 0.2
 one_shot = true
 
+[node name="BrainRegen" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
 [node name="Revival" type="ProgressBar" parent="."]
 visible = false
 z_index = 2
@@ -171,3 +175,4 @@ uppercase = true
 [connection signal="area_entered" from="EnemyDetect" to="." method="_on_enemy_detect_area_entered"]
 [connection signal="area_exited" from="EnemyDetect" to="." method="_on_enemy_detect_area_exited"]
 [connection signal="timeout" from="ReviveTimer" to="." method="_on_revive_timer_timeout"]
+[connection signal="timeout" from="BrainRegen" to="." method="_on_brain_regen_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://dlpndwnncnijn"]
+[gd_scene load_steps=59 format=3 uid="uid://dlpndwnncnijn"]
 
 [ext_resource type="PackedScene" uid="uid://caw6brh3py3mv" path="res://players/player.tscn" id="1_mhf8t"]
 [ext_resource type="AudioStream" uid="uid://bnw73i68y41ik" path="res://music/The Lobby_Loopable.mp3" id="1_x207s"]
@@ -17,7 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://ctw1jwlr8j8mn" path="res://gui/brainCellFillerSS.png" id="10_xahcf"]
 [ext_resource type="FontFile" uid="uid://byk80lambns8u" path="res://utility/MiniPixel.ttf" id="11_2h1l6"]
 [ext_resource type="FontFile" uid="uid://im11hs0xx7wu" path="res://utility/RoadPixel.ttf" id="11_lksja"]
-[ext_resource type="Texture2D" uid="uid://n23u1d7ugi8t" path="res://gui/coinGUISS.png" id="12_su5dn"]
 [ext_resource type="Shader" path="res://transition.gdshader" id="13_wjtoa"]
 [ext_resource type="TileSet" uid="uid://0c8knfi7rtne" path="res://default.tres" id="14_vmf2g"]
 [ext_resource type="Texture2D" uid="uid://bqjyiexgloh6b" path="res://utility/TransScreenBG.png" id="15_ln4oo"]
@@ -92,70 +91,6 @@ animations = [{
 "loop": false,
 "name": &"default",
 "speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iafgu"]
-atlas = ExtResource("12_su5dn")
-region = Rect2(0, 0, 10, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_erb53"]
-atlas = ExtResource("12_su5dn")
-region = Rect2(10, 0, 10, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7ecpl"]
-atlas = ExtResource("12_su5dn")
-region = Rect2(20, 0, 10, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ilg4i"]
-atlas = ExtResource("12_su5dn")
-region = Rect2(30, 0, 10, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_py4ph"]
-atlas = ExtResource("12_su5dn")
-region = Rect2(40, 0, 10, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mx32a"]
-atlas = ExtResource("12_su5dn")
-region = Rect2(50, 0, 10, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mn3br"]
-atlas = ExtResource("12_su5dn")
-region = Rect2(60, 0, 10, 10)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6ykwq"]
-atlas = ExtResource("12_su5dn")
-region = Rect2(70, 0, 10, 10)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_loydx"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iafgu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_erb53")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7ecpl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ilg4i")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_py4ph")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mx32a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mn3br")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6ykwq")
-}],
-"loop": true,
-"name": &"default",
-"speed": 10.0
 }]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rsvsc"]
@@ -254,6 +189,7 @@ position_smoothing_enabled = true
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_mhf8t")]
+max_health = 10
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -480,30 +416,6 @@ theme_override_fonts/font = ExtResource("11_2h1l6")
 theme_override_font_sizes/font_size = 44
 text = "Player 1"
 
-[node name="Money" type="Label" parent="GUI/PlayerStats/PlayerStats1"]
-layout_mode = 0
-offset_left = 168.0
-offset_top = 127.0
-offset_right = 320.0
-offset_bottom = 160.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 20
-theme_override_fonts/font = ExtResource("11_lksja")
-theme_override_font_sizes/font_size = 30
-text = "100"
-vertical_alignment = 1
-metadata/_edit_group_ = true
-
-[node name="Sprite" type="AnimatedSprite2D" parent="GUI/PlayerStats/PlayerStats1/Money"]
-texture_filter = 1
-position = Vector2(-47, -3.99998)
-scale = Vector2(3.7, 3.7)
-sprite_frames = SubResource("SpriteFrames_loydx")
-autoplay = "default"
-frame_progress = 0.7199
-offset = Vector2(5, 5)
-
 [node name="PlayerStats2" type="Control" parent="GUI/PlayerStats"]
 visible = false
 layout_mode = 3
@@ -606,30 +518,6 @@ theme_override_constants/outline_size = 12
 theme_override_fonts/font = ExtResource("11_2h1l6")
 theme_override_font_sizes/font_size = 44
 text = "Player 1"
-
-[node name="Money" type="Label" parent="GUI/PlayerStats/PlayerStats2"]
-layout_mode = 0
-offset_left = 168.0
-offset_top = 127.0
-offset_right = 320.0
-offset_bottom = 160.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 20
-theme_override_fonts/font = ExtResource("11_lksja")
-theme_override_font_sizes/font_size = 30
-text = "100"
-vertical_alignment = 1
-metadata/_edit_group_ = true
-
-[node name="Sprite" type="AnimatedSprite2D" parent="GUI/PlayerStats/PlayerStats2/Money"]
-texture_filter = 1
-position = Vector2(-47, -3.99998)
-scale = Vector2(3.7, 3.7)
-sprite_frames = SubResource("SpriteFrames_loydx")
-autoplay = "default"
-frame_progress = 0.7199
-offset = Vector2(5, 5)
 
 [node name="PlayerStats3" type="Control" parent="GUI/PlayerStats"]
 visible = false
@@ -735,30 +623,6 @@ theme_override_fonts/font = ExtResource("11_2h1l6")
 theme_override_font_sizes/font_size = 44
 text = "Player 1"
 
-[node name="Money" type="Label" parent="GUI/PlayerStats/PlayerStats3"]
-layout_mode = 0
-offset_left = 168.0
-offset_top = 127.0
-offset_right = 320.0
-offset_bottom = 160.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 20
-theme_override_fonts/font = ExtResource("11_lksja")
-theme_override_font_sizes/font_size = 30
-text = "100"
-vertical_alignment = 1
-metadata/_edit_group_ = true
-
-[node name="Sprite" type="AnimatedSprite2D" parent="GUI/PlayerStats/PlayerStats3/Money"]
-texture_filter = 1
-position = Vector2(-47, -3.99998)
-scale = Vector2(3.7, 3.7)
-sprite_frames = SubResource("SpriteFrames_loydx")
-autoplay = "default"
-frame_progress = 0.7199
-offset = Vector2(5, 5)
-
 [node name="PlayerStats4" type="Control" parent="GUI/PlayerStats"]
 visible = false
 layout_mode = 3
@@ -863,30 +727,6 @@ theme_override_fonts/font = ExtResource("11_2h1l6")
 theme_override_font_sizes/font_size = 44
 text = "Player 1"
 
-[node name="Money" type="Label" parent="GUI/PlayerStats/PlayerStats4"]
-layout_mode = 0
-offset_left = 168.0
-offset_top = 127.0
-offset_right = 320.0
-offset_bottom = 160.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 20
-theme_override_fonts/font = ExtResource("11_lksja")
-theme_override_font_sizes/font_size = 30
-text = "100"
-vertical_alignment = 1
-metadata/_edit_group_ = true
-
-[node name="Sprite" type="AnimatedSprite2D" parent="GUI/PlayerStats/PlayerStats4/Money"]
-texture_filter = 1
-position = Vector2(-47, -3.99998)
-scale = Vector2(3.7, 3.7)
-sprite_frames = SubResource("SpriteFrames_loydx")
-autoplay = "default"
-frame_progress = 0.7199
-offset = Vector2(5, 5)
-
 [node name="PlayerInventory" type="Control" parent="GUI"]
 visible = false
 layout_mode = 3
@@ -973,22 +813,6 @@ mouse_filter = 2
 theme_override_constants/separation = -140
 alignment = 1
 
-[node name="Selector" type="TextureRect" parent="GUI/PlayerInventory"]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.57
-anchor_right = 0.5
-anchor_bottom = 0.57
-offset_left = -483.0
-offset_top = -18.6
-offset_right = -376.0
-offset_bottom = 88.4
-grow_horizontal = 0
-grow_vertical = 0
-texture = ExtResource("24_vejm3")
-
 [node name="ItemSlot0" type="TextureRect" parent="GUI/PlayerInventory" groups=["item_slot"]]
 texture_filter = 1
 layout_mode = 1
@@ -1018,6 +842,7 @@ offset_right = -376.15
 offset_bottom = 87.7896
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_rsvsc")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
@@ -1052,6 +877,7 @@ offset_right = -257.174
 offset_bottom = 87.7896
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
@@ -1086,6 +912,7 @@ offset_right = -138.199
 offset_bottom = 87.7896
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
@@ -1120,6 +947,7 @@ offset_right = -19.224
 offset_bottom = 87.7896
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
@@ -1154,6 +982,7 @@ offset_right = 99.7515
 offset_bottom = 87.7896
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
@@ -1188,6 +1017,7 @@ offset_right = -376.15
 offset_bottom = 206.765
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
@@ -1222,6 +1052,7 @@ offset_right = -257.174
 offset_bottom = 206.765
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
@@ -1256,6 +1087,7 @@ offset_right = -138.199
 offset_bottom = 206.765
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
@@ -1290,6 +1122,7 @@ offset_right = -19.224
 offset_bottom = 206.765
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
@@ -1324,6 +1157,7 @@ offset_right = 99.7515
 offset_bottom = 206.765
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
@@ -1358,6 +1192,7 @@ offset_right = -376.15
 offset_bottom = 325.847
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
@@ -1392,6 +1227,7 @@ offset_right = -257.174
 offset_bottom = 325.847
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
@@ -1426,6 +1262,7 @@ offset_right = -138.199
 offset_bottom = 325.847
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
@@ -1460,6 +1297,7 @@ offset_right = -19.224
 offset_bottom = 325.847
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
@@ -1494,10 +1332,28 @@ offset_right = 99.7515
 offset_bottom = 325.847
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_6fmfq")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_qjog4")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_7nme6")
+
+[node name="Selector" type="TextureRect" parent="GUI/PlayerInventory"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.57
+anchor_right = 0.5
+anchor_bottom = 0.57
+offset_left = -483.0
+offset_top = -18.6
+offset_right = -376.0
+offset_bottom = 88.4
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("24_vejm3")
 
 [node name="Prev" type="Button" parent="GUI/PlayerInventory"]
 layout_mode = 1
@@ -1512,6 +1368,7 @@ offset_right = -509.0
 offset_bottom = 193.4
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
 
 [node name="Next" type="Button" parent="GUI/PlayerInventory"]
@@ -1527,6 +1384,7 @@ offset_right = 522.0
 offset_bottom = 193.4
 grow_horizontal = 0
 grow_vertical = 0
+focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6lkfi")
 
 [node name="ItemDescription" type="RichTextLabel" parent="GUI/PlayerInventory"]

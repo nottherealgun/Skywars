@@ -6,7 +6,7 @@ func _process(_delta):
 	visible = (is_instance_valid(boss))
 	if is_instance_valid(boss):
 		$BarProgress.value = (boss.health*1000)/boss.max_health
-		$BossHealth.text = str(boss.health)+"/"+ str(boss.max_health)
+		$BossHealth.text = str(clampf(boss.health,0,boss.max_health))+"/"+ str(boss.max_health)
 		
 func set_boss(new_boss:Node):
 	boss = new_boss

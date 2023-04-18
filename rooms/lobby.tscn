@@ -1,9 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://dbun1tf3xdti6"]
+[gd_scene load_steps=23 format=3 uid="uid://dbun1tf3xdti6"]
 
 [ext_resource type="PackedScene" uid="uid://cx7imnf85vue8" path="res://level.tscn" id="1_p1xgq"]
 [ext_resource type="PackedScene" uid="uid://bhsvoj5kcuifg" path="res://spawning_point.tscn" id="3_2cn4r"]
+[ext_resource type="PackedScene" uid="uid://b50cdoiu11fvs" path="res://interactables/dorion_shop.tscn" id="4_gvhes"]
 [ext_resource type="PackedScene" uid="uid://dsx5fq2n5okv5" path="res://interactables/reception.tscn" id="4_oqpc4"]
-[ext_resource type="PackedScene" uid="uid://bcco2p0tgv3vr" path="res://npcs/orion_npc.tscn" id="5_f43xr"]
 [ext_resource type="PackedScene" uid="uid://6qdjvyw15lm4" path="res://interactables/door.tscn" id="6_q45rr"]
 [ext_resource type="Texture2D" uid="uid://d2cc42iqf5jg7" path="res://misc/infoAnime.png" id="7_46deq"]
 [ext_resource type="Texture2D" uid="uid://bu5eqnppfmrnc" path="res://misc/muicLobbyBoard.png" id="7_rg02r"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://b0hdjqdukved" path="res://interactables/pillar_white.tscn" id="13_iv0gb"]
 [ext_resource type="PackedScene" uid="uid://2pprua54q7h8" path="res://interactables/pillar_yellow.tscn" id="13_srk4e"]
 [ext_resource type="Texture2D" uid="uid://d07t3246r6ci6" path="res://interactables/glassDoubleDoorSS.png" id="15_jrld0"]
+[ext_resource type="PackedScene" uid="uid://bs0h2fmnb8ptq" path="res://enemies/student.tscn" id="17_14yuu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wcjt0"]
 atlas = ExtResource("15_jrld0")
@@ -65,13 +66,12 @@ position = Vector2(1472, 350)
 position = Vector2(1472, 300)
 metadata/_edit_lock_ = true
 
-[node name="OrionNPC" parent="." index="3" instance=ExtResource("5_f43xr")]
-position = Vector2(1584, 192)
+[node name="DorionShop" parent="." index="3" instance=ExtResource("4_gvhes")]
+position = Vector2(865, 101)
 
 [node name="Door" parent="." index="4" instance=ExtResource("6_q45rr")]
 position = Vector2(1112, 208)
 room = "res://rooms/test_map.tscn"
-devtext = "Begin Game"
 synced_with_new_map = true
 boss = "printerovski_3000"
 
@@ -204,3 +204,12 @@ offset = Vector2(0, -40)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GlassDoor4" index="1"]
 position = Vector2(0, 59.5)
 shape = SubResource("RectangleShape2D_0jigo")
+
+[node name="Student" parent="." index="19" instance=ExtResource("17_14yuu")]
+position = Vector2(571, 173)
+
+[node name="Student2" parent="." index="20" instance=ExtResource("17_14yuu")]
+position = Vector2(402, 225)
+
+[node name="Student3" parent="." index="21" instance=ExtResource("17_14yuu")]
+position = Vector2(571, 328)
