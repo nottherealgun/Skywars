@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dbun1tf3xdti6"]
+[gd_scene load_steps=22 format=3 uid="uid://dbun1tf3xdti6"]
 
 [ext_resource type="PackedScene" uid="uid://cx7imnf85vue8" path="res://level.tscn" id="1_p1xgq"]
 [ext_resource type="PackedScene" uid="uid://bhsvoj5kcuifg" path="res://spawning_point.tscn" id="3_2cn4r"]
@@ -16,7 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://b0hdjqdukved" path="res://interactables/pillar_white.tscn" id="13_iv0gb"]
 [ext_resource type="PackedScene" uid="uid://2pprua54q7h8" path="res://interactables/pillar_yellow.tscn" id="13_srk4e"]
 [ext_resource type="Texture2D" uid="uid://d07t3246r6ci6" path="res://interactables/glassDoubleDoorSS.png" id="15_jrld0"]
-[ext_resource type="PackedScene" uid="uid://bs0h2fmnb8ptq" path="res://enemies/student.tscn" id="17_14yuu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wcjt0"]
 atlas = ExtResource("15_jrld0")
@@ -71,9 +70,7 @@ position = Vector2(865, 101)
 
 [node name="Door" parent="." index="4" instance=ExtResource("6_q45rr")]
 position = Vector2(1112, 208)
-room = "res://rooms/test_map.tscn"
 synced_with_new_map = true
-boss = "printerovski_3000"
 
 [node name="MUIC Poster" type="Node2D" parent="." index="5"]
 y_sort_enabled = true
@@ -204,12 +201,3 @@ offset = Vector2(0, -40)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GlassDoor4" index="1"]
 position = Vector2(0, 59.5)
 shape = SubResource("RectangleShape2D_0jigo")
-
-[node name="Student" parent="." index="19" instance=ExtResource("17_14yuu")]
-position = Vector2(571, 173)
-
-[node name="Student2" parent="." index="20" instance=ExtResource("17_14yuu")]
-position = Vector2(402, 225)
-
-[node name="Student3" parent="." index="21" instance=ExtResource("17_14yuu")]
-position = Vector2(571, 328)

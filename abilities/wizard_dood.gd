@@ -3,13 +3,14 @@ extends CharacterBody2D
 @export var max_health = 10
 @onready var health = max_health
 @export var speed := 1
+@export var damage = 5
 
 var move_vec := Vector2.ZERO
 var master : Node
 var min_master_dist = 100
 var shot = false
 
-enum STATES {IDLE,FOLLOWING,ATTACKING,DEATH}
+enum STATES {IDLE,FOLLOWING,BUFFING,DEATH}
 var state = STATES.IDLE
 var targets_in_range = [] as Array
 var target : Node
@@ -28,9 +29,12 @@ func _process(delta):
 		STATES.IDLE:
 			if position.distance_to(master.position) > min_master_dist:
 				change_state(STATES.FOLLOWING)
+			else:
+				if master.health < master.max_health:
+					change_state(STATES.BUFFING)
 				
-			if is_instance_valid(target):
-				change_state(STATES.ATTACKING)
+#			if is_instance_valid(target):
+#				change_state(STATES.CHASING)
 				
 		STATES.FOLLOWING:
 			move_vec = position.direction_to(master.position)
@@ -43,28 +47,28 @@ func _process(delta):
 				
 			elif position.distance_to(master.position) > 500:
 				position = master.position
+		
+		STATES.BUFFING:
+			if is_instance_valid(master) and $BetweenShots.is_stopped():
+				$AnimatedSprite2D.play("buff")
+				$AnimatedSprite2D.flip_h = (master.position.x < position.x)
 				
-			if is_instance_valid(target):
-				change_state(STATES.ATTACKING)
-			
-		STATES.ATTACKING:
-			if is_instance_valid(target) and $BetweenShots.is_stopped():
-				$AnimatedSprite2D.play("attack")
-				$AnimatedSprite2D.flip_h = (target.position.x < position.x)
-				if $AnimatedSprite2D.frame == 6 and !shot:
-					var vine = Global.spawn_projectile(master,"dood_vines",position,position.direction_to(target.position),true)
+				if $AnimatedSprite2D.frame == 10 and !shot:
+					master.health += 1
+					Global.emit_indicator(1,master.position,false,true)
+					spawn_circle()
 					shot = true
+					
 				await $AnimatedSprite2D.animation_finished
 				$AnimatedSprite2D.play("idle")
 				$BetweenShots.start()
-				
 			else:
 				change_state(STATES.IDLE)
 		
 		STATES.DEATH:
 			await $AnimatedSprite2D.animation_finished
 			Global.kill(self)
-				
+
 func detect_allies():
 	var allies_vec := Vector2.ZERO
 	var range := 50
@@ -101,12 +105,23 @@ func change_state(new_state):
 		STATES.FOLLOWING:
 			$AnimatedSprite2D.play("move")
 			
-		STATES.ATTACKING:
-			pass
+		STATES.BUFFING:
+			$AnimatedSprite2D.play("buff")
 			
 		STATES.DEATH:
 			$AnimatedSprite2D.play("death")
-	
+
+func affect(victim:Node):
+	victim.health -= damage
+	Global.emit_indicator(damage,victim.position,false)
+
+func spawn_circle():
+	var new_circle = $HealCircle.duplicate()
+	master.add_child(new_circle)
+	new_circle.show()
+	new_circle.start()
+	return new_circle
+
 func _on_enemy_detect_area_entered(area):
 	var entity = area.get_parent()
 	if entity.is_in_group("enemy"):

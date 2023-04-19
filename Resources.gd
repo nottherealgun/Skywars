@@ -157,9 +157,11 @@ var map_spawnpoint : Vector2
 var rooms = [
 	{"file":"lobby.tscn","name":"Aditayathorn Lobby"},
 	{"file":"test_map.tscn","name":"Test Map"},
-	{"file":"adit_single.tscn","name":"Single Room"},
-	{"file":"adit_double.tscn","name":"Double Room"},
-	{"file":"adit_l_shape_bl.tscn","name":"LShaped-BL Room"},
+	{"file":"adit_treasure.tscn","name":"Treasure Room"},
+	{"file":"adit_single_1.tscn","name":"Single Room 1"},
+	{"file":"adit_single_2.tscn","name":"Single Room 2"},
+	{"file":"adit_double_1.tscn","name":"Double Room 1"},
+	{"file":"adit_t_1.tscn","name":"T-shaped Room 1"},
 ]
 
 const tips = [
@@ -313,16 +315,21 @@ const items = [
 		"desc":"A delicacy from Hainan.",
 	},
 	{
-		"name":"Dispensed Water",
-		"pic":"dispensed_water.png",
-		"desc":"4oz. water.",
+		"name":"Ohm’s Gyoza",
+		"pic":"gyoza.png",
+		"desc":"Available at Athit’s Gyoza.",
 	},
 	{
-		"name":"The Walker Espress",
-		"pic":"",
-		"desc":"Pure coffee juice.",
+		"name":"Dispensed Water",
+		"pic":"dispensed_water.png",
+		"desc":"4oz. of water.",
 	},
 	{ #20
+		"name":"The Walker Espress",
+		"pic":"",
+		"desc":"An Orion-certified beverage. As he’d said before, “Pure coffee juice.”",
+	},
+	{
 		"name":"American-O",
 		"pic":"",
 		"desc":"A bit of coffee and tons of water. A truly watered-down drink.",
@@ -330,12 +337,22 @@ const items = [
 	{
 		"name":"Cap’s Mustache",
 		"pic":"",
-		"desc":"It’s-a me, Cappuccino.",
+		"desc":"YAHOOO. It’s-a me, Cappuccino.",
 	},
 	{
-		"name":"Ohm’s Gyoza",
+		"name":"Shot O' Latte",
 		"pic":"gyoza.png",
-		"desc":"Athit’s Gyoza.",
+		"desc":"Chotto latte kudasai, oniichan~",
+	},
+	{
+		"name":"De Moch Crazy",
+		"pic":"gyoza.png",
+		"desc":"Je suis fou de chocolat cafe!",
+	},
+	{ #25
+		"name":"Dirty Bean Juice",
+		"pic":"gyoza.png",
+		"desc":"No bacteria included, only lactobacillus.",
 	},
 ]
 
@@ -420,6 +437,8 @@ func sync_map(map:Node2D,boss:=""):
 		p.position = spawn_poses[active_players.find(p)]
 		p.transporting = false
 		p.y_sort_enabled = true
+		for m in p.minions:
+			active_entities.append(m)
 	
 	# Exit Transition
 	tween = create_tween()
@@ -449,14 +468,6 @@ func sync_room(map:Node,boss=""):
 			GUI.get_node("Title").text = r["name"]
 			break
 #	GUI.get_node("Title").text = target_map.name.capitalize()
-	
-	# Set new player positions
-	for p in active_players:
-		p.position = spawn_poses[active_players.find(p)]
-		p.transporting = false
-		p.y_sort_enabled = true
-		if p.fainted:
-			p.revive()
 
 	# Clear old map tiles
 	Map.clear()
@@ -488,6 +499,16 @@ func sync_room(map:Node,boss=""):
 	else:
 		if current_track != "combat":
 			music_play("combat")
+	
+	# Set new player positions
+	for p in active_players:
+		p.position = spawn_poses[active_players.find(p)]
+		p.transporting = false
+		p.y_sort_enabled = true
+		if p.fainted:
+			p.revive()
+			for m in p.minions:
+				active_entities.append(m)
 
 func is_out_of_map(pos:Vector2) -> bool:
 	var map_local_pos = Map.to_local(pos)
@@ -500,11 +521,14 @@ func is_out_of_map(pos:Vector2) -> bool:
 
 # Utility
 
-func emit_indicator(amnt:float,pos:Vector2,p_bullet=false):
+func emit_indicator(amnt:float,pos:Vector2,p_bullet=false,heal:=false):
 	var new_indicator = load("res://utility/damage_indicator.tscn").instantiate()
 	new_indicator.position = pos
 	new_indicator.amount = roundi(amnt)
 	new_indicator.player_bullet = p_bullet
+	new_indicator.heal = heal
+	if heal:
+		new_indicator.symbol = "+"
 	Main.add_child(new_indicator)
 
 func emit_death_indicator(pos:Vector2):
@@ -544,3 +568,16 @@ func screen_shake(amplitude=16):
 
 		ShakeTween.tween_property(Cam, "offset", rand, 0.1)
 	ShakeTween.tween_property(Cam, "offset", Vector2.ZERO, 0.1)
+
+# Abilities
+
+func use_ability(character:String,by:Node):
+	match character:
+		"darwin":
+			spawn_from_ability(["dood","super_dood","wizard_dood"].pick_random(),by.position,by)
+
+func use_item(item:Dictionary,by:Node):
+	match item["name"]:
+		"Amulet of Dood":
+			pass
+			

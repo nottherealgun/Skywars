@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bakr387l46lfw"]
+[gd_scene load_steps=4 format=3 uid="uid://bakr387l46lfw"]
 
 [ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://interactables/interactable.tscn" id="1_qf02v"]
-[ext_resource type="Texture2D" uid="uid://tnvx5837ukgb" path="res://interactables/adithPodium.png" id="2_h8uot"]
+[ext_resource type="Texture2D" uid="uid://h0it5r41v387" path="res://interactables/adithPodiumBack.png" id="2_5tyvw"]
+[ext_resource type="Script" path="res://interactables/adit_podium.gd" id="2_lv0ie"]
 
 [node name="AditPodium" instance=ExtResource("1_qf02v")]
+script = ExtResource("2_lv0ie")
+facing = 0
 
 [node name="Sprite" parent="." index="1"]
-scale = Vector2(2, 2)
-texture = ExtResource("2_h8uot")
+texture = ExtResource("2_5tyvw")
 offset = Vector2(-0.5, -21)

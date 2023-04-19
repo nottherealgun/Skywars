@@ -1,3 +1,4 @@
+@tool
 extends StaticBody2D
 
 @export var front_facing := true
@@ -15,7 +16,7 @@ extends StaticBody2D
 
 var players_in_vicinity = []
 
-func _ready():
+func _process(delta):
 	$Dev.text = devtext
 	match front_facing:
 		false:
@@ -23,14 +24,15 @@ func _ready():
 			
 		true:
 			$Sprite.animation = "forward"
+			
 	$Wide.disabled = !front_facing
 	$Tall.disabled = front_facing
 
 func enter_room(player):
 	var room_scene : Node
-	if room == null:
+	if room in [null,"","<null>"]:
 		var rand_room_id : int
-		while rand_room_id in [null,0]:
+		while rand_room_id in [null,0,1]:
 			rand_room_id = randi()%Global.rooms.size()
 		room_scene = load("res://rooms/"+Global.rooms[rand_room_id]["file"]).instantiate()
 	else:

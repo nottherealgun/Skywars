@@ -46,6 +46,7 @@ y_sort_enabled = true
 collision_layer = 0
 collision_mask = 16
 script = ExtResource("1_2rdnx")
+max_health = 10
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 44)

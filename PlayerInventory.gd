@@ -43,7 +43,9 @@ func _input_update():
 	if Input.is_action_just_pressed("p1_primary"):
 		pass
 	elif Input.is_action_just_pressed("p1_secondary"):
-		player_equipped_slots[1] = player_hovering_slots[1]
+		if player_hovering_slots[1] is Dictionary:
+			player_equipped_slots[1] = player_hovering_slots[1]
+			Global.active_players[0].equipped_item = player_equipped_slots[1]
 #		print(player_hovering_slots)
 		
 func refresh_inv():
@@ -86,7 +88,7 @@ func equip_item():
 func mouse_entered(slot:String):
 	var slot_id = slot.substr(7).to_int()
 	mouse_hovering_slot = get_node("./"+slot)
-	$Selector.position = mouse_hovering_slot.position
+	$Selector.position = mouse_hovering_slot.position-Vector2(13,13)
 	if shown_inventory.size() > slot_id:
 		if shown_inventory[slot_id] != null:
 			player_hovering_slots[1] = shown_inventory[slot_id]

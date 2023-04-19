@@ -175,7 +175,8 @@ var allies = []
 
 func get_hurt(by:Node):
 	by.affect(self)
-	Global.kill(by)
+	if by.is_in_group("projectile"):
+		Global.kill(by)
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("injured")
 #	var tween := create_tween().set_trans(Tween.TRANS_LINEAR)

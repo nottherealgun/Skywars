@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://7h0dudlrgsm1"]
+[gd_scene load_steps=5 format=3 uid="uid://7h0dudlrgsm1"]
 
 [ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://interactables/interactable.tscn" id="1_srrfd"]
 [ext_resource type="Texture2D" uid="uid://brsq6mehr8qmm" path="res://interactables/adithChair.png" id="2_pu2iv"]
+[ext_resource type="Script" path="res://interactables/adit_chair.gd" id="2_qw6qa"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4ib1x"]
 radius = 8.0
 height = 48.0
 
 [node name="AditChair" instance=ExtResource("1_srrfd")]
+script = ExtResource("2_qw6qa")
+facing = 0
+flip = false
 
 [node name="Sprite" parent="." index="1"]
 texture = ExtResource("2_pu2iv")

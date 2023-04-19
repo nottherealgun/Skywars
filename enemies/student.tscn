@@ -29,8 +29,12 @@ animation = &"idle"
 offset = Vector2(0, -26)
 
 [node name="HitboxShape" parent="Hitbox" index="0"]
+visible = false
 position = Vector2(0, 12)
 shape = SubResource("RectangleShape2D_qvqom")
+
+[node name="PlayerDetectShape" parent="PlayerDetect" index="0"]
+visible = false
 
 [node name="NameTag" parent="." index="5"]
 offset_top = -137.0

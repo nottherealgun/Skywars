@@ -9,9 +9,11 @@ signal player_killed(player)
 @onready var player_color = [Color.DODGER_BLUE,Color.CORAL,Color.DARK_GREEN,Color.MEDIUM_PURPLE][player_id-1]
 # Player stats
 @export var max_health = 1
-@onready var health = max_health
+@onready var health = max_health-6
 @export var brainpower = 6
 @export var speed = 1
+var equipped_item : Dictionary
+
 var minions = []
 
 # Internal stats
@@ -90,9 +92,9 @@ func _input_update():
 				if aim_vec != Vector2.ZERO:
 					shoot()
 			if Input.is_action_just_pressed("p"+str(player_id)+"_secondary"):
-				if brainpower > 0 and brainpower%2 == 0:
+				if brainpower > 0:
 					brainpower -= 2
-					var dood = Global.spawn_from_ability("dood",position,self)
+					Global.use_ability(character,self)
 				
 			if Input.is_action_just_pressed("p"+str(player_id)+"_action"):
 				# Action1
