@@ -1,4 +1,6 @@
 extends CharacterBody2D
+signal started()
+signal died()
 
 const display_name = "Printerovski 3000"
 const display_desc = "MUIC Printer / Bane of Physical Copies"
@@ -90,6 +92,8 @@ func _physics_process(delta):
 func change_state(new_state):
 #	print("CHANGED STATE TO: "+STATES.keys()[new_state])
 	match state:
+		STATES.TRANSFORM:
+			emit_signal("started")
 		STATES.MOVING:
 			$Pupil.hide()
 
@@ -170,6 +174,7 @@ func change_state(new_state):
 		
 		STATES.DEATH:
 			$AnimatedSprite.play("death")
+			emit_signal("died")
 			
 var allies = []
 

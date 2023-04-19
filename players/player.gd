@@ -9,7 +9,7 @@ signal player_killed(player)
 @onready var player_color = [Color.DODGER_BLUE,Color.CORAL,Color.DARK_GREEN,Color.MEDIUM_PURPLE][player_id-1]
 # Player stats
 @export var max_health = 1
-@onready var health = max_health-6
+@onready var health = max_health
 @export var brainpower = 6
 @export var speed = 1
 var equipped_item : Dictionary

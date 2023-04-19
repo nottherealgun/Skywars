@@ -67,6 +67,7 @@ func spawn_manual(entity_path:String,pos:Vector2):
 
 func kill(entity:Node,immediate=false):
 	if is_instance_valid(entity) and entity in active_entities:
+		emit_signal("enemy_killed",entity)
 		active_entities.erase(entity)
 		var tween = create_tween()
 		if immediate == false:
@@ -79,7 +80,6 @@ func kill(entity:Node,immediate=false):
 		elif entity.is_in_group("projectile"):
 			entity.current_speed = 0
 #		entity.queue_free()
-		emit_signal("enemy_killed",entity)
 
 func kill_all(exceptions:=[]):
 	while not active_entities.is_empty():
@@ -428,7 +428,8 @@ func sync_map(map:Node2D,boss:=""):
 						music_play("printerboss")
 	
 	if boss != "":
-		spawn_boss(boss,MAP_RECT/4)
+		var new_boss = spawn_boss(boss,MAP_RECT/4)
+		GameManager.boss_encounter(new_boss)
 	
 		# Set new player positions
 	for p in active_players:
@@ -536,6 +537,23 @@ func emit_death_indicator(pos:Vector2):
 	new_particle.position = pos
 	Main.add_child(new_particle)
 
+func pick_by_percentage(ratios:Dictionary):
+	# {"a":1,"b":2,"c":3}
+	# sum = 6
+	var keys = ratios.keys()
+	var sum = 0
+	var ranges = {}
+	var range_start = 0
+	for k in keys:
+		sum += ratios[k]
+		ranges[k] = range(range_start,range_start+ratios[k])
+		range_start += ratios[k]
+		
+	var rand = randi_range(0,sum-1)
+	for r in ranges.keys():
+		if rand in ranges[r]:
+			return r
+
 # Music
 
 const tracks = {
@@ -574,7 +592,7 @@ func screen_shake(amplitude=16):
 func use_ability(character:String,by:Node):
 	match character:
 		"darwin":
-			spawn_from_ability(["dood","super_dood","wizard_dood"].pick_random(),by.position,by)
+			spawn_from_ability(Global.pick_by_percentage({"dood":3,"super_dood":6,"wizard_dood":1}),by.position,by)
 
 func use_item(item:Dictionary,by:Node):
 	match item["name"]:

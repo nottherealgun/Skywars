@@ -117,7 +117,8 @@ func affect(victim:Node):
 
 func spawn_circle():
 	var new_circle = $HealCircle.duplicate()
-	master.add_child(new_circle)
+	new_circle.position = position
+	Global.spawn_in(new_circle)
 	new_circle.show()
 	new_circle.start()
 	return new_circle

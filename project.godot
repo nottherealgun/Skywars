@@ -18,7 +18,7 @@ boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
 boot_splash/image="res://utility/skywars_logo.png"
 boot_splash/fullsize=false
 boot_splash/use_filter=false
-config/icon="res://players/darwin_head.png"
+config/icon="res://game_icon.png"
 
 [autoload]
 

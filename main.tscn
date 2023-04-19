@@ -213,6 +213,7 @@ texture = ExtResource("31_4q8pb")
 script = ExtResource("32_o3cct")
 
 [node name="BossBar" type="Control" parent="GUI"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

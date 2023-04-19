@@ -351,11 +351,12 @@ script = ExtResource("7_i6pho")
 [node name="Sprite" type="Sprite2D" parent="HealCircle"]
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(0, 24)
+position = Vector2(0, 11)
+scale = Vector2(2.5, 2.5)
 texture = ExtResource("8_qletg")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="HealCircle"]
-position = Vector2(0, 22)
+position = Vector2(0, 9)
 amount = 50
 emission_shape = 1
 emission_sphere_radius = 25.0
