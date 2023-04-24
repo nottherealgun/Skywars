@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://b64vm0av43tni"]
+
+[ext_resource type="PackedScene" uid="uid://cni0dsstdjde" path="res://projectiles/projectile.tscn" id="1_18mts"]
+[ext_resource type="Texture2D" uid="uid://b2lhheupwrbl4" path="res://projectiles/gun_proj.png" id="2_2blwg"]
+[ext_resource type="Script" path="res://projectiles/gun_proj_1.gd" id="2_esb1s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1p72x"]
+atlas = ExtResource("2_2blwg")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_df3hq"]
+atlas = ExtResource("2_2blwg")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qi3cs"]
+atlas = ExtResource("2_2blwg")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4uilu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1p72x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_df3hq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qi3cs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="GunProj1" instance=ExtResource("1_18mts")]
+script = ExtResource("2_esb1s")
+
+[node name="Sprite" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_4uilu")
+autoplay = "default"
+frame_progress = 0.232843

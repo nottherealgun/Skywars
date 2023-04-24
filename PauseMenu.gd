@@ -39,8 +39,8 @@ func _on_button_2_mouse_exited():
 	tween.tween_property($Button2,"scale",Vector2(1,1),0.1)
 
 func _on_button_2_pressed():
-	pass # Replace with function body.
-
+	$"../SettingsMenu".show()
+	
 func _on_button_3_mouse_entered():
 	if tween:
 		tween.kill()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://yyuwfse1nkky"]
+[gd_scene load_steps=11 format=3 uid="uid://yyuwfse1nkky"]
 
 [ext_resource type="PackedScene" uid="uid://cx7imnf85vue8" path="res://level.tscn" id="1_sy1jh"]
 [ext_resource type="PackedScene" uid="uid://bhsvoj5kcuifg" path="res://spawning_point.tscn" id="2_hp7ss"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dmier4l033rnd" path="res://interactables/book.tscn" id="7_cfq3e"]
 [ext_resource type="PackedScene" uid="uid://ebilckvtvye6" path="res://interactables/box.tscn" id="8_fitb7"]
 [ext_resource type="PackedScene" uid="uid://bs0h2fmnb8ptq" path="res://enemies/student.tscn" id="9_p7d0u"]
+[ext_resource type="PackedScene" uid="uid://dcopfs6ltbw3p" path="res://interactables/electricity_box.tscn" id="10_mrnyd"]
 
 [node name="SingleRoom1" instance=ExtResource("1_sy1jh")]
 
@@ -100,3 +101,7 @@ position = Vector2(307, 329)
 
 [node name="Student2" parent="." index="25" instance=ExtResource("9_p7d0u")]
 position = Vector2(503, 319)
+
+[node name="ElectricityBox" parent="." index="26" instance=ExtResource("10_mrnyd")]
+position = Vector2(128, 128)
+facing = 1

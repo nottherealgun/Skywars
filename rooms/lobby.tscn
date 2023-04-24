@@ -70,7 +70,7 @@ position = Vector2(865, 101)
 
 [node name="Door" parent="." index="4" instance=ExtResource("6_q45rr")]
 position = Vector2(1112, 208)
-room = "res://rooms/adit_double_1.tscn"
+room = "res://rooms/adit_t_1.tscn"
 synced_with_new_map = true
 boss = "printerovski_3000"
 

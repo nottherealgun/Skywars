@@ -1,5 +1,6 @@
 extends Node
 
+var money = 100
 @onready var cam = get_node("/root/Main/MainCam")
 var cam_follow_target = Vector2.ZERO
 var boss_encountered = false
@@ -22,7 +23,13 @@ func _process(_delta):
 	cam_follow_target = vec
 	if !boss_encountered:
 		cam.position = cam_follow_target
+	
+	get_node("/root/Main/GUI/PlayerStats/MoneyGUI/MoneyLabel").text = str(int(money))
 #	Global.Dev.text = str(Global.active_players[0].transporting)
+
+func add_money(amnt:int):
+	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(self,"money",money+amnt,1.0)
 
 func player_killed(player):
 	for p in Global.active_players:
@@ -45,7 +52,10 @@ func entity_killed(entity):
 func boss_encounter(boss:Node):
 	boss_encountered = true
 	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(cam,"position",boss.position,10).from(cam_follow_target)
-#	tween.chain().tween_property(cam,"position",cam_follow_target,5)
+	tween.tween_property(cam,"position",boss.position,7.0).from(boss.position+Vector2(0,1000))
+#	tween.chain().tween_property(cam,"zoom",Vector2.ONE*2.5,1.0).from(Vector2(2,2)).set_trans(Tween.TRANS_ELASTIC)
+#	tween.chain().tween_property(cam,"zoom",Vector2.ONE*3,6.0).from(Vector2(2.5,2.5)).set_trans(Tween.TRANS_LINEAR)
+#	tween.chain().tween_property(cam,"zoom",Vector2.ONE*2,0.5).from(Vector2(4,4)).set_delay(2.0)
+	
 	await boss.started
 	boss_encountered = false

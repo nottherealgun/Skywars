@@ -3,15 +3,15 @@ signal enemy_killed(enemy)
 
 # Resources
 
-@onready var Main := get_node("/root/Main") as Node2D
-@onready var Map := get_node("/root/Main/Map") as TileMap
-@onready var GUI := get_node("/root/Main/GUI") as CanvasLayer
-@onready var Dev := get_node("/root/Main/GUI/Dev") as Label
-@onready var Music := get_node("/root/Main/Music") as AudioStreamPlayer
-@onready var Bossbar := get_node("/root/Main/GUI/BossBar") as Control
-@onready var PauseMenu := get_node("/root/Main/GUI/PauseMenu")
-@onready var Cam := get_node("/root/Main/MainCam") as Camera2D
-@onready var Inventory := get_node("/root/Main/GUI/PlayerInventory") as Control
+@onready var Main := get_node("/root/Main") 							as Node2D
+@onready var Map := get_node("/root/Main/Map") 							as TileMap
+@onready var GUI := get_node("/root/Main/GUI") 							as CanvasLayer
+@onready var Dev := get_node("/root/Main/GUI/Dev") 						as Label
+@onready var Music := get_node("/root/Main/Music") 						as AudioStreamPlayer
+@onready var Bossbar := get_node("/root/Main/GUI/BossBar") 				as Control
+@onready var PauseMenu := get_node("/root/Main/GUI/PauseMenu")			as Control
+@onready var Cam := get_node("/root/Main/MainCam") 						as Camera2D
+@onready var Inventory := get_node("/root/Main/GUI/PlayerInventory") 	as Control
 
 @onready var MAP_RECT : Vector2 = Map.get_used_rect().size*128
 
@@ -76,6 +76,8 @@ func kill(entity:Node,immediate=false):
 			
 		if entity.is_in_group("enemy"):
 			tween.parallel().tween_callback(emit_death_indicator.bind(entity.position))
+			if entity.health <= 0:
+				GameManager.add_money(entity.points)
 			
 		elif entity.is_in_group("projectile"):
 			entity.current_speed = 0
@@ -286,7 +288,7 @@ const items = [
 	},
 	{
 		"name":"Konit’s Brick",
-		"pic":"",
+		"pic":"konit_brick.png",
 		"desc":"Bricked.",
 	},
 	{
@@ -303,56 +305,89 @@ const items = [
 		"name":"Salmon Nigiri",
 		"pic":"salmonNigiri.png",
 		"desc":"It’s actually trout.",
+		"stats":"> +1 health to all players\n> +2 Salmon Armor",
+		"cost":10,
+		"scale_factor":0.75,
 	},
 	{
 		"name":"Tonkatsu Curry",
 		"pic":"curry.png",
 		"desc":"If you’re planning to get MUIC’s curry, just don’t.",
+		"stats":"",
+		"cost":1,
+		"scale_factor":1,
 	},
 	{
 		"name":"Khao Mun Gai",
-		"pic":"",
+		"pic":"chickrice.png",
 		"desc":"A delicacy from Hainan.",
+		"stats":"",
+		"cost":1,
+		"scale_factor":1,
 	},
 	{
 		"name":"Ohm’s Gyoza",
 		"pic":"gyoza.png",
 		"desc":"Available at Athit’s Gyoza.",
+		"stats":"",
+		"cost":1,
+		"scale_factor":0.75,
 	},
 	{
 		"name":"Dispensed Water",
 		"pic":"dispensed_water.png",
 		"desc":"4oz. of water.",
+		"stats":"",
+		"cost":1,
+		"scale_factor":0.6,
 	},
 	{ #20
 		"name":"The Walker Espress",
-		"pic":"",
+		"pic":"walker_espress.png",
 		"desc":"An Orion-certified beverage. As he’d said before, “Pure coffee juice.”",
+		"stats":"",
+		"cost":1,
+		"scale_factor":0.6,
 	},
 	{
 		"name":"American-O",
-		"pic":"",
+		"pic":"americano.png",
 		"desc":"A bit of coffee and tons of water. A truly watered-down drink.",
+		"stats":"",
+		"cost":1,
+		"scale_factor":0.75,
 	},
 	{
 		"name":"Cap’s Mustache",
-		"pic":"",
+		"pic":"cap_mustache.png",
 		"desc":"YAHOOO. It’s-a me, Cappuccino.",
+		"stats":"",
+		"cost":1,
+		"scale_factor":0.6,
 	},
 	{
 		"name":"Shot O' Latte",
-		"pic":"gyoza.png",
+		"pic":"shot_o_latte.png",
 		"desc":"Chotto latte kudasai, oniichan~",
+		"stats":"",
+		"cost":1,
+		"scale_factor":0.6,
 	},
 	{
 		"name":"De Moch Crazy",
-		"pic":"gyoza.png",
+		"pic":"de_moch_crazy.png",
 		"desc":"Je suis fou de chocolat cafe!",
+		"stats":"",
+		"cost":1,
+		"scale_factor":0.6,
 	},
 	{ #25
 		"name":"Dirty Bean Juice",
-		"pic":"gyoza.png",
+		"pic":"dirty_bean_juice.png",
 		"desc":"No bacteria included, only lactobacillus.",
+		"stats":"",
+		"cost":1,
+		"scale_factor":0.6,
 	},
 ]
 
@@ -590,10 +625,27 @@ func screen_shake(amplitude=16):
 # Abilities
 
 func use_ability(character:String,by:Node):
+	var ability_price = {
+		"darwin":2,
+		"gun":2,
+	}
+	if by.brainpower <= 0 or by.brainpower < ability_price.get(character):
+		return
+	by.brainpower -= ability_price.get(character)
 	match character:
 		"darwin":
 			spawn_from_ability(Global.pick_by_percentage({"dood":3,"super_dood":6,"wizard_dood":1}),by.position,by)
-
+		"gun":
+			var aim_vec = by.position.direction_to(Main.get_global_mouse_position()+Vector2(0,by.mouse_aim_offset))
+			for i in 30:
+				var proj = Global.spawn_projectile(self,"gun_proj_1",by.position+Vector2(0,-by.mouse_aim_offset),aim_vec.normalized(),true)
+				await get_tree().create_timer(0.02).timeout
+				proj.t = create_tween().set_loops()
+				var deg = deg_to_rad(35*[-1,1].pick_random())
+				proj.t.tween_property(proj,"direction",aim_vec.rotated(deg),0.5)
+				proj.t.chain().tween_property(proj,"direction",aim_vec.rotated(deg_to_rad(randf_range(0,-10))),0.5)
+				proj.t.chain().tween_property(proj,"direction",aim_vec.rotated(deg*-1),0.5)
+				
 func use_item(item:Dictionary,by:Node):
 	match item["name"]:
 		"Amulet of Dood":

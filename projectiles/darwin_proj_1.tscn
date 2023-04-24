@@ -31,6 +31,12 @@ animations = [{
 [node name="DarwinProj1" instance=ExtResource("1_5i05e")]
 script = ExtResource("2_qt3qx")
 
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(0, 0)
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="1"]
+position = Vector2(3.8147e-06, 0)
+
 [node name="Particles" type="CPUParticles2D" parent="." index="2"]
 z_index = -1
 amount = 20

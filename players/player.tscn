@@ -137,6 +137,10 @@ one_shot = true
 wait_time = 5.0
 autostart = true
 
+[node name="DashDelay" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [node name="Revival" type="ProgressBar" parent="."]
 visible = false
 z_index = 2

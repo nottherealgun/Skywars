@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b50cdoiu11fvs"]
+[gd_scene load_steps=26 format=3 uid="uid://b50cdoiu11fvs"]
 
 [ext_resource type="PackedScene" uid="uid://bcco2p0tgv3vr" path="res://npcs/orion_npc.tscn" id="1_ejp17"]
 [ext_resource type="Script" path="res://interactables/dorion_shop.gd" id="1_rjnau"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://o1su0un7m3q8" path="res://interactables/orionBoothFront.png" id="3_n68mp"]
 [ext_resource type="PackedScene" uid="uid://ceje6knjf6lby" path="res://interactables/table_with_coffee.tscn" id="4_cjmlg"]
 [ext_resource type="FontFile" uid="uid://byk80lambns8u" path="res://utility/MiniPixel.ttf" id="6_x0ky8"]
+[ext_resource type="Texture2D" uid="uid://cidue6voqpmoh" path="res://coinGroundSS.png" id="7_cvmsb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wggvf"]
 size = Vector2(237, 44)
@@ -20,12 +21,92 @@ size = Vector2(248, 114)
 size = Vector2(96, 114)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rewve"]
-bg_color = Color(1, 1, 1, 0.392157)
+bg_color = Color(0.929412, 0.858824, 0.780392, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_255fc"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.560784, 0.360784, 0.152941, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_thlc7"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_buj3n"]
+
+[sub_resource type="Theme" id="Theme_kmgqh"]
+HScrollBar/styles/grabber = SubResource("StyleBoxEmpty_thlc7")
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_buj3n")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s8eql"]
+atlas = ExtResource("7_cvmsb")
+region = Rect2(0, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8lyt"]
+atlas = ExtResource("7_cvmsb")
+region = Rect2(17, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jyfy"]
+atlas = ExtResource("7_cvmsb")
+region = Rect2(34, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7val"]
+atlas = ExtResource("7_cvmsb")
+region = Rect2(51, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqrpo"]
+atlas = ExtResource("7_cvmsb")
+region = Rect2(68, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vr0ri"]
+atlas = ExtResource("7_cvmsb")
+region = Rect2(85, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ms3u1"]
+atlas = ExtResource("7_cvmsb")
+region = Rect2(102, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fho3"]
+atlas = ExtResource("7_cvmsb")
+region = Rect2(119, 0, 17, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t2liu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s8eql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8lyt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8jyfy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s7val")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqrpo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vr0ri")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ms3u1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fho3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="DorionShop" type="StaticBody2D"]
 y_sort_enabled = true
@@ -76,13 +157,16 @@ metadata/_edit_group_ = true
 position = Vector2(-72, 89)
 shape = SubResource("RectangleShape2D_rv34n")
 
-[node name="Item1" type="Sprite2D" parent="ItemInteract1"]
+[node name="Node2D" type="Node2D" parent="ItemInteract1"]
+position = Vector2(-53, 96)
+scale = Vector2(1.5, 1.5)
+
+[node name="Item1" type="Sprite2D" parent="ItemInteract1/Node2D"]
 unique_name_in_owner = true
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(-53, 96)
-scale = Vector2(1.5, 1.5)
-offset = Vector2(0, -37.333)
+position = Vector2(0, -35)
+offset = Vector2(0, 0.000331879)
 
 [node name="Desc" type="Panel" parent="ItemInteract1"]
 z_index = 2
@@ -94,22 +178,123 @@ offset_bottom = 82.0
 scale = Vector2(1e-05, 1e-05)
 pivot_offset = Vector2(121, 41)
 theme_override_styles/panel = SubResource("StyleBoxFlat_rewve")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="ItemInteract1/Desc"]
 texture_filter = 1
 layout_mode = 2
 anchor_right = 0.992
 anchor_bottom = 0.976
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.03201
-offset_bottom = -8.03201
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+offset_left = -43.0
+offset_top = -20.0
+offset_right = 42.968
+offset_bottom = -77.032
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("6_x0ky8")
 theme_override_font_sizes/font_size = 20
 text = "Lorem ipsum"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Panel" type="Panel" parent="ItemInteract1/Desc"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_255fc")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ItemInteract1/Desc"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 71.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+theme = SubResource("Theme_kmgqh")
+horizontal_scroll_mode = 0
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="ItemInteract1/Desc/ScrollContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.560784, 0.360784, 0.152941, 1)
+theme_override_constants/line_spacing = -5
+theme_override_fonts/font = ExtResource("6_x0ky8")
+theme_override_font_sizes/font_size = 20
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In hac habitasse platea dictumst. Enim nec dui nunc mattis. Orci dapibus asdultrices in iaculis nunc sed augue lacus viverra. Condimentum lacinia quis vel eros donec ac."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Stats" type="ScrollContainer" parent="ItemInteract1/Desc" node_paths=PackedStringArray("shortcut_context")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 40.0
+offset_right = 109.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+shortcut_context = NodePath("")
+theme = SubResource("Theme_kmgqh")
+horizontal_scroll_mode = 0
+
+[node name="Label" type="RichTextLabel" parent="ItemInteract1/Desc/Stats"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+theme_override_colors/default_color = Color(0.780392, 0.505882, 0.211765, 1)
+theme_override_constants/line_separation = -4
+theme_override_fonts/normal_font = ExtResource("6_x0ky8")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "Stats
+> +1 health to all players
+> +2 Salmon Armor"
+
+[node name="Cost" type="Label" parent="ItemInteract1/Desc"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 4.0
+offset_top = 64.0
+offset_right = 192.0
+offset_bottom = 87.0
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+theme_override_colors/font_color = Color(0.780392, 0.505882, 0.211765, 1)
+theme_override_constants/line_spacing = -5
+theme_override_fonts/font = ExtResource("6_x0ky8")
+theme_override_font_sizes/font_size = 20
+text = "Cost:   1"
+autowrap_mode = 2
+clip_text = true
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="ItemInteract1/Desc/Cost"]
+position = Vector2(38.3333, 10)
+sprite_frames = SubResource("SpriteFrames_t2liu")
+autoplay = "default"
+frame_progress = 0.430696
 
 [node name="ItemInteract2" type="Area2D" parent="."]
 y_sort_enabled = true
@@ -120,13 +305,15 @@ metadata/_edit_group_ = true
 position = Vector2(80, 89)
 shape = SubResource("RectangleShape2D_rv34n")
 
-[node name="Item2" type="Sprite2D" parent="ItemInteract2"]
+[node name="Node2D" type="Node2D" parent="ItemInteract2"]
+position = Vector2(56, 96)
+scale = Vector2(1.5, 1.5)
+
+[node name="Item2" type="Sprite2D" parent="ItemInteract2/Node2D"]
 unique_name_in_owner = true
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(56, 96)
-scale = Vector2(1.5, 1.5)
-offset = Vector2(0, -37.3333)
+position = Vector2(0, -35)
 
 [node name="Desc" type="Panel" parent="ItemInteract2"]
 z_index = 2
@@ -138,22 +325,123 @@ offset_bottom = 82.0
 scale = Vector2(1e-05, 1e-05)
 pivot_offset = Vector2(0, 41)
 theme_override_styles/panel = SubResource("StyleBoxFlat_rewve")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="ItemInteract2/Desc"]
 texture_filter = 1
 layout_mode = 2
 anchor_right = 0.992
 anchor_bottom = 0.976
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.03201
-offset_bottom = -8.03201
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+offset_left = -42.0
+offset_top = -20.0
+offset_right = 41.968
+offset_bottom = -77.032
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("6_x0ky8")
 theme_override_font_sizes/font_size = 20
 text = "Lorem ipsum"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Panel" type="Panel" parent="ItemInteract2/Desc"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_255fc")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ItemInteract2/Desc"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 71.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+theme = SubResource("Theme_kmgqh")
+horizontal_scroll_mode = 0
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="ItemInteract2/Desc/ScrollContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+theme_override_colors/font_color = Color(0.560784, 0.360784, 0.152941, 1)
+theme_override_constants/line_spacing = -5
+theme_override_fonts/font = ExtResource("6_x0ky8")
+theme_override_font_sizes/font_size = 20
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In hac habitasse platea dictumst. Enim nec dui nunc mattis. Orci dapibus ultrices in iaculis nunc sed augue lacus viverra. Condimentum lacinia quis vel eros donec ac."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Stats" type="ScrollContainer" parent="ItemInteract2/Desc" node_paths=PackedStringArray("shortcut_context")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 40.0
+offset_right = 109.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+shortcut_context = NodePath("")
+theme = SubResource("Theme_kmgqh")
+horizontal_scroll_mode = 0
+
+[node name="Label" type="RichTextLabel" parent="ItemInteract2/Desc/Stats"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+theme_override_colors/default_color = Color(0.780392, 0.505882, 0.211765, 1)
+theme_override_constants/line_separation = -4
+theme_override_fonts/normal_font = ExtResource("6_x0ky8")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "Stats
+> +1 health to all players
+> +2 Salmon Armor"
+
+[node name="Cost" type="Label" parent="ItemInteract2/Desc"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 4.0
+offset_top = 64.0
+offset_right = 192.0
+offset_bottom = 87.0
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+theme_override_colors/font_color = Color(0.780392, 0.505882, 0.211765, 1)
+theme_override_constants/line_spacing = -5
+theme_override_fonts/font = ExtResource("6_x0ky8")
+theme_override_font_sizes/font_size = 20
+text = "Cost:   1"
+autowrap_mode = 2
+clip_text = true
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="ItemInteract2/Desc/Cost"]
+position = Vector2(38.3333, 10)
+sprite_frames = SubResource("SpriteFrames_t2liu")
+autoplay = "default"
+frame_progress = 0.265828
 
 [node name="Label" type="Label" parent="."]
 z_index = 1

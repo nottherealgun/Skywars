@@ -14,9 +14,9 @@ func _ready():
 	$Body.position = Vector2(0,-1000)
 	tween.tween_property($Indicator,"scale",Vector2.ONE*5,1.0).from(Vector2.ZERO).set_trans(Tween.TRANS_ELASTIC)
 	# Projectile Falling
-	tween.chain().tween_property($Body,"position",Vector2(0,0),3.0).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.chain().tween_property($Body,"position",Vector2(0,0),3.0/2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	# Red Indicator Fading
-	tween2.tween_property($Indicator,"modulate",Color.TRANSPARENT,4.0)
+	tween2.tween_property($Indicator,"modulate",Color.TRANSPARENT,4.0/2)
 	
 	await tween.finished
 	$Drop.stream = load("res://sfx/a4_drop/a4_drop"+str(randi_range(1,4))+".mp3")

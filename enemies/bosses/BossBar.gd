@@ -14,17 +14,19 @@ func set_boss(new_boss:Node):
 	$BossDesc.text = "[center][shake]"+boss.display_desc
 	
 	await boss.started
-	show()
 	var tween := create_tween()
 	tween.tween_property($BossName,"visible_ratio",1.0,3.0).from(0.0)
-	tween.chain().tween_property($BossDesc,"visible_ratio",1.0,3.0).from(0.0)
+	tween.parallel().tween_property($BossDesc,"visible_ratio",1.0,3.0).from(0.0)
 	for c in get_children():
-		tween = create_tween()
-		tween.chain().tween_property(c,"position:y",c.position.y,3.0).from(1200).set_trans(Tween.TRANS_CUBIC)
+		tween.parallel().tween_property(c,"position:y",c.position.y,3.0).from(1200).set_trans(Tween.TRANS_CUBIC)
+		tween.parallel().tween_callback(c.show)
 
 func boss_died():
 	var tween := create_tween()
+	tween.tween_property(%Flash,"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE)
 	for c in get_children():
-		tween = create_tween()
-		tween.chain().tween_property(c,"position:y",1200,3.0).set_trans(Tween.TRANS_CUBIC)
-	tween.chain().tween_callback(self.hide)
+		tween.parallel().tween_property(c,"position:y",1200,3.0).set_trans(Tween.TRANS_CUBIC)
+	await tween.finished
+	for c in get_children():
+		c.hide()
+	

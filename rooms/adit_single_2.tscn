@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cptdngh1rcvny"]
+[gd_scene load_steps=8 format=3 uid="uid://cptdngh1rcvny"]
 
 [ext_resource type="PackedScene" uid="uid://of23s1fagf1c" path="res://rooms/test_map.tscn" id="1_gqulf"]
 [ext_resource type="PackedScene" uid="uid://6qdjvyw15lm4" path="res://interactables/door.tscn" id="2_pr5pc"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bbn41xawi3av5" path="res://interactables/adit_table.tscn" id="4_61ag2"]
 [ext_resource type="PackedScene" uid="uid://ebilckvtvye6" path="res://interactables/box.tscn" id="5_uk0kf"]
 [ext_resource type="PackedScene" uid="uid://7h0dudlrgsm1" path="res://interactables/adit_chair.tscn" id="6_mbko5"]
+[ext_resource type="PackedScene" uid="uid://dcopfs6ltbw3p" path="res://interactables/electricity_box.tscn" id="7_7ocn5"]
 
 [node name="AditSingle2" instance=ExtResource("1_gqulf")]
 
@@ -85,5 +86,10 @@ facing = 2
 
 [node name="AditChair9" parent="." index="22" instance=ExtResource("6_mbko5")]
 position = Vector2(512, 768)
+facing = 1
+flip = true
+
+[node name="ElectricityBox" parent="." index="23" instance=ExtResource("7_7ocn5")]
+position = Vector2(960, 160)
 facing = 1
 flip = true

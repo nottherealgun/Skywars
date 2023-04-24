@@ -16,19 +16,36 @@ func _ready():
 func refresh_stock():
 	items = []
 	for i in item_slots.size():
-		var new_item = Global.items[randi_range(15,22)]
+		var new_item = Global.items[randi_range(15,25)]
 		while new_item in items or new_item == null:
-			new_item = Global.items[randi_range(15,22)]
+			new_item = Global.items[randi_range(15,25)]
 		items.append(new_item)
 		if new_item["pic"] != "":
 			item_slots[i].texture = load("res://items/"+new_item["pic"])
-			item_slots[i].get_node("../Desc/Label").text = new_item["name"]
+			item_slots[i].get_node("../../Desc/Label").text = new_item["name"]
+			item_slots[i].get_node("../../Desc/ScrollContainer/Label").text = new_item["desc"]
+			item_slots[i].get_node("../../Desc/Stats/Label").text = "Stats:\n"+new_item["stats"]
+			item_slots[i].get_node("../../Desc/Cost").text = "Cost:   "+str(new_item["cost"])
+			item_slots[i].scale = Vector2.ONE * new_item["scale_factor"]
 		else:
 			item_slots[i].texture = null
-			item_slots[i].get_node("../Desc/Label").text = "Out of Stock."
+			item_slots[i].get_node("../../Desc/Label").text = ""
+			item_slots[i].get_node("../../Desc/ScrollContainer/Label").text = "Out of Stock."
+			item_slots[i].get_node("../../Desc/Cost").text = "Cost:   -"
+			
 	
 func buy(for_player):
-	refresh_stock()
+	var bought_item = items[inspecting_item_id]
+	if not bought_item in [null,{}]:
+		if GameManager.money >= bought_item.cost:
+			GameManager.add_money(-bought_item.cost)
+			Global.Inventory.add_item(bought_item)
+			items[inspecting_item_id] = {}
+			item_slots[inspecting_item_id].texture = null
+			item_slots[inspecting_item_id].get_node("../../Desc/Label").text = "(SOLD)"
+			item_slots[inspecting_item_id].get_node("../../Desc/Stats/Label").text = ""
+			item_slots[inspecting_item_id].get_node("../../Desc/ScrollContainer/Label").text = "Item Sold."
+			item_slots[inspecting_item_id].get_node("../../Desc/Cost").text = "Cost:   -"
 
 func _on_area_area_entered(area):
 	var entity = area.get_parent()
@@ -54,7 +71,7 @@ func _on_item_1_area_entered(area):
 		inspecting_item_id = 0
 		var tween2 := create_tween().set_trans(Tween.TRANS_CUBIC)
 		tween2.tween_property(item_slots[0],"offset:y",-5,0.25).as_relative()
-		tween2.tween_property(item_slots[0].get_node("../Desc"),"scale",Vector2.ONE,0.25)
+		tween2.tween_property(item_slots[0].get_node("../../Desc"),"scale",Vector2.ONE,0.25)
 
 func _on_item_2_area_entered(area):
 	var entity = area.get_parent()
@@ -62,15 +79,14 @@ func _on_item_2_area_entered(area):
 		inspecting_item_id = 1
 		var tween2 := create_tween().set_trans(Tween.TRANS_CUBIC)
 		tween2.tween_property(item_slots[1],"offset:y",-5,0.25).as_relative()
-		tween2.tween_property(item_slots[1].get_node("../Desc"),"scale",Vector2.ONE,0.25)
+		tween2.tween_property(item_slots[1].get_node("../../Desc"),"scale",Vector2.ONE,0.25)
 
 func _on_item_interact_1_area_exited(area):
 	var tween2 := create_tween()
 	tween2.tween_property(item_slots[0],"offset:y",original_offsets[0].y,0.25)
-	tween2.tween_property(item_slots[0].get_node("../Desc"),"scale",Vector2.ZERO,0.25)
-	
+	tween2.tween_property(item_slots[0].get_node("../../Desc"),"scale",Vector2.ZERO,0.25)
 
 func _on_item_interact_2_area_exited(area):
 	var tween2 := create_tween()
 	tween2.tween_property(item_slots[1],"offset:y",original_offsets[1].y,0.25)
-	tween2.tween_property(item_slots[1].get_node("../Desc"),"scale",Vector2.ZERO,0.25)
+	tween2.tween_property(item_slots[1].get_node("../../Desc"),"scale",Vector2.ZERO,0.25)

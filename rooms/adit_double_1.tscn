@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://rsnv7w07ma12"]
+[gd_scene load_steps=8 format=3 uid="uid://rsnv7w07ma12"]
 
 [ext_resource type="PackedScene" uid="uid://of23s1fagf1c" path="res://rooms/test_map.tscn" id="1_ye51b"]
 [ext_resource type="PackedScene" uid="uid://6qdjvyw15lm4" path="res://interactables/door.tscn" id="2_gambo"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bbn41xawi3av5" path="res://interactables/adit_table.tscn" id="4_kcua6"]
 [ext_resource type="PackedScene" uid="uid://7h0dudlrgsm1" path="res://interactables/adit_chair.tscn" id="5_ijk5r"]
 [ext_resource type="PackedScene" uid="uid://ebilckvtvye6" path="res://interactables/box.tscn" id="6_pfwvo"]
+[ext_resource type="PackedScene" uid="uid://dcopfs6ltbw3p" path="res://interactables/electricity_box.tscn" id="7_txwvc"]
 
 [node name="adit_double_1" instance=ExtResource("1_ye51b")]
 
@@ -130,3 +131,8 @@ position = Vector2(1632, 224)
 
 [node name="Box6" parent="." index="35" instance=ExtResource("6_pfwvo")]
 position = Vector2(1536, 256)
+
+[node name="ElectricityBox" parent="." index="36" instance=ExtResource("7_txwvc")]
+position = Vector2(1728, 160)
+facing = 1
+flip = true

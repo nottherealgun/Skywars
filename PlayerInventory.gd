@@ -63,7 +63,13 @@ func refresh_inv():
 		var item = shown_inventory[i]
 		var slot = get_node("ItemSlot"+str(i))
 		
-		slot.texture = load("res://items/"+item["pic"])
+		var texture = load("res://items/"+item["pic"]) as Texture2D
+		slot.texture = texture
+		match texture.get_height():
+			32:
+				slot.scale=Vector2.ONE
+			64:
+				slot.scale=Vector2(2,2)
 	
 	for i in $HBox.get_children():
 		var equip_slot = i.get_node("PlayerSlotItem")
@@ -94,6 +100,10 @@ func mouse_entered(slot:String):
 			player_hovering_slots[1] = shown_inventory[slot_id]
 		else:
 			player_hovering_slots[1] = 0
+	
+	if player_hovering_slots[1] is Dictionary:
+		$ItemDescription.text = "[center]"+player_hovering_slots[1]["name"]+"[/center]\n\n"
+		$ItemDescription.text += player_hovering_slots[1]["desc"]
 
 func mouse_exited(slot:String):
 	for i in player_hovering_slots:
@@ -102,9 +112,10 @@ func mouse_exited(slot:String):
 				player_hovering_slots[player_hovering_slots.find(i)] = 0
 
 func slot_pressed(slot:String):
-	if player_hovering_slots[1] is Dictionary:
-		$ItemDescription.text = "[center]"+player_hovering_slots[1]["name"]+"[/center]\n\n"
-		$ItemDescription.text += player_hovering_slots[1]["desc"]
+#	if player_hovering_slots[1] is Dictionary:
+#		$ItemDescription.text = "[center]"+player_hovering_slots[1]["name"]+"[/center]\n\n"
+#		$ItemDescription.text += player_hovering_slots[1]["desc"]
+	pass
 
 func _on_prev_pressed():
 	if inv_set_idx > 1:

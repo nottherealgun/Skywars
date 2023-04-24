@@ -91,15 +91,34 @@ func _input_update():
 					aim_vec = position.direction_to(get_global_mouse_position()+Vector2(0,mouse_aim_offset))
 				if aim_vec != Vector2.ZERO:
 					shoot()
-			if Input.is_action_just_pressed("p"+str(player_id)+"_secondary"):
-				if brainpower > 0:
-					brainpower -= 2
-					Global.use_ability(character,self)
 				
 			if Input.is_action_just_pressed("p"+str(player_id)+"_action"):
 				# Action1
 				emit_signal("action",self)
+			
+			if Input.is_action_just_pressed("p"+str(player_id)+"_secondary"):
+				# Ability
+				Global.use_ability(character,self)
 				
+			if Input.is_action_just_pressed("p"+str(player_id)+"_dash"):
+				# Dash
+				if move_vec != Vector2.ZERO:
+					if move_and_collide(move_vec*150,true) == null and $DashDelay.is_stopped():
+						$DashDelay.start(0.5)
+#						var temp = [$Sprite.offset,$Sprite.position]
+#						$Sprite.offset = Vector2.ZERO
+#						$Sprite.position = Vector2.ZERO
+						var t = create_tween()
+						t.tween_property(self,"position",move_vec*150,0.2).as_relative()
+						if move_vec.normalized().x < 0:
+							t.parallel().tween_property($Sprite,"rotation",0,0.25).from(PI*2)
+						else:
+							t.parallel().tween_property($Sprite,"rotation",0,0.25).from(-PI*2)
+
+						await t.finished
+#						$Sprite.offset = Vector2(0,-24)
+#						$Sprite.position = Vector2(0,48)
+					
 			if Input.is_action_pressed("p"+str(player_id)+"_action"):
 				if is_instance_valid(revival_target) and revival_target.fainted:
 					if revival_target.get_node("ReviveTimer").is_stopped():
@@ -124,9 +143,15 @@ func _move_update(delta):
 	move_and_collide(move_vec.normalized()*delta*speed*200)
 
 func shoot():
-	var player_proj = Global.spawn_projectile(self,"darwin_proj_1",position+Vector2(0,-mouse_aim_offset),aim_vec.normalized(),true)
-#	player_proj.set("knockback",1)
+	match character:
+		"darwin":
+			var player_proj = Global.spawn_projectile(self,"darwin_proj_1",position+Vector2(0,-mouse_aim_offset),aim_vec.normalized(),true)
+		"gun":
+			var player_proj = Global.spawn_projectile(self,"gun_proj_1",position+Vector2(0,-mouse_aim_offset),aim_vec.normalized(),true)
+		_:
+			var player_proj = Global.spawn_projectile(self,"gun_proj_1",position+Vector2(0,-mouse_aim_offset),aim_vec.normalized(),true)
 
+#	player_proj.set("knockback",1)
 #func get_knockback(direction:Vector2,strength:=1):
 #	var tween := create_tween()
 #	tween.tween_property(self,"position",position+(direction*strength),0.2)

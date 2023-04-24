@@ -6,12 +6,12 @@ const display_name = "Printerovski 3000"
 const display_desc = "MUIC Printer / Bane of Physical Copies"
 @export var max_health = 400
 @onready var health = max_health
-@export var speed = 1
+@export var speed = 2
 var speed_modifier = 1
 @export var damage = 3
 
 @export var level = 1
-@export var points = 1
+@export var points = 100
 var latest_shooter : Node
 
 var move_vec := Vector2.ZERO
@@ -44,6 +44,7 @@ func _ready():
 func _physics_process(delta):
 #	print(STATES.keys()[state])
 	if health <= 0 and state != STATES.DEATH:
+		GameManager.add_money(points)
 		change_state(STATES.DEATH)
 #		$Hitbox.monitoring = false
 		
@@ -53,6 +54,10 @@ func _physics_process(delta):
 		$Pupil.scale = Vector2.ONE*(4.5-(dis_to_target*3.8/500))
 		if target.fainted:
 			target = null
+	else:
+		for p in Global.active_players:
+			if !p.fainted:
+				target = p
 			
 	if !targets_in_range.is_empty():
 #			target = targets_in_range[0]
@@ -184,11 +189,7 @@ func get_hurt(by:Node):
 		Global.kill(by)
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("injured")
-#	var tween := create_tween().set_trans(Tween.TRANS_LINEAR)
-#	tween.tween_property($Healthbar,"value",(health*100)/max_health,0.5).from_current()
-#	tween.parallel().tween_property($Healthbar,"scale:y",1.0,0.5).from(2.0)
-#	$Healthbar.value = (health*100)/max_health
-
+	
 func get_knockback(direction:Vector2,strength:=1):
 	pass # Bosses do not take knockback
 #	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
@@ -199,6 +200,7 @@ func _on_hitbox_area_entered(area):
 	var entity = area.get_parent()
 	if area.is_in_group("projectile"):
 		get_hurt(area)
+		
 	elif entity.is_in_group("player") and state != STATES.DEATH:
 		entity._injured_effect()
 #		entity.get_knockback(position.direction_to(entity.position),50)
@@ -235,7 +237,7 @@ func artillery_shot():
 	Global.active_entities.append(f_new_proj)
 	await f_new_proj.thrown
 	
-	var rand_land_pos
+	var rand_land_pos = target.position+Vector2(randf_range(-300,300),randf_range(-300,300))
 	while (rand_land_pos == null or !Global.is_out_of_map(rand_land_pos)) and is_instance_valid(target):
 		rand_land_pos = target.position+Vector2(randf_range(-300,300),randf_range(-300,300))
 	
