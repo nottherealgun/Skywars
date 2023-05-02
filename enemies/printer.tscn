@@ -258,7 +258,6 @@ shape = SubResource("RectangleShape2D_gdykf")
 
 [node name="Sprite" parent="." index="1"]
 position = Vector2(0, 48)
-scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_o5emk")
 animation = &"static"
 autoplay = "static"

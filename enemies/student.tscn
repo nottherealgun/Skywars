@@ -23,7 +23,6 @@ shape = SubResource("RectangleShape2D_cyl6t")
 
 [node name="Sprite" parent="." index="1"]
 position = Vector2(0, 52)
-scale = Vector2(2, 2)
 sprite_frames = ExtResource("3_n61ad")
 animation = &"idle"
 offset = Vector2(0, -26)

@@ -31,7 +31,7 @@ func start():
 	add_item(Global.items[0])
 	add_item(Global.items[1])
 	add_item(Global.items[2])
-	add_item(Global.items[5])
+	add_item(Global.items[4])
 	
 func _process(_delta):
 	$Page.text = "Page " + str(inv_set_idx) + "/" + str(floor(inventory.size()/16)+1)
@@ -46,6 +46,8 @@ func _input_update():
 		if player_hovering_slots[1] is Dictionary:
 			player_equipped_slots[1] = player_hovering_slots[1]
 			Global.active_players[0].equipped_item = player_equipped_slots[1]
+			Global.active_players[0].stat_gui.get_node("EquippedItem/Texture").texture =\
+			load("res://items/"+player_equipped_slots[1]["pic"])
 #		print(player_hovering_slots)
 		
 func refresh_inv():
@@ -104,6 +106,7 @@ func mouse_entered(slot:String):
 	if player_hovering_slots[1] is Dictionary:
 		$ItemDescription.text = "[center]"+player_hovering_slots[1]["name"]+"[/center]\n\n"
 		$ItemDescription.text += player_hovering_slots[1]["desc"]
+		$ItemDescription.text += "\n[center]- Stats -[/center][color=green]\n"+player_hovering_slots[1]["stats"]
 
 func mouse_exited(slot:String):
 	for i in player_hovering_slots:

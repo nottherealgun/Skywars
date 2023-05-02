@@ -1,9 +1,9 @@
 extends CharacterBody2D
 
-@export var max_health = 10
+@export var max_health = 100
 @onready var health = max_health
 @export var speed := 1
-@export var damage = 5
+@export var damage = 50
 
 var move_vec := Vector2.ZERO
 var master : Node

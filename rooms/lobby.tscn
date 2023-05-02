@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dbun1tf3xdti6"]
+[gd_scene load_steps=24 format=3 uid="uid://dbun1tf3xdti6"]
 
 [ext_resource type="PackedScene" uid="uid://cx7imnf85vue8" path="res://level.tscn" id="1_p1xgq"]
 [ext_resource type="PackedScene" uid="uid://bhsvoj5kcuifg" path="res://spawning_point.tscn" id="3_2cn4r"]
@@ -16,6 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://b0hdjqdukved" path="res://interactables/pillar_white.tscn" id="13_iv0gb"]
 [ext_resource type="PackedScene" uid="uid://2pprua54q7h8" path="res://interactables/pillar_yellow.tscn" id="13_srk4e"]
 [ext_resource type="Texture2D" uid="uid://d07t3246r6ci6" path="res://interactables/glassDoubleDoorSS.png" id="15_jrld0"]
+[ext_resource type="Texture2D" uid="uid://cvfvpdu4fdfi0" path="res://interactables/broIsHerePoster.png" id="17_0eqkn"]
+[ext_resource type="PackedScene" uid="uid://bs0h2fmnb8ptq" path="res://enemies/student.tscn" id="18_enljv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wcjt0"]
 atlas = ExtResource("15_jrld0")
@@ -203,3 +205,15 @@ offset = Vector2(0, -40)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GlassDoor4" index="1"]
 position = Vector2(0, 59.5)
 shape = SubResource("RectangleShape2D_0jigo")
+
+[node name="BroIsHerePoster" type="Sprite2D" parent="." index="19"]
+texture_filter = 1
+position = Vector2(-179, -80)
+texture = ExtResource("17_0eqkn")
+offset = Vector2(-7.62939e-06, -46.6667)
+
+[node name="Student" parent="." index="20" instance=ExtResource("18_enljv")]
+position = Vector2(2269, 208)
+max_health = 99999999
+speed = 0
+damage = 0

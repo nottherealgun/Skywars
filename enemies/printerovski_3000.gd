@@ -4,11 +4,11 @@ signal died()
 
 const display_name = "Printerovski 3000"
 const display_desc = "MUIC Printer / Bane of Physical Copies"
-@export var max_health = 400
+@export var max_health = 4000
 @onready var health = max_health
 @export var speed = 2
 var speed_modifier = 1
-@export var damage = 3
+@export var damage = 30
 
 @export var level = 1
 @export var points = 100
@@ -68,7 +68,10 @@ func _physics_process(delta):
 				break
 			if t.position.distance_to(position) < dist:
 				dist = t.position.distance_to(position)
+				if not t is Object:
+					continue
 				closest = t
+				
 		target = closest
 	
 	match state:

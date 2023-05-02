@@ -20,12 +20,14 @@ func set_boss(new_boss:Node):
 	for c in get_children():
 		tween.parallel().tween_property(c,"position:y",c.position.y,3.0).from(1200).set_trans(Tween.TRANS_CUBIC)
 		tween.parallel().tween_callback(c.show)
+	tween.parallel().tween_property(Global.Cam,"zoom",Vector2.ONE*1.5,3.0)
 
 func boss_died():
 	var tween := create_tween()
 	tween.tween_property(%Flash,"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE)
 	for c in get_children():
 		tween.parallel().tween_property(c,"position:y",1200,3.0).set_trans(Tween.TRANS_CUBIC)
+	tween.parallel().tween_property(Global.Cam,"zoom",Vector2.ONE*2,3.0)
 	await tween.finished
 	for c in get_children():
 		c.hide()

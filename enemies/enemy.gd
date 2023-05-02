@@ -1,10 +1,10 @@
 class_name Enemy extends CharacterBody2D
 
 @export_placeholder("enemy_name") var display_name = ""
-@export var max_health = 5
+@export var max_health = 50
 @onready var health = max_health
 @export var speed = 1
-@export var damage = 1
+@export var damage = 10
 
 @export var level = 1
 @export var points = 1

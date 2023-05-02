@@ -258,6 +258,7 @@ position_smoothing_enabled = true
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_mhf8t")]
+character = "gun"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -498,6 +499,23 @@ theme_override_constants/outline_size = 12
 theme_override_fonts/font = ExtResource("11_2h1l6")
 theme_override_font_sizes/font_size = 44
 text = "Player 1"
+
+[node name="EquippedItem" type="Panel" parent="GUI/PlayerStats/PlayerStats1"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 120.0
+offset_right = 136.0
+offset_bottom = 184.0
+
+[node name="Texture" type="TextureRect" parent="GUI/PlayerStats/PlayerStats1/EquippedItem"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
 
 [node name="PlayerStats2" type="Control" parent="GUI/PlayerStats"]
 visible = false

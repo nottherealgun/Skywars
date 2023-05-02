@@ -31,7 +31,7 @@ func spawn_in(entity):
 	Main.add_child(entity)
 	return entity
 
-func spawn_projectile(shooter:Node,proj_name:String,pos:Vector2,dir:Vector2,player_bullet=false,dmg:=1):
+func spawn_projectile(shooter:Node,proj_name:String,pos:Vector2,dir:Vector2,player_bullet=false,dmg:=10):
 	var new_proj = load("res://projectiles/"+proj_name+".tscn").instantiate()
 	new_proj.shooter = shooter
 	new_proj.position = pos
@@ -98,7 +98,6 @@ func kill_all(exceptions:=[]):
 				
 		if exceptions != []:
 			break
-
 # Bosses
 
 func spawn_boss(type:String,pos:Vector2):
@@ -230,82 +229,98 @@ const items = [
 		"name":"NotTheRealGun",
 		"pic":"notTheRealGun.png",
 		"desc":"We don’t support school shootings. So, this is just a NERF gun.",
+		"stats":"+5% Critical Chance (x1.5 damage on crit)",
+		
 	},
 	{
 		"name":"Amulet of Dood",
 		"pic":"amuletOfDood.png",
 		"desc":"A periapt forged by mother nature herself.",
+		"stats":"+10% Minion's Damage or Heal",
 	},
 	{
 		"name":"The Ice of Ice",
 		"pic":"icyboiIce.png",
 		"desc":"This ice is Ice’s ice which belongs to Ice. Cooler than Ice himself.",
+		"stats":"+10% Slow on hit",
 	},
 	{
 		"name":"Walker's Special",
 		"pic":"walkerSpecial.png",
 		"desc":"A secret recipe passed down from the first ancestor of Walker’s family.",
+		"stats":"+10% Attack Speed",
 	},
 	{ 
 		"name":"Worrier Froge",
-		"pic":"",
+		"pic":"froge.png",
 		"desc":"The most versatile emoji on Earth. When you look closely, it looks like Ken.",
+		"stats":"+30% Dashing Distance",
 	},
 	{ #5
 		"name":"Ken’s Gachapon",
-		"pic":"froge.png",
+		"pic":"",
 		"desc":"Pure sodium chloride.",
+		"stats":"",
 	},
 	{
 		"name":"Bro Was Here",
 		"pic":"",
 		"desc":"I hate it here.",
+		"stats":"",
 	},
 	{
 		"name":"Kouprey’s Horn",
 		"pic":"koupreyHorn.png",
 		"desc":"A forbidden ingredient for aphrodisiac.",
+		"stats":"+10% Damage",
 	},
 	{
 		"name":"Moss",
 		"pic":"",
 		"desc":"A sacred beast tamed by Mr.Will.",
+		"stats":"",
 	},
 	{
 		"name":"Archplan Copy",
 		"pic":"",
 		"desc":"A copy of Archplan; A game made by Dennis.",
+		"stats":"",
 	},
 	{ #10
 		"name":"James’s Hoodie",
 		"pic":"",
 		"desc":"He was there. He was always there.",
+		"stats":"",
 	},
 	{
 		"name":"AJ’s Basketball",
 		"pic":"",
-		"desc":"Traveled.",
+		"desc":"This ball’s owner has the level of extrovertedness equivalent to a whole NFL match.",
+		"stats":"",
 	},
 	{
 		"name":"Konit’s Brick",
 		"pic":"konit_brick.png",
 		"desc":"Bricked.",
+		"stats":"+15% Damage Reduction",
 	},
 	{
 		"name":"Tim’s Shakes",
 		"pic":"",
 		"desc":"We don't know what it is but it’s Tim’s.",
+		"stats":"",
 	},
 	{
 		"name":"Advisor’s Approval",
 		"pic":"",
-		"desc":"On hold.",
+		"desc":"Online. Offline. Online again, Offline. Oh, finally replied.",
+		"stats":"",
 	},
 	{ #15
 		"name":"Salmon Nigiri",
 		"pic":"salmonNigiri.png",
 		"desc":"It’s actually trout.",
-		"stats":"> +1 health to all players\n> +2 Salmon Armor",
+		"stats":"+ 20% Heal\n+ 2 Brain cells",
 		"cost":10,
 		"scale_factor":0.75,
 	},
@@ -313,7 +328,7 @@ const items = [
 		"name":"Tonkatsu Curry",
 		"pic":"curry.png",
 		"desc":"If you’re planning to get MUIC’s curry, just don’t.",
-		"stats":"",
+		"stats":"+ Fully recovers your health",
 		"cost":1,
 		"scale_factor":1,
 	},
@@ -321,7 +336,7 @@ const items = [
 		"name":"Khao Mun Gai",
 		"pic":"chickrice.png",
 		"desc":"A delicacy from Hainan.",
-		"stats":"",
+		"stats":"+ Recovers 75% of your health",
 		"cost":1,
 		"scale_factor":1,
 	},
@@ -329,7 +344,7 @@ const items = [
 		"name":"Ohm’s Gyoza",
 		"pic":"gyoza.png",
 		"desc":"Available at Athit’s Gyoza.",
-		"stats":"",
+		"stats":"+ Recovers 50% of your health",
 		"cost":1,
 		"scale_factor":0.75,
 	},
@@ -337,7 +352,7 @@ const items = [
 		"name":"Dispensed Water",
 		"pic":"dispensed_water.png",
 		"desc":"4oz. of water.",
-		"stats":"",
+		"stats":"+ Refreshes the brain cell bar\n+ Removes debuffs",
 		"cost":1,
 		"scale_factor":0.6,
 	},
@@ -345,7 +360,7 @@ const items = [
 		"name":"The Walker Espress",
 		"pic":"walker_espress.png",
 		"desc":"An Orion-certified beverage. As he’d said before, “Pure coffee juice.”",
-		"stats":"",
+		"stats":"+ Insane Movement Speed\n+ Drains your entire brain cell bar",
 		"cost":1,
 		"scale_factor":0.6,
 	},
@@ -353,7 +368,7 @@ const items = [
 		"name":"American-O",
 		"pic":"americano.png",
 		"desc":"A bit of coffee and tons of water. A truly watered-down drink.",
-		"stats":"",
+		"stats":"+ Doubles the amount of projectiles\n+ Disables dash mechanic",
 		"cost":1,
 		"scale_factor":0.75,
 	},
@@ -361,7 +376,7 @@ const items = [
 		"name":"Cap’s Mustache",
 		"pic":"cap_mustache.png",
 		"desc":"YAHOOO. It’s-a me, Cappuccino.",
-		"stats":"",
+		"stats":"+ Doubles brain cell recharge rate\n+ 1.5x brain cell consumption rate",
 		"cost":1,
 		"scale_factor":0.6,
 	},
@@ -369,7 +384,7 @@ const items = [
 		"name":"Shot O' Latte",
 		"pic":"shot_o_latte.png",
 		"desc":"Chotto latte kudasai, oniichan~",
-		"stats":"",
+		"stats":"+ Improves attack speed\n+ Decreases movement speed",
 		"cost":1,
 		"scale_factor":0.6,
 	},
@@ -377,7 +392,7 @@ const items = [
 		"name":"De Moch Crazy",
 		"pic":"de_moch_crazy.png",
 		"desc":"Je suis fou de chocolat cafe!",
-		"stats":"",
+		"stats":"+ Every 10th bullet's damage is increased tenfold\n+ Your controls are reversed",
 		"cost":1,
 		"scale_factor":0.6,
 	},
@@ -385,7 +400,7 @@ const items = [
 		"name":"Dirty Bean Juice",
 		"pic":"dirty_bean_juice.png",
 		"desc":"No bacteria included, only lactobacillus.",
-		"stats":"",
+		"stats":"+ Increases defense by 10%\n+ Killed enemies drop more coins",
 		"cost":1,
 		"scale_factor":0.6,
 	},
@@ -646,8 +661,18 @@ func use_ability(character:String,by:Node):
 				proj.t.chain().tween_property(proj,"direction",aim_vec.rotated(deg_to_rad(randf_range(0,-10))),0.5)
 				proj.t.chain().tween_property(proj,"direction",aim_vec.rotated(deg*-1),0.5)
 				
-func use_item(item:Dictionary,by:Node):
+func use_trinket(item:Dictionary,by:Node):
 	match item["name"]:
+		"NotTheRealGun":
+			if randi_range(1,100) <= 5 and is_instance_valid(by.last_bullet):
+				by.last_bullet.damage *= 1.5
 		"Amulet of Dood":
+			if by.minions != []:
+				pass
+		"The Ice of Ice":
+			pass
+		"Walker's Special":
+			pass
+		"Worrier Froge":
 			pass
 			

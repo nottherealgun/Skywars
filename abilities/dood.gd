@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
-@export var max_health = 10
+@export var max_health = 100
 @onready var health = max_health
 @export var speed := 1
+@export var damage = 10
 
 var move_vec := Vector2.ZERO
 var master : Node
@@ -15,6 +16,7 @@ var targets_in_range = [] as Array
 var target : Node
 
 var allies = []
+var last_bullet : Object
 
 func _process(delta):
 	if !is_instance_valid(target):
@@ -52,7 +54,8 @@ func _process(delta):
 				$AnimatedSprite2D.play("attack")
 				$AnimatedSprite2D.flip_h = (target.position.x < position.x)
 				if $AnimatedSprite2D.frame == 6 and !shot:
-					var vine = Global.spawn_projectile(master,"dood_vines",position,position.direction_to(target.position),true)
+					last_bullet = Global.spawn_projectile(master,"dood_vines",position,position.direction_to(target.position),true)
+					last_bullet.damage = damage
 					shot = true
 				await $AnimatedSprite2D.animation_finished
 				$AnimatedSprite2D.play("idle")

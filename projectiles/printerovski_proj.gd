@@ -3,7 +3,7 @@ extends Node2D
 var land_pos : Vector2
 
 var printer_boss : CharacterBody2D
-var damage = 3
+var damage = 5
 var landed = false
 
 func _ready():

@@ -8,7 +8,7 @@ var current_speed = 1
 var knockback = 0
 
 #@onready var tween = self.create_tween()
-@export var damage = 1
+@export var damage = 10
 var player_bullet = false 
 
 func _enter_tree():

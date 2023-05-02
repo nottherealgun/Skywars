@@ -35,6 +35,10 @@ gdscript/warnings/enable=false
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 
+[editor]
+
+movie_writer/movie_file="D:/Godot Projects/createch-clash/misc/test.avi"
+
 [input]
 
 p1_up={

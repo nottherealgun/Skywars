@@ -8,7 +8,7 @@ signal player_killed(player)
 @export_enum("darwin","gun") var character = "darwin"
 @onready var player_color = [Color.DODGER_BLUE,Color.CORAL,Color.DARK_GREEN,Color.MEDIUM_PURPLE][player_id-1]
 # Player stats
-@export var max_health = 1
+@export var max_health = 100
 @onready var health = max_health
 @export var brainpower = 6
 @export var speed = 1
@@ -22,6 +22,7 @@ var aim_vec := Vector2.ZERO
 var fainted = false
 var transporting = false
 var iframed = false
+var last_bullet : Object
 
 const hitbox_anchor = Vector2(0,44)
 
@@ -48,9 +49,10 @@ func _ready():
 	stat_gui.get_node("NameTag").text = "Player "+str(player_id)
 	
 func _process(delta):
-	$dev.text = str(iframed)
+#	$dev.text = str(iframed)
 	_input_update() # Update device input
 	_gui_update() # Update gui
+	activate_trinket() # Activate Trinket
 	var sprite = get_node("Sprite")
 	if health <= 0: # If player dies
 		if !fainted:
@@ -133,6 +135,8 @@ func _input_update():
 func _gui_update():
 	healthbar.value = (health*healthbar.max_value)/max_health
 	brainbar.frame = brainpower
+	$DashGUI.value = ($DashDelay.time_left*100)/$DashDelay.wait_time
+	$DashGUI.visible = !($DashDelay.time_left == 0)
 
 func _move_update(delta):
 	move_vec = Input.get_vector("p"+str(player_id)+"_left","p"+str(player_id)+"_right","p"+str(player_id)+"_up","p"+str(player_id)+"_down")
@@ -145,11 +149,11 @@ func _move_update(delta):
 func shoot():
 	match character:
 		"darwin":
-			var player_proj = Global.spawn_projectile(self,"darwin_proj_1",position+Vector2(0,-mouse_aim_offset),aim_vec.normalized(),true)
+			last_bullet = Global.spawn_projectile(self,"darwin_proj_1",position+Vector2(0,-mouse_aim_offset),aim_vec.normalized(),true)
 		"gun":
-			var player_proj = Global.spawn_projectile(self,"gun_proj_1",position+Vector2(0,-mouse_aim_offset),aim_vec.normalized(),true)
+			last_bullet = Global.spawn_projectile(self,"gun_proj_1",position+Vector2(0,-mouse_aim_offset),aim_vec.normalized(),true)
 		_:
-			var player_proj = Global.spawn_projectile(self,"gun_proj_1",position+Vector2(0,-mouse_aim_offset),aim_vec.normalized(),true)
+			last_bullet = Global.spawn_projectile(self,"gun_proj_1",position+Vector2(0,-mouse_aim_offset),aim_vec.normalized(),true)
 
 #	player_proj.set("knockback",1)
 #func get_knockback(direction:Vector2,strength:=1):
@@ -188,6 +192,11 @@ func get_surround_pos() -> Vector2:
 
 func get_hitbox_anchor():
 	return position+hitbox_anchor
+
+func activate_trinket():
+	if not equipped_item in [null,{}]:
+		Global.use_trinket(equipped_item,self)
+	last_bullet = null
 
 func _on_hitbox_area_entered(area:Area2D):
 	if area.is_in_group("projectile"):
