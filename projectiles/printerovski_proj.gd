@@ -37,4 +37,3 @@ func _process(_delta):
 
 func affect(victim:Node):
 	victim.health -= damage
-	Global.emit_indicator(damage,victim.position,false)

@@ -5,6 +5,12 @@ extends CharacterBody2D
 @export var speed := 1
 @export var damage = 10
 
+var DEFAULT = {
+	"max_health" = 100,
+	"speed" = 1,
+	"damage" = 10
+}
+
 var move_vec := Vector2.ZERO
 var master : Node
 var min_master_dist = 100

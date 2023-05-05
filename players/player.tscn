@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://caw6brh3py3mv"]
+[gd_scene load_steps=15 format=3 uid="uid://daeql3etvbgyq"]
 
 [ext_resource type="Script" path="res://players/player.gd" id="1_2rdnx"]
 [ext_resource type="SpriteFrames" uid="uid://ut4kvd8lo60w" path="res://players/gun.tres" id="2_gfowo"]
 [ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://utility/shadow.png" id="2_ixn7o"]
 [ext_resource type="Texture2D" uid="uid://c8fdbjdlywnc" path="res://players/arrow.png" id="3_j5x1p"]
 [ext_resource type="FontFile" uid="uid://im11hs0xx7wu" path="res://utility/RoadPixel.ttf" id="4_nv7os"]
+[ext_resource type="Script" path="res://players/TrinketManager.gd" id="6_fqbxb"]
+[ext_resource type="Script" path="res://players/Buff.gd" id="7_oj8un"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oscn4"]
 size = Vector2(40, 16)
@@ -40,6 +42,13 @@ _data = {
 "RESET": SubResource("Animation_j2gx7"),
 "default": SubResource("Animation_245ad")
 }
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c8qaq"]
+bg_color = Color(0.14902, 0.635294, 0.937255, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
@@ -129,7 +138,7 @@ uppercase = true
 wait_time = 0.01
 
 [node name="RateOfFire" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.25
 one_shot = true
 
 [node name="BrainRegen" type="Timer" parent="."]
@@ -144,10 +153,11 @@ one_shot = true
 autostart = true
 
 [node name="DashGUI" type="ProgressBar" parent="."]
-offset_left = -24.0
-offset_top = 64.0
-offset_right = 24.0
-offset_bottom = 68.0
+offset_left = -32.0
+offset_top = -55.0
+offset_right = 32.0
+offset_bottom = -51.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_c8qaq")
 show_percentage = false
 
 [node name="Revival" type="ProgressBar" parent="."]
@@ -183,6 +193,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
+[node name="TrinketManager" type="Node" parent="."]
+script = ExtResource("6_fqbxb")
+
+[node name="Buff" type="Node" parent="TrinketManager" groups=["buff"]]
+script = ExtResource("7_oj8un")
+
+[node name="Timer" type="Timer" parent="TrinketManager/Buff"]
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
@@ -190,3 +208,4 @@ uppercase = true
 [connection signal="area_exited" from="EnemyDetect" to="." method="_on_enemy_detect_area_exited"]
 [connection signal="timeout" from="ReviveTimer" to="." method="_on_revive_timer_timeout"]
 [connection signal="timeout" from="BrainRegen" to="." method="_on_brain_regen_timeout"]
+[connection signal="timeout" from="TrinketManager/Buff/Timer" to="TrinketManager/Buff" method="_on_timer_timeout"]

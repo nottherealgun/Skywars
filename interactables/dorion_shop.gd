@@ -50,8 +50,8 @@ func buy(for_player):
 func _on_area_area_entered(area):
 	var entity = area.get_parent()
 	if entity.is_in_group("player"):
-		if !entity.is_connected("action",buy):
-			entity.connect("action",buy)
+		if !entity.is_connected("does_action",buy):
+			entity.connect("does_action",buy)
 
 		tween = create_tween().set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 		tween.tween_property($Label,"scale",Vector2.ONE,2.0).from_current()
@@ -59,8 +59,8 @@ func _on_area_area_entered(area):
 func _on_area_area_exited(area):
 	var entity = area.get_parent()
 	if entity.is_in_group("player"):
-		if entity.is_connected("action",buy):
-			entity.disconnect("action",buy)
+		if entity.is_connected("does_action",buy):
+			entity.disconnect("does_action",buy)
 		tween.stop()
 		tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 		tween.tween_property($Label,"scale",Vector2.ZERO,0.25).from_current()

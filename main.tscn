@@ -1,6 +1,6 @@
 [gd_scene load_steps=71 format=3 uid="uid://dlpndwnncnijn"]
 
-[ext_resource type="PackedScene" uid="uid://caw6brh3py3mv" path="res://players/player.tscn" id="1_mhf8t"]
+[ext_resource type="PackedScene" uid="uid://daeql3etvbgyq" path="res://players/player.tscn" id="1_mhf8t"]
 [ext_resource type="AudioStream" uid="uid://bnw73i68y41ik" path="res://music/The Lobby_Loopable.mp3" id="1_x207s"]
 [ext_resource type="Texture2D" uid="uid://dv8c76rwlux0p" path="res://items/idCardGUI.png" id="2_e4464"]
 [ext_resource type="Texture2D" uid="uid://bffxtkyh5d2av" path="res://players/gun_head.png" id="3_5ew25"]
@@ -252,13 +252,12 @@ bus = &"Music"
 position = Vector2(192, 128)
 scale = Vector2(2, 2)
 ignore_rotation = false
-zoom = Vector2(2, 2)
+zoom = Vector2(1.5, 1.5)
 limit_smoothed = true
 position_smoothing_enabled = true
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_mhf8t")]
-character = "gun"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1

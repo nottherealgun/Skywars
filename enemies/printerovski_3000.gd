@@ -5,10 +5,16 @@ signal died()
 const display_name = "Printerovski 3000"
 const display_desc = "MUIC Printer / Bane of Physical Copies"
 @export var max_health = 4000
-@onready var health = max_health
+@onready var health = max_health : set = _set_health
 @export var speed = 2
 var speed_modifier = 1
 @export var damage = 30
+
+var DEFAULT = {
+	"max_health" : max_health,
+	"speed" : speed,
+	"damage" : damage,
+}
 
 @export var level = 1
 @export var points = 100
@@ -184,6 +190,13 @@ func change_state(new_state):
 			$AnimatedSprite.play("death")
 			emit_signal("died")
 			
+
+## Privates
+
+func _set_health(new_val):
+	Global.emit_indicator((health-new_val),position,true)
+	health = new_val
+
 var allies = []
 
 func get_hurt(by:Node):
@@ -208,7 +221,6 @@ func _on_hitbox_area_entered(area):
 		entity._injured_effect()
 #		entity.get_knockback(position.direction_to(entity.position),50)
 		entity.health -= damage
-		Global.emit_indicator(damage,entity.position,false)
 	
 func _on_player_detect_area_entered(area):
 	var entity = area.get_parent()

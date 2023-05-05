@@ -8,6 +8,7 @@ var shown_inventory = [] # This variable represents a set of 15 slots of the inv
 var inv_set_idx := 1
 var player_equipped_slots = [null] # Player IDs start from 1, Not 0. Which is why this array at index 0 is occupied.
 var player_hovering_slots = [null]
+var player_hovering_slot_ids = [null]
 var mouse_hovering_slot
 
 func _ready():
@@ -27,11 +28,19 @@ func start():
 		new_player_slot.get_node("PlayerSlotIcon").texture = load("res://players/"+str(p.character)+"_head.png")
 		player_equipped_slots.append({})
 		player_hovering_slots.append(0)
+		player_hovering_slot_ids.append(-1)
 	
 	add_item(Global.items[0])
 	add_item(Global.items[1])
 	add_item(Global.items[2])
+	add_item(Global.items[3])
 	add_item(Global.items[4])
+	add_item(Global.items[7])
+	add_item(Global.items[12])
+	add_item(Global.items[15])
+	add_item(Global.items[16])
+	add_item(Global.items[17])
+	add_item(Global.items[18])
 	
 func _process(_delta):
 	$Page.text = "Page " + str(inv_set_idx) + "/" + str(floor(inventory.size()/16)+1)
@@ -44,11 +53,14 @@ func _input_update():
 		pass
 	elif Input.is_action_just_pressed("p1_secondary"):
 		if player_hovering_slots[1] is Dictionary:
-			player_equipped_slots[1] = player_hovering_slots[1]
-			Global.active_players[0].equipped_item = player_equipped_slots[1]
-			Global.active_players[0].stat_gui.get_node("EquippedItem/Texture").texture =\
-			load("res://items/"+player_equipped_slots[1]["pic"])
-#		print(player_hovering_slots)
+			if player_hovering_slots[1].type == "trinket":
+				player_equipped_slots[1] = player_hovering_slots[1]
+				Global.active_players[0].emit_signal("equips_item",player_equipped_slots[1])
+				Global.active_players[0].stat_gui.get_node("EquippedItem/Texture").texture =\
+				load("res://items/"+player_equipped_slots[1]["pic"])
+			elif player_hovering_slots[1].type == "consumable":
+				Global.active_players[0].emit_signal("consumes_item",player_hovering_slots[1])
+				remove_item(player_hovering_slot_ids[1])
 		
 func refresh_inv():
 	for i in shown_inventory.size():
@@ -85,16 +97,12 @@ func add_item(item:Dictionary):
 	return item
 
 func remove_item(slot_id=-1):
-	if slot_id == -1:
-		pass
-	else:
+	if slot_id >= 0:
 		inventory.remove_at(slot_id)
-
-func equip_item():
-	pass
 
 func mouse_entered(slot:String):
 	var slot_id = slot.substr(7).to_int()
+	player_hovering_slot_ids[1] = slot_id
 	mouse_hovering_slot = get_node("./"+slot)
 	$Selector.position = mouse_hovering_slot.position-Vector2(13,13)
 	if shown_inventory.size() > slot_id:
@@ -106,7 +114,7 @@ func mouse_entered(slot:String):
 	if player_hovering_slots[1] is Dictionary:
 		$ItemDescription.text = "[center]"+player_hovering_slots[1]["name"]+"[/center]\n\n"
 		$ItemDescription.text += player_hovering_slots[1]["desc"]
-		$ItemDescription.text += "\n[center]- Stats -[/center][color=green]\n"+player_hovering_slots[1]["stats"]
+		$ItemDescription.text += "\n[center][color=gray]- Stats -[/color][/center][color=green]\n"+player_hovering_slots[1]["stats"]
 
 func mouse_exited(slot:String):
 	for i in player_hovering_slots:

@@ -1,22 +1,40 @@
 class_name Player extends CharacterBody2D
 
-signal action(by)
-signal player_killed(player)
+signal does_action(by)
+signal kills_player(player)
+signal equips_item(trinket)
+signal consumes_item(consumable)
+signal spawns_bullet(bullet)
+signal spawns_minion(minion)
 
 # Player device settings
 @export var player_id = 1
 @export_enum("darwin","gun") var character = "darwin"
 @onready var player_color = [Color.DODGER_BLUE,Color.CORAL,Color.DARK_GREEN,Color.MEDIUM_PURPLE][player_id-1]
-# Player stats
-@export var max_health = 100
-@onready var health = max_health
-@export var brainpower = 6
-@export var speed = 1
-var equipped_item : Dictionary
 
+# Player stats
+@export var max_health = 	100
+@onready var health = 		max_health : set = _set_health
+@export var brainpower = 	6
+@export var damage_modifier = 1
+@export var speed = 		1
+@export var attack_speed :=	0.25 : set = _set_attack_speed
+@export var dash_modifier =	1
+@export var damage_reduction = 0 # Out of 100
+
+@onready var DEFAULT = {
+	"max_health" 	: max_health,
+	"damage_modifier" : damage_modifier,
+	"speed" 		: speed,
+	"attack_speed" 	: attack_speed,
+	"dash_modifier" : dash_modifier,
+	"damage_reduction" : damage_reduction,
+}
+
+var equipped_item : Dictionary
 var minions = []
 
-# Internal stats
+# Internal stats / Metadata
 var move_vec := Vector2.ZERO
 var aim_vec := Vector2.ZERO
 var fainted = false
@@ -28,6 +46,7 @@ const hitbox_anchor = Vector2(0,44)
 
 var latest_shooter
 var revival_target : Player
+
 # Player GUI setup
 @onready var stat_gui = Global.GUI.get_node("PlayerStats/PlayerStats"+str(player_id))
 @onready var healthbar = stat_gui.get_node("Healthbar")
@@ -47,12 +66,12 @@ func _ready():
 	stat_gui.get_node("Icon").texture = load("res://players/"+character+"_head.png")
 	stat_gui.get_node("NameTag").set("theme_override_colors/font_color",player_color)
 	stat_gui.get_node("NameTag").text = "Player "+str(player_id)
+	equips_item.connect(equip_item)
 	
 func _process(delta):
 #	$dev.text = str(iframed)
 	_input_update() # Update device input
 	_gui_update() # Update gui
-	activate_trinket() # Activate Trinket
 	var sprite = get_node("Sprite")
 	if health <= 0: # If player dies
 		if !fainted:
@@ -60,7 +79,7 @@ func _process(delta):
 			fainted = true
 			$Arrow.hide()
 			$Revival.show()
-			emit_signal("player_killed",self)
+			emit_signal("kills_player",self)
 			
 	if fainted:
 		if $Revival.value == 100.0:
@@ -96,7 +115,7 @@ func _input_update():
 				
 			if Input.is_action_just_pressed("p"+str(player_id)+"_action"):
 				# Action1
-				emit_signal("action",self)
+				emit_signal("does_action",self)
 			
 			if Input.is_action_just_pressed("p"+str(player_id)+"_secondary"):
 				# Ability
@@ -111,7 +130,7 @@ func _input_update():
 #						$Sprite.offset = Vector2.ZERO
 #						$Sprite.position = Vector2.ZERO
 						var t = create_tween()
-						t.tween_property(self,"position",move_vec*150,0.2).as_relative()
+						t.tween_property(self,"position",move_vec*150*dash_modifier,0.2).as_relative()
 						if move_vec.normalized().x < 0:
 							t.parallel().tween_property($Sprite,"rotation",0,0.25).from(PI*2)
 						else:
@@ -146,6 +165,25 @@ func _move_update(delta):
 #	position.y = clampf(position.y, 0, Global.MAP_RECT.y)
 	move_and_collide(move_vec.normalized()*delta*speed*200)
 
+## Privates
+
+func _set_health(new_val) -> void:
+	var dmg_inflicted = health - new_val
+	if damage_reduction > 0:
+		health = health - floor(dmg_inflicted*(1.0-(damage_reduction/100.0)))
+		Global.emit_indicator(dmg_inflicted*(1.0-(damage_reduction/100.0)),position,false)
+		
+	else:
+		health = new_val
+		Global.emit_indicator(dmg_inflicted,position,false)
+		
+	health = clampf(health,0,max_health)
+
+func _set_attack_speed(new_val:float) -> void:
+	$RateOfFire.wait_time = new_val
+	attack_speed = new_val
+
+##
 func shoot():
 	match character:
 		"darwin":
@@ -154,11 +192,8 @@ func shoot():
 			last_bullet = Global.spawn_projectile(self,"gun_proj_1",position+Vector2(0,-mouse_aim_offset),aim_vec.normalized(),true)
 		_:
 			last_bullet = Global.spawn_projectile(self,"gun_proj_1",position+Vector2(0,-mouse_aim_offset),aim_vec.normalized(),true)
-
-#	player_proj.set("knockback",1)
-#func get_knockback(direction:Vector2,strength:=1):
-#	var tween := create_tween()
-#	tween.tween_property(self,"position",position+(direction*strength),0.2)
+	last_bullet.damage *= damage_modifier
+	emit_signal("spawns_bullet",last_bullet)
 
 func _injured_effect():
 	var sprite = $Sprite
@@ -193,10 +228,9 @@ func get_surround_pos() -> Vector2:
 func get_hitbox_anchor():
 	return position+hitbox_anchor
 
-func activate_trinket():
-	if not equipped_item in [null,{}]:
-		Global.use_trinket(equipped_item,self)
-	last_bullet = null
+func equip_item(item:Dictionary):
+	equipped_item = item
+	return item
 
 func _on_hitbox_area_entered(area:Area2D):
 	if area.is_in_group("projectile"):

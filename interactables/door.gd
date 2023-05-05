@@ -48,11 +48,11 @@ func enter_room(player):
 func _on_area_2d_area_entered(area):
 	var entity = area.get_parent()
 	if entity.is_in_group("player"):
-		if !entity.is_connected("action",enter_room):
-			entity.connect("action",enter_room)
+		if !entity.is_connected("does_action",enter_room):
+			entity.connect("does_action",enter_room)
 
 func _on_area_2d_area_exited(area):
 	var entity = area.get_parent()
 	if entity.is_in_group("player"):
-		if entity.is_connected("action",enter_room):
-			entity.disconnect("action",enter_room)
+		if entity.is_connected("does_action",enter_room):
+			entity.disconnect("does_action",enter_room)

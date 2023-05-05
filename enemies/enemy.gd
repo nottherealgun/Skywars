@@ -2,7 +2,7 @@ class_name Enemy extends CharacterBody2D
 
 @export_placeholder("enemy_name") var display_name = ""
 @export var max_health = 50
-@onready var health = max_health
+@onready var health = max_health : set = _set_health
 @export var speed = 1
 @export var damage = 10
 
@@ -15,6 +15,8 @@ var move_vec := Vector2.ZERO
 var targets_in_range = []
 var target : Node
 
+var DEFAULT = {}
+
 func _ready():
 #	$NameTag.text = display_name
 #	$NameTag/LevelTag.text = "Lvl "+str(level)
@@ -22,6 +24,10 @@ func _ready():
 	max_health += level*2
 	health = max_health
 	points += level*2
+	
+	DEFAULT["max_health"] = max_health
+	DEFAULT["damage"] = damage
+	DEFAULT["speed"] = speed
 
 func _physics_process(delta):
 	if health <= 0:
@@ -48,6 +54,12 @@ func _physics_process(delta):
 func _move_update(delta):
 	pass
 
+## Privates
+
+func _set_health(new_val):
+	Global.emit_indicator((health-new_val),position,true)
+	health = new_val
+
 var allies = []
 
 func get_hurt(by:Node):
@@ -56,15 +68,6 @@ func get_hurt(by:Node):
 		Global.kill(by)
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("injured")
-#	var tween := create_tween().set_trans(Tween.TRANS_LINEAR)
-#	tween.tween_property($Healthbar,"value",(health*100)/max_health,0.5).from_current()
-#	tween.parallel().tween_property($Healthbar,"scale:y",1.0,0.5).from(2.0)
-#	$Healthbar.value = (health*100)/max_health
-
-#func get_knockback(direction:Vector2,strength:=1):
-#	var tween := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
-##	tween.tween_property(self,"position",position+(direction*10*strength),0.2)
-#	tween.tween_method(move_and_collide,Vector2.ZERO,(direction*strength*5),0.1)
 
 func _on_hitbox_area_entered(area):
 	if area.is_in_group("projectile"):

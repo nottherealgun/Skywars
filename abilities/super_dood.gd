@@ -5,6 +5,12 @@ extends CharacterBody2D
 @export var speed := 1
 @export var damage = 50
 
+var DEFAULT = {
+	"max_health" = 100,
+	"speed" = 1,
+	"damage" = 50
+}
+
 var move_vec := Vector2.ZERO
 var master : Node
 var min_master_dist = 100
@@ -56,7 +62,7 @@ func _process(delta):
 				change_state(STATES.ATTACKING)
 		
 		STATES.ATTACKING:
-			if is_instance_valid(target) and $BetweenShots.is_stopped():
+			if is_instance_valid(target):
 				$AnimatedSprite2D.play("attack")
 				$AnimatedSprite2D.flip_h = (target.position.x < position.x)
 				if target.position.x < position.x:
@@ -69,12 +75,12 @@ func _process(delta):
 				elif $AnimatedSprite2D.frame == 12:
 					$PunchParticle.emitting = false
 				
-				if $AnimatedSprite2D.frame == 15 and !shot:
+				if $AnimatedSprite2D.frame == 15 and $BetweenShots.is_stopped():
 					target.get_hurt(self)
-					shot = true
+					$BetweenShots.start()
 				await $AnimatedSprite2D.animation_finished
 				$AnimatedSprite2D.play("idle")
-				$BetweenShots.start()
+	
 			else:
 				change_state(STATES.IDLE)
 		
@@ -126,7 +132,6 @@ func change_state(new_state):
 
 func affect(victim:Node):
 	victim.health -= damage
-	Global.emit_indicator(damage,victim.position,false)
 
 func _on_enemy_detect_area_entered(area):
 	var entity = area.get_parent()

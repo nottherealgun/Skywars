@@ -11,7 +11,6 @@ func _ready():
 	$Sprite.play("idle")
 	
 func _physics_process(delta):
-	$Dev.text = str(allies)
 	super(delta)
 	if is_instance_valid(target):
 		$Sprite.flip_h = !(target.position.x > position.x)
@@ -38,7 +37,6 @@ func _physics_process(delta):
 func affect(victim:Node):
 	victim.health -= damage
 #	victim.get_knockback(position.direction_to(victim.position),knockback)
-	Global.emit_indicator(damage,victim.position,false)
 
 func change_state(new_state):
 	match new_state:

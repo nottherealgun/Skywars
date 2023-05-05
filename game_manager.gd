@@ -11,7 +11,7 @@ func _ready():
 	for n in Global.Main.get_children():
 		if n.is_in_group("player"):
 			Global.active_players.append(n)
-			n.connect("player_killed",player_killed)
+			n.connect("kills_player",player_killed)
 	
 	Global.Inventory.start()
 	
@@ -29,7 +29,7 @@ func _process(_delta):
 
 func add_money(amnt:int):
 	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(self,"money",money+amnt,1.0)
+	tween.tween_property(self,"money",money+amnt,0.6)
 
 func player_killed(player):
 	for p in Global.active_players:

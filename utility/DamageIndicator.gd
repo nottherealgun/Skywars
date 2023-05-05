@@ -6,7 +6,9 @@ var heal = false
 var player_bullet = false
 
 func _ready():
-	if heal:
+	if amount < 0 or heal:
+		if amount < 0:
+			amount*=-1
 		$Label.set("theme_override_colors/font_color",Color.GREEN)
 	else:
 		if !player_bullet:

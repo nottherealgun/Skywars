@@ -43,6 +43,7 @@ offset_bottom = -98.0
 one_shot = true
 
 [node name="Dev" parent="." index="8"]
+visible = true
 z_index = 1
 offset_left = -144.0
 offset_right = 144.0

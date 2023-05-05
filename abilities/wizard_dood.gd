@@ -3,7 +3,13 @@ extends CharacterBody2D
 @export var max_health = 100
 @onready var health = max_health
 @export var speed := 1
-@export var damage = 50
+@export var damage = 10
+
+var DEFAULT = {
+	"max_health" = 100,
+	"speed" = 1,
+	"damage" = 10
+}
 
 var move_vec := Vector2.ZERO
 var master : Node
@@ -54,8 +60,7 @@ func _process(delta):
 				$AnimatedSprite2D.flip_h = (master.position.x < position.x)
 				
 				if $AnimatedSprite2D.frame == 10 and !shot:
-					master.health += 1
-					Global.emit_indicator(1,master.position,false,true)
+					master.health += damage
 					spawn_circle()
 					shot = true
 					

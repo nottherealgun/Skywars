@@ -32,6 +32,7 @@ func dupe():
 	await get_tree().create_timer(0.2).timeout
 
 	if is_instance_valid(child) and $VisibleOnScreenNotifier2D.is_on_screen():
+		child.damage = damage
 		child.master = true
 		child.dupe()
 

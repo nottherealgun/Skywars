@@ -227,97 +227,112 @@ const tips = [
 const items = [
 	{ #0
 		"name":"NotTheRealGun",
+		"type":"trinket",
 		"pic":"notTheRealGun.png",
 		"desc":"We don’t support school shootings. So, this is just a NERF gun.",
-		"stats":"+5% Critical Chance (x1.5 damage on crit)",
-		
+		"stats":"+5% Critical Chance (x2 damage on crit)",
 	},
 	{
 		"name":"Amulet of Dood",
+		"type":"trinket",
 		"pic":"amuletOfDood.png",
 		"desc":"A periapt forged by mother nature herself.",
 		"stats":"+10% Minion's Damage or Heal",
 	},
 	{
 		"name":"The Ice of Ice",
+		"type":"trinket",
 		"pic":"icyboiIce.png",
 		"desc":"This ice is Ice’s ice which belongs to Ice. Cooler than Ice himself.",
 		"stats":"+10% Slow on hit",
 	},
 	{
 		"name":"Walker's Special",
+		"type":"trinket",
 		"pic":"walkerSpecial.png",
 		"desc":"A secret recipe passed down from the first ancestor of Walker’s family.",
 		"stats":"+10% Attack Speed",
 	},
 	{ 
 		"name":"Worrier Froge",
+		"type":"trinket",
 		"pic":"froge.png",
 		"desc":"The most versatile emoji on Earth. When you look closely, it looks like Ken.",
 		"stats":"+30% Dashing Distance",
 	},
 	{ #5
-		"name":"Ken’s Gachapon",
+		"name":"Ken's Gachapon",
+		"type":"trinket",
 		"pic":"",
 		"desc":"Pure sodium chloride.",
 		"stats":"",
 	},
 	{
 		"name":"Bro Was Here",
+		"type":"trinket",
 		"pic":"",
 		"desc":"I hate it here.",
 		"stats":"",
 	},
 	{
-		"name":"Kouprey’s Horn",
+		"name":"Kouprey's Horn",
+		"type":"trinket",
 		"pic":"koupreyHorn.png",
 		"desc":"A forbidden ingredient for aphrodisiac.",
 		"stats":"+10% Damage",
 	},
 	{
 		"name":"Moss",
+		"type":"trinket",
 		"pic":"",
 		"desc":"A sacred beast tamed by Mr.Will.",
 		"stats":"",
 	},
 	{
 		"name":"Archplan Copy",
+		"type":"trinket",
 		"pic":"",
 		"desc":"A copy of Archplan; A game made by Dennis.",
 		"stats":"",
 	},
 	{ #10
 		"name":"James’s Hoodie",
+		"type":"trinket",
 		"pic":"",
 		"desc":"He was there. He was always there.",
 		"stats":"",
 	},
 	{
-		"name":"AJ’s Basketball",
+		"name":"AJ's Basketball",
+		"type":"trinket",
 		"pic":"",
 		"desc":"This ball’s owner has the level of extrovertedness equivalent to a whole NFL match.",
 		"stats":"",
 	},
 	{
-		"name":"Konit’s Brick",
+		"name":"Konit's Brick",
+		"type":"trinket",
 		"pic":"konit_brick.png",
 		"desc":"Bricked.",
 		"stats":"+15% Damage Reduction",
 	},
 	{
-		"name":"Tim’s Shakes",
+		"name":"Tim's Shakes",
+		"type":"trinket",
 		"pic":"",
 		"desc":"We don't know what it is but it’s Tim’s.",
 		"stats":"",
 	},
 	{
-		"name":"Advisor’s Approval",
+		"name":"Advisor's Approval",
+		"type":"trinket",
 		"pic":"",
 		"desc":"Online. Offline. Online again, Offline. Oh, finally replied.",
 		"stats":"",
 	},
 	{ #15
 		"name":"Salmon Nigiri",
+		"type":"consumable",
 		"pic":"salmonNigiri.png",
 		"desc":"It’s actually trout.",
 		"stats":"+ 20% Heal\n+ 2 Brain cells",
@@ -326,6 +341,7 @@ const items = [
 	},
 	{
 		"name":"Tonkatsu Curry",
+		"type":"consumable",
 		"pic":"curry.png",
 		"desc":"If you’re planning to get MUIC’s curry, just don’t.",
 		"stats":"+ Fully recovers your health",
@@ -334,6 +350,7 @@ const items = [
 	},
 	{
 		"name":"Khao Mun Gai",
+		"type":"consumable",
 		"pic":"chickrice.png",
 		"desc":"A delicacy from Hainan.",
 		"stats":"+ Recovers 75% of your health",
@@ -341,7 +358,8 @@ const items = [
 		"scale_factor":1,
 	},
 	{
-		"name":"Ohm’s Gyoza",
+		"name":"Ohm's Gyoza",
+		"type":"consumable",
 		"pic":"gyoza.png",
 		"desc":"Available at Athit’s Gyoza.",
 		"stats":"+ Recovers 50% of your health",
@@ -350,6 +368,7 @@ const items = [
 	},
 	{
 		"name":"Dispensed Water",
+		"type":"consumable",
 		"pic":"dispensed_water.png",
 		"desc":"4oz. of water.",
 		"stats":"+ Refreshes the brain cell bar\n+ Removes debuffs",
@@ -358,6 +377,7 @@ const items = [
 	},
 	{ #20
 		"name":"The Walker Espress",
+		"type":"consumable",
 		"pic":"walker_espress.png",
 		"desc":"An Orion-certified beverage. As he’d said before, “Pure coffee juice.”",
 		"stats":"+ Insane Movement Speed\n+ Drains your entire brain cell bar",
@@ -366,6 +386,7 @@ const items = [
 	},
 	{
 		"name":"American-O",
+		"type":"consumable",
 		"pic":"americano.png",
 		"desc":"A bit of coffee and tons of water. A truly watered-down drink.",
 		"stats":"+ Doubles the amount of projectiles\n+ Disables dash mechanic",
@@ -373,7 +394,8 @@ const items = [
 		"scale_factor":0.75,
 	},
 	{
-		"name":"Cap’s Mustache",
+		"name":"Cap's Mustache",
+		"type":"consumable",
 		"pic":"cap_mustache.png",
 		"desc":"YAHOOO. It’s-a me, Cappuccino.",
 		"stats":"+ Doubles brain cell recharge rate\n+ 1.5x brain cell consumption rate",
@@ -382,6 +404,7 @@ const items = [
 	},
 	{
 		"name":"Shot O' Latte",
+		"type":"consumable",
 		"pic":"shot_o_latte.png",
 		"desc":"Chotto latte kudasai, oniichan~",
 		"stats":"+ Improves attack speed\n+ Decreases movement speed",
@@ -390,6 +413,7 @@ const items = [
 	},
 	{
 		"name":"De Moch Crazy",
+		"type":"consumable",
 		"pic":"de_moch_crazy.png",
 		"desc":"Je suis fou de chocolat cafe!",
 		"stats":"+ Every 10th bullet's damage is increased tenfold\n+ Your controls are reversed",
@@ -398,6 +422,7 @@ const items = [
 	},
 	{ #25
 		"name":"Dirty Bean Juice",
+		"type":"consumable",
 		"pic":"dirty_bean_juice.png",
 		"desc":"No bacteria included, only lactobacillus.",
 		"stats":"+ Increases defense by 10%\n+ Killed enemies drop more coins",
@@ -580,7 +605,7 @@ func emit_indicator(amnt:float,pos:Vector2,p_bullet=false,heal:=false):
 	new_indicator.heal = heal
 	if heal:
 		new_indicator.symbol = "+"
-	Main.add_child(new_indicator)
+	Main.add_child.call_deferred(new_indicator)
 
 func emit_death_indicator(pos:Vector2):
 	var new_particle = load("res://utility/death_indicator.tscn").instantiate()
@@ -649,7 +674,8 @@ func use_ability(character:String,by:Node):
 	by.brainpower -= ability_price.get(character)
 	match character:
 		"darwin":
-			spawn_from_ability(Global.pick_by_percentage({"dood":3,"super_dood":6,"wizard_dood":1}),by.position,by)
+			var minion = spawn_from_ability(Global.pick_by_percentage({"dood":3,"super_dood":6,"wizard_dood":1}),by.position,by)
+			by.emit_signal("spawns_minion",minion)
 		"gun":
 			var aim_vec = by.position.direction_to(Main.get_global_mouse_position()+Vector2(0,by.mouse_aim_offset))
 			for i in 30:
@@ -660,19 +686,4 @@ func use_ability(character:String,by:Node):
 				proj.t.tween_property(proj,"direction",aim_vec.rotated(deg),0.5)
 				proj.t.chain().tween_property(proj,"direction",aim_vec.rotated(deg_to_rad(randf_range(0,-10))),0.5)
 				proj.t.chain().tween_property(proj,"direction",aim_vec.rotated(deg*-1),0.5)
-				
-func use_trinket(item:Dictionary,by:Node):
-	match item["name"]:
-		"NotTheRealGun":
-			if randi_range(1,100) <= 5 and is_instance_valid(by.last_bullet):
-				by.last_bullet.damage *= 1.5
-		"Amulet of Dood":
-			if by.minions != []:
-				pass
-		"The Ice of Ice":
-			pass
-		"Walker's Special":
-			pass
-		"Worrier Froge":
-			pass
-			
+				by.emit_signal("spawns_bullet",proj)

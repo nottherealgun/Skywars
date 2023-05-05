@@ -215,5 +215,3 @@ offset = Vector2(-7.62939e-06, -46.6667)
 [node name="Student" parent="." index="20" instance=ExtResource("18_enljv")]
 position = Vector2(2269, 208)
 max_health = 99999999
-speed = 0
-damage = 0
