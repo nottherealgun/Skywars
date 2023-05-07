@@ -54,7 +54,14 @@ func _on_button_3_mouse_exited():
 	tween.tween_property($Button3,"scale",Vector2(1,1),0.1)
 
 func _on_button_3_pressed():
-	pass # Replace with function body.
+	hide()
+	get_tree().paused = false
+	$"../MainMenu".show()
+	$"../MainMenu/CanvasLayer".show()
+	LevelManager.clear_level()
+	for p in Global.active_players:
+		Global.active_players.erase(p)
+		p.queue_free()
 
 func _on_button_4_mouse_entered():
 	if tween:

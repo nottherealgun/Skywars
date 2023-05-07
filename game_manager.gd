@@ -6,7 +6,8 @@ var cam_follow_target = Vector2.ZERO
 var boss_encountered = false
 
 func _game_start():
-	Global.connect("enemy_killed",entity_killed)
+	if !Global.is_connected("enemy_killed",entity_killed):
+		Global.connect("enemy_killed",entity_killed)
 	
 	for n in Global.Main.get_children():
 		if n.is_in_group("player"):
@@ -45,7 +46,9 @@ func player_killed(player):
 func entity_killed(entity):
 	var active_enemies = []
 	for e in Global.active_entities:
-		if e.is_in_group("enemy"):
+		if !is_instance_valid(e):
+			Global.active_entities.erase(e)
+		elif e.is_in_group("enemy"):
 			active_enemies.append(e)
 	
 	if active_enemies.size() == 0:

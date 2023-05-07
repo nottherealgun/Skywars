@@ -74,7 +74,7 @@ func _physics_process(delta):
 				break
 			if t.position.distance_to(position) < dist:
 				dist = t.position.distance_to(position)
-				if not t is Object:
+				if t is Object == false:
 					continue
 				closest = t
 				

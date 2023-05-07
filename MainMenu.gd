@@ -24,15 +24,12 @@ func button_pressed(button:String):
 	$AudioStreamPlayer.play()
 	match button:
 		"play":
-			hide()
-			$CanvasLayer.hide()
-			var new_player = load("res://players/player.tscn").instantiate()
-			Global.Main.add_child(new_player)
-			GameManager._game_start()
-			Global.sync_room(testmap)
+			$AnimationPlayer.play("clear")
+			$"../CharacterSelection".show()
 
 		"options":
 			$AnimationPlayer.play("options")
+			$"../SettingsMenu".show()
 		"credits":
 			$AnimationPlayer.play("credits")
 			$Credits.reset_autoscroll()
@@ -44,3 +41,13 @@ func button_pressed(button:String):
 		"credits_back":
 			$AnimationPlayer.play("credits_back")
 		
+func start_game(character:String):
+	hide()
+	$CanvasLayer.hide()
+	var new_player = load("res://players/player.tscn").instantiate()
+	new_player.character = character.to_lower()
+	Global.Main.add_child(new_player)
+	GameManager._game_start()
+	Global.sync_room(testmap)
+	$AnimationPlayer.play("opening")
+	

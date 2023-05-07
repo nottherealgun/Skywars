@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=3 uid="uid://dlpndwnncnijn"]
+[gd_scene load_steps=119 format=3 uid="uid://dlpndwnncnijn"]
 
 [ext_resource type="AudioStream" uid="uid://bl3tu345hbh37" path="res://music/The Lobby.mp3" id="1_4g0f4"]
 [ext_resource type="Texture2D" uid="uid://dv8c76rwlux0p" path="res://items/idCardGUI.png" id="2_e4464"]
@@ -65,6 +65,7 @@
 [ext_resource type="Texture2D" uid="uid://6xmkatqahwq5" path="res://gui/back_hover.png" id="54_00pad"]
 [ext_resource type="AudioStream" uid="uid://dwtnyj0u68m1i" path="res://sfx/My_Song_3.mp3" id="54_s1dar"]
 [ext_resource type="Script" path="res://Credits.gd" id="56_ldiwf"]
+[ext_resource type="Script" path="res://CharacterSelection.gd" id="58_pmmy4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sr40o"]
 atlas = ExtResource("10_xahcf")
@@ -406,10 +407,10 @@ tracks/6/path = NodePath("MainBG:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": []
+"values": [Vector2(-616, -2968)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -446,6 +447,204 @@ tracks/9/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, 1080), Vector2(1920, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8cgqb"]
+resource_name = "credits"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("QuitButton:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1443, 760), Vector2(1443, 1004)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayButton:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 760), Vector2(0, 1004)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OptionsButton:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(481, 760), Vector2(481, 1004)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CreditsButton:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(962, 760), Vector2(962, 1004)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Subtitle:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(395, 640), Vector2(395, -120.978)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Title:position")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(175, 386), Vector2(175, -374.978)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MainBG:position")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-616, -2968), Vector2(-1464, -2968)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Credits:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1080), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dlq38"]
+resource_name = "credits_back"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("QuitButton:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1443, 1004), Vector2(1443, 760)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayButton:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1004), Vector2(0, 760)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OptionsButton:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(481, 1004), Vector2(481, 760)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CreditsButton:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(962, 1004), Vector2(962, 760)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Subtitle:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(395, -120.978), Vector2(395, 640)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Title:position")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(175, -374.978), Vector2(175, 386)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MainBG:position")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1464, -2968), Vector2(-616, -2968)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Credits:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1080)]
 }
 
 [sub_resource type="Animation" id="Animation_kbvwt"]
@@ -734,107 +933,8 @@ tracks/7/keys = {
 "values": [Vector2(0, 0), Vector2(0, 1080)]
 }
 
-[sub_resource type="Animation" id="Animation_dlq38"]
-resource_name = "credits_back"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("QuitButton:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.2, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1443, 1004), Vector2(1443, 760)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayButton:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.2, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 1004), Vector2(0, 760)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("OptionsButton:position")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.2, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(481, 1004), Vector2(481, 760)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CreditsButton:position")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.2, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(962, 1004), Vector2(962, 760)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Subtitle:position")
-tracks/4/interp = 2
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.2, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(395, -120.978), Vector2(395, 640)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Title:position")
-tracks/5/interp = 2
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0.2, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(175, -374.978), Vector2(175, 386)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("MainBG:position")
-tracks/6/interp = 2
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-1464, -2968), Vector2(-616, -2968)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Credits:position")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 1080)]
-}
-
-[sub_resource type="Animation" id="Animation_8cgqb"]
-resource_name = "credits"
+[sub_resource type="Animation" id="Animation_wrcnk"]
+resource_name = "clear"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -907,40 +1007,24 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector2(175, 386), Vector2(175, -374.978)]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("MainBG:position")
-tracks/6/interp = 2
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-616, -2968), Vector2(-1464, -2968)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Credits:position")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 1080), Vector2(0, 0)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_21rxb"]
 _data = {
 "RESET": SubResource("Animation_fmxbt"),
+"clear": SubResource("Animation_wrcnk"),
 "credits": SubResource("Animation_8cgqb"),
 "credits_back": SubResource("Animation_dlq38"),
 "opening": SubResource("Animation_kbvwt"),
 "options": SubResource("Animation_up2qx"),
 "options_back": SubResource("Animation_60gyb")
 }
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wwb3"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
 
 [sub_resource type="Animation" id="Animation_17gly"]
 length = 0.001
@@ -2535,7 +2619,7 @@ grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 text = "SkyWars Demo
-Alpha V.7 | As of 15/4/2023
+Alpha V.7 | As of 7/5/2023
 
 If any bugs or errors are found,
 please report to the Dev Team.
@@ -2544,6 +2628,7 @@ CONTROLS:
 WASD to move.
 E to Open Doors.
 Mouse Left Click to Attack.
+Mouse Right Click to Equip/Consume.
 Tab to Open Inventory."
 horizontal_alignment = 2
 
@@ -2731,8 +2816,8 @@ offset_right = -0.000488281
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("35_ntfof")
-skip_splashscreen = true
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="MainBG" type="TextureRect" parent="GUI/MainMenu"]
 texture_filter = 1
@@ -2794,7 +2879,7 @@ anchor_bottom = 0.5
 offset_left = -565.5
 offset_top = -652.0
 offset_right = 565.5
-offset_bottom = -542.002
+offset_bottom = -542.001
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("39_jmqov")
@@ -2811,7 +2896,7 @@ anchor_bottom = 0.5
 offset_left = -960.0
 offset_top = 540.0
 offset_right = -483.0
-offset_bottom = 861.055
+offset_bottom = 861.056
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -2829,8 +2914,8 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -479.0
 offset_top = 540.0
-offset_right = -1.99927
-offset_bottom = 861.027
+offset_right = -1.99902
+offset_bottom = 861.029
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -2849,7 +2934,7 @@ anchor_bottom = 0.5
 offset_left = 2.00024
 offset_top = 540.0
 offset_right = 479.0
-offset_bottom = 860.999
+offset_bottom = 861.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -2868,7 +2953,7 @@ anchor_bottom = 0.5
 offset_left = 483.0
 offset_top = 540.0
 offset_right = 960.0
-offset_bottom = 861.012
+offset_bottom = 861.013
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -2886,7 +2971,6 @@ libraries = {
 stream = ExtResource("51_1moc3")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="GUI/MainMenu"]
-visible = false
 
 [node name="DemoText" type="Label" parent="GUI/MainMenu/CanvasLayer"]
 modulate = Color(1, 1, 1, 0.235294)
@@ -2903,7 +2987,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
-text = "SkyWars Demo | Beta Release 1.0 (AV.7) | As of 7/5/2023
+text = "SkyWars Demo | Alpha V.7 | As of 7/5/2023
 If any bugs or errors are found, please report to the Dev Team."
 
 [node name="Options" type="Control" parent="GUI/MainMenu"]
@@ -2912,6 +2996,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 1080.0
+offset_right = 0.000488281
 offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -3067,6 +3152,70 @@ It's YOU, Champ! Thank you for playing our game!
 
 
 "
+
+[node name="CharacterSelection" type="Control" parent="GUI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("58_pmmy4")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Selector" type="OptionButton" parent="GUI/CharacterSelection"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -423.0
+offset_top = -76.0
+offset_right = 424.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("11_2h1l6")
+theme_override_font_sizes/font_size = 100
+theme_override_styles/normal = SubResource("StyleBoxFlat_2wwb3")
+alignment = 1
+icon_alignment = 1
+item_count = 2
+fit_to_longest_item = false
+popup/item_0/text = "Darwin"
+popup/item_0/id = 0
+popup/item_1/text = "Gun"
+popup/item_1/id = 1
+
+[node name="Label" type="Label" parent="GUI/CharacterSelection"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -180.0
+offset_right = 360.0
+offset_bottom = -77.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("11_2h1l6")
+theme_override_font_sizes/font_size = 100
+text = "Choose Your Character"
+
+[node name="Button" type="Button" parent="GUI/CharacterSelection"]
+layout_mode = 0
+offset_left = 753.0
+offset_top = 650.0
+offset_right = 1168.0
+offset_bottom = 758.0
+theme_override_fonts/font = ExtResource("11_2h1l6")
+theme_override_font_sizes/font_size = 100
+text = "BEGIN!"
 
 [node name="SettingsMenu" type="Control" parent="GUI"]
 process_mode = 3
@@ -3246,6 +3395,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GUI/Splashscreen"]
 stream = ExtResource("53_1avgu")
@@ -3376,4 +3527,5 @@ metadata/_edit_lock_ = true
 [connection signal="mouse_entered" from="GUI/PauseMenu/Button4/Button4" to="GUI/PauseMenu" method="_on_button_4_mouse_entered"]
 [connection signal="mouse_exited" from="GUI/PauseMenu/Button4/Button4" to="GUI/PauseMenu" method="_on_button_4_mouse_exited"]
 [connection signal="pressed" from="GUI/PauseMenu/Button4/Button4" to="GUI/PauseMenu" method="_on_button_4_pressed"]
+[connection signal="pressed" from="GUI/CharacterSelection/Button" to="GUI/CharacterSelection" method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/SettingsMenu/Back" to="GUI/SettingsMenu" method="_on_back_pressed"]
