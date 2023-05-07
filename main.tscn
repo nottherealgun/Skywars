@@ -1,7 +1,6 @@
-[gd_scene load_steps=71 format=3 uid="uid://dlpndwnncnijn"]
+[gd_scene load_steps=116 format=3 uid="uid://dlpndwnncnijn"]
 
-[ext_resource type="PackedScene" uid="uid://daeql3etvbgyq" path="res://players/player.tscn" id="1_mhf8t"]
-[ext_resource type="AudioStream" uid="uid://bnw73i68y41ik" path="res://music/The Lobby_Loopable.mp3" id="1_x207s"]
+[ext_resource type="AudioStream" uid="uid://bl3tu345hbh37" path="res://music/The Lobby.mp3" id="1_4g0f4"]
 [ext_resource type="Texture2D" uid="uid://dv8c76rwlux0p" path="res://items/idCardGUI.png" id="2_e4464"]
 [ext_resource type="Texture2D" uid="uid://bffxtkyh5d2av" path="res://players/gun_head.png" id="3_5ew25"]
 [ext_resource type="Texture2D" uid="uid://2obg1drnmlyg" path="res://enemies/printerboss_barbg.png" id="3_fdslt"]
@@ -37,7 +36,35 @@
 [ext_resource type="Texture2D" uid="uid://cfhc31r667nck" path="res://utility/cursor.png" id="31_4q8pb"]
 [ext_resource type="Script" path="res://utility/Cursor.gd" id="32_o3cct"]
 [ext_resource type="Script" path="res://SettingsMenu.gd" id="35_0fttp"]
+[ext_resource type="Script" path="res://MainMenu.gd" id="35_ntfof"]
+[ext_resource type="Texture2D" uid="uid://brfwg747imx2e" path="res://utility/main_menu2.png" id="35_u44vp"]
 [ext_resource type="Script" path="res://Audio.gd" id="36_fpc5t"]
+[ext_resource type="Texture2D" uid="uid://bfy2mqveueq0a" path="res://utility/skywars_logo2.png" id="37_4lgv6"]
+[ext_resource type="Shader" path="res://main.gdshader" id="37_gvddd"]
+[ext_resource type="Texture2D" uid="uid://bex16j1bm6ndj" path="res://gui/play_default.png" id="38_o5rt3"]
+[ext_resource type="Texture2D" uid="uid://tochat2seu7s" path="res://utility/logo sub.png" id="39_jmqov"]
+[ext_resource type="Texture2D" uid="uid://c3yyl8i1hbpry" path="res://gui/play_pressed.png" id="39_t8fib"]
+[ext_resource type="Texture2D" uid="uid://dvdfewnnssd2a" path="res://gui/play_hover.png" id="40_13npj"]
+[ext_resource type="Texture2D" uid="uid://mrf6re1hueun" path="res://gui/option_default.png" id="41_1nwta"]
+[ext_resource type="Texture2D" uid="uid://dxsxueg8nuiwo" path="res://gui/option_pressed.png" id="42_u7553"]
+[ext_resource type="Texture2D" uid="uid://c2uxvb0k51psf" path="res://gui/option_hover.png" id="43_rx0b5"]
+[ext_resource type="Texture2D" uid="uid://blyf4am4b8gyj" path="res://gui/credit_default.png" id="44_bd5f1"]
+[ext_resource type="Texture2D" uid="uid://doeiu25scif8r" path="res://gui/credit_pressed.png" id="45_d7wx8"]
+[ext_resource type="Texture2D" uid="uid://1bj7b4o0ifi2" path="res://gui/credit_hover.png" id="46_o8bku"]
+[ext_resource type="Texture2D" uid="uid://dnjv8u2fwrxtk" path="res://gui/quit_default.png" id="47_gh4hk"]
+[ext_resource type="Texture2D" uid="uid://xshwauf5nxbk" path="res://gui/quit_pressed.png" id="48_32h6v"]
+[ext_resource type="Texture2D" uid="uid://b0y265bwi6nfd" path="res://gui/quit_hover.png" id="49_31eij"]
+[ext_resource type="Texture2D" uid="uid://gomlio8e7xu4" path="res://utility/Snakes_Outline.png" id="50_orti2"]
+[ext_resource type="AudioStream" uid="uid://bk8uekbkue7c1" path="res://sfx/MainMenu SFX.mp3" id="51_1moc3"]
+[ext_resource type="Texture2D" uid="uid://c5cj0xx160bls" path="res://utility/Rubber_Duck_Alone.png" id="51_2qqln"]
+[ext_resource type="Texture2D" uid="uid://8kudt5gvx2un" path="res://gui/back_default.png" id="52_vas6t"]
+[ext_resource type="AudioStream" uid="uid://c35lqriee4dpv" path="res://sfx/duck_quack.mp3" id="53_1avgu"]
+[ext_resource type="Script" path="res://Options.gd" id="53_6ipk1"]
+[ext_resource type="FontFile" uid="uid://dqg68cyeyg3a5" path="res://utility/DefaultFont.ttf" id="53_eaymc"]
+[ext_resource type="Texture2D" uid="uid://0yk1xwbripns" path="res://gui/back_pressed.png" id="53_hvedx"]
+[ext_resource type="Texture2D" uid="uid://6xmkatqahwq5" path="res://gui/back_hover.png" id="54_00pad"]
+[ext_resource type="AudioStream" uid="uid://dwtnyj0u68m1i" path="res://sfx/My_Song_3.mp3" id="54_s1dar"]
+[ext_resource type="Script" path="res://Credits.gd" id="56_ldiwf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sr40o"]
 atlas = ExtResource("10_xahcf")
@@ -239,12 +266,903 @@ shader_parameter/blur_amount = 2.5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ghjbs"]
 
+[sub_resource type="Shader" id="Shader_4a7de"]
+code = "shader_type canvas_item;
+
+uniform vec4 line_color : source_color = vec4(1);
+uniform float line_thickness : hint_range(0, 10) = 1.0;
+
+void fragment() {
+	vec2 size = TEXTURE_PIXEL_SIZE * line_thickness;
+	
+	float outline = texture(TEXTURE, UV + vec2(-size.x, 0)).a;
+	outline += texture(TEXTURE, UV + vec2(0, size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(size.x, 0)).a;
+	outline += texture(TEXTURE, UV + vec2(0, -size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(-size.x, size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(size.x, size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(-size.x, -size.y)).a;
+	outline += texture(TEXTURE, UV + vec2(size.x, -size.y)).a;
+	outline = min(outline, 1.0);
+	
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = mix(color, line_color, outline - color.a);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4yyxw"]
+shader = SubResource("Shader_4a7de")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_thickness = 10.0
+
+[sub_resource type="Animation" id="Animation_dc4i8"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_hplob"]
+resource_name = "new_animation"
+length = 1.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.25, 0.25), Vector2(0.3, 0.3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wklap"]
+_data = {
+"RESET": SubResource("Animation_dc4i8"),
+"new_animation": SubResource("Animation_hplob")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2bsxx"]
+shader = ExtResource("37_gvddd")
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/line_thickness = 10.0
+
+[sub_resource type="Animation" id="Animation_fmxbt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayButton:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1080)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OptionsButton:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(481, 1080)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CreditsButton:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(962, 1080)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("QuitButton:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1443, 1080)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Title:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(175, -317)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Subtitle:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(394.5, -112)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MainBG:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("MainBG:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Options:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1080)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Credits:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.0001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1080), Vector2(1920, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kbvwt"]
+resource_name = "opening"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Title:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.5, 2.5, 3.4, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(175, -304), Vector2(175, -304), Vector2(175, 500), Vector2(175, 386)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Subtitle:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.5, 2.5, 3.3, 3.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(395, -118), Vector2(395, -118), Vector2(395, 690), Vector2(395, 640)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayButton:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.5, 2.5, 2.7, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 1080), Vector2(0, 780), Vector2(0, 800), Vector2(0, 760)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("OptionsButton:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.5, 2.8, 3, 3.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(481, 1080), Vector2(481, 780), Vector2(481, 800), Vector2(481, 760)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CreditsButton:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.5, 3.1, 3.3, 3.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(962, 1080), Vector2(962, 780), Vector2(962, 800), Vector2(962, 760)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("QuitButton:position")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.5, 3.4, 3.6, 3.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1443, 1080), Vector2(1443, 780), Vector2(1443, 800), Vector2(1443, 760)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MainBG:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.647059, 0.647059, 0.647059, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_up2qx"]
+resource_name = "options"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("QuitButton:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1443, 760), Vector2(1443, 1004)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayButton:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 760), Vector2(0, 1004)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OptionsButton:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(481, 760), Vector2(481, 1004)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CreditsButton:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(962, 760), Vector2(962, 1004)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Subtitle:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(395, 640), Vector2(395, -120.978)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Title:position")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(175, 386), Vector2(175, -374.978)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MainBG:position")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-616, -2968), Vector2(-8, -2968)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Options:position")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1080), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_60gyb"]
+resource_name = "options_back"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("QuitButton:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1443, 1004), Vector2(1443, 760)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayButton:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1004), Vector2(0, 760)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OptionsButton:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(481, 1004), Vector2(481, 760)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CreditsButton:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(962, 1004), Vector2(962, 760)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Subtitle:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(395, -120.978), Vector2(395, 640)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Title:position")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(175, -374.978), Vector2(175, 386)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MainBG:position")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-8, -2968), Vector2(-616, -2968)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Options:position")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1080)]
+}
+
+[sub_resource type="Animation" id="Animation_dlq38"]
+resource_name = "credits_back"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("QuitButton:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1443, 1004), Vector2(1443, 760)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayButton:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1004), Vector2(0, 760)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OptionsButton:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(481, 1004), Vector2(481, 760)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CreditsButton:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(962, 1004), Vector2(962, 760)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Subtitle:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(395, -120.978), Vector2(395, 640)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Title:position")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.2, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(175, -374.978), Vector2(175, 386)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MainBG:position")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1464, -2968), Vector2(-616, -2968)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Credits:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1080)]
+}
+
+[sub_resource type="Animation" id="Animation_8cgqb"]
+resource_name = "credits"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("QuitButton:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1443, 760), Vector2(1443, 1004)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayButton:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 760), Vector2(0, 1004)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OptionsButton:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(481, 760), Vector2(481, 1004)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CreditsButton:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(962, 760), Vector2(962, 1004)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Subtitle:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(395, 640), Vector2(395, -120.978)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Title:position")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(175, 386), Vector2(175, -374.978)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MainBG:position")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-616, -2968), Vector2(-1464, -2968)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Credits:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1080), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_21rxb"]
+_data = {
+"RESET": SubResource("Animation_fmxbt"),
+"credits": SubResource("Animation_8cgqb"),
+"credits_back": SubResource("Animation_dlq38"),
+"opening": SubResource("Animation_kbvwt"),
+"options": SubResource("Animation_up2qx"),
+"options_back": SubResource("Animation_60gyb")
+}
+
+[sub_resource type="Animation" id="Animation_17gly"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../MainMenu/MainBG:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-616, -1000)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TeamLogo:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(554, 92)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(330, 824)]
+}
+
+[sub_resource type="Animation" id="Animation_0uhop"]
+resource_name = "splashscreen"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TeamLogo:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.7, 0.9, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.2, 1.2), Vector2(1, 1), Vector2(0.8, 0.8), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TeamLogo/Duck:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.8, 1, 1.1, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.872665, 0.872665, 0.0, -0.349066, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.8, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../MainMenu/AnimationPlayer:current_animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(-0.1, 7.1, 8.3, 9.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [&"RESET", &"RESET", &"RESET", &"opening"]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 9.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamPlayer:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer2:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../MainMenu/CanvasLayer:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 8.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../MainMenu/MainBG:position")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(6, 9.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-616, 0), Vector2(-616, -2968)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("TeamLogo:position")
+tracks/9/interp = 2
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(6, 6.5, 7.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(554, 92), Vector2(554, 195), Vector2(554, -944)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Label:position")
+tracks/10/interp = 2
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(6, 6.5, 7.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(330, 824), Vector2(330, 927), Vector2(330, -212)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("../../Music:playing")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(4.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4bbmr"]
+_data = {
+"RESET": SubResource("Animation_17gly"),
+"splashscreen": SubResource("Animation_0uhop")
+}
+
+[sub_resource type="Animation" id="Animation_jo7xg"]
+resource_name = "new_animation"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TeamLogo/Snake:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q7jed"]
+_data = {
+"new_animation": SubResource("Animation_jo7xg")
+}
+
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-stream = ExtResource("1_x207s")
+stream = ExtResource("1_4g0f4")
 volume_db = -15.0
 bus = &"Music"
 
@@ -256,8 +1174,6 @@ zoom = Vector2(1.5, 1.5)
 limit_smoothed = true
 position_smoothing_enabled = true
 metadata/_edit_lock_ = true
-
-[node name="Player" parent="." instance=ExtResource("1_mhf8t")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -1619,7 +2535,7 @@ grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 text = "SkyWars Demo
-Alpha V.6 | As of 15/4/2023
+Alpha V.7 | As of 15/4/2023
 
 If any bugs or errors are found,
 please report to the Dev Team.
@@ -1806,6 +2722,352 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_2vqn0")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_luix7")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ghjbs")
 
+[node name="MainMenu" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -0.000488281
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("35_ntfof")
+skip_splashscreen = true
+metadata/_edit_group_ = true
+
+[node name="MainBG" type="TextureRect" parent="GUI/MainMenu"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1576.0
+offset_top = -1540.0
+offset_right = 1816.0
+offset_bottom = 2514.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("35_u44vp")
+stretch_mode = 5
+
+[node name="Title" type="Control" parent="GUI/MainMenu"]
+texture_filter = 2
+material = SubResource("ShaderMaterial_4yyxw")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -785.0
+offset_top = -857.0
+offset_right = 785.0
+offset_bottom = -584.008
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00016, 1.00016)
+pivot_offset = Vector2(743, 137)
+
+[node name="Sprite2D" type="Sprite2D" parent="GUI/MainMenu/Title"]
+position = Vector2(769.996, 146.998)
+scale = Vector2(0.251801, 0.251801)
+texture = ExtResource("37_4lgv6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GUI/MainMenu/Title/Sprite2D"]
+root_node = NodePath("../..")
+autoplay = "new_animation"
+reset_on_save = false
+libraries = {
+"": SubResource("AnimationLibrary_wklap")
+}
+
+[node name="Subtitle" type="TextureRect" parent="GUI/MainMenu"]
+texture_filter = 5
+material = SubResource("ShaderMaterial_2bsxx")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -565.5
+offset_top = -652.0
+offset_right = 565.5
+offset_bottom = -542.002
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("39_jmqov")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="PlayButton" type="TextureButton" parent="GUI/MainMenu"]
+texture_filter = 1
+layout_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = 540.0
+offset_right = -483.0
+offset_bottom = 861.055
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("38_o5rt3")
+texture_pressed = ExtResource("39_t8fib")
+texture_hover = ExtResource("40_13npj")
+stretch_mode = 5
+
+[node name="OptionsButton" type="TextureButton" parent="GUI/MainMenu"]
+texture_filter = 1
+layout_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -479.0
+offset_top = 540.0
+offset_right = -1.99927
+offset_bottom = 861.027
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("41_1nwta")
+texture_pressed = ExtResource("42_u7553")
+texture_hover = ExtResource("43_rx0b5")
+stretch_mode = 5
+
+[node name="CreditsButton" type="TextureButton" parent="GUI/MainMenu"]
+texture_filter = 1
+layout_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 2.00024
+offset_top = 540.0
+offset_right = 479.0
+offset_bottom = 860.999
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("44_bd5f1")
+texture_pressed = ExtResource("45_d7wx8")
+texture_hover = ExtResource("46_o8bku")
+stretch_mode = 5
+
+[node name="QuitButton" type="TextureButton" parent="GUI/MainMenu"]
+texture_filter = 1
+layout_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 483.0
+offset_top = 540.0
+offset_right = 960.0
+offset_bottom = 861.012
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("47_gh4hk")
+texture_pressed = ExtResource("48_32h6v")
+texture_hover = ExtResource("49_31eij")
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GUI/MainMenu"]
+libraries = {
+"": SubResource("AnimationLibrary_21rxb")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GUI/MainMenu"]
+stream = ExtResource("51_1moc3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="GUI/MainMenu"]
+visible = false
+
+[node name="DemoText" type="Label" parent="GUI/MainMenu/CanvasLayer"]
+modulate = Color(1, 1, 1, 0.235294)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -944.0
+offset_top = -524.0
+offset_right = -461.0
+offset_bottom = -472.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+text = "SkyWars Demo | Beta Release 1.0 (AV.7) | As of 7/5/2023
+If any bugs or errors are found, please report to the Dev Team."
+
+[node name="Options" type="Control" parent="GUI/MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1080.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("53_6ipk1")
+
+[node name="Back" type="TextureButton" parent="GUI/MainMenu/Options"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -280.0
+offset_top = -304.0
+offset_right = 64.0005
+offset_bottom = 40.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("52_vas6t")
+texture_pressed = ExtResource("53_hvedx")
+texture_hover = ExtResource("54_00pad")
+stretch_mode = 5
+flip_h = true
+
+[node name="Credits" type="Control" parent="GUI/MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1080.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("56_ldiwf")
+
+[node name="Back" type="TextureButton" parent="GUI/MainMenu/Credits"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1984.0
+offset_top = -304.0
+offset_right = -1640.0
+offset_bottom = 40.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("52_vas6t")
+texture_pressed = ExtResource("53_hvedx")
+texture_hover = ExtResource("54_00pad")
+stretch_mode = 5
+
+[node name="Text" type="RichTextLabel" parent="GUI/MainMenu/Credits"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 210.0
+offset_right = -210.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("11_2h1l6")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]
+
+
+
+
+
+
+
+
+
+
+
+[font_size=100]Credits[/font_size]
+
+[font_size=75]Project Founders[/font_size]
+[color=gray]
+Paramate Tangphichayaphothiwat
+Thanapat Nartthanarung
+[/color]
+[font_size=75]Creative Directors[/font_size]
+[color=gray]
+Noppanat Ampas
+[/color]
+[font_size=75]Assets & Visuals Artists[/font_size]
+[color=gray]
+Paramate Tangphichayaphothiwat
+Pojsakul Muangsai
+[/color]
+[font_size=75]Programmers[/font_size]
+[color=gray]
+Thanapat Nartthanarung
+[/color]
+[font_size=75]Music Composers[/font_size]
+[color=gray]
+Orion Walker
+[/color]
+[font_size=75]SFX Designers[/font_size]
+[color=gray]
+Sitthipak Barame
+[/color]
+[font_size=75]Upcoming Voices[/font_size]
+[color=gray]
+Asst. Prof. Dale Konstanz
+Dr. Pisit Praiwattana
+Niran Sachdev
+[/color]
+[font_size=75]Beta Testers[/font_size]
+[color=gray]
+Athit Eakapapan
+Dennis Scheucher
+Sarawin Intaranan 
+Thanagit Hlawthienchai
+
+
+
+
+And most importantly...
+
+
+
+
+
+It's YOU, Champ! Thank you for playing our game!
+[/color]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"
+
 [node name="SettingsMenu" type="Control" parent="GUI"]
 process_mode = 3
 visible = false
@@ -1976,14 +3238,110 @@ theme_override_fonts/font = ExtResource("11_2h1l6")
 theme_override_font_sizes/font_size = 40
 text = "Back"
 
-[node name="MainMenu" type="Control" parent="GUI"]
-visible = false
+[node name="Splashscreen" type="Control" parent="GUI"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GUI/Splashscreen"]
+stream = ExtResource("53_1avgu")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="GUI/Splashscreen"]
+stream = ExtResource("54_s1dar")
+volume_db = -20.0
+
+[node name="ColorRect" type="ColorRect" parent="GUI/Splashscreen"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0745098, 0.0745098, 0.0745098, 1)
+
+[node name="Label" type="Label" parent="GUI/Splashscreen"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -630.0
+offset_top = 284.0
+offset_right = 630.0
+offset_bottom = 492.002
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(653.5, 52)
+theme_override_fonts/font = ExtResource("53_eaymc")
+theme_override_font_sizes/font_size = 80
+text = "Creative tech studios"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TeamLogo" type="Control" parent="GUI/Splashscreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -406.0
+offset_top = -448.0
+offset_right = 406.0
+offset_bottom = 264.998
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(406, 357)
+
+[node name="Snake" type="TextureRect" parent="GUI/Splashscreen/TeamLogo"]
+texture_filter = 6
+layout_mode = 0
+offset_left = -3650.0
+offset_top = -3219.5
+offset_right = 4467.0
+offset_bottom = 3908.5
+rotation = 5.47626
+scale = Vector2(0.1, 0.1)
+pivot_offset = Vector2(4059.96, 3564.96)
+texture = ExtResource("50_orti2")
+
+[node name="Duck" type="TextureRect" parent="GUI/Splashscreen/TeamLogo"]
+texture_filter = 6
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2417.0
+offset_top = -3552.0
+offset_right = 2417.0
+offset_bottom = 2808.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.09, 0.09)
+pivot_offset = Vector2(2422.22, 3555.56)
+texture = ExtResource("51_2qqln")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GUI/Splashscreen"]
+libraries = {
+"": SubResource("AnimationLibrary_4bbmr")
+}
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="GUI/Splashscreen"]
+autoplay = "new_animation"
+speed_scale = 0.75
+libraries = {
+"": SubResource("AnimationLibrary_q7jed")
+}
 
 [node name="Map" type="TileMap" parent="."]
 z_index = -1

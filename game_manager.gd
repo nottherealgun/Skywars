@@ -1,11 +1,11 @@
 extends Node
 
 var money = 100
-@onready var cam = get_node("/root/Main/MainCam")
+@onready var cam = get_node("/root/Main/MainCam") as Camera2D
 var cam_follow_target = Vector2.ZERO
 var boss_encountered = false
 
-func _ready():
+func _game_start():
 	Global.connect("enemy_killed",entity_killed)
 	
 	for n in Global.Main.get_children():
@@ -14,6 +14,9 @@ func _ready():
 			n.connect("kills_player",player_killed)
 	
 	Global.Inventory.start()
+	
+	cam.position = Global.active_players[0].position
+	cam.reset_smoothing()
 	
 func _process(_delta):
 	var vec := Vector2.ZERO

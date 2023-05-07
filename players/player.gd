@@ -69,7 +69,6 @@ func _ready():
 	equips_item.connect(equip_item)
 	
 func _process(delta):
-#	$dev.text = str(iframed)
 	_input_update() # Update device input
 	_gui_update() # Update gui
 	var sprite = get_node("Sprite")

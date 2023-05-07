@@ -15,7 +15,7 @@ config/description="SkyWars is a roguelike top-down/2.5D PvE video game based on
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
-boot_splash/image="res://utility/skywars_logo.png"
+boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
 config/icon="res://game_icon.png"
@@ -34,6 +34,7 @@ gdscript/warnings/enable=false
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
 
 [editor]
 
