@@ -35,7 +35,8 @@ func _process(_delta):
 	
 	get_node("/root/Main/GUI/PlayerStats/MoneyGUI/MoneyLabel").text = str(int(money))
 #	Global.Dev.text = str(Global.current_room,"\n\n",Global.active_rooms,"\n\n",Global.active_rooms.find(Global.current_room))
-	Global.Dev.text = str(Global.gen_maps)
+#	Global.Dev.text = str(Global.gen_maps)
+	
 func add_money(amnt:int):
 #	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
 #	tween.tween_property(self,"money",money+amnt,0.6)

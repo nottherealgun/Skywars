@@ -28,10 +28,10 @@ func _get(property):
 			return facing_pos[facing_direction_idx]
 
 func _process(delta):
-	if connected_door:
-		$Dev.text = str(get_parent().name)
-	else:
-		$Dev.text = "Locked."
+#	if connected_door:
+#		$Dev.text = str(get_parent().name)
+#	else:
+#		$Dev.text = "Locked."
 	match front_facing:
 		false:
 			$Sprite.animation = "side"
@@ -51,14 +51,21 @@ func enter_room(player):
 		room_scene = load("res://rooms/"+Global.rooms[rand_room_id]["file"]).instantiate()
 	else:
 		room_scene = load(room).instantiate()
-	
-	$Sprite.play()
-	await $Sprite.animation_finished
+
 	if synced_with_new_map:
+		$Sprite.play()
+		await $Sprite.animation_finished
 		Global.sync_map(room_scene,boss)
 	else:
 		#Global.sync_room(room_scene)
-		Global.exit_from_this_door(self,connected_door)
+		if connected_door:
+			$Sprite.play()
+			await $Sprite.animation_finished
+			Global.exit_from_this_door(self,connected_door)
+		else:
+			var t = create_tween().set_loops(3)
+			t.tween_property($Sprite,"offset",Vector2(2,-32),0.1)
+			t.chain().tween_property($Sprite,"offset",Vector2(0,-30),0.1)
 		
 	$Sprite.frame = 0
 

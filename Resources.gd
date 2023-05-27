@@ -642,7 +642,7 @@ func exit_from_this_door(enter_from:Node,exit_from:Node):
 	for p in active_players:
 		if p.fainted:
 			p.revive()
-		p.position = exit_from.get_parent().position+exit_from.position+(exit_from.facing_vec*100)
+		p.position = exit_from.get_parent().position+exit_from.position+(exit_from.facing_pos[exit_from.facing_direction_idx]*50)
 		p.transporting = false
 		p.y_sort_enabled = true
 		for m in p.minions:

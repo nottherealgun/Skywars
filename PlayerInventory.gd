@@ -30,18 +30,6 @@ func start():
 		player_hovering_slots.append(0)
 		player_hovering_slot_ids.append(-1)
 	
-	add_item(Global.items[0])
-	add_item(Global.items[1])
-	add_item(Global.items[2])
-	add_item(Global.items[3])
-	add_item(Global.items[4])
-	add_item(Global.items[7])
-	add_item(Global.items[12])
-	add_item(Global.items[15])
-	add_item(Global.items[16])
-	add_item(Global.items[17])
-	add_item(Global.items[18])
-	
 func _process(_delta):
 	$Page.text = "Page " + str(inv_set_idx) + "/" + str(floor(inventory.size()/16)+1)
 	if init and visible:

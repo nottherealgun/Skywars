@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cjet56niiyss1"]
+[gd_scene load_steps=5 format=3 uid="uid://cjet56niiyss1"]
 
 [ext_resource type="PackedScene" uid="uid://of23s1fagf1c" path="res://rooms/test_map.tscn" id="1_hau78"]
 [ext_resource type="PackedScene" uid="uid://6qdjvyw15lm4" path="res://interactables/door.tscn" id="2_ktoef"]
+[ext_resource type="PackedScene" uid="uid://cbc45vf2vhru6" path="res://interactables/chest.tscn" id="3_us5i5"]
+[ext_resource type="PackedScene" uid="uid://b50cdoiu11fvs" path="res://interactables/dorion_shop.tscn" id="4_2qqmr"]
 
 [node name="adit_treasure" instance=ExtResource("1_hau78")]
 
@@ -28,3 +30,9 @@ facing_direction_idx = 3
 position = Vector2(1056, 512)
 front_facing = false
 facing_direction_idx = 2
+
+[node name="Chest" parent="." index="6" instance=ExtResource("3_us5i5")]
+position = Vector2(536, 463)
+
+[node name="DorionShop" parent="." index="7" instance=ExtResource("4_2qqmr")]
+position = Vector2(288, 142)
