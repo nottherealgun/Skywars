@@ -449,6 +449,81 @@ tracks/9/keys = {
 "values": [Vector2(0, 1080), Vector2(1920, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_wrcnk"]
+resource_name = "clear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("QuitButton:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1443, 760), Vector2(1443, 1004)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayButton:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 760), Vector2(0, 1004)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OptionsButton:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(481, 760), Vector2(481, 1004)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CreditsButton:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(962, 760), Vector2(962, 1004)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Subtitle:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(395, 640), Vector2(395, -120.978)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Title:position")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(175, 386), Vector2(175, -374.978)]
+}
+
 [sub_resource type="Animation" id="Animation_8cgqb"]
 resource_name = "credits"
 tracks/0/type = "value"
@@ -931,81 +1006,6 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 1080)]
-}
-
-[sub_resource type="Animation" id="Animation_wrcnk"]
-resource_name = "clear"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("QuitButton:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1443, 760), Vector2(1443, 1004)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayButton:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 760), Vector2(0, 1004)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("OptionsButton:position")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(481, 760), Vector2(481, 1004)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CreditsButton:position")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(962, 760), Vector2(962, 1004)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Subtitle:position")
-tracks/4/interp = 2
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(395, 640), Vector2(395, -120.978)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Title:position")
-tracks/5/interp = 2
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(175, 386), Vector2(175, -374.978)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_21rxb"]
@@ -2591,7 +2591,7 @@ libraries = {
 }
 
 [node name="Dev" type="Label" parent="GUI"]
-visible = false
+unique_name_in_owner = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -2816,6 +2816,7 @@ offset_right = -0.000488281
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("35_ntfof")
+skip_splashscreen = true
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
@@ -2914,7 +2915,7 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -479.0
 offset_top = 540.0
-offset_right = -1.99902
+offset_right = -1.99756
 offset_bottom = 861.029
 grow_horizontal = 2
 grow_vertical = 2
@@ -2971,6 +2972,7 @@ libraries = {
 stream = ExtResource("51_1moc3")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="GUI/MainMenu"]
+visible = false
 
 [node name="DemoText" type="Label" parent="GUI/MainMenu/CanvasLayer"]
 modulate = Color(1, 1, 1, 0.235294)
@@ -2996,8 +2998,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 1080.0
-offset_right = 0.000488281
-offset_bottom = 1080.0
+offset_right = 9600.0
+offset_bottom = 6480.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("53_6ipk1")
@@ -3028,7 +3030,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 1080.0
-offset_bottom = 1080.0
+offset_right = 9600.0
+offset_bottom = 6480.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("56_ldiwf")
@@ -3065,7 +3068,7 @@ grow_vertical = 2
 theme_override_fonts/normal_font = ExtResource("11_2h1l6")
 theme_override_font_sizes/normal_font_size = 50
 bbcode_enabled = true
-text = "[center]
+text = "[center][outline_size=18][outline_color=black]
 
 
 
@@ -3077,7 +3080,7 @@ text = "[center]
 
 
 
-[font_size=100]Credits[/font_size]
+[font_size=100][color=yellow]Credits[/color][/font_size]
 
 [font_size=75]Project Founders[/font_size]
 [color=gray]
@@ -3184,6 +3187,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_2wwb3")
 alignment = 1
 icon_alignment = 1
 item_count = 2
+selected = 0
 fit_to_longest_item = false
 popup/item_0/text = "Darwin"
 popup/item_0/id = 0
@@ -3446,7 +3450,7 @@ anchor_bottom = 0.5
 offset_left = -406.0
 offset_top = -448.0
 offset_right = 406.0
-offset_bottom = 264.998
+offset_bottom = 264.997
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1e-05, 1e-05)

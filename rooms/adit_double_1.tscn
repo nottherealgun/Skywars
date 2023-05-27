@@ -17,10 +17,12 @@ layer_1/tile_data = PackedInt32Array(-65536, 65538, 0, -65535, 65538, 0, -65534,
 [node name="Door" parent="." index="2" instance=ExtResource("2_gambo")]
 position = Vector2(88, 192)
 front_facing = false
+facing_direction_idx = 3
 
 [node name="Door2" parent="." index="3" instance=ExtResource("2_gambo")]
 position = Vector2(88, 832)
 front_facing = false
+facing_direction_idx = 3
 
 [node name="AditPodium" parent="." index="4" instance=ExtResource("3_3i6m3")]
 position = Vector2(1440, 256)

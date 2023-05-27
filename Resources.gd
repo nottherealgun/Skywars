@@ -15,13 +15,11 @@ signal enemy_killed(enemy)
 
 @onready var MAP_RECT : Vector2 = Map.get_used_rect().size*128
 
-var current_map_uninit
+var prev_map
 var current_map
 var current_map_boss
 
-var cached_rooms = []
 var active_players = []
-
 # Entities
 
 var active_entities = []
@@ -436,7 +434,6 @@ func sync_map(map:Node2D,boss:=""):
 	randomize()
 	# Prepare spawnpoints
 	var target_map = map.duplicate()
-	current_map_uninit = map
 	current_map = target_map
 	current_map_boss = boss
 	
@@ -522,69 +519,134 @@ func sync_map(map:Node2D,boss:=""):
 	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
 	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
 
-func sync_room(map:Node,boss=""):
-	randomize()
-	# Prepare spawnpoints
-	var target_map = map.duplicate()
-	current_map_uninit = map
-	current_map = target_map
-	current_map_boss = boss
-	var spawn_poses = []
-	map_spawnpoint = target_map.find_child("SpawningPoint").position
+var gen_maps = []
+
+func build_stage(): # Build first game stage (endless mode)
+	# Clear old map tiles
+	Map.clear()
+	# Clear old entities
+	LevelManager.clear_level()
+
+	# Install map tiles
+#	var old_map = Map
+#	Main.remove_child(old_map)
+#	old_map.queue_free()
+		
+	current_map = build_room()
 	
+	# Prepare spawnpoints
+	var spawn_poses = []
+	map_spawnpoint = current_map[0].find_child("SpawningPoint").position
 	for p in active_players:
 		var radius = 25
 		spawn_poses.append(map_spawnpoint+Vector2(randi()%radius,randi()%radius))
 		p.transporting = true
 		p.y_sort_enabled = false
-
-	# Set level title name
-	for r in rooms:
-		if map.name == load("res://rooms/"+r["file"]).instantiate().name:
-			GUI.get_node("Title").text = r["name"]
-			break
-#	GUI.get_node("Title").text = target_map.name.capitalize()
-
-	# Clear old map tiles
-	Map.clear()
-	# Clear old entities
-	LevelManager.clear_level()
-	
-	# Install map tiles
-	var old_map = Map
-	var new_map = target_map.get_node("Map")
-	Map = new_map
-	Main.remove_child(old_map)
-	target_map.remove_child(new_map)
-	Main.add_child(new_map)
-	old_map.queue_free()
-	
-	MAP_RECT = Map.get_used_rect().size*128
-	
-	# Install map enemies
-	for entity in target_map.get_children():
-		if entity.get_class() in ["TileMap","Marker2D"]:
-			continue
-		target_map.remove_child(entity)
-		active_entities.append(entity)
-		Main.add_child(entity)
-	
-	if map.name == load("res://rooms/"+rooms[0].file).instantiate().name:
-		if current_track != "lobby":
-			music_play("lobby")
-	else:
-		if current_track != "combat":
-			music_play("combat")
-	
+			
 	# Set new player positions
 	for p in active_players:
+		if p.fainted:
+			p.revive()
 		p.position = spawn_poses[active_players.find(p)]
 		p.transporting = false
 		p.y_sort_enabled = true
+		for m in p.minions:
+			active_entities.append(m)
+	
+#	var found_exit = false
+#	for e in get_exits(current_map[1]):
+#		if len(generated_rooms) > 10:
+#			break
+#		while !found_exit:
+##			var r = randi_range(0,len(get_exits(current_map[1])))
+##			if r != 0:
+##				continue
+##			elif r == 0 or get_exits(current_map[1]).back() == e:
+#			if found_exit == false:
+#				var adjacent_room = build_room()
+#				recursive_room_build(adjacent_room)
+#				var r_exit = get_exits(adjacent_room[1]).pick_random()
+#				r_exit.connected_door = e
+#				e.connected_door = r_exit
+#				adjacent_room[1].position.y += generated_rooms.find(adjacent_room[1]) * -3000
+#				found_exit = true
+	recursive_room_build(current_map)
+	build_ends()
+#	for r in gen_maps:
+#		recursive_room_build(r)
+#	assert(len(generated_rooms) >= 5)
+	
+	MAP_RECT = Map.get_used_rect().size*128
+
+func build_room():
+	var rand_room_id : int
+	while rand_room_id in [null,0,1]:
+		rand_room_id = randi()%(Global.rooms.size()-1)
+	var room_scene = load("res://rooms/"+Global.rooms[rand_room_id]["file"]).instantiate()
+	
+	var new_room = Node2D.new()
+	new_room.y_sort_enabled = true
+	new_room.name = "Room"
+	
+	# Install map entities
+	var new_map = room_scene.duplicate()
+	for entity in room_scene.get_children():
+		if entity.get_class() in ["Marker2D"]:
+			continue
+		room_scene.remove_child(entity)
+		active_entities.append(entity)
+		new_room.add_child(entity)
+	Main.add_child(new_room)
+	gen_maps.append([new_map,new_room])
+	return [new_map,new_room]
+
+func recursive_room_build(map:Array):
+	while len(gen_maps) < 5:
+		var found_exit = false
+		for e in get_exits(map[1]):
+			if e.connected_door != null:
+					continue
+			if found_exit == false:
+				var adjacent_room = build_room()
+				var r_exit = get_exits(adjacent_room[1]).pick_random()
+				r_exit.connected_door = e
+				e.connected_door = r_exit
+				adjacent_room[1].position = r_exit.facing_pos[r_exit.facing_direction_idx] * gen_maps.find(adjacent_room) * 3000
+				recursive_room_build(adjacent_room)
+				found_exit = true
+
+func build_ends():
+	var locked = []
+	for m in gen_maps: # Map,Room Sets
+		for e in get_exits(m[1]): # Exits
+			if e.connected_door == null:
+				locked.append([m[1],e])
+	
+	for l in locked:
+		var end = build_room()
+		var exit = get_exits(end[1]).pick_random()
+		exit.connected_door = l[1]
+		l[1].connected_door = exit
+		end[1].position = exit.facing_pos[exit.facing_direction_idx] * gen_maps.find(end) * 3000
+
+func get_exits(room:Node):
+	var doors = []
+	for c in room.get_children():
+		if c.is_in_group("door"):
+			doors.append(c)
+	return doors
+
+func exit_from_this_door(enter_from:Node,exit_from:Node):
+	if !exit_from:
+		return
+	for p in active_players:
 		if p.fainted:
 			p.revive()
-			for m in p.minions:
-				active_entities.append(m)
+		p.position = exit_from.get_parent().position+exit_from.position+(exit_from.facing_vec*100)
+		p.transporting = false
+		p.y_sort_enabled = true
+		for m in p.minions:
+			active_entities.append(m)
 
 func is_out_of_map(pos:Vector2) -> bool:
 	var map_local_pos = Map.to_local(pos)

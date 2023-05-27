@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cx7imnf85vue8"]
+[gd_scene load_steps=3 format=3 uid="uid://cx7imnf85vue8"]
 
 [ext_resource type="TileSet" uid="uid://0c8knfi7rtne" path="res://default.tres" id="1_8b75m"]
+[ext_resource type="Script" path="res://level.gd" id="1_m57b6"]
 
 [node name="Level" type="Node2D"]
+script = ExtResource("1_m57b6")
 
 [node name="Map" type="TileMap" parent="."]
 z_index = -1

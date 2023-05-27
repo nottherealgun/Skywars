@@ -1,7 +1,7 @@
 extends Control
 
 @export var skip_splashscreen = false
-@onready var testmap = load("res://rooms/"+Global.rooms[0].file).instantiate()
+@onready var testmap = load("res://rooms/"+Global.rooms[2].file).instantiate()
 
 func _ready():
 	$PlayButton.pressed.connect(button_pressed.bind("play"))
@@ -13,7 +13,7 @@ func _ready():
 	
 	$"../Splashscreen/AnimationPlayer".play("splashscreen")
 	if skip_splashscreen:
-		$"../Splashscreen/AnimationPlayer".seek(8.5)
+		$"../Splashscreen/AnimationPlayer".seek(9.5)
 
 func _input(event):
 	if Input.is_key_pressed(KEY_SPACE):
@@ -48,6 +48,6 @@ func start_game(character:String):
 	new_player.character = character.to_lower()
 	Global.Main.add_child(new_player)
 	GameManager._game_start()
-	Global.sync_room(testmap)
+	Global.build_stage()
 	$AnimationPlayer.play("opening")
 	

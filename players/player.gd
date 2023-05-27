@@ -17,7 +17,7 @@ signal spawns_minion(minion)
 @onready var health = 		max_health : set = _set_health
 @export var brainpower = 	6
 @export var damage_modifier = 1
-@export var speed = 		1
+@export var speed = 		2
 @export var attack_speed :=	0.25 : set = _set_attack_speed
 @export var dash_modifier =	1
 @export var damage_reduction = 0 # Out of 100

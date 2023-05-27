@@ -14,6 +14,7 @@ position = Vector2(544, 736)
 
 [node name="Door" parent="." index="2" instance=ExtResource("2_ktoef")]
 position = Vector2(544, -32)
+facing_direction_idx = 1
 
 [node name="Door2" parent="." index="3" instance=ExtResource("2_ktoef")]
 position = Vector2(544, 992)
@@ -21,7 +22,9 @@ position = Vector2(544, 992)
 [node name="Door3" parent="." index="4" instance=ExtResource("2_ktoef")]
 position = Vector2(88, 512)
 front_facing = false
+facing_direction_idx = 3
 
 [node name="Door4" parent="." index="5" instance=ExtResource("2_ktoef")]
 position = Vector2(1056, 512)
 front_facing = false
+facing_direction_idx = 2
