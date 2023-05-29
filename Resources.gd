@@ -17,7 +17,8 @@ signal enemy_killed(enemy)
 
 var prev_map
 var current_map
-var current_map_boss
+var current_map_uninit
+var current_map_boss = ""
 
 var active_players = []
 # Entities
@@ -434,6 +435,7 @@ func sync_map(map:Node2D,boss:=""):
 	randomize()
 	# Prepare spawnpoints
 	var target_map = map.duplicate()
+	current_map_uninit = target_map
 	current_map = target_map
 	current_map_boss = boss
 	
@@ -582,7 +584,7 @@ func build_room():
 	var rand_room_id : int
 	while rand_room_id in [null,0,1]:
 		rand_room_id = randi()%(Global.rooms.size()-1)
-	var room_scene = load("res://rooms/"+Global.rooms[rand_room_id]["file"]).instantiate()
+	var room_scene = load("res://rooms/"+Global.rooms[2]["file"]).instantiate()
 	
 	var new_room = Node2D.new()
 	new_room.y_sort_enabled = true
@@ -590,6 +592,8 @@ func build_room():
 	
 	# Install map entities
 	var new_map = room_scene.duplicate()
+	current_map_uninit = new_map
+	
 	for entity in room_scene.get_children():
 		if entity.get_class() in ["Marker2D"]:
 			continue
@@ -611,7 +615,9 @@ func recursive_room_build(map:Array):
 				var r_exit = get_exits(adjacent_room[1]).pick_random()
 				r_exit.connected_door = e
 				e.connected_door = r_exit
-				adjacent_room[1].position = r_exit.facing_pos[r_exit.facing_direction_idx] * gen_maps.find(adjacent_room) * 3000
+				for entity in adjacent_room[1].get_children():
+					entity.position += r_exit.facing_pos[r_exit.facing_direction_idx] * gen_maps.find(adjacent_room) * 3000
+				
 				recursive_room_build(adjacent_room)
 				found_exit = true
 
@@ -627,7 +633,8 @@ func build_ends():
 		var exit = get_exits(end[1]).pick_random()
 		exit.connected_door = l[1]
 		l[1].connected_door = exit
-		end[1].position = exit.facing_pos[exit.facing_direction_idx] * gen_maps.find(end) * 3000
+		for entity in end[1].get_children():
+			entity.position += exit.facing_pos[exit.facing_direction_idx] * gen_maps.find(end) * 3000
 
 func get_exits(room:Node):
 	var doors = []

@@ -48,7 +48,7 @@ func enter_room(player):
 		var rand_room_id : int
 		while rand_room_id in [null,0,1]:
 			rand_room_id = randi()%(Global.rooms.size()-1)
-		room_scene = load("res://rooms/"+Global.rooms[rand_room_id]["file"]).instantiate()
+		room_scene = load("res://rooms/"+Global.rooms[2]["file"]).instantiate()
 	else:
 		room_scene = load(room).instantiate()
 
