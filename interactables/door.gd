@@ -65,6 +65,10 @@ func enter_room(player):
 			await $Sprite.animation_finished
 			Global.exit_from_this_door(self,connected_door)
 		else:
+			if !connected_door:
+				Global.Notifier.display("Door is locked.")
+			elif locked:
+				Global.Notifier.display("More enemies nearby...")
 			var t = create_tween().set_loops(3)
 			t.tween_property($Sprite,"offset",Vector2(2,-32),0.1)
 			t.chain().tween_property($Sprite,"offset",Vector2(0,-30),0.1)

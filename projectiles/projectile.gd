@@ -24,7 +24,7 @@ func _ready():
 
 func _process(delta):
 	# Movement
-	position += direction * delta * current_speed * 250
+	position += direction * delta * current_speed * 350
 	$Dev.text = str(player_bullet)
 	
 func affect(victim:Node):

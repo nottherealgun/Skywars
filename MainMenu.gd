@@ -47,13 +47,12 @@ func button_pressed(button:String):
 		
 func start_game(character:String):
 	hide()
-	$CanvasLayer.hide()
 	var new_player = load("res://players/player.tscn").instantiate()
 	new_player.character = character.to_lower()
 	Global.Main.add_child(new_player)
 	Global.active_players.append(new_player)
 	Global.RNG.set_seed(int("test"))
 	GameManager._game_start()
-	Global.build_stage()
+	Global.build_lobby()
 	$AnimationPlayer.play("opening")
 	

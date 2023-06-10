@@ -13,21 +13,18 @@ func set_boss(new_boss:Node):
 	$BossName.text = "[center][shake]"+boss.display_name
 	$BossDesc.text = "[center][shake]"+boss.display_desc
 	
-	await boss.started
+#	await boss.started
 	var tween = create_tween()
 	tween.tween_property($BossName,"visible_ratio",1.0,3.0).from(0.0)
 	tween.parallel().tween_property($BossDesc,"visible_ratio",1.0,3.0).from(0.0)
 	for c in get_children():
-		tween.parallel().tween_property(c,"position:y",c.position.y,3.0).from(1200).set_trans(Tween.TRANS_CUBIC)
-		tween.parallel().tween_callback(c.show)
+		tween.parallel().tween_property(c,"position:y",-240,3.0).as_relative().set_trans(Tween.TRANS_CUBIC)
+		
 
 func boss_died():
+	GameManager.bosses_vanquished += 1
 	var tween := create_tween()
 	tween.tween_property(%Flash,"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE)
 	for c in get_children():
-		tween.parallel().tween_property(c,"position:y",1200,3.0).set_trans(Tween.TRANS_CUBIC)
+		tween.parallel().tween_property(c,"position:y",240,3.0).as_relative().set_trans(Tween.TRANS_CUBIC)
 #	tween.parallel().tween_property(Global.Cam,"zoom",Vector2.ONE*1.5,3.0)
-	await tween.finished
-	for c in get_children():
-		c.hide()
-	

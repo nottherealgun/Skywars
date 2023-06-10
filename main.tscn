@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=3 uid="uid://dlpndwnncnijn"]
+[gd_scene load_steps=129 format=3 uid="uid://dlpndwnncnijn"]
 
 [ext_resource type="AudioStream" uid="uid://bl3tu345hbh37" path="res://music/The Lobby.mp3" id="1_4g0f4"]
 [ext_resource type="Texture2D" uid="uid://dv8c76rwlux0p" path="res://items/idCardGUI.png" id="2_e4464"]
@@ -32,6 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://515cgx6i0ygs" path="res://gui/optionButton.png" id="26_diu8h"]
 [ext_resource type="Texture2D" uid="uid://bebfa5wjlu236" path="res://gui/homeButton.png" id="27_atwa6"]
 [ext_resource type="Texture2D" uid="uid://ttq5mrq4ae03" path="res://gui/exitButton.png" id="28_04hgl"]
+[ext_resource type="Script" path="res://Notifier.gd" id="28_6orup"]
 [ext_resource type="Texture2D" uid="uid://cfhc31r667nck" path="res://utility/cursor.png" id="31_4q8pb"]
 [ext_resource type="Script" path="res://utility/Cursor.gd" id="32_o3cct"]
 [ext_resource type="Script" path="res://SettingsMenu.gd" id="35_0fttp"]
@@ -64,6 +65,7 @@
 [ext_resource type="Texture2D" uid="uid://6xmkatqahwq5" path="res://gui/back_hover.png" id="54_00pad"]
 [ext_resource type="AudioStream" uid="uid://dwtnyj0u68m1i" path="res://sfx/My_Song_3.mp3" id="54_s1dar"]
 [ext_resource type="Script" path="res://Credits.gd" id="56_ldiwf"]
+[ext_resource type="Script" path="res://ScoreboardMenu.gd" id="57_edoq2"]
 [ext_resource type="Script" path="res://CharacterSelection.gd" id="58_pmmy4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sr40o"]
@@ -1018,6 +1020,58 @@ _data = {
 "options_back": SubResource("Animation_60gyb")
 }
 
+[sub_resource type="Animation" id="Animation_jjgmq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ipad:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(64, 1080)]
+}
+
+[sub_resource type="Animation" id="Animation_qx1tk"]
+resource_name = "enter"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ipad:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(64, 1080), Vector2(64, 92.0001)]
+}
+
+[sub_resource type="Animation" id="Animation_qr1ik"]
+resource_name = "exit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ipad:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(64, 92.0001), Vector2(64, 1080)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eqnug"]
+_data = {
+"RESET": SubResource("Animation_jjgmq"),
+"enter": SubResource("Animation_qx1tk"),
+"exit": SubResource("Animation_qr1ik")
+}
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wwb3"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_left = 10
@@ -1246,58 +1300,46 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("../MainMenu/CanvasLayer:visible")
-tracks/7/interp = 1
+tracks/7/path = NodePath("../MainMenu/MainBG:position")
+tracks/7/interp = 2
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 8.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("../MainMenu/MainBG:position")
-tracks/8/interp = 2
-tracks/8/loop_wrap = true
-tracks/8/keys = {
 "times": PackedFloat32Array(6, 9.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-616, 0), Vector2(-616, -2968)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("TeamLogo:position")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(6, 6.5, 7.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(554, 92), Vector2(554, 195), Vector2(554, -944)]
+}
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("TeamLogo:position")
+tracks/9/path = NodePath("Label:position")
 tracks/9/interp = 2
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(6, 6.5, 7.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(554, 92), Vector2(554, 195), Vector2(554, -944)]
+"values": [Vector2(330, 824), Vector2(330, 927), Vector2(330, -212)]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Label:position")
-tracks/10/interp = 2
+tracks/10/path = NodePath("../../Music:playing")
+tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(6, 6.5, 7.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(330, 824), Vector2(330, 927), Vector2(330, -212)]
-}
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("../../Music:playing")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
 "times": PackedFloat32Array(4.5),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -1396,7 +1438,6 @@ mouse_filter = 2
 script = ExtResource("3_r8jns")
 
 [node name="BarProgress" type="TextureProgressBar" parent="GUI/BossBar"]
-visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 7
@@ -1405,9 +1446,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -44.4448
-offset_top = -120.0
+offset_top = 120.0
 offset_right = 44.5552
-offset_bottom = -108.0
+offset_bottom = 132.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(9, 9)
@@ -1420,7 +1461,6 @@ texture_over = ExtResource("4_5lu23")
 texture_progress = ExtResource("5_qygbk")
 
 [node name="BossName" type="RichTextLabel" parent="GUI/BossBar"]
-visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 7
@@ -1429,9 +1469,8 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -399.945
-offset_top = -240.0
 offset_right = 400.06
-offset_bottom = -176.0
+offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
@@ -1443,7 +1482,6 @@ bbcode_enabled = true
 text = "[center]PRINTEROVSKI 3000"
 
 [node name="BossDesc" type="RichTextLabel" parent="GUI/BossBar"]
-visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 7
@@ -1452,9 +1490,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -399.945
-offset_top = -192.0
+offset_top = 48.0
 offset_right = 400.06
-offset_bottom = -128.0
+offset_bottom = 112.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
@@ -1467,7 +1505,6 @@ bbcode_enabled = true
 text = "[center]MUIC Printer: Bane of Physical Copies"
 
 [node name="BossHealth" type="Label" parent="GUI/BossBar"]
-visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 7
@@ -1476,9 +1513,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -304.0
-offset_top = -160.0
+offset_top = 80.0
 offset_right = -160.0
-offset_bottom = -64.0
+offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("11_2h1l6")
@@ -2682,6 +2719,7 @@ libraries = {
 
 [node name="Dev" type="Label" parent="GUI"]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -2695,20 +2733,24 @@ text = "Lorem Ipsum"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Scoreboard" type="Label" parent="GUI"]
-unique_name_in_owner = true
-z_index = 1
+[node name="Notifier" type="Label" parent="GUI"]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 5
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 64.0
-offset_top = -488.0
+offset_top = -119.0
 offset_right = 1984.0
 offset_bottom = -56.0
 grow_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("11_2h1l6")
+theme_override_font_sizes/font_size = 60
+text = "test"
 vertical_alignment = 2
+script = ExtResource("28_6orup")
 
 [node name="DemoText" type="Label" parent="GUI"]
 anchors_preset = 15
@@ -2916,13 +2958,12 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -0.000488281
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("35_ntfof")
 skip_splashscreen = true
-metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="MainBG" type="TextureRect" parent="GUI/MainMenu"]
 texture_filter = 1
@@ -2932,10 +2973,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1576.0
-offset_top = -1540.0
-offset_right = 1816.0
-offset_bottom = 2514.0
+offset_left = -616.0
+offset_top = -1000.0
+offset_right = 2776.0
+offset_bottom = 3054.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("35_u44vp")
@@ -2950,10 +2991,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -785.0
-offset_top = -870.0
-offset_right = 785.0
-offset_bottom = -597.008
+offset_left = 175.0
+offset_top = -330.0
+offset_right = 1745.0
+offset_bottom = -57.0081
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.00016, 1.00016)
@@ -2981,10 +3022,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -565.5
-offset_top = -652.0
-offset_right = 565.5
-offset_bottom = -542.001
+offset_left = 394.5
+offset_top = -112.0
+offset_right = 1525.5
+offset_bottom = -2.00098
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("39_jmqov")
@@ -2998,10 +3039,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -960.0
-offset_top = 540.0
-offset_right = -483.0
-offset_bottom = 861.06
+offset_top = 1080.0
+offset_right = 477.0
+offset_bottom = 1401.06
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -3017,10 +3057,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -479.0
-offset_top = 540.0
-offset_right = -1.9978
-offset_bottom = 861.03
+offset_left = 481.0
+offset_top = 1080.0
+offset_right = 958.002
+offset_bottom = 1401.03
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -3036,10 +3076,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 2.00024
-offset_top = 540.0
-offset_right = 479.0
-offset_bottom = 861.0
+offset_left = 962.0
+offset_top = 1080.0
+offset_right = 1439.0
+offset_bottom = 1401.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -3055,10 +3095,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 483.0
-offset_top = 540.0
-offset_right = 960.0
-offset_bottom = 861.01
+offset_left = 1443.0
+offset_top = 1080.0
+offset_right = 1920.0
+offset_bottom = 1401.01
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -3075,34 +3115,14 @@ libraries = {
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GUI/MainMenu"]
 stream = ExtResource("51_1moc3")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="GUI/MainMenu"]
-visible = false
-
-[node name="DemoText" type="Label" parent="GUI/MainMenu/CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -944.0
-offset_top = -524.0
-offset_right = -461.0
-offset_bottom = -472.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-text = "SkyWars Demo | Alpha V.7 | As of 7/5/2023
-If any bugs or errors are found, please report to the Dev Team."
-
 [node name="Options" type="Control" parent="GUI/MainMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 1080.0
-offset_right = 24960.0
-offset_bottom = 15120.0
+offset_right = 34560.0
+offset_bottom = 20520.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("53_6ipk1")
@@ -3134,8 +3154,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 1080.0
-offset_right = 24960.0
-offset_bottom = 15120.0
+offset_right = 34560.0
+offset_bottom = 20520.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("56_ldiwf")
@@ -3260,6 +3280,116 @@ It's YOU, Champ! Thank you for playing our game!
 
 "
 
+[node name="ScoreboardMenu" type="Control" parent="GUI"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("57_edoq2")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Title" type="RichTextLabel" parent="GUI/ScoreboardMenu"]
+top_level = true
+texture_filter = 5
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 384.0
+offset_top = 232.0
+offset_right = -384.0
+offset_bottom = -788.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("11_2h1l6")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "[center]Scoreboard"
+fit_content = true
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Info" type="RichTextLabel" parent="GUI/ScoreboardMenu"]
+top_level = true
+texture_filter = 5
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 384.0
+offset_top = 256.0
+offset_right = -384.0
+offset_bottom = -184.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("11_2h1l6")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[p align=center]
+[wave amp=50 freq=10][color=yellow]* NEW RECORD! *[/color][/wave]
+- You -
+Levels Cleared: 1
+Rooms Cleared: 1
+Enemies Killed: 1
+Bosses Vanquished: 1
+Total Playtime: 1 HR, 5 MIN, 0 SEC
+
+- Best Player -
+Levels Cleared: 1
+Rooms Cleared: 1
+Enemies Killed: 1
+Bosses Vanquished: 1
+Total Playtime: 1 HR, 5 MIN, 0 SEC"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Blur" type="ColorRect" parent="GUI/ScoreboardMenu"]
+material = SubResource("ShaderMaterial_ys8be")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="Ipad" type="TextureRect" parent="GUI/ScoreboardMenu"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.517
+anchor_right = 0.5
+anchor_bottom = 0.517
+offset_left = 64.0
+offset_top = 1080.0
+offset_right = 1856.0
+offset_bottom = 2012.03
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("23_qefvt")
+
+[node name="Timer" type="Timer" parent="GUI/ScoreboardMenu"]
+wait_time = 5.0
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GUI/ScoreboardMenu"]
+libraries = {
+"": SubResource("AnimationLibrary_eqnug")
+}
+
 [node name="CharacterSelection" type="Control" parent="GUI"]
 visible = false
 layout_mode = 3
@@ -3332,8 +3462,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 1077.0
-offset_right = 24960.0
-offset_bottom = 15117.0
+offset_right = 7680.0
+offset_bottom = 5397.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
@@ -3536,10 +3666,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -630.0
-offset_top = 284.0
-offset_right = 630.0
-offset_bottom = 492.0
+offset_left = 330.0
+offset_top = 824.0
+offset_right = 1590.0
+offset_bottom = 1032.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(653.5, 52)
@@ -3556,10 +3686,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -406.0
-offset_top = -448.0
-offset_right = 406.0
-offset_bottom = 264.997
+offset_left = 554.0
+offset_top = 92.0
+offset_right = 1366.0
+offset_bottom = 804.997
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1e-05, 1e-05)
@@ -3640,5 +3770,6 @@ metadata/_edit_lock_ = true
 [connection signal="mouse_entered" from="GUI/PauseMenu/Button4/Button4" to="GUI/PauseMenu" method="_on_button_4_mouse_entered"]
 [connection signal="mouse_exited" from="GUI/PauseMenu/Button4/Button4" to="GUI/PauseMenu" method="_on_button_4_mouse_exited"]
 [connection signal="pressed" from="GUI/PauseMenu/Button4/Button4" to="GUI/PauseMenu" method="_on_button_4_pressed"]
+[connection signal="timeout" from="GUI/ScoreboardMenu/Timer" to="GUI/ScoreboardMenu" method="_on_timer_timeout"]
 [connection signal="pressed" from="GUI/CharacterSelection/Button" to="GUI/CharacterSelection" method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/SettingsMenu/Back" to="GUI/SettingsMenu" method="_on_back_pressed"]

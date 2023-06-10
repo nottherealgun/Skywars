@@ -275,7 +275,7 @@ func summon_nests():
 	var room_data = Global.current_room.get_meta("metadata")
 	var map = room_data[1]
 	for i in 3:
-		var nest = Global.spawn_enemy("paper_nest",map.position+Global.get_rand_room_tile(map))
+		var nest = Global.spawn_enemy("paper_nest",Global.get_rand_room_tile(map))
 
 func _on_animated_sprite_frame_changed():
 	if state == STATES.ATTACK1:

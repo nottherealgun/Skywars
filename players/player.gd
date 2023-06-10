@@ -16,7 +16,7 @@ signal spawns_minion(minion)
 @export var max_health = 	100
 @onready var health = 		max_health : set = _set_health
 @export var brainpower = 	6 : set = _set_brainpower
-@export var damage_modifier = 100
+@export var damage_modifier = 1
 @export var speed = 		1
 @export var attack_speed :=	0.25 : set = _set_attack_speed
 @export var dash_modifier =	1
@@ -131,10 +131,10 @@ func _input_update():
 #						$Sprite.position = Vector2.ZERO
 						var t = create_tween()
 						t.tween_property(self,"position",move_vec*150*dash_modifier,0.2).as_relative()
-						if move_vec.normalized().x < 0:
-							t.parallel().tween_property($Sprite,"rotation",0,0.25).from(PI*2)
-						else:
-							t.parallel().tween_property($Sprite,"rotation",0,0.25).from(-PI*2)
+#						if move_vec.normalized().x < 0:
+#							t.parallel().tween_property($Sprite,"rotation",0,0.25).from(PI*2)
+#						else:
+#							t.parallel().tween_property($Sprite,"rotation",0,0.25).from(-PI*2)
 
 						await t.finished
 #						$Sprite.offset = Vector2(0,-24)
@@ -163,7 +163,7 @@ func _move_update(delta):
 #	position += move_vec.normalized()*delta*speed*200
 #	position.x = clampf(position.x, 0+32, Global.MAP_RECT.x-32)
 #	position.y = clampf(position.y, 0, Global.MAP_RECT.y)
-	move_and_collide(move_vec.normalized()*delta*speed*200)
+	move_and_collide(move_vec.normalized()*delta*speed*250)
 
 ## Privates
 

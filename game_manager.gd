@@ -11,22 +11,22 @@ var levels_cleared = 0
 var sec_elapsed = 0
 var min_elapsed = 0
 var hr_elapsed = 0
+var bosses_vanquished = 0
 
 func _game_start():
 	if !Global.is_connected("enemy_killed",entity_killed):
 		Global.connect("enemy_killed",entity_killed)
 	
 	for n in Global.Main.get_children():
-		if n.is_in_group("player") and not n in Global.active_players:
-			Global.active_players.append(n)
+		if n.is_in_group("player"):
+			if not n in Global.active_players:
+				Global.active_players.append(n)
 			n.connect("kills_player",player_killed)
 	
 	Global.Inventory.start()
 	
 	cam.position = Global.active_players[0].position
 	cam.reset_smoothing()
-	
-	$Timer.start()
 	
 func _process(_delta):
 	var a = []
@@ -43,8 +43,6 @@ func _process(_delta):
 		cam.position = cam_follow_target
 	
 	get_node("/root/Main/GUI/PlayerStats/MoneyGUI/MoneyLabel").text = str(int(money))
-#	Global.Dev.text = str(Global.current_room,"\n\n",Global.active_rooms,"\n\n",Global.active_rooms.find(Global.current_room))
-	Global.Scoreboard.text = "Enemies Killed: "+str(enemies_killed)
 	
 	rooms_cleared = 0
 	
@@ -63,24 +61,22 @@ func _process(_delta):
 		for e in r[1].get_meta("entities"):
 			if !is_instance_valid(e):
 				continue
+			if is_nan(e.position.x):
+				Global.kill(e)
+				continue
 			if e.is_in_group("enemy"):
 				cleared = false
 				break
 				
 		if cleared:
 			rooms_cleared += 1
-	
-	Global.Scoreboard.text += "\nRooms Cleared: "+str(rooms_cleared)
-	Global.Scoreboard.text += "\nLevels Cleared: "+str(levels_cleared)
-	
+
 	if sec_elapsed >= 60:
 		sec_elapsed = 0
 		min_elapsed += 1
 	if min_elapsed >= 60:
 		min_elapsed = 0
 		hr_elapsed += 1
-	
-	Global.Scoreboard.text += "\nTime Elapsed(sec): "+str(hr_elapsed)+":"+str(min_elapsed)+":"+str(sec_elapsed)
 	
 	var closest = null
 	var dist = INF
@@ -89,6 +85,10 @@ func _process(_delta):
 		if p:
 			while null in Global.active_entities:
 				Global.active_entities.erase(null)
+			var temp = Global.active_entities.duplicate()
+			for e in temp:
+				if !is_instance_valid(e) or !e:
+					Global.active_entities.erase(e)
 			for e in Global.active_entities:
 				if e.is_in_group("enemy") == false or !e:
 					continue
@@ -140,10 +140,13 @@ func add_money(amnt:int):
 func player_killed(player):
 	for p in Global.active_players:
 		if p.fainted == false:
-			break
-		else:
-			if p == Global.active_players.back():
-				Global.sync_map(Global.current_map_uninit,Global.current_map_boss)
+			return
+	$Timer.paused = true
+	Global.Scoreboard.display(levels_cleared,rooms_cleared,enemies_killed,bosses_vanquished,{"hrs":hr_elapsed,"min":min_elapsed,"sec":sec_elapsed})
+	await Global.Scoreboard.reviewed
+#	Global.sync_map(Global.current_map_uninit,Global.current_map_boss)
+	Global.build_lobby()
+	sec_elapsed = 0
 
 func entity_killed(entity):
 	var active_enemies = []

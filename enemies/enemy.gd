@@ -34,7 +34,20 @@ func _physics_process(delta):
 		Global.kill(self)
 #	if !Global.is_out_of_map(position):
 #		Global.kill(self)
+	
+	while null in targets_in_range:
+		targets_in_range.erase(null)
 		
+	for t in targets_in_range:
+		if !is_instance_valid(t):
+			targets_in_range.erase(t)
+			
+	if !target:
+		if !targets_in_range.is_empty():
+			target = targets_in_range.pick_random()
+			if !is_instance_valid(target):
+				target = null
+	
 	if is_instance_valid(target):
 		if target.fainted:
 			target = null
@@ -49,7 +62,8 @@ func _physics_process(delta):
 			if t.position.distance_to(position) < dist:
 				dist = t.position.distance_to(position)
 				closest = t
-		target = closest
+		if is_instance_of(closest, Object):
+			target = closest
 
 func _move_update(delta):
 	pass

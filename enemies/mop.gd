@@ -40,19 +40,20 @@ func _physics_process(delta):
 			else:
 				change_state(States.IDLE)
 			
-			var strafepoint = target.position+position.direction_to(target.position+target.move_vec.normalized()*50)*200			
-			if $Timer.is_stopped():
-				$Sprite.frame = 0
-				$Sprite.play("attack")
-				var t = create_tween().set_trans(Tween.TRANS_CUBIC)
-				t.tween_property(self,"position",strafepoint,1.0)
-				$Timer.start()
-			else:
-				if !$Sprite.is_playing():
-					$Sprite.play("idle")
-				var vec = position.direction_to(strafepoint)
-				if move_and_collide(vec,true):
-					change_state(States.IDLE)
+			if is_instance_valid(target):
+				var strafepoint = target.position+position.direction_to(target.position+target.move_vec.normalized()*50)*200			
+				if $Timer.is_stopped():
+					$Sprite.frame = 0
+					$Sprite.play("attack")
+					var t = create_tween().set_trans(Tween.TRANS_CUBIC)
+					t.tween_property(self,"position",strafepoint,1.0)
+					$Timer.start()
+				else:
+					if !$Sprite.is_playing():
+						$Sprite.play("idle")
+					var vec = position.direction_to(strafepoint)
+					if move_and_collide(vec,true):
+						change_state(States.IDLE)
 
 func affect(victim:Node):
 	victim.health-=damage

@@ -1,10 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://dbun1tf3xdti6"]
+[gd_scene load_steps=38 format=3 uid="uid://dbun1tf3xdti6"]
 
 [ext_resource type="PackedScene" uid="uid://cx7imnf85vue8" path="res://level.tscn" id="1_p1xgq"]
 [ext_resource type="PackedScene" uid="uid://bhsvoj5kcuifg" path="res://spawning_point.tscn" id="3_2cn4r"]
 [ext_resource type="PackedScene" uid="uid://b50cdoiu11fvs" path="res://interactables/dorion_shop.tscn" id="4_gvhes"]
 [ext_resource type="PackedScene" uid="uid://dsx5fq2n5okv5" path="res://interactables/reception.tscn" id="4_oqpc4"]
-[ext_resource type="PackedScene" uid="uid://6qdjvyw15lm4" path="res://interactables/door.tscn" id="6_q45rr"]
 [ext_resource type="Texture2D" uid="uid://d2cc42iqf5jg7" path="res://misc/infoAnime.png" id="7_46deq"]
 [ext_resource type="Texture2D" uid="uid://bu5eqnppfmrnc" path="res://misc/muicLobbyBoard.png" id="7_rg02r"]
 [ext_resource type="PackedScene" uid="uid://bwk52glm5umlq" path="res://interactables/pillar_red.tscn" id="8_8gxcb"]
@@ -17,6 +16,11 @@
 [ext_resource type="PackedScene" uid="uid://2pprua54q7h8" path="res://interactables/pillar_yellow.tscn" id="13_srk4e"]
 [ext_resource type="Texture2D" uid="uid://d07t3246r6ci6" path="res://interactables/glassDoubleDoorSS.png" id="15_jrld0"]
 [ext_resource type="Texture2D" uid="uid://cvfvpdu4fdfi0" path="res://interactables/broIsHerePoster.png" id="17_0eqkn"]
+[ext_resource type="Script" path="res://rooms/TestDoor.gd" id="17_ltuuk"]
+[ext_resource type="Texture2D" uid="uid://d2y2gnp4q0ti3" path="res://interactables/aniDoorHorizontalSS.png" id="17_qq1s7"]
+[ext_resource type="Shader" path="res://rooms/lobby.gdshader" id="18_5s27c"]
+[ext_resource type="Texture2D" uid="uid://baceu1lu7581p" path="res://interactables/aniDoorVerticalSS.png" id="18_k3c0y"]
+[ext_resource type="FontFile" uid="uid://im11hs0xx7wu" path="res://utility/RoadPixel.ttf" id="21_xd07g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wcjt0"]
 atlas = ExtResource("15_jrld0")
@@ -50,6 +54,78 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0jigo"]
 size = Vector2(192, 9)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aexii"]
+size = Vector2(64, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6rifr"]
+shader = ExtResource("18_5s27c")
+shader_parameter/color_gap = Color(0.25, 0.25, 0.25, 0.25)
+shader_parameter/color_stripe = Color(1, 0.75, 0, 1)
+shader_parameter/divisions = 8.0
+shader_parameter/stripe_bias = 2.5
+shader_parameter/speed = 0.1
+shader_parameter/angle = 0.7854
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ay6p7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vknpa"]
+atlas = ExtResource("17_qq1s7")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2mhs"]
+atlas = ExtResource("17_qq1s7")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5sxj"]
+atlas = ExtResource("17_qq1s7")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wq30d"]
+atlas = ExtResource("18_k3c0y")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7k31v"]
+atlas = ExtResource("18_k3c0y")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dltdp"]
+atlas = ExtResource("18_k3c0y")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lylq3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vknpa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2mhs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5sxj")
+}],
+"loop": false,
+"name": &"forward",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wq30d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7k31v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dltdp")
+}],
+"loop": false,
+"name": &"side",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rp4j0"]
+radius = 111.005
+
 [node name="lobby" instance=ExtResource("1_p1xgq")]
 y_sort_enabled = true
 position = Vector2(-93, -29)
@@ -67,14 +143,9 @@ position = Vector2(1472, 300)
 metadata/_edit_lock_ = true
 
 [node name="DorionShop" parent="." index="3" instance=ExtResource("4_gvhes")]
-position = Vector2(865, 101)
+position = Vector2(2179, 96)
 
-[node name="Door" parent="." index="4" instance=ExtResource("6_q45rr")]
-position = Vector2(1112, 208)
-room = "res://rooms/adit_single_1.tscn"
-synced_with_new_map = true
-
-[node name="MUIC Poster" type="Node2D" parent="." index="5"]
+[node name="MUIC Poster" type="Node2D" parent="." index="4"]
 y_sort_enabled = true
 position = Vector2(475, -8)
 metadata/_edit_group_ = true
@@ -87,7 +158,7 @@ scale = Vector2(2.5, 2.5)
 texture = ExtResource("7_rg02r")
 offset = Vector2(3.05176e-05, -30.1714)
 
-[node name="IceInfographics" type="Node2D" parent="." index="6"]
+[node name="IceInfographics" type="Node2D" parent="." index="5"]
 y_sort_enabled = true
 position = Vector2(-48, -16)
 metadata/_edit_group_ = true
@@ -100,39 +171,39 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("7_46deq")
 offset = Vector2(3.05176e-05, -30.1714)
 
-[node name="PillarGreen" parent="." index="7" instance=ExtResource("12_jgss6")]
+[node name="PillarGreen" parent="." index="6" instance=ExtResource("12_jgss6")]
 position = Vector2(315, 128)
 metadata/_edit_lock_ = true
 
-[node name="PillarRed" parent="." index="8" instance=ExtResource("8_8gxcb")]
+[node name="PillarRed" parent="." index="7" instance=ExtResource("8_8gxcb")]
 position = Vector2(1030, 160)
 metadata/_edit_lock_ = true
 
-[node name="PillarGrey" parent="." index="9" instance=ExtResource("8_lomov")]
+[node name="PillarGrey" parent="." index="8" instance=ExtResource("8_lomov")]
 position = Vector2(1920, 128)
 metadata/_edit_lock_ = true
 
-[node name="PillarYellow" parent="." index="10" instance=ExtResource("13_srk4e")]
+[node name="PillarYellow" parent="." index="9" instance=ExtResource("13_srk4e")]
 position = Vector2(2624, 160)
 metadata/_edit_lock_ = true
 
-[node name="PillarBlue" parent="." index="11" instance=ExtResource("10_ys8ck")]
+[node name="PillarBlue" parent="." index="10" instance=ExtResource("10_ys8ck")]
 position = Vector2(321, 496)
 metadata/_edit_lock_ = true
 
-[node name="PillarOrange" parent="." index="12" instance=ExtResource("11_1ks2k")]
+[node name="PillarOrange" parent="." index="11" instance=ExtResource("11_1ks2k")]
 position = Vector2(1024, 464)
 metadata/_edit_lock_ = true
 
-[node name="PillarWhite" parent="." index="13" instance=ExtResource("13_iv0gb")]
+[node name="PillarWhite" parent="." index="12" instance=ExtResource("13_iv0gb")]
 position = Vector2(1920, 496)
 metadata/_edit_lock_ = true
 
-[node name="PillarBlackSeat" parent="." index="14" instance=ExtResource("9_r3aum")]
+[node name="PillarBlackSeat" parent="." index="13" instance=ExtResource("9_r3aum")]
 position = Vector2(2624, 496)
 metadata/_edit_lock_ = true
 
-[node name="GlassDoor" type="StaticBody2D" parent="." index="15"]
+[node name="GlassDoor" type="StaticBody2D" parent="." index="14"]
 y_sort_enabled = true
 position = Vector2(-256, -144)
 collision_layer = 16
@@ -150,7 +221,7 @@ offset = Vector2(0, -40)
 position = Vector2(0, 59.5)
 shape = SubResource("RectangleShape2D_0jigo")
 
-[node name="GlassDoor2" type="StaticBody2D" parent="." index="16"]
+[node name="GlassDoor2" type="StaticBody2D" parent="." index="15"]
 y_sort_enabled = true
 position = Vector2(3200, -144)
 collision_layer = 16
@@ -168,7 +239,7 @@ offset = Vector2(0, -40)
 position = Vector2(0, 59.5)
 shape = SubResource("RectangleShape2D_0jigo")
 
-[node name="GlassDoor3" type="StaticBody2D" parent="." index="17"]
+[node name="GlassDoor3" type="StaticBody2D" parent="." index="16"]
 y_sort_enabled = true
 position = Vector2(1216, 372)
 collision_layer = 16
@@ -186,7 +257,7 @@ offset = Vector2(0, -40)
 position = Vector2(0, 59.5)
 shape = SubResource("RectangleShape2D_0jigo")
 
-[node name="GlassDoor4" type="StaticBody2D" parent="." index="18"]
+[node name="GlassDoor4" type="StaticBody2D" parent="." index="17"]
 y_sort_enabled = true
 position = Vector2(1728, 372)
 collision_layer = 16
@@ -204,8 +275,61 @@ offset = Vector2(0, -40)
 position = Vector2(0, 59.5)
 shape = SubResource("RectangleShape2D_0jigo")
 
-[node name="BroIsHerePoster" type="Sprite2D" parent="." index="19"]
+[node name="BroIsHerePoster" type="Sprite2D" parent="." index="18"]
 texture_filter = 1
 position = Vector2(-179, -80)
 texture = ExtResource("17_0eqkn")
 offset = Vector2(-7.62939e-06, -46.6667)
+
+[node name="TestDoor" type="StaticBody2D" parent="." index="19"]
+position = Vector2(855, 205)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("17_ltuuk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestDoor" index="0"]
+position = Vector2(0, 41)
+shape = SubResource("RectangleShape2D_aexii")
+
+[node name="Panel" type="Panel" parent="TestDoor" index="1"]
+material = SubResource("ShaderMaterial_6rifr")
+offset_left = -32.0
+offset_top = -51.0
+offset_right = 32.0
+offset_bottom = 51.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ay6p7")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="TestDoor" index="2"]
+y_sort_enabled = true
+texture_filter = 1
+position = Vector2(0, 49)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_lylq3")
+animation = &"forward"
+offset = Vector2(0, -30)
+
+[node name="Area2D" type="Area2D" parent="TestDoor" index="3"]
+position = Vector2(0, -8)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestDoor/Area2D" index="0"]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_rp4j0")
+
+[node name="Label" type="Label" parent="TestDoor" index="4"]
+texture_filter = 5
+offset_left = -32.0
+offset_top = -106.0
+offset_right = 32.0
+offset_bottom = -36.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("21_xd07g")
+theme_override_font_sizes/font_size = 16
+text = "Endless
+Mode"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="area_entered" from="TestDoor/Area2D" to="TestDoor" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="TestDoor/Area2D" to="TestDoor" method="_on_area_2d_area_exited"]
