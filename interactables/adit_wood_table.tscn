@@ -1,10 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4sdqwlakm0si"]
+[gd_scene load_steps=4 format=3 uid="uid://c4sdqwlakm0si"]
 
 [ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://interactables/interactable.tscn" id="1_j4lg7"]
 [ext_resource type="Texture2D" uid="uid://c7a6c3orutsv2" path="res://interactables/adithWoodTable.png" id="2_1sqq2"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y5ev3"]
+size = Vector2(128, 20)
+
 [node name="AditWoodTable" instance=ExtResource("1_j4lg7")]
 
-[node name="Sprite" parent="." index="1"]
+[node name="Sprite" parent="." index="0"]
 texture = ExtResource("2_1sqq2")
 offset = Vector2(0, -22)
+
+[node name="CollisionShape" parent="." index="1"]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_y5ev3")
+disabled = false

@@ -15,8 +15,8 @@ signal spawns_minion(minion)
 # Player stats
 @export var max_health = 	100
 @onready var health = 		max_health : set = _set_health
-@export var brainpower = 	6
-@export var damage_modifier = 1
+@export var brainpower = 	6 : set = _set_brainpower
+@export var damage_modifier = 100
 @export var speed = 		1
 @export var attack_speed :=	0.25 : set = _set_attack_speed
 @export var dash_modifier =	1
@@ -69,6 +69,7 @@ func _ready():
 	equips_item.connect(equip_item)
 	
 func _process(delta):
+#	$dev.text = str(Global.is_out_of_map(position))
 	_input_update() # Update device input
 	_gui_update() # Update gui
 	var sprite = get_node("Sprite")
@@ -175,8 +176,11 @@ func _set_health(new_val) -> void:
 	else:
 		health = new_val
 		Global.emit_indicator(dmg_inflicted,position,false)
-		
+	
 	health = clampf(health,0,max_health)
+
+func _set_brainpower(new_val) -> void:
+	brainpower = clampi(new_val,0,6)
 
 func _set_attack_speed(new_val:float) -> void:
 	$RateOfFire.wait_time = new_val

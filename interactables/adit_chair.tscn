@@ -13,14 +13,12 @@ script = ExtResource("2_qw6qa")
 facing = 0
 flip = false
 
-[node name="Sprite" parent="." index="1"]
+[node name="Sprite" parent="." index="0"]
 texture = ExtResource("2_pu2iv")
 offset = Vector2(0, -12)
 
-[node name="Hitbox" parent="." index="2"]
-position = Vector2(0, -32)
-
-[node name="HitboxShape" parent="Hitbox" index="0"]
-position = Vector2(0, 22)
+[node name="CollisionShape" parent="." index="1"]
+position = Vector2(0, -8)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_4ib1x")
+disabled = false

@@ -17,6 +17,7 @@ func _enter_tree():
 		set_collision_layer_value(3,true)
 	else:
 		$Sprite.modulate = Color.WHITE.blend(Color(1.0,0,0,0.2))
+		set_collision_mask_value(5,false)
 
 func _ready():
 	pass

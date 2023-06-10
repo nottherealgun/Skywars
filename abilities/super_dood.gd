@@ -24,12 +24,20 @@ var target : Node
 var allies = []
 
 func _process(delta):
-	if !is_instance_valid(target):
-		for t in targets_in_range:
-			if !is_instance_valid(t):
-				targets_in_range.erase(t)
+	while null in targets_in_range:
+		targets_in_range.erase(null)
+		
+	for t in targets_in_range:
+		if !is_instance_valid(t):
+			targets_in_range.erase(t)
+			
+	if !target:
 		if !targets_in_range.is_empty():
 			target = targets_in_range.pick_random()
+			if !is_instance_valid(target):
+				target = null
+	if !target and state != STATES.FOLLOWING:
+		change_state(STATES.FOLLOWING)
 		
 	match state:
 		STATES.IDLE:
@@ -43,7 +51,7 @@ func _process(delta):
 			move_vec = position.direction_to(master.position)
 			$AnimatedSprite2D.flip_h = (move_vec.x < 0)
 			if $AnimatedSprite2D.frame >= 3:
-				move_and_collide((move_vec+detect_allies()).normalized()*delta*speed*200)
+				move((move_vec).normalized()*delta*speed*200)
 				
 			if position.distance_to(master.position) <= min_master_dist:
 				change_state(STATES.IDLE)
@@ -57,7 +65,7 @@ func _process(delta):
 		STATES.CHASING:
 			move_vec = position.direction_to(target.position)
 			if $AnimatedSprite2D.frame >= 3:
-				move_and_collide((move_vec+detect_allies()).normalized()*delta*speed*200)
+				move((move_vec).normalized()*delta*speed*200)
 			if position.distance_to(target.position) < 25:
 				change_state(STATES.ATTACKING)
 		
@@ -88,24 +96,47 @@ func _process(delta):
 			await $AnimatedSprite2D.animation_finished
 			Global.kill(self)
 
+func move(main_vec:Vector2):
+	var checked_vec = main_vec*1.5
+	var c = move_and_collide(checked_vec,true)
+	var new_vec := Vector2.ZERO
+	var a := Vector2.ZERO
+	
+	for i in 10:
+		a = checked_vec.normalized().rotated(deg_to_rad(i*36))*200
+		c = move_and_collide(a,true)
+		if c and !is_instance_of(c.get_collider(),TileMap) and !c.get_collider().is_in_group("door"):
+			var dist = position.distance_to(c.get_collider().position)-100
+			var direc = position.direction_to(c.get_collider().position)
+			var vec = direc*dist
+			new_vec = vec
+#			checked_vec -= direc/dist*5
+	
+	checked_vec += detect_allies()
+	move_and_collide(checked_vec)
+	
+	$test.set_point_position(1,checked_vec*100)
+	$test2.set_point_position(1,new_vec)
+#	$test3.set_point_position(1,checked_vec.normalized().rotated(deg_to_rad(-50))*200)
+#	$test3.set_point_position(2,checked_vec.normalized().rotated(deg_to_rad(50))*200)
+	$test3.set_point_position(1,a)
+		
+		
 func detect_allies():
 	var allies_vec := Vector2.ZERO
 	var range := 50
 	for ally in allies:
 		if ally.position.distance_to(position) <= range:
-#				allies_vec += ((position.direction_to(ally.position))/ally.position.distance_to(position))*10
 			var rot : float
 			var a = position.direction_to(ally.position).rotated(PI*2/3)*100
 			var b = position.direction_to(ally.position).rotated(-PI*2/3)*100
 			var c = move_vec.angle_to(position+a)
 			var d = move_vec.angle_to(position+b)
-#				$a.set_point_position(1,a)
-#				$b.set_point_position(1,b)
 			if c < d:
 				rot = PI*2/3
 			else:
 				rot = -PI*2/3
-			allies_vec = ally.position.direction_to(position).rotated(deg_to_rad(rot))
+			allies_vec += ally.position.direction_to(position).rotated(deg_to_rad(rot))
 	return allies_vec
 	
 func change_state(new_state):

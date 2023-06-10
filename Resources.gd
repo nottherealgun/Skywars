@@ -7,6 +7,7 @@ signal enemy_killed(enemy)
 @onready var Map := get_node("/root/Main/Map") 							as TileMap
 @onready var GUI := get_node("/root/Main/GUI") 							as CanvasLayer
 @onready var Dev := get_node("/root/Main/GUI/Dev") 						as Label
+@onready var Scoreboard := get_node("/root/Main/GUI/Scoreboard") 		as Label
 @onready var Music := get_node("/root/Main/Music") 						as AudioStreamPlayer
 @onready var Bossbar := get_node("/root/Main/GUI/BossBar") 				as Control
 @onready var PauseMenu := get_node("/root/Main/GUI/PauseMenu")			as Control
@@ -15,12 +16,18 @@ signal enemy_killed(enemy)
 
 @onready var MAP_RECT : Vector2 = Map.get_used_rect().size*128
 
+var RNG = RandomNumberGenerator.new()
+
 var prev_map
+var current_room
 var current_map
+
 var current_map_uninit
 var current_map_boss = ""
 
 var active_players = []
+var uncleared_rooms_arr = []
+
 # Entities
 
 var active_entities = []
@@ -77,6 +84,7 @@ func kill(entity:Node,immediate=false):
 			tween.parallel().tween_callback(emit_death_indicator.bind(entity.position))
 			if entity.health <= 0:
 				GameManager.add_money(entity.points)
+				GameManager.enemies_killed += 1
 			
 		elif entity.is_in_group("projectile"):
 			entity.current_speed = 0
@@ -119,21 +127,21 @@ var active_doors = []
 func get_door_pos(size:Vector2i):
 	var door_pos : Vector2
 	var rand_pos = Vector2i(-1,-1)
-	var rand_side = ["left","top","right","bottom"][randi()%4]
+	var rand_side = ["left","top","right","bottom"][RNG.randi()%4]
 	var flip = true
 	match rand_side:
 		"left":
-			rand_pos.y = (randi()%size.y)
+			rand_pos.y = (RNG.randi()%size.y)
 			flip=false
 		"right":
 			rand_pos.x = size.x
-			rand_pos.y = (randi()%size.y)
+			rand_pos.y = (RNG.randi()%size.y)
 			flip=false
 		"top":
-			rand_pos.x = (randi()%size.x)
+			rand_pos.x = (RNG.randi()%size.x)
 		"bottom":
 			rand_pos.y = size.y
-			rand_pos.x = (randi()%size.x)
+			rand_pos.x = (RNG.randi()%size.x)
 		
 	door_pos = Map.map_to_local(rand_pos)
 	door_pos = Map.to_global(door_pos)
@@ -161,6 +169,7 @@ var rooms = [
 	{"file":"adit_single_1.tscn","name":"Single Room 1"},
 	{"file":"adit_single_2.tscn","name":"Single Room 2"},
 	{"file":"adit_double_1.tscn","name":"Double Room 1"},
+	{"file":"adit_boss.tscn","name":"Boss Room"},
 	{"file":"adit_t_1.tscn","name":"T-shaped Room 1"},
 ]
 
@@ -432,11 +441,10 @@ const items = [
 
 # Levels
 func sync_map(map:Node2D,boss:=""):
-	randomize()
 	# Prepare spawnpoints
 	var target_map = map.duplicate()
 	current_map_uninit = target_map
-	current_map = target_map
+	current_room = target_map
 	current_map_boss = boss
 	
 	var spawn_poses = []
@@ -524,17 +532,24 @@ func sync_map(map:Node2D,boss:=""):
 var gen_maps = []
 
 func build_stage(): # Build first game stage (endless mode)
+	gen_maps = []
+	# Entry Transition
+	var transition_screen = GUI.get_node("Transition")
+	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
+	transition_screen.get_node("Tips").text = "[center][wave amp=25 freq=10]\n"+"Tip: "+str(tips[randi()%tips.size()])
+	tween.tween_property(transition_screen.material,"shader_parameter/progress",1.0,2).from(0.0)
+	
+	await tween.step_finished
 	# Clear old map tiles
 	Map.clear()
 	# Clear old entities
 	LevelManager.clear_level()
-
-	# Install map tiles
-#	var old_map = Map
-#	Main.remove_child(old_map)
-#	old_map.queue_free()
-		
+	
+	# Set level title name
 	current_map = build_room()
+	current_room = current_map[1]
+	
+	GUI.get_node("Title").text = "New Level Entered."
 	
 	# Prepare spawnpoints
 	var spawn_poses = []
@@ -554,55 +569,54 @@ func build_stage(): # Build first game stage (endless mode)
 		p.y_sort_enabled = true
 		for m in p.minions:
 			active_entities.append(m)
-	
-#	var found_exit = false
-#	for e in get_exits(current_map[1]):
-#		if len(generated_rooms) > 10:
-#			break
-#		while !found_exit:
-##			var r = randi_range(0,len(get_exits(current_map[1])))
-##			if r != 0:
-##				continue
-##			elif r == 0 or get_exits(current_map[1]).back() == e:
-#			if found_exit == false:
-#				var adjacent_room = build_room()
-#				recursive_room_build(adjacent_room)
-#				var r_exit = get_exits(adjacent_room[1]).pick_random()
-#				r_exit.connected_door = e
-#				e.connected_door = r_exit
-#				adjacent_room[1].position.y += generated_rooms.find(adjacent_room[1]) * -3000
-#				found_exit = true
+			
 	recursive_room_build(current_map)
 	build_ends()
-#	for r in gen_maps:
-#		recursive_room_build(r)
-#	assert(len(generated_rooms) >= 5)
+	populate()
+	
+	uncleared_rooms_arr = gen_maps
 	
 	MAP_RECT = Map.get_used_rect().size*128
 
-func build_room():
+	# Exit Transition
+	tween = create_tween()
+	tween.tween_property(transition_screen.material,"shader_parameter/progress",0.0,1.5).from(1.0)
+	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
+	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
+
+func build_room(room_type=null):
 	var rand_room_id : int
-	while rand_room_id in [null,0,1]:
-		rand_room_id = randi()%(Global.rooms.size()-1)
-	var room_scene = load("res://rooms/"+Global.rooms[2]["file"]).instantiate()
+	while rand_room_id in [null,0,1,6]:
+		rand_room_id = RNG.randi()%(Global.rooms.size()-1)
+	if room_type:
+		rand_room_id = room_type
+	var room_scene = load("res://rooms/"+Global.rooms[rand_room_id]["file"]).instantiate()
 	
 	var new_room = Node2D.new()
 	new_room.y_sort_enabled = true
 	new_room.name = "Room"
+	new_room.set_meta("entities",[])
 	
 	# Install map entities
 	var new_map = room_scene.duplicate()
 	current_map_uninit = new_map
+	var new_tilemap
 	
 	for entity in room_scene.get_children():
-		if entity.get_class() in ["Marker2D"]:
+		if is_instance_of(entity,Marker2D):
 			continue
+		if is_instance_of(entity,TileMap):
+			new_tilemap = entity
+		if entity.is_in_group("door"):
+			entity.in_map = [new_map,new_room,new_tilemap]
 		room_scene.remove_child(entity)
 		active_entities.append(entity)
 		new_room.add_child(entity)
+	
+	new_room.set_meta("metadata",[new_map,new_room,new_tilemap])
 	Main.add_child(new_room)
-	gen_maps.append([new_map,new_room])
-	return [new_map,new_room]
+	gen_maps.append([new_map,new_room,new_tilemap])
+	return [new_map,new_room,new_tilemap]
 
 func recursive_room_build(map:Array):
 	while len(gen_maps) < 5:
@@ -612,7 +626,7 @@ func recursive_room_build(map:Array):
 					continue
 			if found_exit == false:
 				var adjacent_room = build_room()
-				var r_exit = get_exits(adjacent_room[1]).pick_random()
+				var r_exit = get_exits(adjacent_room[1])[RNG.randi()%len(get_exits(adjacent_room[1]))-1]
 				r_exit.connected_door = e
 				e.connected_door = r_exit
 				for entity in adjacent_room[1].get_children():
@@ -621,6 +635,37 @@ func recursive_room_build(map:Array):
 				recursive_room_build(adjacent_room)
 				found_exit = true
 
+func populate():
+	var gen_dict = {
+		"corrupted_paper":6,
+		"mop":2,
+		"student":4,
+		"printer":2,
+		"paper_nest":2,
+	}
+	
+	for map in gen_maps:
+		if map[0].is_in_group("special"):
+			continue
+			
+		var entities = []
+		for d in gen_dict.keys():
+			for i in gen_dict[d]:
+				var new
+				var ok = false
+				while !ok:
+					var pos
+					while pos == null or is_out_of_map(pos) or is_nan(pos.x) or is_nan(pos.y):
+						pos = map[1].position+get_rand_room_tile(map[1])
+					new = spawn_enemy(d,pos) as Enemy
+					ok = true
+					for j in 4:
+						if new.move_and_collide(Vector2.ONE.rotated(deg_to_rad(i*90)),true):
+							ok = false
+							break
+				entities.append(new)
+		map[1].set_meta("entities",entities)
+
 func build_ends():
 	var locked = []
 	for m in gen_maps: # Map,Room Sets
@@ -628,13 +673,42 @@ func build_ends():
 			if e.connected_door == null:
 				locked.append([m[1],e])
 	
+	var boss = locked[RNG.randi_range(0,len(locked)-1)]
+	
+	while boss[0] == current_room:
+		boss = locked[RNG.randi_range(0,len(locked)-1)]
+	
 	for l in locked:
-		var end = build_room()
-		var exit = get_exits(end[1]).pick_random()
+		var end
+		if l == boss:
+			end = build_room(6)
+			end[1].set_meta("boss",true)
+		else:
+			end = build_room()
+		var exit = get_exits(end[1])[RNG.randi_range(0,len(get_exits(end[1]))-1)]
 		exit.connected_door = l[1]
 		l[1].connected_door = exit
 		for entity in end[1].get_children():
 			entity.position += exit.facing_pos[exit.facing_direction_idx] * gen_maps.find(end) * 3000
+
+func get_rand_room_tile(room:Node2D):
+	var map = room.get_node("Map") as TileMap
+	var tiles = map.get_used_cells(0)
+	var t = tiles[RNG.randi_range(0,len(tiles)-1)]
+	var ok = false
+	
+	while !ok:
+		ok = true
+		t = tiles[RNG.randi_range(0,len(tiles)-1)]
+		for c in map.get_surrounding_cells(t):
+			var d = map.get_cell_tile_data(0,c)
+			var d2 = map.get_cell_tile_data(1,t)
+			if !d or d2:
+				ok = false
+				break
+	
+	var cell = map.to_global(Map.map_to_local(t))
+	return cell
 
 func get_exits(room:Node):
 	var doors = []
@@ -642,10 +716,21 @@ func get_exits(room:Node):
 		if c.is_in_group("door"):
 			doors.append(c)
 	return doors
-
+	
 func exit_from_this_door(enter_from:Node,exit_from:Node):
+	current_room = exit_from.in_map[1]
 	if !exit_from:
 		return
+	
+	if current_room.has_meta("boss"):
+		var center = exit_from.in_map[2].get_used_rect().get_center()
+		var new_boss = spawn_boss("printerovski_3000",exit_from.in_map[2].position+Vector2(center*64))
+		GameManager.boss_encounter(new_boss)
+		current_room.get_meta("entities").append(new_boss)
+		exit_from.synced_with_new_map = true
+		
+	Cam.position_smoothing_speed = 100
+		
 	for p in active_players:
 		if p.fainted:
 			p.revive()
@@ -654,15 +739,21 @@ func exit_from_this_door(enter_from:Node,exit_from:Node):
 		p.y_sort_enabled = true
 		for m in p.minions:
 			active_entities.append(m)
-
+	
+	Cam.position_smoothing_speed = 5
+	
 func is_out_of_map(pos:Vector2) -> bool:
-	var map_local_pos = Map.to_local(pos)
-	var cell = Map.local_to_map(map_local_pos)
-	var data = Map.get_cell_tile_data(0,cell)
-	if data:
-		return true
-	else:
-		return false
+	var data
+	var p = pos
+	for m in gen_maps:
+		var map = m[2] as TileMap
+		p = pos + m[1].position
+		var map_local_pos = map.to_local(p)
+		var cell = map.local_to_map(map_local_pos)
+		data = map.get_cell_tile_data(0,cell)
+		if data:
+			return false
+	return true
 
 # Utility
 
@@ -742,7 +833,7 @@ func use_ability(character:String,by:Node):
 		return
 	by.brainpower -= ability_price.get(character)
 	match character:
-		"darwin":
+		"darwin":# 3 6 1
 			var minion = spawn_from_ability(Global.pick_by_percentage({"dood":3,"super_dood":6,"wizard_dood":1}),by.position,by)
 			by.emit_signal("spawns_minion",minion)
 		"gun":

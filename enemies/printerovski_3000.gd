@@ -77,8 +77,8 @@ func _physics_process(delta):
 				if t is Object == false:
 					continue
 				closest = t
-				
-		target = closest
+		if is_instance_of(closest, Object):
+			target = closest
 	
 	match state:
 		STATES.TRANSFORM:
@@ -131,6 +131,8 @@ func change_state(new_state):
 					await get_tree().create_timer(0.3).timeout
 		
 		STATES.RELOADING:
+			if randi()%100 < 30:
+				summon_nests()
 			for i in range(0,3):
 				
 				$AnimatedSprite.play("reload")
@@ -189,7 +191,8 @@ func change_state(new_state):
 		STATES.DEATH:
 			$AnimatedSprite.play("death")
 			emit_signal("died")
-			
+			await $AnimatedSprite.animation_finished
+			Global.kill(self)
 
 ## Privates
 
@@ -252,11 +255,10 @@ func artillery_shot():
 	Global.active_entities.append(f_new_proj)
 	await f_new_proj.thrown
 	
-	var rand_land_pos = target.position+Vector2(randf_range(-300,300),randf_range(-300,300))
-	while (rand_land_pos == null or !Global.is_out_of_map(rand_land_pos)) and is_instance_valid(target):
+	var rand_land_pos = null
+	while (rand_land_pos == null or Global.is_out_of_map(rand_land_pos)) and is_instance_valid(target):
 		rand_land_pos = target.position+Vector2(randf_range(-300,300),randf_range(-300,300))
 	
-	randomize()
 	var new_proj = load("res://projectiles/printerovski_proj.tscn").instantiate()
 	new_proj.land_pos = rand_land_pos
 	new_proj.printer_boss = self
@@ -268,6 +270,12 @@ func crash_burst(angle_mod=0):
 	for i in 18:
 		Global.spawn_projectile(self,"printer_proj_2",position,vec)
 		vec = vec.rotated(deg_to_rad(20))
+
+func summon_nests():
+	var room_data = Global.current_room.get_meta("metadata")
+	var map = room_data[1]
+	for i in 3:
+		var nest = Global.spawn_enemy("paper_nest",map.position+Global.get_rand_room_tile(map))
 
 func _on_animated_sprite_frame_changed():
 	if state == STATES.ATTACK1:

@@ -14,6 +14,20 @@ func _physics_process(delta):
 	super(delta)
 	if is_instance_valid(target):
 		$Sprite.flip_h = !(target.position.x > position.x)
+		
+	while null in targets_in_range:
+		targets_in_range.erase(null)
+		
+	for t in targets_in_range:
+		if !is_instance_valid(t):
+			targets_in_range.erase(t)
+			
+	if !target:
+		if !targets_in_range.is_empty():
+			target = targets_in_range.pick_random()
+			if !is_instance_valid(target):
+				target = null
+		
 	match state:
 		States.IDLE:
 			pass
@@ -30,7 +44,7 @@ func _physics_process(delta):
 					change_state(States.CHASING)
 			else:
 				change_state(States.IDLE)
-			if $Timer.is_stopped():
+			if $Timer.is_stopped() and target:
 				target.get_hurt(self)
 				$Timer.start()
 

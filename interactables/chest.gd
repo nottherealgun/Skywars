@@ -22,7 +22,6 @@ func open(player):
 			item_effect()
 		money_effect()
 		
-
 func _on_hitbox_area_entered(area):
 	var entity = area.get_parent()
 	if entity.is_in_group("player"):

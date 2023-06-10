@@ -4,3 +4,7 @@
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_r5ett")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

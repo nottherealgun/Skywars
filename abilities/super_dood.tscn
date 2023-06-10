@@ -346,6 +346,7 @@ shape = SubResource("RectangleShape2D_ot3gj")
 [node name="EnemyDetect" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetect"]
+visible = false
 shape = SubResource("CircleShape2D_6v1hg")
 
 [node name="AllyDetect" type="Area2D" parent="."]
@@ -353,6 +354,7 @@ collision_layer = 32
 collision_mask = 32
 
 [node name="AllyDetectShape" type="CollisionShape2D" parent="AllyDetect"]
+visible = false
 shape = SubResource("CircleShape2D_nq7j5")
 
 [node name="Shadow" type="Sprite2D" parent="."]
@@ -369,8 +371,7 @@ autostart = true
 [node name="BetweenShots" type="Timer" parent="."]
 one_shot = true
 
-[node name="Label" type="Label" parent="."]
-visible = false
+[node name="Dev" type="Label" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -387,6 +388,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PunchParticle" type="CPUParticles2D" parent="."]
+visible = false
 position = Vector2(-35, -5)
 emitting = false
 amount = 50
@@ -405,6 +407,21 @@ scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_skufa")
 color_ramp = SubResource("Gradient_tb0ug")
 hue_variation_max = 1.0
+
+[node name="test" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(0, 0, 0, 0)
+default_color = Color(0, 0.392157, 1, 1)
+
+[node name="test2" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(0, 0, 0, 0)
+default_color = Color(0.823529, 0, 0.427451, 1)
+
+[node name="test3" type="Line2D" parent="."]
+visible = false
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)
+default_color = Color(0.635294, 0.396078, 0, 1)
 
 [connection signal="area_entered" from="EnemyDetect" to="." method="_on_enemy_detect_area_entered"]
 [connection signal="area_exited" from="EnemyDetect" to="." method="_on_enemy_detect_area_exited"]

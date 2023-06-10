@@ -21,7 +21,16 @@ speed = 2
 position = Vector2(0, 44)
 shape = SubResource("RectangleShape2D_cyl6t")
 
-[node name="Sprite" parent="." index="1"]
+[node name="Dev" parent="." index="1"]
+visible = true
+z_index = 1
+offset_left = -144.0
+offset_right = 144.0
+theme_override_font_sizes/font_size = 10
+autowrap_mode = 2
+text_overrun_behavior = 4
+
+[node name="Sprite" parent="." index="2"]
 position = Vector2(0, 52)
 sprite_frames = ExtResource("3_n61ad")
 animation = &"idle"
@@ -35,21 +44,12 @@ shape = SubResource("RectangleShape2D_qvqom")
 [node name="PlayerDetectShape" parent="PlayerDetect" index="0"]
 visible = false
 
-[node name="NameTag" parent="." index="5"]
+[node name="NameTag" parent="." index="6"]
 offset_top = -137.0
 offset_bottom = -98.0
 
 [node name="Timer" type="Timer" parent="." index="7"]
 one_shot = true
-
-[node name="Dev" parent="." index="8"]
-visible = true
-z_index = 1
-offset_left = -144.0
-offset_right = 144.0
-theme_override_font_sizes/font_size = 10
-autowrap_mode = 2
-text_overrun_behavior = 4
 
 [node name="Shadow" type="Sprite2D" parent="." index="9"]
 z_index = -1

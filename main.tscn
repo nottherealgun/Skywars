@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=3 uid="uid://dlpndwnncnijn"]
+[gd_scene load_steps=123 format=3 uid="uid://dlpndwnncnijn"]
 
 [ext_resource type="AudioStream" uid="uid://bl3tu345hbh37" path="res://music/The Lobby.mp3" id="1_4g0f4"]
 [ext_resource type="Texture2D" uid="uid://dv8c76rwlux0p" path="res://items/idCardGUI.png" id="2_e4464"]
@@ -20,7 +20,6 @@
 [ext_resource type="TileSet" uid="uid://0c8knfi7rtne" path="res://default.tres" id="14_vmf2g"]
 [ext_resource type="Texture2D" uid="uid://bqjyiexgloh6b" path="res://utility/TransScreenBG.png" id="15_ln4oo"]
 [ext_resource type="Texture2D" uid="uid://syf78yg1sd4h" path="res://items/walkerSpecial.png" id="18_lgn5r"]
-[ext_resource type="Texture2D" uid="uid://dxwh08gt81dgh" path="res://utility/skywars_logo.png" id="19_f7762"]
 [ext_resource type="Texture2D" uid="uid://cidue6voqpmoh" path="res://coinGroundSS.png" id="19_nlkcr"]
 [ext_resource type="Script" path="res://PlayerInventory.gd" id="21_3xiss"]
 [ext_resource type="Texture2D" uid="uid://iu6iar47r7n0" path="res://gui/inventoryGUI.png" id="21_drtqb"]
@@ -255,7 +254,7 @@ _data = {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ys8be"]
 shader = ExtResource("23_jl8kg")
-shader_parameter/blur_amount = 2.5
+shader_parameter/blur_amount = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qojfl"]
 
@@ -386,7 +385,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(175, -317)]
+"values": [Vector2(175, -330)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -683,7 +682,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0.2, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(395, -120.978), Vector2(395, 640)]
+"values": [Vector2(395, -120.978), Vector2(395, 588)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -747,7 +746,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(1.5, 2.5, 3.3, 3.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(395, -118), Vector2(395, -118), Vector2(395, 690), Vector2(395, 640)]
+"values": [Vector2(395, -118), Vector2(395, -118), Vector2(395, 690), Vector2(395, 588)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -969,7 +968,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0.2, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(395, -120.978), Vector2(395, 640)]
+"values": [Vector2(395, -120.978), Vector2(395, 588)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -1025,6 +1024,98 @@ border_width_left = 10
 border_width_top = 10
 border_width_right = 10
 border_width_bottom = 10
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d7yox"]
+shader = ExtResource("23_jl8kg")
+shader_parameter/blur_amount = 2.5
+
+[sub_resource type="Animation" id="Animation_achef"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1077)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_l434s"]
+resource_name = "enter"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1096), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_6hu8c"]
+resource_name = "exit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1096)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_riier"]
+_data = {
+"RESET": SubResource("Animation_achef"),
+"enter": SubResource("Animation_l434s"),
+"exit": SubResource("Animation_6hu8c")
+}
 
 [sub_resource type="Animation" id="Animation_17gly"]
 length = 0.001
@@ -2501,6 +2592,7 @@ vertical_alignment = 1
 metadata/_edit_lock_ = true
 
 [node name="Transition" type="TextureRect" parent="GUI"]
+z_index = 1
 material = SubResource("ShaderMaterial_q6brm")
 anchors_preset = 15
 anchor_right = 1.0
@@ -2521,19 +2613,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -1576.0
-offset_top = -572.0
-offset_right = 1573.0
-offset_bottom = 430.0
+offset_left = -960.0
+offset_top = -732.0
+offset_right = 4524.0
+offset_bottom = 3435.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.4, 0.4)
-pivot_offset = Vector2(1575, 593.125)
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(1.11877, 0.477783)
 mouse_filter = 2
-texture = ExtResource("19_f7762")
-expand_mode = 1
-stretch_mode = 5
-metadata/_edit_lock_ = true
+texture = ExtResource("37_f8cj7")
+stretch_mode = 3
 
 [node name="Tips" type="RichTextLabel" parent="GUI/Transition"]
 texture_filter = 1
@@ -2604,6 +2694,21 @@ theme_override_constants/outline_size = 10
 text = "Lorem Ipsum"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Scoreboard" type="Label" parent="GUI"]
+unique_name_in_owner = true
+z_index = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = -488.0
+offset_right = 1984.0
+offset_bottom = -56.0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+vertical_alignment = 2
 
 [node name="DemoText" type="Label" parent="GUI"]
 anchors_preset = 15
@@ -2827,10 +2932,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -616.0
-offset_top = -1000.0
-offset_right = 2776.0
-offset_bottom = 3054.0
+offset_left = -1576.0
+offset_top = -1540.0
+offset_right = 1816.0
+offset_bottom = 2514.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("35_u44vp")
@@ -2845,10 +2950,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 175.0
-offset_top = -317.0
-offset_right = 1745.0
-offset_bottom = -44.008
+offset_left = -785.0
+offset_top = -870.0
+offset_right = 785.0
+offset_bottom = -597.008
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.00016, 1.00016)
@@ -2876,10 +2981,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 394.5
-offset_top = -112.0
-offset_right = 1525.5
-offset_bottom = -2.00098
+offset_left = -565.5
+offset_top = -652.0
+offset_right = 565.5
+offset_bottom = -542.001
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("39_jmqov")
@@ -2893,9 +2998,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = 1080.0
-offset_right = 477.0
-offset_bottom = 1401.06
+offset_left = -960.0
+offset_top = 540.0
+offset_right = -483.0
+offset_bottom = 861.06
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -2911,10 +3017,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 481.0
-offset_top = 1080.0
-offset_right = 958.002
-offset_bottom = 1401.03
+offset_left = -479.0
+offset_top = 540.0
+offset_right = -1.9978
+offset_bottom = 861.03
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -2930,10 +3036,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 962.0
-offset_top = 1080.0
-offset_right = 1439.0
-offset_bottom = 1401.0
+offset_left = 2.00024
+offset_top = 540.0
+offset_right = 479.0
+offset_bottom = 861.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -2949,10 +3055,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 1443.0
-offset_top = 1080.0
-offset_right = 1920.0
-offset_bottom = 1401.01
+offset_left = 483.0
+offset_top = 540.0
+offset_right = 960.0
+offset_bottom = 861.01
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -2995,13 +3101,14 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 1080.0
-offset_right = 9600.0
-offset_bottom = 6480.0
+offset_right = 24960.0
+offset_bottom = 15120.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("53_6ipk1")
 
 [node name="Back" type="TextureButton" parent="GUI/MainMenu/Options"]
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 3
@@ -3027,8 +3134,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 1080.0
-offset_right = 9600.0
-offset_bottom = 6480.0
+offset_right = 24960.0
+offset_bottom = 15120.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("56_ldiwf")
@@ -3220,21 +3327,22 @@ text = "BEGIN!"
 
 [node name="SettingsMenu" type="Control" parent="GUI"]
 process_mode = 3
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 1077.0
+offset_right = 24960.0
+offset_bottom = 15117.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("35_0fttp")
-metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
 [node name="Blur" type="ColorRect" parent="GUI/SettingsMenu"]
 visible = false
-material = SubResource("ShaderMaterial_ys8be")
+material = SubResource("ShaderMaterial_d7yox")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3255,12 +3363,11 @@ anchor_bottom = 0.517
 offset_left = -896.0
 offset_top = -466.36
 offset_right = 896.0
-offset_bottom = 465.64
+offset_bottom = 465.686
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
 texture = ExtResource("23_qefvt")
-metadata/_edit_lock_ = true
 
 [node name="SettingsContainer" type="TabContainer" parent="GUI/SettingsMenu"]
 layout_mode = 1
@@ -3270,7 +3377,7 @@ anchor_bottom = 1.0
 offset_left = 360.0
 offset_top = 224.0
 offset_right = -360.0
-offset_bottom = -176.0
+offset_bottom = -176.001
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("11_2h1l6")
@@ -3388,6 +3495,11 @@ theme_override_fonts/font = ExtResource("11_2h1l6")
 theme_override_font_sizes/font_size = 40
 text = "Back"
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GUI/SettingsMenu"]
+libraries = {
+"": SubResource("AnimationLibrary_riier")
+}
+
 [node name="Splashscreen" type="Control" parent="GUI"]
 layout_mode = 3
 anchors_preset = 15
@@ -3424,10 +3536,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 330.0
-offset_top = 824.0
-offset_right = 1590.0
-offset_bottom = 1032.0
+offset_left = -630.0
+offset_top = 284.0
+offset_right = 630.0
+offset_bottom = 492.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(653.5, 52)
@@ -3444,10 +3556,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 554.0
-offset_top = 92.0
-offset_right = 1366.0
-offset_bottom = 804.997
+offset_left = -406.0
+offset_top = -448.0
+offset_right = 406.0
+offset_bottom = 264.997
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1e-05, 1e-05)

@@ -32,6 +32,7 @@ func consumes_item(item:Dictionary):
 	match item.name:
 		"Salmon Nigiri":
 			user.health += user.max_health*0.2
+			user.brainpower += 2
 		"Tonkatsu Curry":
 			user.health = user.max_health
 		"Khao Mun Gai":
@@ -39,9 +40,9 @@ func consumes_item(item:Dictionary):
 		"Ohm's Gyoza":
 			user.health += user.max_health*0.5
 		"Dispensed Water":
-			pass
+			user.brainpower = 6
 		"The Walker Espress":
-			pass
+			user.brainpower = 0
 		"American-O":
 			pass
 		"Cap's Mustache":
