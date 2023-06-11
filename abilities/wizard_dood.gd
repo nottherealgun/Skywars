@@ -79,6 +79,7 @@ func _process(delta):
 				change_state(STATES.IDLE)
 		
 		STATES.DEATH:
+			$Death.play()
 			await $AnimatedSprite2D.animation_finished
 			Global.kill(self)
 

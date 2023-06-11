@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://u01jccblb6wp"]
+[gd_scene load_steps=43 format=3 uid="uid://u01jccblb6wp"]
 
 [ext_resource type="Script" path="res://abilities/dood.gd" id="1_y7i1w"]
 [ext_resource type="Texture2D" uid="uid://csrvcyrt7j1ls" path="res://abilities/dood_ranged_attack.png" id="2_1rm18"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://e0pdynsl0t0p" path="res://abilities/dood_ranged_dead.png" id="3_x3ret"]
 [ext_resource type="Texture2D" uid="uid://b0vmhbttj3ema" path="res://abilities/dood_ranged_walk.png" id="4_8ie1c"]
 [ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://utility/shadow.png" id="5_21xil"]
+[ext_resource type="AudioStream" uid="uid://ci8lsmwanws7t" path="res://sfx/sproutdude_death.mp3" id="7_uwels"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sj6uq"]
 size = Vector2(48, 56)
@@ -322,6 +323,11 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_uwels")
+volume_db = 5.0
+bus = &"SFX"
 
 [connection signal="area_entered" from="EnemyDetect" to="." method="_on_enemy_detect_area_entered"]
 [connection signal="area_exited" from="EnemyDetect" to="." method="_on_enemy_detect_area_exited"]

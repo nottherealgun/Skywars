@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/sproutdude_healing_field.mp3-ca8f231f28632853
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

@@ -1275,7 +1275,7 @@ tracks/4/keys = {
 }
 tracks/5/type = "value"
 tracks/5/imported = false
-tracks/5/enabled = false
+tracks/5/enabled = true
 tracks/5/path = NodePath("AudioStreamPlayer:playing")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
@@ -2765,7 +2765,7 @@ grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 text = "SkyWars Demo
-Alpha V.7 | As of 7/5/2023
+Alpha V.8 | As of 11/6/2023
 
 If any bugs or errors are found,
 please report to the Dev Team.
@@ -2786,7 +2786,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("35_ntfof")
-skip_splashscreen = true
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -2978,8 +2977,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 1080.0
-offset_bottom = 1080.0
+offset_left = 1920.0
+offset_right = 1920.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("56_ldiwf")
@@ -3467,7 +3466,6 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("35_0fttp")
 metadata/_edit_group_ = true
-metadata/_edit_use_anchors_ = true
 
 [node name="Blur" type="ColorRect" parent="GUI/SettingsMenu"]
 visible = false

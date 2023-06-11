@@ -5,6 +5,7 @@ var child
 var shot = false
 
 func _ready():
+	$Vines.play()
 	dupe()
 
 func _process(delta):
