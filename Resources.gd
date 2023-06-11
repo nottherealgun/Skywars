@@ -1,5 +1,6 @@
 extends Node
 signal enemy_killed(enemy)
+signal built_level
 
 # Resources
 
@@ -37,7 +38,7 @@ func spawn_in(entity):
 	Main.add_child(entity)
 	return entity
 
-func spawn_projectile(shooter:Node,proj_name:String,pos:Vector2,dir:Vector2,player_bullet=false,dmg:=10):
+func spawn_projectile(shooter:Object,proj_name:String,pos:Vector2,dir:Vector2,player_bullet=false,dmg:=10):
 	var new_proj = load("res://projectiles/"+proj_name+".tscn").instantiate()
 	new_proj.shooter = shooter
 	new_proj.position = pos
@@ -55,7 +56,7 @@ func spawn_enemy(enemy_name:String,pos:Vector2):
 	Main.add_child(new_enemy)
 	return new_enemy
 
-func spawn_from_ability(entity:String,pos:Vector2,user:Node):
+func spawn_from_ability(entity:String,pos:Vector2,user:Object):
 	var new_entity = load("res://abilities/"+entity+".tscn").instantiate()
 	new_entity.position = pos
 	new_entity.master = user
@@ -71,7 +72,7 @@ func spawn_manual(entity_path:String,pos:Vector2):
 	Main.add_child(new_entity)
 	return new_entity
 
-func kill(entity:Node,immediate=false):
+func kill(entity:Object,immediate=false):
 	if is_instance_valid(entity) and entity in active_entities:
 		emit_signal("enemy_killed",entity)
 		active_entities.erase(entity)
@@ -156,7 +157,7 @@ func new_door(room_size=Map.get_used_rect().size):
 	new_door_instance.side = new[2]
 	return new_door_instance
 
-func install_door(node:Node):
+func install_door(node:Object):
 	active_doors.append(node)
 	Main.add_child(node)
 
@@ -530,6 +531,31 @@ func sync_map(map:Node2D,boss:=""):
 	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
 
 var gen_maps = []
+var transitioning = false : set = _set_transitioning
+
+func _set_transitioning(val:bool):
+	transitioning = val
+	for p in active_players:
+		p.transporting = val
+
+func generic_transition():
+	# Enter Transition
+	var transition_screen = GUI.get_node("Transition")
+	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
+	transition_screen.get_node("Tips").text = "[center][wave amp=25 freq=10]\n"+"Tip: "+str(tips[randi()%tips.size()])
+	tween.tween_property(transition_screen.material,"shader_parameter/progress",1.0,2).from(0.0)
+	
+	transitioning = true
+	await tween.step_finished
+	
+	emit_signal("built_level")
+	
+	# Exit Transition
+	tween = create_tween()
+	tween.tween_property(transition_screen.material,"shader_parameter/progress",0.0,1.5).from(1.0)
+	tween.chain().tween_callback(_set_transitioning.bind(false))
+	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
+	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
 
 func build_lobby():
 	gen_maps = []
@@ -539,7 +565,9 @@ func build_lobby():
 	transition_screen.get_node("Tips").text = "[center][wave amp=25 freq=10]\n"+"Tip: "+str(tips[randi()%tips.size()])
 	tween.tween_property(transition_screen.material,"shader_parameter/progress",1.0,2).from(0.0)
 	
+	transitioning = true
 	await tween.step_finished
+	emit_signal("built_level")
 	var room_scene = load("res://rooms/"+Global.rooms[0]["file"]).instantiate()
 	
 	var new_map = room_scene.duplicate()
@@ -603,12 +631,14 @@ func build_lobby():
 	Main.add_child(new_room)
 	GameManager.get_node("Timer").start()
 	GameManager.get_node("Timer").paused = true
+	music_build_update([new_map,new_room,new_tilemap])
+
 	# Exit Transition
 	tween = create_tween()
 	tween.tween_property(transition_screen.material,"shader_parameter/progress",0.0,1.5).from(1.0)
+	tween.chain().tween_callback(_set_transitioning.bind(false))
 	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
 	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
-
 
 func build_stage(): # Build first game stage (endless mode)
 	gen_maps = []
@@ -618,6 +648,7 @@ func build_stage(): # Build first game stage (endless mode)
 	transition_screen.get_node("Tips").text = "[center][wave amp=25 freq=10]\n"+"Tip: "+str(tips[randi()%tips.size()])
 	tween.tween_property(transition_screen.material,"shader_parameter/progress",1.0,2).from(0.0)
 	
+	transitioning = true
 	await tween.step_finished
 	# Clear old map tiles
 	Map.clear()
@@ -657,16 +688,23 @@ func build_stage(): # Build first game stage (endless mode)
 	
 	MAP_RECT = Map.get_used_rect().size*128
 	GameManager.get_node("Timer").paused = false
+	music_build_update(current_map)
+
 	# Exit Transition
 	tween = create_tween()
 	tween.tween_property(transition_screen.material,"shader_parameter/progress",0.0,1.5).from(1.0)
+	tween.chain().tween_callback(_set_transitioning.bind(false))
 	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.WHITE,1.0).from(Color.TRANSPARENT)
 	tween.chain().tween_property(GUI.get_node("Title"),"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE).set_delay(3.0)
 
+var has_treasure_room = false
+	
 func build_room(room_type=null):
 	var rand_room_id : int
-	while rand_room_id in [null,0,1,6]:
+	while rand_room_id in [null,0,1,6] or (has_treasure_room and rand_room_id == 2):
 		rand_room_id = RNG.randi()%(Global.rooms.size()-1)
+		if rand_room_id == 2:
+			has_treasure_room = true
 	if room_type:
 		rand_room_id = room_type
 	var room_scene = load("res://rooms/"+Global.rooms[rand_room_id]["file"]).instantiate()
@@ -675,7 +713,8 @@ func build_room(room_type=null):
 	new_room.y_sort_enabled = true
 	new_room.name = "Room"
 	new_room.set_meta("entities",[])
-	
+	if rand_room_id == 2:
+		new_room.set_meta("treasure",true)
 	# Install map entities
 	var new_map = room_scene.duplicate()
 	current_map_uninit = new_map
@@ -718,7 +757,7 @@ func recursive_room_build(map:Array):
 func populate():
 	var gen_dict = {
 		"corrupted_paper":6,
-		"mop":2,
+		"mop":3,
 		"student":4,
 		"printer":2,
 		"paper_nest":2,
@@ -754,7 +793,6 @@ func build_ends():
 				locked.append([m[1],e])
 	
 	var boss = locked[RNG.randi_range(0,len(locked)-1)]
-	
 	while boss[0] == current_room:
 		boss = locked[RNG.randi_range(0,len(locked)-1)]
 	
@@ -791,14 +829,14 @@ func get_rand_room_tile(room:Node2D):
 	var cell = map.to_global(Map.map_to_local(t))
 	return cell
 
-func get_exits(room:Node):
+func get_exits(room:Object):
 	var doors = []
 	for c in room.get_children():
 		if c.is_in_group("door"):
 			doors.append(c)
 	return doors
 	
-func exit_from_this_door(enter_from:Node,exit_from:Node):
+func exit_from_this_door(enter_from:Object,exit_from:Object):
 	current_room = exit_from.in_map[1]
 	if !exit_from:
 		return
@@ -817,6 +855,7 @@ func exit_from_this_door(enter_from:Node,exit_from:Node):
 				continue
 			if e.connected_door.in_map[1].has_meta("boss"):
 				e.get_node("Dev").text = "BOSS"
+				e.connected_door.get_node("Dev").text = "Next Level"
 		
 	for p in active_players:
 		if p.fainted:
@@ -826,8 +865,8 @@ func exit_from_this_door(enter_from:Node,exit_from:Node):
 		p.y_sort_enabled = true
 		for m in p.minions:
 			active_entities.append(m)
-	
-	Cam.position_smoothing_speed = 5
+	current_map = exit_from.in_map
+	music_build_update(exit_from.in_map)
 	
 func is_out_of_map(pos:Vector2) -> bool:
 	var data
@@ -879,12 +918,15 @@ func pick_by_percentage(ratios:Dictionary):
 # Music
 
 const tracks = {
-	"lobby":"res://music/The Lobby_Loopable.mp3",	
+	"lobby":"res://music/The Lobby.mp3",
+	"1stfloor":"res://music/First Floor.mp3",
+	"2ndfloor":"res://music/2nd Floor.mp3",
+	"dorion":"res://music/D'Orion.mp3",
 	"combat":"res://music/College Quarrel_Loopable.mp3",
 	"printerboss":"res://music/Printing Issue_Loopable.mp3",
 }
 
-var current_track : String
+var current_track : String = "lobby"
 
 func music_play(track_name:String):
 	var default_volume = -15.0
@@ -899,6 +941,30 @@ func music_play(track_name:String):
 	tween.tween_property(Music,"volume_db",default_volume,1.0).from(-80.0)
 	return Music.stream
 
+func music_build_update(map_data:Array):
+	var map = map_data[0] as Level
+	var room = map_data[1] as Node2D
+	var tilemap = map_data[2] as TileMap
+	
+	var new_track = "lobby"
+	if map.name == "lobby":
+		new_track = "lobby"
+	elif room.has_meta("treasure"):
+		new_track = "dorion"
+	elif room.has_meta("boss"):
+		new_track = "printerboss"
+	else:
+		new_track = "1stfloor"
+		for e in room.get_meta("entities"):
+			if !is_instance_valid(e) or !e or e == null:
+				continue
+			if is_instance_of(e,Enemy):
+				new_track = "combat"
+				break
+	
+	if new_track != current_track:
+		music_play(new_track)
+
 func screen_shake(amplitude=16):
 	var ShakeTween = create_tween().set_trans(Tween.TRANS_CUBIC)
 	for i in 10:
@@ -911,7 +977,7 @@ func screen_shake(amplitude=16):
 
 # Abilities
 
-func use_ability(character:String,by:Node):
+func use_ability(character:String,by:Object):
 	var ability_price = {
 		"darwin":2,
 		"gun":2,

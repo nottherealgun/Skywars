@@ -12,14 +12,14 @@ var DEFAULT = {
 }
 
 var move_vec := Vector2.ZERO
-var master : Node
+var master : Object
 var min_master_dist = 100
 var shot = false
 
 enum STATES {IDLE,FOLLOWING,BUFFING,DEATH}
 var state = STATES.IDLE
 var targets_in_range = [] as Array
-var target : Node
+var target : Object
 
 var allies = []
 
@@ -143,7 +143,7 @@ func change_state(new_state):
 		STATES.DEATH:
 			$AnimatedSprite2D.play("death")
 
-func affect(victim:Node):
+func affect(victim:Object):
 	victim.health -= damage
 	Global.emit_indicator(damage,victim.position,false)
 

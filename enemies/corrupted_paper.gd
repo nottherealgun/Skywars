@@ -8,6 +8,7 @@ var shoot_speed = 1
 func _ready():
 	super()
 	shoot_speed = level
+	$Sprite.sprite_frames = load("res://enemies/corrupted_paper"+str(1+randi()%2)+".tres")
 
 func _physics_process(delta):
 	super(delta)
@@ -37,7 +38,7 @@ func _physics_process(delta):
 			if $Sprite.frame == 8:
 				target.get_hurt(self)
 
-func affect(victim:Node):
+func affect(victim:Object):
 	victim.health-=damage
 
 func change_state(new_state):
@@ -65,7 +66,7 @@ func _move_update(delta):
 				allies_vec += (position.direction_to(ally.position)*50)/ally.position.distance_to(position)
 		move_and_collide((move_vec-allies_vec) * speed * delta * 50)
 
-func get_hurt(by:Node):
+func get_hurt(by:Object):
 	super(by)
 
 func _on_player_detect_area_entered(area):

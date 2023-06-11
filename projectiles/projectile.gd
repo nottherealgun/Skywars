@@ -1,7 +1,7 @@
 @icon("res://projectiles/paperProjectile1.png")
 class_name Projectile extends Area2D
 
-var shooter
+var shooter : Object
 var health = 1
 var direction := Vector2.RIGHT
 var current_speed = 1
@@ -27,16 +27,19 @@ func _process(delta):
 	position += direction * delta * current_speed * 350
 	$Dev.text = str(player_bullet)
 	
-func affect(victim:Node):
-	victim.health -= damage
+func affect(victim:Object):
+	var calc_damage = damage
 	if player_bullet:
 		victim.latest_shooter = shooter
+		var dist = victim.position.distance_to(shooter.position)
+		calc_damage = 10-(snapped(dist,100)/200)
 #		victim.get_knockback(direction,knockback)
 	for b in get_children():
 		if b.is_in_group("buff"):
 			remove_child(b)
 			victim.add_child(b)
 			b.activate()
+	victim.health -= calc_damage
 	
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	Global.kill(self)

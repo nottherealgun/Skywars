@@ -1,13 +1,13 @@
 extends Control
 
-var boss : Node
+var boss : Object
 
 func _process(_delta):
 	if is_instance_valid(boss):
 		$BarProgress.value = (boss.health*1000)/boss.max_health
 		$BossHealth.text = str(clampf(boss.health,0,boss.max_health))+"/"+ str(boss.max_health)
 		
-func set_boss(new_boss:Node):
+func set_boss(new_boss:Object):
 	boss = new_boss
 	boss.died.connect(self.boss_died)
 	$BossName.text = "[center][shake]"+boss.display_name

@@ -15,7 +15,7 @@ func _ready():
 	$"../Splashscreen/AnimationPlayer".play("splashscreen")
 	if skip_splashscreen:
 		$"../Splashscreen/AnimationPlayer".seek(9.5)
-	call_deferred("start_game","darwin")
+#	call_deferred("start_game","darwin")
 
 func _input(event):
 	if Input.is_key_pressed(KEY_SPACE):
@@ -36,6 +36,7 @@ func button_pressed(button:String):
 		"credits":
 			$AnimationPlayer.play("credits")
 			$Credits.reset_autoscroll()
+			
 		"quit":
 			get_tree().quit()
 		
@@ -46,13 +47,14 @@ func button_pressed(button:String):
 			$AnimationPlayer.play("credits_back")
 		
 func start_game(character:String):
-	hide()
 	var new_player = load("res://players/player.tscn").instantiate()
 	new_player.character = character.to_lower()
 	Global.Main.add_child(new_player)
 	Global.active_players.append(new_player)
-	Global.RNG.set_seed(int("test"))
+#	Global.RNG.set_seed(int("test"))
 	GameManager._game_start()
 	Global.build_lobby()
+	await Global.built_level
 	$AnimationPlayer.play("opening")
+	hide()
 	

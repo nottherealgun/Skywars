@@ -123,3 +123,5 @@ scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("3_d00gb")
 
 [node name="Drop" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
+bus = &"SFX"

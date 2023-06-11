@@ -206,9 +206,9 @@ func _injured_effect():
 	Input.start_joy_vibration(player_id-1,1,0,0.2)
 	
 	injury_tween = create_tween().set_loops(2).bind_node(self)
-	injury_tween.tween_property(sprite,"modulate",Color.WHITE,0.25).from(Color.TRANSPARENT)
+	injury_tween.tween_property(sprite,"modulate",Color.WHITE,0.2).from(Color.TRANSPARENT)
 
-func get_hurt(by:Node):
+func get_hurt(by:Object):
 	if !iframed:
 		iframed = true
 		by.affect(self)

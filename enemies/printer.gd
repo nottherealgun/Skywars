@@ -61,7 +61,7 @@ func _move_update(delta):
 				allies_vec += (position.direction_to(ally.position)*50)/ally.position.distance_to(position)
 		position += (move_vec-allies_vec) * speed * delta * 50
 
-func get_hurt(by:Node):
+func get_hurt(by:Object):
 	if (awoken and state == States.IDLE) or (state == States.ATTACKING):
 		super(by)
 

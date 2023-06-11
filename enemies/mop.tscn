@@ -343,7 +343,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cq0oo"]
-size = Vector2(54, 56)
+size = Vector2(54, 69)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_utfun"]
 radius = 448.018
@@ -355,12 +355,18 @@ radius = 87.9659
 script = ExtResource("2_bjrgk")
 speed = 2
 
-[node name="Sprite" parent="." index="1"]
+[node name="CollisionShape" parent="." index="0"]
+position = Vector2(0, 29)
+
+[node name="Sprite" parent="." index="2"]
+position = Vector2(0, 41)
 sprite_frames = SubResource("SpriteFrames_j0105")
 animation = &"static"
 autoplay = "static"
+offset = Vector2(0, -16.4)
 
 [node name="HitboxShape" parent="Hitbox" index="0"]
+position = Vector2(0, 6.5)
 shape = SubResource("RectangleShape2D_cq0oo")
 
 [node name="PlayerDetectShape" parent="PlayerDetect" index="0"]
@@ -369,14 +375,14 @@ shape = SubResource("CircleShape2D_utfun")
 [node name="AllyDetectShape" parent="AllyDetect" index="0"]
 shape = SubResource("CircleShape2D_ab1t4")
 
-[node name="PlayerViewRay" parent="." index="8"]
+[node name="PlayerViewRay" parent="." index="7"]
 visible = false
 
-[node name="Timer" type="Timer" parent="." index="9"]
+[node name="Timer" type="Timer" parent="." index="8"]
 wait_time = 3.0
 one_shot = true
 
-[node name="Shadow" type="Sprite2D" parent="." index="10"]
+[node name="Shadow" type="Sprite2D" parent="." index="9"]
 z_index = -1
 position = Vector2(0, 31)
 scale = Vector2(4, 4)

@@ -36,7 +36,7 @@ func dupe():
 		child.master = true
 		child.dupe()
 
-func affect(victim:Node):
+func affect(victim:Object):
 	super(victim)
 
 func _on_sprite_animation_finished():

@@ -6,3 +6,9 @@ var tween : Tween
 func reset_autoscroll():
 	tween = create_tween()
 	tween.tween_property(scrollbar,"value",scrollbar.max_value-1080,30).from(0)
+
+func _input(event):
+	if Input.is_action_pressed("scroll"):
+		if tween and tween.is_running():
+			tween.stop()
+		

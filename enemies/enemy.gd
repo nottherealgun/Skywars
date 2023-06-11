@@ -3,17 +3,17 @@ class_name Enemy extends CharacterBody2D
 @export_placeholder("enemy_name") var display_name = ""
 @export var max_health = 50
 @onready var health = max_health : set = _set_health
-@export var speed = 1
-@export var damage = 10
+@export var speed := 1
+@export var damage := 10
 
-@export var level = 1
-@export var points = 1
-var latest_shooter : Node
+@export var level := 0
+@export var points := 1
+var latest_shooter : Object
 
 var move_vec := Vector2.ZERO
 
 var targets_in_range = []
-var target : Node
+var target : Object
 
 var DEFAULT = {}
 
@@ -77,7 +77,7 @@ func _set_health(new_val):
 var allies = []
 
 var og_scale = scale
-func get_hurt(by:Node):
+func get_hurt(by:Object):
 	by.affect(self)
 	if by.is_in_group("projectile"):
 		

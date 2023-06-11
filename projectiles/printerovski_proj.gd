@@ -35,5 +35,5 @@ func _process(_delta):
 #		$Body.monitorable = false
 	$Body.monitorable = ($Body.position.y > -110.0)
 
-func affect(victim:Node):
+func affect(victim:Object):
 	victim.health -= damage

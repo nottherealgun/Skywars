@@ -5,6 +5,7 @@ var state = States.IDLE
 var awoken = false
 var range = 200
 var shoot_speed = 1
+var t : Tween
 
 func _ready():
 	super()
@@ -45,17 +46,19 @@ func _physics_process(delta):
 				if $Timer.is_stopped():
 					$Sprite.frame = 0
 					$Sprite.play("attack")
-					var t = create_tween().set_trans(Tween.TRANS_CUBIC)
+					t = create_tween().set_trans(Tween.TRANS_CUBIC)
 					t.tween_property(self,"position",strafepoint,1.0)
 					$Timer.start()
 				else:
 					if !$Sprite.is_playing():
 						$Sprite.play("idle")
-					var vec = position.direction_to(strafepoint)
+					var vec = position.direction_to(strafepoint)*5
 					if move_and_collide(vec,true):
-						change_state(States.IDLE)
+						if t:
+							t.stop()
+						change_state(States.CHASING)
 
-func affect(victim:Node):
+func affect(victim:Object):
 	victim.health-=damage
 
 func change_state(new_state):
@@ -84,7 +87,7 @@ func _move_update(delta):
 				allies_vec += (position.direction_to(ally.position)*50)/ally.position.distance_to(position)
 		move_and_collide((move_vec-allies_vec) * speed * delta * 50)
 
-func get_hurt(by:Node):
+func get_hurt(by:Object):
 	if awoken:
 		super(by)
 

@@ -150,24 +150,22 @@ func player_killed(player):
 
 func entity_killed(entity):
 	var active_enemies = []
-	for e in Global.active_entities:
+	for e in Global.current_map[1].get_meta("entities"):
 		if !is_instance_valid(e):
 			Global.active_entities.erase(e)
 		elif e.is_in_group("enemy"):
 			active_enemies.append(e)
 	
 	if active_enemies.size() == 0:
-		if entity.is_in_group("enemy"):
-			Global.music_play("lobby")
+		Global.music_build_update(Global.current_map)
 
-func boss_encounter(boss:Node):
+func boss_encounter(boss:Object):
 	boss_encountered = true
 	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(cam,"position",boss.position,3.0).from(boss.position+Vector2(0,1000))
 #	tween.chain().tween_property(cam,"zoom",Vector2.ONE*2.5,1.0).from(Vector2(2,2)).set_trans(Tween.TRANS_ELASTIC)
 #	tween.chain().tween_property(cam,"zoom",Vector2.ONE*3,6.0).from(Vector2(2.5,2.5)).set_trans(Tween.TRANS_LINEAR)
 #	tween.chain().tween_property(cam,"zoom",Vector2.ONE*2,0.5).from(Vector2(4,4)).set_delay(2.0)
-	
 	await boss.started
 	boss_encountered = false
 

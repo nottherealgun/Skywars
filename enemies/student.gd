@@ -35,7 +35,7 @@ func _physics_process(delta):
 				target.get_hurt(self)
 				$Timer.start()
 
-func affect(victim:Node):
+func affect(victim:Object):
 	victim.health -= damage
 #	victim.get_knockback(position.direction_to(victim.position),knockback)
 

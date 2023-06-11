@@ -12,7 +12,7 @@
 size = Vector2(40, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2i4hs"]
-size = Vector2(40, 24)
+size = Vector2(40, 52)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5rio8"]
 radius = 160.05
@@ -64,7 +64,7 @@ shape = SubResource("RectangleShape2D_oscn4")
 collision_mask = 3
 
 [node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(0, 40)
+position = Vector2(0, 26)
 shape = SubResource("RectangleShape2D_2i4hs")
 
 [node name="EnemyDetect" type="Area2D" parent="."]

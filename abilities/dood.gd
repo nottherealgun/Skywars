@@ -12,14 +12,14 @@ var DEFAULT = {
 }
 
 var move_vec := Vector2.ZERO
-var master : Node
+var master : Object
 var min_master_dist = 100
 var shot = false
 
 enum STATES {IDLE,FOLLOWING,ATTACKING,DEATH}
 var state = STATES.IDLE
 var targets_in_range = [] as Array
-var target : Node
+var target : Object
 
 var allies = []
 var last_bullet : Object

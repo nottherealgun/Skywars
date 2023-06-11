@@ -18,12 +18,12 @@ var DEFAULT = {
 
 @export var level = 1
 @export var points = 100
-var latest_shooter : Node
+var latest_shooter : Object
 
 var move_vec := Vector2.ZERO
 
 var targets_in_range = []
-var target : Node
+var target : Object
 
 enum STATES {TRANSFORM,IDLE,MOVING,RELOADING,ATTACK1,ATTACK2,FLYING,FALLING,DEATH}
 var state = STATES.TRANSFORM
@@ -64,6 +64,7 @@ func _physics_process(delta):
 		for p in Global.active_players:
 			if !p.fainted:
 				target = p
+				break
 			
 	if !targets_in_range.is_empty():
 #			target = targets_in_range[0]
@@ -104,12 +105,15 @@ func _physics_process(delta):
 			
 		
 func change_state(new_state):
-#	print("CHANGED STATE TO: "+STATES.keys()[new_state])
+	if !target and state != STATES.IDLE:
+		new_state = STATES.IDLE
+		
 	match state:
 		STATES.TRANSFORM:
 			emit_signal("started")
 		STATES.MOVING:
 			$Pupil.hide()
+			$Walk.stop()
 
 	state = new_state
 	match state:
@@ -119,6 +123,7 @@ func change_state(new_state):
 		STATES.MOVING:
 			$Pupil.show()
 			$AnimatedSprite.play("move")
+			$Walk.play()
 			var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
 			tween.tween_property(self,"speed_modifier",2.0,2.0).from(0.1)
 			
@@ -148,6 +153,7 @@ func change_state(new_state):
 			change_state(STATES.RELOADING)
 			
 		STATES.ATTACK2:
+			$Fly.play()
 			$AnimatedSprite.play("jump")
 			$Hitbox.monitoring = false
 			await $AnimatedSprite.animation_finished
@@ -190,6 +196,7 @@ func change_state(new_state):
 		
 		STATES.DEATH:
 			$AnimatedSprite.play("death")
+			$Death.play()
 			emit_signal("died")
 			await $AnimatedSprite.animation_finished
 			Global.kill(self)
@@ -202,7 +209,7 @@ func _set_health(new_val):
 
 var allies = []
 
-func get_hurt(by:Node):
+func get_hurt(by:Object):
 	by.affect(self)
 	if by.is_in_group("projectile"):
 		Global.kill(by)

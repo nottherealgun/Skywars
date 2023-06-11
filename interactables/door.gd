@@ -12,7 +12,7 @@ const facing_pos = [Vector2(0,-1),Vector2(0,1),Vector2(-1,0),Vector2(1,0)]
 var facing_vec = facing_pos[0]
 var enterpoint := Vector2.ZERO
 var locked = false
-var connected_door : Node
+var connected_door : Object
 var entrance = false
 var in_map : Array
 

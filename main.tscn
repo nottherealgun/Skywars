@@ -254,20 +254,6 @@ _data = {
 "default": SubResource("Animation_aowxi")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ys8be"]
-shader = ExtResource("23_jl8kg")
-shader_parameter/blur_amount = 0.0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qojfl"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3eo5v"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2vqn0"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_luix7"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ghjbs"]
-
 [sub_resource type="Shader" id="Shader_4a7de"]
 code = "shader_type canvas_item;
 
@@ -1020,6 +1006,10 @@ _data = {
 "options_back": SubResource("Animation_60gyb")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ys8be"]
+shader = ExtResource("23_jl8kg")
+shader_parameter/blur_amount = 0.0
+
 [sub_resource type="Animation" id="Animation_jjgmq"]
 length = 0.001
 tracks/0/type = "value"
@@ -1071,6 +1061,16 @@ _data = {
 "enter": SubResource("Animation_qx1tk"),
 "exit": SubResource("Animation_qr1ik")
 }
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qojfl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3eo5v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2vqn0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_luix7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ghjbs"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wwb3"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -1275,7 +1275,7 @@ tracks/4/keys = {
 }
 tracks/5/type = "value"
 tracks/5/imported = false
-tracks/5/enabled = true
+tracks/5/enabled = false
 tracks/5/path = NodePath("AudioStreamPlayer:playing")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
@@ -2778,181 +2778,6 @@ Mouse Right Click to Equip/Consume.
 Tab to Open Inventory."
 horizontal_alignment = 2
 
-[node name="PauseMenu" type="Control" parent="GUI"]
-process_mode = 3
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-script = ExtResource("23_yhhpu")
-metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
-
-[node name="Blur" type="ColorRect" parent="GUI/PauseMenu"]
-material = SubResource("ShaderMaterial_ys8be")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_lock_ = true
-
-[node name="Ipad" type="TextureRect" parent="GUI/PauseMenu"]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.517
-anchor_right = 0.5
-anchor_bottom = 0.517
-offset_left = -896.0
-offset_top = -466.36
-offset_right = 896.0
-offset_bottom = 465.64
-grow_horizontal = 0
-grow_vertical = 0
-texture = ExtResource("23_qefvt")
-
-[node name="Button1" type="TextureRect" parent="GUI/PauseMenu"]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.533
-anchor_right = 0.5
-anchor_bottom = 0.533
-offset_left = -616.0
-offset_top = -367.64
-offset_bottom = 0.359924
-pivot_offset = Vector2(304, 176)
-texture = ExtResource("25_yffer")
-stretch_mode = 5
-
-[node name="Button1" type="Button" parent="GUI/PauseMenu/Button1"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 181.0
-offset_top = 58.0
-offset_right = -193.0
-offset_bottom = -69.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_qojfl")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_3eo5v")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_2vqn0")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_luix7")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_ghjbs")
-
-[node name="Button2" type="TextureRect" parent="GUI/PauseMenu"]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.533
-anchor_right = 0.5
-anchor_bottom = 0.533
-offset_left = 24.0
-offset_top = -367.64
-offset_right = 616.0
-offset_bottom = 0.359924
-pivot_offset = Vector2(291, 179)
-texture = ExtResource("26_diu8h")
-stretch_mode = 5
-
-[node name="Button2" type="Button" parent="GUI/PauseMenu/Button2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 168.0
-offset_top = 58.0
-offset_right = -182.0
-offset_bottom = -69.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_qojfl")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_3eo5v")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_2vqn0")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_luix7")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_ghjbs")
-
-[node name="Button3" type="TextureRect" parent="GUI/PauseMenu"]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.487
-anchor_top = 0.511
-anchor_right = 0.487
-anchor_bottom = 0.511
-offset_left = -591.04
-offset_top = 0.119934
-offset_right = 0.959961
-offset_bottom = 368.12
-pivot_offset = Vector2(302, 178)
-texture = ExtResource("27_atwa6")
-stretch_mode = 5
-
-[node name="Button3" type="Button" parent="GUI/PauseMenu/Button3"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 181.0
-offset_top = 56.0
-offset_right = -169.0
-offset_bottom = -69.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_qojfl")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_3eo5v")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_2vqn0")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_luix7")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_ghjbs")
-
-[node name="Button4" type="TextureRect" parent="GUI/PauseMenu"]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.487
-anchor_top = 0.511
-anchor_right = 0.487
-anchor_bottom = 0.511
-offset_left = 0.959961
-offset_top = 0.119934
-offset_right = 640.96
-offset_bottom = 368.12
-pivot_offset = Vector2(314, 184)
-texture = ExtResource("28_04hgl")
-stretch_mode = 5
-
-[node name="Button4" type="Button" parent="GUI/PauseMenu/Button4"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 193.0
-offset_top = 57.0
-offset_right = -182.0
-offset_bottom = -69.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_qojfl")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_3eo5v")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_2vqn0")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_luix7")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_ghjbs")
-
 [node name="MainMenu" type="Control" parent="GUI"]
 layout_mode = 3
 anchors_preset = 15
@@ -2973,10 +2798,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -616.0
-offset_top = -1000.0
-offset_right = 2776.0
-offset_bottom = 3054.0
+offset_left = -1576.0
+offset_top = -1540.0
+offset_right = 1816.0
+offset_bottom = 2514.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("35_u44vp")
@@ -2991,10 +2816,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 175.0
-offset_top = -330.0
-offset_right = 1745.0
-offset_bottom = -57.0081
+offset_left = -785.0
+offset_top = -870.0
+offset_right = 785.0
+offset_bottom = -597.008
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.00016, 1.00016)
@@ -3022,10 +2847,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 394.5
-offset_top = -112.0
-offset_right = 1525.5
-offset_bottom = -2.00098
+offset_left = -565.5
+offset_top = -652.0
+offset_right = 565.5
+offset_bottom = -542.001
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("39_jmqov")
@@ -3039,9 +2864,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = 1080.0
-offset_right = 477.0
-offset_bottom = 1401.06
+offset_left = -960.0
+offset_top = 540.0
+offset_right = -483.0
+offset_bottom = 861.06
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -3057,10 +2883,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 481.0
-offset_top = 1080.0
-offset_right = 958.002
-offset_bottom = 1401.03
+offset_left = -479.0
+offset_top = 540.0
+offset_right = -1.99805
+offset_bottom = 861.03
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -3076,10 +2902,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 962.0
-offset_top = 1080.0
-offset_right = 1439.0
-offset_bottom = 1401.0
+offset_left = 2.0
+offset_top = 540.0
+offset_right = 479.0
+offset_bottom = 861.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -3095,10 +2921,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 1443.0
-offset_top = 1080.0
-offset_right = 1920.0
-offset_bottom = 1401.01
+offset_left = 483.0
+offset_top = 540.0
+offset_right = 960.0
+offset_bottom = 861.01
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -3121,8 +2947,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 1080.0
-offset_right = 34560.0
-offset_bottom = 20520.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("53_6ipk1")
@@ -3154,8 +2979,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 1080.0
-offset_right = 34560.0
-offset_bottom = 20520.0
+offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("56_ldiwf")
@@ -3367,17 +3191,17 @@ metadata/_edit_lock_ = true
 [node name="Ipad" type="TextureRect" parent="GUI/ScoreboardMenu"]
 texture_filter = 1
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 0.517
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.517
-offset_left = 64.0
-offset_top = 1080.0
-offset_right = 1856.0
-offset_bottom = 2012.03
-grow_horizontal = 0
-grow_vertical = 0
+anchor_bottom = 0.5
+offset_left = -896.0
+offset_top = 540.0
+offset_right = 896.0
+offset_bottom = 1472.03
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("23_qefvt")
 
@@ -3389,6 +3213,181 @@ one_shot = true
 libraries = {
 "": SubResource("AnimationLibrary_eqnug")
 }
+
+[node name="PauseMenu" type="Control" parent="GUI"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("23_yhhpu")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Blur" type="ColorRect" parent="GUI/PauseMenu"]
+material = SubResource("ShaderMaterial_ys8be")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Ipad" type="TextureRect" parent="GUI/PauseMenu"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.517
+anchor_right = 0.5
+anchor_bottom = 0.517
+offset_left = -896.0
+offset_top = -466.36
+offset_right = 896.0
+offset_bottom = 465.64
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("23_qefvt")
+
+[node name="Button1" type="TextureRect" parent="GUI/PauseMenu"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.533
+anchor_right = 0.5
+anchor_bottom = 0.533
+offset_left = -616.0
+offset_top = -367.64
+offset_bottom = 0.359924
+pivot_offset = Vector2(304, 176)
+texture = ExtResource("25_yffer")
+stretch_mode = 5
+
+[node name="Button1" type="Button" parent="GUI/PauseMenu/Button1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 181.0
+offset_top = 58.0
+offset_right = -193.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qojfl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3eo5v")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2vqn0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_luix7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ghjbs")
+
+[node name="Button2" type="TextureRect" parent="GUI/PauseMenu"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.533
+anchor_right = 0.5
+anchor_bottom = 0.533
+offset_left = 24.0
+offset_top = -367.64
+offset_right = 616.0
+offset_bottom = 0.359924
+pivot_offset = Vector2(291, 179)
+texture = ExtResource("26_diu8h")
+stretch_mode = 5
+
+[node name="Button2" type="Button" parent="GUI/PauseMenu/Button2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 168.0
+offset_top = 58.0
+offset_right = -182.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qojfl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3eo5v")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2vqn0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_luix7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ghjbs")
+
+[node name="Button3" type="TextureRect" parent="GUI/PauseMenu"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.487
+anchor_top = 0.511
+anchor_right = 0.487
+anchor_bottom = 0.511
+offset_left = -591.04
+offset_top = 0.119934
+offset_right = 0.959961
+offset_bottom = 368.12
+pivot_offset = Vector2(302, 178)
+texture = ExtResource("27_atwa6")
+stretch_mode = 5
+
+[node name="Button3" type="Button" parent="GUI/PauseMenu/Button3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 181.0
+offset_top = 56.0
+offset_right = -169.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qojfl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3eo5v")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2vqn0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_luix7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ghjbs")
+
+[node name="Button4" type="TextureRect" parent="GUI/PauseMenu"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.487
+anchor_top = 0.511
+anchor_right = 0.487
+anchor_bottom = 0.511
+offset_left = 0.959961
+offset_top = 0.119934
+offset_right = 640.96
+offset_bottom = 368.12
+pivot_offset = Vector2(314, 184)
+texture = ExtResource("28_04hgl")
+stretch_mode = 5
+
+[node name="Button4" type="Button" parent="GUI/PauseMenu/Button4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 193.0
+offset_top = 57.0
+offset_right = -182.0
+offset_bottom = -69.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qojfl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3eo5v")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2vqn0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_luix7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ghjbs")
 
 [node name="CharacterSelection" type="Control" parent="GUI"]
 visible = false
@@ -3462,13 +3461,13 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 1077.0
-offset_right = 7680.0
-offset_bottom = 5397.0
+offset_bottom = 1077.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("35_0fttp")
 metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
 
 [node name="Blur" type="ColorRect" parent="GUI/SettingsMenu"]
 visible = false
@@ -3666,10 +3665,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 330.0
-offset_top = 824.0
-offset_right = 1590.0
-offset_bottom = 1032.0
+offset_left = -630.0
+offset_top = 284.0
+offset_right = 630.0
+offset_bottom = 492.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(653.5, 52)
@@ -3686,10 +3685,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 554.0
-offset_top = 92.0
-offset_right = 1366.0
-offset_bottom = 804.997
+offset_left = -406.0
+offset_top = -448.0
+offset_right = 406.0
+offset_bottom = 264.997
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1e-05, 1e-05)
@@ -3758,6 +3757,7 @@ metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="GUI/PlayerInventory/Prev" to="GUI/PlayerInventory" method="_on_prev_pressed"]
 [connection signal="pressed" from="GUI/PlayerInventory/Next" to="GUI/PlayerInventory" method="_on_next_pressed"]
+[connection signal="timeout" from="GUI/ScoreboardMenu/Timer" to="GUI/ScoreboardMenu" method="_on_timer_timeout"]
 [connection signal="mouse_entered" from="GUI/PauseMenu/Button1/Button1" to="GUI/PauseMenu" method="_on_button_1_mouse_entered"]
 [connection signal="mouse_exited" from="GUI/PauseMenu/Button1/Button1" to="GUI/PauseMenu" method="_on_button_1_mouse_exited"]
 [connection signal="pressed" from="GUI/PauseMenu/Button1/Button1" to="GUI/PauseMenu" method="_on_button_1_pressed"]
@@ -3770,6 +3770,5 @@ metadata/_edit_lock_ = true
 [connection signal="mouse_entered" from="GUI/PauseMenu/Button4/Button4" to="GUI/PauseMenu" method="_on_button_4_mouse_entered"]
 [connection signal="mouse_exited" from="GUI/PauseMenu/Button4/Button4" to="GUI/PauseMenu" method="_on_button_4_mouse_exited"]
 [connection signal="pressed" from="GUI/PauseMenu/Button4/Button4" to="GUI/PauseMenu" method="_on_button_4_pressed"]
-[connection signal="timeout" from="GUI/ScoreboardMenu/Timer" to="GUI/ScoreboardMenu" method="_on_timer_timeout"]
 [connection signal="pressed" from="GUI/CharacterSelection/Button" to="GUI/CharacterSelection" method="_on_button_pressed"]
 [connection signal="pressed" from="GUI/SettingsMenu/Back" to="GUI/SettingsMenu" method="_on_back_pressed"]
