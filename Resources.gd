@@ -702,7 +702,7 @@ func build_stage(): # Build first game stage (endless mode)
 			
 	recursive_room_build(current_map)
 	build_ends()
-#	populate()
+	populate()
 	lock_checks()
 	
 	uncleared_rooms_arr = gen_maps
