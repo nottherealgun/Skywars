@@ -22,6 +22,7 @@ var in_map : Array
 @export var oneshot := false
 
 @export var boss := ""
+var is_boss_door = false : set = _set_is_boss_door
 
 var players_in_vicinity = []
 
@@ -29,6 +30,17 @@ func _get(property):
 	match property:
 		"facing_vec":
 			return facing_pos[facing_direction_idx]
+
+func _set_is_boss_door(val):
+	is_boss_door = val
+	if is_boss_door:
+		$BossParticles.emitting = true
+
+func lock_check():
+	if !connected_door:
+		$Sprite.sprite_frames = load("res://interactables/door_barricade.tres")
+		if facing_direction_idx == 2 and !front_facing:
+			$Sprite.flip_h = true
 
 func _process(delta):
 #	if connected_door:
@@ -46,7 +58,6 @@ func _process(delta):
 	$Tall.disabled = front_facing
 
 func enter_room(player):
-	
 	locked = false
 	if in_map[1].has_meta("entities"):
 		for e in in_map[1].get_meta("entities"):
@@ -60,13 +71,13 @@ func enter_room(player):
 		Global.build_stage()
 		GameManager.levels_cleared += 1
 	else:
-		if connected_door and !locked:
+		if connected_door and is_instance_valid(connected_door) and !locked:
 			$Sprite.play()
 			await $Sprite.animation_finished
 			Global.exit_from_this_door(self,connected_door)
 		else:
 			if !connected_door:
-				Global.Notifier.display("Door is locked.")
+				Global.Notifier.display("You cannot open this door.")
 			elif locked:
 				Global.Notifier.display("More enemies nearby...")
 			var t = create_tween().set_loops(3)

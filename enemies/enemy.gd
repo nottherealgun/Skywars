@@ -77,15 +77,16 @@ func _set_health(new_val):
 var allies = []
 
 var og_scale = scale
+
 func get_hurt(by:Object):
 	by.affect(self)
 	if by.is_in_group("projectile"):
-		
 		Global.kill(by)
 #	$AnimationPlayer.stop()
 #	$AnimationPlayer.play("injured")
 	var t = create_tween().set_trans(Tween.TRANS_CUBIC)
 	t.tween_property(self,"scale",og_scale,0.5).from(og_scale*4/5)
+	t.parallel().tween_property(get_node("Sprite"),"modulate",Color.WHITE,0.2).from(Color.RED)
 
 func _on_hitbox_area_entered(area):
 	if area.is_in_group("projectile"):

@@ -5,7 +5,7 @@ var child
 var shot = false
 
 func _ready():
-	$Vines.play()
+	$AudioManager.play("Vines")
 	dupe()
 
 func _process(delta):

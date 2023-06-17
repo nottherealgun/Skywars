@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bbv8t7mb52kv6"]
+[gd_scene load_steps=8 format=3 uid="uid://bbv8t7mb52kv6"]
 
 [ext_resource type="PackedScene" uid="uid://0anrpyccai4l" path="res://enemies/enemy.tscn" id="1_50q0j"]
 [ext_resource type="Script" path="res://PaperNest.gd" id="2_ewdaq"]
 [ext_resource type="Texture2D" uid="uid://fsk28vbw2yjn" path="res://enemies/paper_spawner.png" id="3_ojst1"]
+[ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://utility/shadow.png" id="4_ur3jd"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_446qh"]
 animations = [{
@@ -47,12 +48,16 @@ position = Vector2(0, 44)
 z_index = 1
 
 [node name="Sprite" parent="." index="2"]
-position = Vector2(9.09495e-13, -9.53674e-07)
+position = Vector2(0, 44)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_446qh")
+offset = Vector2(1.81899e-13, -8.8)
 
 [node name="HitboxShape" parent="Hitbox" index="0"]
 position = Vector2(0, 4)
+
+[node name="PlayerDetectShape" parent="PlayerDetect" index="0"]
+visible = false
 
 [node name="AllyDetectShape" parent="AllyDetect" index="0"]
 visible = false
@@ -71,5 +76,11 @@ libraries = {
 [node name="Timer" type="Timer" parent="." index="9"]
 wait_time = 7.5
 autostart = true
+
+[node name="Shadow" type="Sprite2D" parent="." index="10"]
+z_index = -1
+position = Vector2(0, 40)
+scale = Vector2(6.5, 10)
+texture = ExtResource("4_ur3jd")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

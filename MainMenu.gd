@@ -15,7 +15,6 @@ func _ready():
 	$"../Splashscreen/AnimationPlayer".play("splashscreen")
 	if skip_splashscreen:
 		$"../Splashscreen/AnimationPlayer".seek(9.5)
-#	call_deferred("start_game","darwin")
 
 func _input(event):
 	if Input.is_key_pressed(KEY_SPACE):

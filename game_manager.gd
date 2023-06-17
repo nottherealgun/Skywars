@@ -151,7 +151,7 @@ func player_killed(player):
 func entity_killed(entity):
 	var active_enemies = []
 	for e in Global.current_map[1].get_meta("entities"):
-		if !is_instance_valid(e):
+		if !is_instance_valid(e) or !e:
 			Global.active_entities.erase(e)
 		elif e.is_in_group("enemy"):
 			active_enemies.append(e)

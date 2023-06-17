@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://cy2cce8rq0vks"]
+[gd_scene load_steps=15 format=3 uid="uid://cy2cce8rq0vks"]
 
 [ext_resource type="Script" path="res://projectiles/printerovski_proj.gd" id="1_qhdrf"]
 [ext_resource type="Texture2D" uid="uid://b20vors8clxa6" path="res://enemies/doubleASS.png" id="2_2uhla"]
 [ext_resource type="Texture2D" uid="uid://qoo81ukju437" path="res://enemies/bossArtilleryIndicator.png" id="3_d00gb"]
+[ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://audio_manager.tscn" id="4_vw4sk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_blrns"]
 radius = 59.0
@@ -122,6 +123,8 @@ position = Vector2(0, 12)
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("3_d00gb")
 
-[node name="Drop" type="AudioStreamPlayer" parent="."]
+[node name="AudioManager" parent="." instance=ExtResource("4_vw4sk")]
+
+[node name="Drop" type="AudioStreamPlayer" parent="AudioManager"]
 volume_db = -15.0
 bus = &"SFX"

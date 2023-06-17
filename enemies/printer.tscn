@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://mk0d1skckp7j" path="res://enemies/printerAttackSS.png" id="3_wgc6c"]
 [ext_resource type="Texture2D" uid="uid://bth4bvxjoej3q" path="res://enemies/printerIdleSS.png" id="4_xxh4f"]
 [ext_resource type="Texture2D" uid="uid://cotyq4yqnoypn" path="res://enemies/printerTransformSS.png" id="5_vgk5h"]
+[ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://utility/shadow.png" id="6_30iro"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gdykf"]
 size = Vector2(72, 22)
@@ -245,8 +246,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ana4n"]
 size = Vector2(72, 72)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hd58e"]
-
 [node name="Printer" instance=ExtResource("1_1ynln")]
 script = ExtResource("2_owcnx")
 display_name = "MUIC Printer"
@@ -256,7 +255,11 @@ speed = 3
 position = Vector2(4, 39)
 shape = SubResource("RectangleShape2D_gdykf")
 
-[node name="Sprite" parent="." index="1"]
+[node name="Dev" parent="." index="1"]
+visible = true
+z_index = 1
+
+[node name="Sprite" parent="." index="2"]
 position = Vector2(0, 48)
 sprite_frames = SubResource("SpriteFrames_o5emk")
 animation = &"static"
@@ -270,17 +273,13 @@ shape = SubResource("RectangleShape2D_ana4n")
 [node name="Timer" type="Timer" parent="." index="4"]
 one_shot = true
 
-[node name="NameTag" parent="." index="6"]
+[node name="NameTag" parent="." index="7"]
 offset_top = -87.0
 offset_bottom = -44.0
 text = "MUIC PRINTER"
-
-[node name="Dev" parent="." index="8"]
-visible = true
-z_index = 1
 
 [node name="Shadow" type="Sprite2D" parent="." index="9"]
 z_index = -1
 position = Vector2(0, 45)
 scale = Vector2(6, 4.875)
-texture = SubResource("CompressedTexture2D_hd58e")
+texture = ExtResource("6_30iro")

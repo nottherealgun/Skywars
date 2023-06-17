@@ -1,6 +1,6 @@
 extends CharacterBody2D
 signal started()
-signal died()
+signal died(boss)
 
 const display_name = "Printerovski 3000"
 const display_desc = "MUIC Printer / Bane of Physical Copies"
@@ -34,7 +34,7 @@ func _ready():
 	tween.tween_property($AnimatedSprite,"position:y",128.0,1.0).from(-500.0).set_delay(4.0)
 	tween.chain().tween_callback($Shockwave.play.bind("default"))
 	tween.chain().tween_callback($AnimatedSprite.play.bind("transform"))
-	tween.parallel().tween_callback($Transform.play)
+	tween.parallel().tween_callback($AudioManager.play.bind("Transform"))
 	
 	await $AnimatedSprite.animation_finished
 #	tween = create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUINT)
@@ -113,7 +113,7 @@ func change_state(new_state):
 			emit_signal("started")
 		STATES.MOVING:
 			$Pupil.hide()
-			$Walk.stop()
+			$AudioManager.stop("Walk")
 
 	state = new_state
 	match state:
@@ -123,7 +123,7 @@ func change_state(new_state):
 		STATES.MOVING:
 			$Pupil.show()
 			$AnimatedSprite.play("move")
-			$Walk.play()
+			$AudioManager.play("Walk")
 			var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
 			tween.tween_property(self,"speed_modifier",2.0,2.0).from(0.1)
 			
@@ -139,21 +139,20 @@ func change_state(new_state):
 			if randi()%100 < 30:
 				summon_nests()
 			for i in range(0,3):
-				
 				$AnimatedSprite.play("reload")
-				$Reload.play()
+				$AudioManager.play("Reload")
 				
 				await $AnimatedSprite.animation_finished
 			change_state(STATES.IDLE)
 			
 		STATES.ATTACK1:
 			$AnimatedSprite.play("artillery")
-			$Artillery.play()
+			$AudioManager.play("Artillery")
 			await $AnimatedSprite.animation_finished
 			change_state(STATES.RELOADING)
 			
 		STATES.ATTACK2:
-			$Fly.play()
+			$AudioManager.play("Fly")
 			$AnimatedSprite.play("jump")
 			$Hitbox.monitoring = false
 			await $AnimatedSprite.animation_finished
@@ -178,7 +177,7 @@ func change_state(new_state):
 			
 			$AnimatedSprite.play("crash")
 			$Shockwave.play("default")
-			$Crash.play()
+			$AudioManager.play("Crash")
 			Global.screen_shake(16)
 			for i in 2:
 				var minion = Global.spawn_enemy("printer",position)
@@ -196,8 +195,8 @@ func change_state(new_state):
 		
 		STATES.DEATH:
 			$AnimatedSprite.play("death")
-			$Death.play()
-			emit_signal("died")
+			$AudioManager.play("Death")
+			emit_signal("died",self)
 			await $AnimatedSprite.animation_finished
 			Global.kill(self)
 
@@ -283,7 +282,7 @@ func summon_nests():
 	var map = room_data[1]
 	for i in 3:
 		var nest = Global.spawn_enemy("paper_nest",Global.get_rand_room_tile(map))
-
+	
 func _on_animated_sprite_frame_changed():
 	if state == STATES.ATTACK1:
 		var a = $AnimatedSprite
@@ -299,9 +298,9 @@ func _on_timer_timeout():
 			var r = randi_range(1,100)
 			if r in range(1,45):
 				change_state(STATES.MOVING)
-			elif r in range(45,90):
+			elif r in range(45,70):
 				change_state(STATES.ATTACK1)
-			elif r in range(90,100):
+			elif r in range(70,100):
 				change_state(STATES.ATTACK2)
 					
 		STATES.MOVING:

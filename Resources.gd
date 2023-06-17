@@ -21,7 +21,7 @@ var RNG = RandomNumberGenerator.new()
 
 var prev_map
 var current_room
-var current_map
+var current_map : set = _set_current_map
 
 var current_map_uninit
 var current_map_boss = ""
@@ -32,6 +32,16 @@ var uncleared_rooms_arr = []
 # Entities
 
 var active_entities = []
+
+func _set_current_map(val):
+	current_map = val
+	current_room = current_map[1]
+	var curr_map = current_map[2]
+	var rect = curr_map.get_used_rect() as Rect2i
+	
+#	if get_viewport().get_visible_rect().size.x > rect.size.x:
+#		Global.Cam.limit_left = rect.position.x*64
+#		Global.Cam.limit_right = current_room.position.x + rect.end.x*64
 
 func spawn_in(entity):
 	active_entities.append(entity)
@@ -73,7 +83,10 @@ func spawn_manual(entity_path:String,pos:Vector2):
 	return new_entity
 
 func kill(entity:Object,immediate=false):
-	if is_instance_valid(entity) and entity in active_entities:
+	while null in active_entities:
+		active_entities.erase(null)
+	
+	if is_instance_valid(entity) and entity in active_entities and entity != null:
 		emit_signal("enemy_killed",entity)
 		active_entities.erase(entity)
 		var tween = create_tween()
@@ -114,7 +127,12 @@ func spawn_boss(type:String,pos:Vector2):
 	active_entities.append(new_boss)
 	Main.add_child(new_boss)
 	Bossbar.set_boss(new_boss)
+	new_boss.died.connect(boss_died)
 	return new_boss
+
+func boss_died(boss:Object):
+	current_map[1].remove_meta("boss")
+	music_build_update(current_map)
 
 # Doors
 
@@ -589,7 +607,7 @@ func build_lobby():
 	
 	# Set level title name
 	current_map = [new_map,new_room,new_tilemap]
-	current_room = current_map[1]
+	current_room = new_room
 	
 	GUI.get_node("Title").text = "Aditayathorn Lobby"
 	
@@ -656,7 +674,7 @@ func build_stage(): # Build first game stage (endless mode)
 	LevelManager.clear_level()
 	
 	# Set level title name
-	current_map = build_room()
+	current_map = build_room(null,[2])
 	current_room = current_map[1]
 	
 	GUI.get_node("Title").text = "New Level Entered."
@@ -675,6 +693,8 @@ func build_stage(): # Build first game stage (endless mode)
 		if p.fainted:
 			p.revive()
 		p.position = spawn_poses[active_players.find(p)]
+		for m in p.minions:
+			m.position = p.position
 		p.transporting = false
 		p.y_sort_enabled = true
 		for m in p.minions:
@@ -682,7 +702,8 @@ func build_stage(): # Build first game stage (endless mode)
 			
 	recursive_room_build(current_map)
 	build_ends()
-	populate()
+#	populate()
+	lock_checks()
 	
 	uncleared_rooms_arr = gen_maps
 	
@@ -699,14 +720,19 @@ func build_stage(): # Build first game stage (endless mode)
 
 var has_treasure_room = false
 	
-func build_room(room_type=null):
+func build_room(room_type=null,exceptions=[]):
 	var rand_room_id : int
-	while rand_room_id in [null,0,1,6] or (has_treasure_room and rand_room_id == 2):
+	while rand_room_id in [null,0,1,6] or rand_room_id in exceptions:
 		rand_room_id = RNG.randi()%(Global.rooms.size()-1)
-		if rand_room_id == 2:
-			has_treasure_room = true
+		if rand_room_id == 2 and has_treasure_room:
+			rand_room_id = 0
+			continue
+		
 	if room_type:
 		rand_room_id = room_type
+	if rand_room_id == 2:
+		has_treasure_room = true
+		
 	var room_scene = load("res://rooms/"+Global.rooms[rand_room_id]["file"]).instantiate()
 	
 	var new_room = Node2D.new()
@@ -718,23 +744,24 @@ func build_room(room_type=null):
 	# Install map entities
 	var new_map = room_scene.duplicate()
 	current_map_uninit = new_map
-	var new_tilemap
-	
+	var new_tilemap : TileMap
+	var spawnpoint : Object
 	for entity in room_scene.get_children():
 		if is_instance_of(entity,Marker2D):
+			spawnpoint = entity
 			continue
 		if is_instance_of(entity,TileMap):
 			new_tilemap = entity
 		if entity.is_in_group("door"):
-			entity.in_map = [new_map,new_room,new_tilemap]
+			entity.in_map = [new_map,new_room,new_tilemap,spawnpoint]
 		room_scene.remove_child(entity)
 		active_entities.append(entity)
 		new_room.add_child(entity)
 	
-	new_room.set_meta("metadata",[new_map,new_room,new_tilemap])
+	new_room.set_meta("metadata",[new_map,new_room,new_tilemap,spawnpoint])
 	Main.add_child(new_room)
-	gen_maps.append([new_map,new_room,new_tilemap])
-	return [new_map,new_room,new_tilemap]
+	gen_maps.append([new_map,new_room,new_tilemap,spawnpoint])
+	return [new_map,new_room,new_tilemap,spawnpoint]
 
 func recursive_room_build(map:Array):
 	while len(gen_maps) < 5:
@@ -770,13 +797,18 @@ func populate():
 		var entities = []
 		for d in gen_dict.keys():
 			for i in gen_dict[d]:
-				var new
+				var new : Enemy
 				var ok = false
 				while !ok:
-					var pos
-					while pos == null or is_out_of_map(pos) or is_nan(pos.x) or is_nan(pos.y):
+					var pos : Vector2
+					var is_near_spawnpoint : bool = false
+					while pos == null or is_out_of_map(pos) or is_nan(pos.x) or is_nan(pos.y) or is_near_spawnpoint:
 						pos = get_rand_room_tile(map[1])
-					new = spawn_enemy(d,pos) as Enemy
+						is_near_spawnpoint = false
+						if pos.distance_to(map[3].position) <= 400:
+							is_near_spawnpoint = true
+							
+					new = spawn_enemy(d,pos)
 					ok = true
 					for j in 4:
 						if new.move_and_collide(Vector2.ONE.rotated(deg_to_rad(i*90)),true):
@@ -791,24 +823,56 @@ func build_ends():
 		for e in get_exits(m[1]): # Exits
 			if e.connected_door == null:
 				locked.append([m[1],e])
-	
-	var boss = locked[RNG.randi_range(0,len(locked)-1)]
-	while boss[0] == current_room:
-		boss = locked[RNG.randi_range(0,len(locked)-1)]
-	
+		
 	for l in locked:
-		var end
-		if l == boss:
-			end = build_room(6)
-			end[1].set_meta("boss",true)
-		else:
-			end = build_room()
+		var end = build_room()
 		var exit = get_exits(end[1])[RNG.randi_range(0,len(get_exits(end[1]))-1)]
 		exit.connected_door = l[1]
 		l[1].connected_door = exit
-#		for entity in end[1].get_children():
-#			entity.position += exit.facing_pos[exit.facing_direction_idx] * gen_maps.find(end) * 3000
 		end[1].position += exit.facing_pos[exit.facing_direction_idx] * gen_maps.find(end) * 3000
+	
+	for m in gen_maps: # Map,Room Sets
+		for e in get_exits(m[1]): # Exits
+			if e.connected_door == null and [m[1],e] not in locked:
+				locked.append([m[1],e])
+	
+	var avail = locked.duplicate()
+	for a in avail:
+		if a[0] == current_room:
+			avail.erase(a)
+			break
+			
+	var special_rooms = {
+		"boss":		null,
+	}
+	
+	for room_type in special_rooms.keys():
+		var room_data = special_rooms[room_type]
+		while room_data == null:
+			special_rooms[room_type] = avail[RNG.randi_range(0,len(avail)-1)]
+			room_data = special_rooms[room_type]
+			avail.erase(room_data)
+			
+		var l = room_data
+		
+		var end
+		match room_type:
+			"boss":
+				end = build_room(6)
+			
+		end[1].set_meta(room_type,true)
+		
+		var exit = get_exits(end[1])[RNG.randi_range(0,len(get_exits(end[1]))-1)]
+		exit.connected_door = l[1]
+		l[1].connected_door = exit
+		end[1].position += exit.facing_pos[exit.facing_direction_idx] * gen_maps.find(end) * 3000
+
+func lock_checks():
+	for m in gen_maps:
+		var room = m[1]
+		for d in room.get_children():
+			if d.is_in_group("door"):
+				d.lock_check()
 
 func get_rand_room_tile(room:Node2D):
 	var map = room.get_node("Map") as TileMap
@@ -854,8 +918,11 @@ func exit_from_this_door(enter_from:Object,exit_from:Object):
 			if !e.connected_door:
 				continue
 			if e.connected_door.in_map[1].has_meta("boss"):
-				e.get_node("Dev").text = "BOSS"
-				e.connected_door.get_node("Dev").text = "Next Level"
+#				e.get_node("Dev").text = "BOSS"
+				e.is_boss_door = true
+				e.get_node('Sprite').set_modulate(Color.RED)
+				e.connected_door.get_node('Sprite').set_modulate(Color.GREEN)
+#				e.connected_door.get_node("Dev").text = "Next Level"
 		
 	for p in active_players:
 		if p.fainted:
@@ -864,7 +931,7 @@ func exit_from_this_door(enter_from:Object,exit_from:Object):
 		p.transporting = false
 		p.y_sort_enabled = true
 		for m in p.minions:
-			active_entities.append(m)
+			m.position = p.position
 	current_map = exit_from.in_map
 	music_build_update(exit_from.in_map)
 	
@@ -982,21 +1049,31 @@ func use_ability(character:String,by:Object):
 		"darwin":2,
 		"gun":2,
 	}
+	var ok = true
+	
 	if by.brainpower <= 0 or by.brainpower < ability_price.get(character):
-		return
-	by.brainpower -= ability_price.get(character)
+		ok = false
+	
 	match character:
-		"darwin":# 3 6 1
-			var minion = spawn_from_ability(Global.pick_by_percentage({"dood":3,"super_dood":6,"wizard_dood":1}),by.position,by)
-			by.emit_signal("spawns_minion",minion)
-		"gun":
-			var aim_vec = by.position.direction_to(Main.get_global_mouse_position()+Vector2(0,by.mouse_aim_offset))
-			for i in 30:
-				var proj = Global.spawn_projectile(self,"gun_proj_1",by.position+Vector2(0,-by.mouse_aim_offset),aim_vec.normalized(),true)
-				await get_tree().create_timer(0.02).timeout
-				proj.t = create_tween().set_loops()
-				var deg = deg_to_rad(35*[-1,1].pick_random())
-				proj.t.tween_property(proj,"direction",aim_vec.rotated(deg),0.5)
-				proj.t.chain().tween_property(proj,"direction",aim_vec.rotated(deg_to_rad(randf_range(0,-10))),0.5)
-				proj.t.chain().tween_property(proj,"direction",aim_vec.rotated(deg*-1),0.5)
-				by.emit_signal("spawns_bullet",proj)
+		"darwin":
+			if by.minions.size() >= 3:
+				ok = false
+	
+	if ok:
+		by.brainpower -= ability_price.get(character)
+		match character:
+			"darwin":# 3 6 1
+				var minion = spawn_from_ability(Global.pick_by_percentage({"dood":3,"super_dood":6,"wizard_dood":1}),by.position,by)
+				by.emit_signal("spawns_minion",minion)
+			"gun":
+				var aim_vec = by.position.direction_to(Main.get_global_mouse_position()+Vector2(0,by.mouse_aim_offset))
+				for i in 30:
+					var proj = Global.spawn_projectile(by,"gun_proj_1",by.position+Vector2(0,-by.mouse_aim_offset),aim_vec.normalized(),true)
+					await get_tree().create_timer(0.02).timeout
+					proj.t = create_tween().set_loops()
+					var deg = deg_to_rad(35*[-1,1].pick_random())
+					proj.t.tween_property(proj,"direction",aim_vec.rotated(deg),0.5)
+					proj.t.chain().tween_property(proj,"direction",aim_vec.rotated(deg_to_rad(randf_range(0,-10))),0.5)
+					proj.t.chain().tween_property(proj,"direction",aim_vec.rotated(deg*-1),0.5)
+					by.emit_signal("spawns_bullet",proj)
+					

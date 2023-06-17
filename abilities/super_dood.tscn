@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://tmssw0cknnbk"]
+[gd_scene load_steps=55 format=3 uid="uid://tmssw0cknnbk"]
 
 [ext_resource type="Script" path="res://abilities/super_dood.gd" id="1_pqk2u"]
 [ext_resource type="Texture2D" uid="uid://isyt1d2ichjf" path="res://abilities/dood_sup_attack.png" id="2_1dqg7"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cvu0qikm8fwj0" path="res://abilities/dood_sup_idle.png" id="3_qej56"]
 [ext_resource type="Texture2D" uid="uid://ct7j8fjuybpuw" path="res://abilities/dood_sup_walk.png" id="4_d62jk"]
 [ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://utility/shadow.png" id="5_02ejf"]
+[ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://audio_manager.tscn" id="7_jbiyq"]
 [ext_resource type="AudioStream" uid="uid://fgdsuoei7o4q" path="res://sfx/sproutdude_superpunch.mp3" id="7_utbfo"]
 [ext_resource type="AudioStream" uid="uid://ci8lsmwanws7t" path="res://sfx/sproutdude_death.mp3" id="8_weg5k"]
 
@@ -425,13 +426,15 @@ visible = false
 points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)
 default_color = Color(0.635294, 0.396078, 0, 1)
 
-[node name="Punch" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_utbfo")
-bus = &"SFX"
+[node name="AudioManager" parent="." instance=ExtResource("7_jbiyq")]
 
-[node name="Death" type="AudioStreamPlayer" parent="."]
+[node name="Death" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("8_weg5k")
 volume_db = 5.0
+bus = &"SFX"
+
+[node name="Punch" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("7_utbfo")
 bus = &"SFX"
 
 [connection signal="area_entered" from="EnemyDetect" to="." method="_on_enemy_detect_area_entered"]

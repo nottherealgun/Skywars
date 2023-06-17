@@ -3,7 +3,7 @@ extends Enemy
 enum States { AWOKEN, IDLE, CHASING, ATTACKING }
 var state = States.IDLE
 var awoken = false
-var range = 200
+var range = 350
 var shoot_speed = 1
 var t : Tween
 

@@ -29,7 +29,11 @@ func start():
 		player_equipped_slots.append({})
 		player_hovering_slots.append(0)
 		player_hovering_slot_ids.append(-1)
-	
+
+func clean_player_slots():
+	for c in $HBox.get_children():
+		c.queue_free()
+
 func _process(_delta):
 	$Page.text = "Page " + str(inv_set_idx) + "/" + str(floor(inventory.size()/16)+1)
 	if init and visible:

@@ -12,6 +12,8 @@ func _on_player_detect_area_entered(area):
 func _on_timer_timeout():
 	if target:
 		for i in 3:
+			if !get_parent():
+				continue
 			$AnimationPlayer.play("summon")
 			var paper = Global.call_deferred("spawn_enemy","corrupted_paper",position+get_parent().position+position.direction_to(target.position)*50)
 			await get_tree().create_timer(0.2).timeout

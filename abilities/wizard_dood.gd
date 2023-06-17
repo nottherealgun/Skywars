@@ -1,4 +1,5 @@
 extends CharacterBody2D
+signal minion_died
 
 @export var max_health = 100
 @onready var health = max_health
@@ -27,9 +28,13 @@ func _process(delta):
 	while null in targets_in_range:
 		targets_in_range.erase(null)
 		
-	for t in targets_in_range:
-		if !is_instance_valid(t):
-			targets_in_range.erase(t)
+	var ok = false
+	while !ok:
+		ok = true
+		for t in targets_in_range:
+			if !is_instance_valid(t) or !t or t == null:
+				targets_in_range.erase(t)
+				ok = false
 			
 	if !is_instance_valid(target):
 		if !targets_in_range.is_empty():
@@ -79,8 +84,10 @@ func _process(delta):
 				change_state(STATES.IDLE)
 		
 		STATES.DEATH:
-			$Death.play()
+			$AudioManager.play("Death")
 			await $AnimatedSprite2D.animation_finished
+			master.minions.erase(self)
+			emit_signal("minion_died")
 			Global.kill(self)
 
 func move(main_vec:Vector2):

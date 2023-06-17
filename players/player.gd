@@ -1,6 +1,7 @@
 class_name Player extends CharacterBody2D
 
 signal does_action(by)
+signal attacked
 signal kills_player(player)
 signal equips_item(trinket)
 signal consumes_item(consumable)
@@ -51,6 +52,7 @@ var revival_target : Player
 @onready var stat_gui = Global.GUI.get_node("PlayerStats/PlayerStats"+str(player_id))
 @onready var healthbar = stat_gui.get_node("Healthbar")
 @onready var brainbar = stat_gui.get_node("Brainbar")
+@onready var brainbarBG = stat_gui.get_node("BrainbarBG")
 
 # Tweens
 @onready var injury_tween : Tween
@@ -69,7 +71,7 @@ func _ready():
 	equips_item.connect(equip_item)
 	
 func _process(delta):
-#	$dev.text = str(Global.is_out_of_map(position))
+#	$dev.text = str(minions)
 	_input_update() # Update device input
 	_gui_update() # Update gui
 	var sprite = get_node("Sprite")
@@ -96,6 +98,12 @@ func _process(delta):
 				sprite.flip_h = false
 		else:
 			sprite.animation = "idle"
+	
+	if move_tween and move_tween.is_running():
+		if move_and_collide(move_vec*2,true):
+			move_tween.stop()
+
+var move_tween : Tween
 
 func _input_update():
 	# Get movement input strength
@@ -124,21 +132,12 @@ func _input_update():
 			if Input.is_action_just_pressed("p"+str(player_id)+"_dash"):
 				# Dash
 				if move_vec != Vector2.ZERO:
-					if move_and_collide(move_vec*150,true) == null and $DashDelay.is_stopped():
+					if $DashDelay.is_stopped(): #and move_and_collide(move_vec*150,true) == null:
 						$DashDelay.start(0.5)
-#						var temp = [$Sprite.offset,$Sprite.position]
-#						$Sprite.offset = Vector2.ZERO
-#						$Sprite.position = Vector2.ZERO
-						var t = create_tween()
-						t.tween_property(self,"position",move_vec*150*dash_modifier,0.2).as_relative()
-#						if move_vec.normalized().x < 0:
-#							t.parallel().tween_property($Sprite,"rotation",0,0.25).from(PI*2)
-#						else:
-#							t.parallel().tween_property($Sprite,"rotation",0,0.25).from(-PI*2)
-
-						await t.finished
-#						$Sprite.offset = Vector2(0,-24)
-#						$Sprite.position = Vector2(0,48)
+						if move_tween and move_tween.is_running():
+							move_tween.stop()
+						move_tween = create_tween()
+						move_tween.tween_property(self,"position",move_vec*150*dash_modifier,0.2).as_relative()
 					
 			if Input.is_action_pressed("p"+str(player_id)+"_action"):
 				if is_instance_valid(revival_target) and revival_target.fainted:
@@ -195,7 +194,7 @@ func shoot():
 			last_bullet = Global.spawn_projectile(self,"gun_proj_1",position+Vector2(0,-mouse_aim_offset),aim_vec.normalized(),true)
 		_:
 			last_bullet = Global.spawn_projectile(self,"gun_proj_1",position+Vector2(0,-mouse_aim_offset),aim_vec.normalized(),true)
-	last_bullet.damage *= damage_modifier
+	last_bullet.damage_modifier = damage_modifier
 	emit_signal("spawns_bullet",last_bullet)
 
 func _injured_effect():
@@ -208,11 +207,23 @@ func _injured_effect():
 	injury_tween = create_tween().set_loops(2).bind_node(self)
 	injury_tween.tween_property(sprite,"modulate",Color.WHITE,0.2).from(Color.TRANSPARENT)
 
+var decor_tween : Tween
+
 func get_hurt(by:Object):
 	if !iframed:
 		iframed = true
 		by.affect(self)
 		_injured_effect()
+		emit_signal("attacked")
+		
+		if decor_tween and decor_tween.is_running():
+			decor_tween.stop()
+		
+		var pos = healthbar.position
+		decor_tween = create_tween().set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+		decor_tween.tween_property(healthbar,"scale",Vector2.ONE,1.0).from(Vector2.ONE*1.1)
+		decor_tween.parallel().tween_property(healthbar,"position",pos,1.0).from(pos+Vector2(10,0))
+		decor_tween.parallel().tween_property(healthbar,"modulate",Color.WHITE,3.0).from(Color.RED)
 		await injury_tween.finished
 		iframed = false
 
@@ -282,3 +293,14 @@ func _on_revive_timer_timeout():
 func _on_brain_regen_timeout():
 	if brainpower < 6:
 		brainpower += 1
+	
+		if decor_tween and decor_tween.is_running():
+			decor_tween.stop()
+		
+		var pos = brainbar.position
+		var size = brainbar.scale
+		var size2 = brainbarBG.scale
+		decor_tween = create_tween().set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+		decor_tween.parallel().tween_property(brainbar,"modulate",Color.WHITE,3.0).from(Color.GREEN)
+		decor_tween.parallel().tween_property(brainbarBG,"modulate",Color.WHITE,3.0).from(Color.DARK_GOLDENROD)
+	

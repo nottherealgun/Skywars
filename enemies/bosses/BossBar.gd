@@ -21,7 +21,7 @@ func set_boss(new_boss:Object):
 		tween.parallel().tween_property(c,"position:y",-240,3.0).as_relative().set_trans(Tween.TRANS_CUBIC)
 		
 
-func boss_died():
+func boss_died(boss:Object):
 	GameManager.bosses_vanquished += 1
 	var tween := create_tween()
 	tween.tween_property(%Flash,"modulate",Color.TRANSPARENT,1.0).from(Color.WHITE)

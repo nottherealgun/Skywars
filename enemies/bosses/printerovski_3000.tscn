@@ -1,4 +1,4 @@
-[gd_scene load_steps=220 format=3 uid="uid://cryhi5byg0s3p"]
+[gd_scene load_steps=221 format=3 uid="uid://cryhi5byg0s3p"]
 
 [ext_resource type="Script" path="res://enemies/printerovski_3000.gd" id="1_u6nnc"]
 [ext_resource type="Texture2D" uid="uid://wnienomcqn25" path="res://enemies/printerboss_artillery.png" id="2_vfpup"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://cwlth80a3g0jf" path="res://enemies/printerboss_indicator.png" id="13_6xell"]
 [ext_resource type="Texture2D" uid="uid://b8t0w643gqb04" path="res://enemies/printerboss_shockwave.png" id="14_doid5"]
 [ext_resource type="AudioStream" uid="uid://bnu5x8c03eaoa" path="res://sfx/printerboss_transform.mp3" id="14_istcn"]
+[ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://audio_manager.tscn" id="16_fko6d"]
 [ext_resource type="AudioStream" uid="uid://dyn0yvfy6fjn3" path="res://sfx/printerboss_reload.mp3" id="16_kt8ol"]
 [ext_resource type="AudioStream" uid="uid://bou1mt4cg1jn1" path="res://sfx/printerboss_crash.mp3" id="17_gce0l"]
 [ext_resource type="AudioStream" uid="uid://dm06id81h0ht" path="res://sfx/printerboss_artillery3.mp3" id="17_u3w7h"]
@@ -1507,7 +1508,6 @@ shape = SubResource("RectangleShape2D_e33vm")
 collision_layer = 0
 
 [node name="PlayerDetectShape" type="CollisionShape2D" parent="PlayerDetect"]
-visible = false
 shape = SubResource("CircleShape2D_iidox")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -1533,37 +1533,39 @@ position = Vector2(0, 21)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_cjycf")
 
-[node name="Transform" type="AudioStreamPlayer" parent="."]
+[node name="AudioManager" parent="." instance=ExtResource("16_fko6d")]
+
+[node name="Transform" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("14_istcn")
 volume_db = -15.0
 bus = &"SFX"
 
-[node name="Artillery" type="AudioStreamPlayer" parent="."]
+[node name="Artillery" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("17_u3w7h")
 volume_db = -15.0
 bus = &"SFX"
 
-[node name="Reload" type="AudioStreamPlayer" parent="."]
+[node name="Reload" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("16_kt8ol")
 volume_db = -15.0
 bus = &"SFX"
 
-[node name="Crash" type="AudioStreamPlayer" parent="."]
+[node name="Crash" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("17_gce0l")
 volume_db = -15.0
 bus = &"SFX"
 
-[node name="Death" type="AudioStreamPlayer" parent="."]
+[node name="Death" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("20_we5k8")
 volume_db = -15.0
 bus = &"SFX"
 
-[node name="Fly" type="AudioStreamPlayer" parent="."]
+[node name="Fly" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("21_pssyy")
-volume_db = -15.0
+volume_db = 5.0
 bus = &"SFX"
 
-[node name="Walk" type="AudioStreamPlayer" parent="."]
+[node name="Walk" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("22_akdkh")
 volume_db = -15.0
 bus = &"SFX"

@@ -3,14 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://0anrpyccai4l" path="res://enemies/enemy.tscn" id="1_u8cc3"]
 [ext_resource type="Script" path="res://enemies/student.gd" id="2_coljh"]
 [ext_resource type="SpriteFrames" uid="uid://dk73utyosr1wa" path="res://enemies/student1.tres" id="3_n61ad"]
+[ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://utility/shadow.png" id="4_ku66m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cyl6t"]
 size = Vector2(48, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qvqom"]
 size = Vector2(48, 80)
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_402vk"]
 
 [node name="Student" instance=ExtResource("1_u8cc3")]
 script = ExtResource("2_coljh")
@@ -44,6 +43,9 @@ shape = SubResource("RectangleShape2D_qvqom")
 [node name="PlayerDetectShape" parent="PlayerDetect" index="0"]
 visible = false
 
+[node name="AllyDetectShape" parent="AllyDetect" index="0"]
+visible = false
+
 [node name="NameTag" parent="." index="6"]
 offset_top = -137.0
 offset_bottom = -98.0
@@ -53,9 +55,9 @@ one_shot = true
 
 [node name="Shadow" type="Sprite2D" parent="." index="9"]
 z_index = -1
-position = Vector2(0, 52)
+position = Vector2(0, 48)
 scale = Vector2(5, 4)
-texture = SubResource("CompressedTexture2D_402vk")
+texture = ExtResource("4_ku66m")
 
 [node name="line" type="Line2D" parent="." index="10"]
 visible = false

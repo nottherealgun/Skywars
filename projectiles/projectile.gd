@@ -9,6 +9,7 @@ var knockback = 0
 
 #@onready var tween = self.create_tween()
 @export var damage = 10
+var damage_modifier = 1
 var player_bullet = false 
 
 func _enter_tree():
@@ -32,7 +33,7 @@ func affect(victim:Object):
 	if player_bullet:
 		victim.latest_shooter = shooter
 		var dist = victim.position.distance_to(shooter.position)
-		calc_damage = 10-(snapped(dist,100)/200)
+		calc_damage = (10-(snapped(dist,100)/200)) * damage_modifier
 #		victim.get_knockback(direction,knockback)
 	for b in get_children():
 		if b.is_in_group("buff"):
