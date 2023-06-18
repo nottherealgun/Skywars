@@ -2786,6 +2786,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("35_ntfof")
+skip_splashscreen = true
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
