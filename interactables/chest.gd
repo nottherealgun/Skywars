@@ -15,7 +15,7 @@ func open(player):
 		opened = true
 	if opened:
 		if !collected:
-			item = Global.items[randi_range(15,25)]
+			item = Global.items[randi_range(0,9)]
 			Global.Inventory.add_item(item)
 			GameManager.add_money(money)
 			collected = true

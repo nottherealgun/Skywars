@@ -16,9 +16,9 @@ func _ready():
 func refresh_stock():
 	items = []
 	for i in item_slots.size():
-		var new_item = Global.items[randi_range(15,25)]
+		var new_item = Global.items[randi_range(7,17)]
 		while new_item in items or new_item == null:
-			new_item = Global.items[randi_range(15,25)]
+			new_item = Global.items[randi_range(7,17)]
 		items.append(new_item)
 		if new_item["pic"] != "":
 			item_slots[i].texture = load("res://items/"+new_item["pic"])

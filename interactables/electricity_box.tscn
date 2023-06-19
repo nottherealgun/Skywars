@@ -12,3 +12,7 @@ flip = false
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("2_u87hc")
 offset = Vector2(0, -16)
+
+[node name="CollisionShape" parent="." index="1"]
+position = Vector2(0, -32)
+disabled = false

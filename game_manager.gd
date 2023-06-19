@@ -169,5 +169,21 @@ func boss_encounter(boss:Object):
 	await boss.started
 	boss_encountered = false
 
+func game_reset():
+	GameManager.money = 0
+	Global.Inventory.hide()
+	Global.Inventory.reset_inv()
+	Global.Inventory.clean_player_slots()
+	
+	for p in Global.active_players:
+		for m in p.minions:
+			m.queue_free()
+		p.minions.clear()
+		p.health = p.max_health
+		p.brainpower = 6
+		
+		Global.active_players.erase(p)
+		p.queue_free()
+
 func _on_timer_timeout():
 	sec_elapsed += 1

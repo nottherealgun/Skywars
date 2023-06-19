@@ -88,7 +88,7 @@ func _physics_process(delta):
 		
 		STATES.IDLE:
 			if $Timer.is_stopped():
-				$Timer.start(5.0)
+				$Timer.start(3.5)
 				
 		STATES.MOVING:
 			if is_instance_valid(target):
@@ -182,7 +182,9 @@ func change_state(new_state):
 			for i in 2:
 				var minion = Global.spawn_enemy("printer",position)
 				var min_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-				min_tween.tween_property(minion,"position",position+position.direction_to(target.position).rotated(deg_to_rad(randf_range(-90.0,90.0)))*300,1.0)
+				var physics_vec = position+position.direction_to(target.position).rotated(deg_to_rad(randf_range(-90.0,90.0)))*300
+				min_tween.tween_property(minion,"position",physics_vec,1.0)
+				minion.physics_influence(min_tween,physics_vec)
 				
 			await $AnimatedSprite.animation_finished
 				

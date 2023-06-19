@@ -17,6 +17,9 @@ var target : Object
 
 var DEFAULT = {}
 
+var physics_vector : Vector2
+var physics_tween : Tween
+
 func _ready():
 #	$NameTag.text = display_name
 #	$NameTag/LevelTag.text = "Lvl "+str(level)
@@ -64,6 +67,15 @@ func _physics_process(delta):
 				closest = t
 		if is_instance_of(closest, Object):
 			target = closest
+
+	if physics_tween and physics_tween.is_running():
+		assert(physics_vector != null)
+		if move_and_collide(physics_vector.normalized(),true):
+			physics_tween.stop()
+
+func physics_influence(tween:Tween,force_vec:Vector2):
+	physics_tween = tween
+	physics_vector = force_vec
 
 func _move_update(delta):
 	pass

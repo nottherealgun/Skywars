@@ -44,7 +44,6 @@ func _on_button_3_mouse_exited():
 	tween.tween_property($Button3,"scale",Vector2(1,1),0.1)
 
 func _on_button_3_pressed():
-	GameManager.money = 0
 	Global.music_play("lobby")
 	get_tree().paused = false
 	Global.generic_transition()
@@ -52,11 +51,7 @@ func _on_button_3_pressed():
 	hide()
 	$"../MainMenu".show()
 	LevelManager.clear_level()
-	for p in Global.active_players:
-		Global.active_players.erase(p)
-		p.queue_free()
-
-	Global.Inventory.clean_player_slots()
+	GameManager.game_reset()
 
 func _on_button_4_mouse_entered():
 	tween = create_tween().set_trans(Tween.TRANS_CUBIC)

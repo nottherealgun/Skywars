@@ -50,6 +50,8 @@ func _on_area_entered(area):
 		if area.player_bullet != player_bullet:
 			Global.kill(area)
 			Global.kill(self)
+#	elif area.is_in_group("interactable"):
+#		Global.kill(self)
 
 func _on_body_entered(_body):
 	Global.kill(self)

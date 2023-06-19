@@ -18,7 +18,28 @@ func _ready():
 				i.get_node("Button").connect("mouse_entered",mouse_entered.bind(i.name))
 				i.get_node("Button").connect("mouse_exited",mouse_exited.bind(i.name))
 				i.get_node("Button").connect("pressed",slot_pressed.bind(i.name))
+
+	add_item(Global.items[0])
+	add_item(Global.items[1])
+	add_item(Global.items[2])
+
+var anim_tween : Tween
+
+func _set(property, value):
+	match property:
+		"visible":
+			if anim_tween and anim_tween.is_running():
+				anim_tween.stop()
+			
+			anim_tween = create_tween().set_trans(Tween.TRANS_CUBIC)
+			if value:
+				anim_tween.tween_property(self,"position:y",0,0.5).from(1100)
+			else:
+				anim_tween.tween_property(self,"position:y",1100,0.5).from(0)
 	
+			await anim_tween.finished
+	property = value
+		
 func start():
 	init = true
 	for p in Global.active_players:
@@ -42,14 +63,44 @@ func _process(_delta):
 
 func _input_update():
 	if Input.is_action_just_pressed("p1_primary"):
-		pass
+		if anim_tween and anim_tween.is_running():
+			anim_tween.stop()
+			
+		if player_hovering_slots[1] is Dictionary:
+			for i in shown_inventory.size():
+				var slot = get_node("ItemSlot"+str(i))
+				if i == player_hovering_slot_ids[1]:
+					anim_tween = create_tween().set_trans(Tween.TRANS_CUBIC)
+					anim_tween.tween_property(slot,"scale",Vector2.ONE,0.25).from(Vector2.ONE*0.5)
+					break
+					
 	elif Input.is_action_just_pressed("p1_secondary"):
+		if anim_tween and anim_tween.is_running():
+			anim_tween.stop()
+			
 		if player_hovering_slots[1] is Dictionary:
 			if player_hovering_slots[1].type == "trinket":
 				player_equipped_slots[1] = player_hovering_slots[1]
 				Global.active_players[0].emit_signal("equips_item",player_equipped_slots[1])
 				Global.active_players[0].stat_gui.get_node("EquippedItem/Texture").texture =\
 				load("res://items/"+player_equipped_slots[1]["pic"])
+			
+				for i in shown_inventory.size():
+					var slot = get_node("ItemSlot"+str(i))
+					if i == player_hovering_slot_ids[1]:
+						anim_tween = create_tween().set_trans(Tween.TRANS_CUBIC)
+						anim_tween.tween_property(slot,"scale",Vector2.ONE,0.25).from(Vector2.ONE*1.1)
+						
+						for e in $HBox.get_children():
+							if e.get_index() != 0:
+								continue
+							var equip_slot = e.get_node("PlayerSlotItem")
+							anim_tween.parallel().tween_property(equip_slot,"scale",Vector2.ONE,0.25).from(Vector2.ONE*1.1)
+						
+						anim_tween.parallel().tween_property(Global.active_players[0].stat_gui.get_node("EquippedItem/Texture"),"scale",Vector2.ONE,0.25).from(Vector2.ONE*1.1)
+						anim_tween.parallel().tween_property(slot,"modulate",Color.WHITE,0.25).from(Color.GOLD)
+						break
+						
 			elif player_hovering_slots[1].type == "consumable":
 				Global.active_players[0].emit_signal("consumes_item",player_hovering_slots[1])
 				remove_item(player_hovering_slot_ids[1])
@@ -84,6 +135,27 @@ func refresh_inv():
 			if equip_slot_in_array != {}:
 				equip_slot.texture = load("res://items/"+equip_slot_in_array["pic"])
 
+func reset_inv():
+	for i in shown_inventory.size():
+		var slot = get_node("ItemSlot"+str(i))
+		slot.texture = null
+		
+	inventory.clear()
+	shown_inventory.clear()
+	inv_set_idx = 1
+	
+	player_equipped_slots = [null]
+	player_hovering_slots = [null]
+	player_hovering_slot_ids = [null]
+	mouse_hovering_slot = null
+	
+	$ItemDescription.text = ""
+	$Selector.position = Vector2.ZERO
+	
+	for p in Global.active_players:
+		p.equipped_item = {}
+		p.stat_gui.get_node("EquippedItem/Texture").texture = null
+	
 func add_item(item:Dictionary):
 	inventory.append(item)
 	return item
