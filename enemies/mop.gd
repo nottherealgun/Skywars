@@ -9,7 +9,6 @@ var t : Tween
 
 func _ready():
 	super()
-	shoot_speed = level
 
 func _physics_process(delta):
 	super(delta)

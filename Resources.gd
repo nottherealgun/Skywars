@@ -86,14 +86,13 @@ func kill(entity:Object,immediate=false):
 	while null in active_entities:
 		active_entities.erase(null)
 	
-	if is_instance_valid(entity) and entity in active_entities and entity != null:
-		emit_signal("enemy_killed",entity)
-		active_entities.erase(entity)
+	if is_instance_valid(entity) and entity in active_entities:
 		var tween = create_tween()
+		emit_signal("enemy_killed",entity)
 		if immediate == false:
 			tween.tween_property(entity,"scale",Vector2.ZERO,0.2)
-			tween.chain().tween_callback(entity.queue_free)
-			
+			tween.chain().tween_callback(entity.queue_free)	
+
 		if entity.is_in_group("enemy"):
 			tween.parallel().tween_callback(emit_death_indicator.bind(entity.position))
 			if entity.health <= 0:
@@ -102,7 +101,9 @@ func kill(entity:Object,immediate=false):
 			
 		elif entity.is_in_group("projectile"):
 			entity.current_speed = 0
-#		entity.queue_free()
+	
+			
+		active_entities.erase(entity)
 
 func kill_all(exceptions:=[]):
 	while not active_entities.is_empty():
@@ -132,7 +133,8 @@ func spawn_boss(type:String,pos:Vector2):
 
 func boss_died(boss:Object):
 	current_map[1].remove_meta("boss")
-	music_build_update(current_map)
+#	music_build_update(current_map)
+	music_play("victory")
 
 # Doors
 
@@ -790,6 +792,7 @@ func populate():
 		"paper_nest":2,
 	}
 	
+	var stage_enemies = []
 	for map in gen_maps:
 		if map[0].is_in_group("special"):
 			continue
@@ -815,7 +818,15 @@ func populate():
 							ok = false
 							break
 				entities.append(new)
+				stage_enemies.append(new)
+		
 		map[1].set_meta("entities",entities)
+	
+	var rand_enemy = stage_enemies.pick_random()
+	var new_key = load("res://key.tscn").instantiate()
+	rand_enemy.add_child(new_key)
+	new_key.holder = rand_enemy
+
 
 func build_ends():
 	var locked = []
@@ -985,12 +996,13 @@ func pick_by_percentage(ratios:Dictionary):
 # Music
 
 const tracks = {
-	"lobby":"res://music/The Lobby.mp3",
-	"1stfloor":"res://music/First Floor.mp3",
-	"2ndfloor":"res://music/2nd Floor.mp3",
-	"dorion":"res://music/D'Orion.mp3",
-	"combat":"res://music/College Quarrel_Loopable.mp3",
-	"printerboss":"res://music/Printing Issue_Loopable.mp3",
+	"lobby":		"res://music/The Lobby.mp3",
+	"1stfloor":		"res://music/First Floor.mp3",
+	"2ndfloor":		"res://music/2nd Floor.mp3",
+	"dorion":		"res://music/D'Orion.mp3",
+	"combat":		"res://music/College Quarrel_Loopable.mp3",
+	"printerboss":	"res://music/Printing Issue_Loopable.mp3",
+	"victory":		"res://music/Victory.mp3",
 }
 
 var current_track : String = "lobby"
@@ -1001,7 +1013,7 @@ func music_play(track_name:String):
 	tween.tween_property(Music,"volume_db",-80.0,1.0).from(default_volume)
 	await tween.finished
 	Music.stream = load(tracks[track_name])
-	Music.stream.set("loop",true)
+#	Music.stream.set("loop",true)
 	Music.playing = true
 	current_track = track_name
 	tween = create_tween()
@@ -1065,6 +1077,7 @@ func use_ability(character:String,by:Object):
 			"darwin":# 3 6 1
 				var minion = spawn_from_ability(Global.pick_by_percentage({"dood":3,"super_dood":6,"wizard_dood":1}),by.position,by)
 				by.emit_signal("spawns_minion",minion)
+				
 			"gun":
 				var aim_vec = by.position.direction_to(Main.get_global_mouse_position()+Vector2(0,by.mouse_aim_offset))
 				for i in 30:
@@ -1076,4 +1089,4 @@ func use_ability(character:String,by:Object):
 					proj.t.chain().tween_property(proj,"direction",aim_vec.rotated(deg_to_rad(randf_range(0,-10))),0.5)
 					proj.t.chain().tween_property(proj,"direction",aim_vec.rotated(deg*-1),0.5)
 					by.emit_signal("spawns_bullet",proj)
-					
+					by.get_node("AudioManager").play("ShootGun")

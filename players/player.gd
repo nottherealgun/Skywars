@@ -47,6 +47,7 @@ const hitbox_anchor = Vector2(0,44)
 
 var latest_shooter
 var revival_target : Player
+var key : Object
 
 # Player GUI setup
 @onready var stat_gui = Global.GUI.get_node("PlayerStats/PlayerStats"+str(player_id))
@@ -58,6 +59,7 @@ var revival_target : Player
 @onready var injury_tween : Tween
 
 var mouse_aim_offset = 0
+var dashing = false
 
 func _ready():
 	# Setup player appearance and GUI settings
@@ -89,6 +91,7 @@ func _process(delta):
 				
 	if !fainted and !transporting and !Global.PauseMenu.visible and !Global.Inventory.visible: # If player alive
 		_move_update(delta) # Update movement
+		dash_effect()
 		# Sprite H flipping
 		if move_vec != Vector2.ZERO:
 			sprite.animation = "run"
@@ -104,6 +107,19 @@ func _process(delta):
 			move_tween.stop()
 
 var move_tween : Tween
+
+func dash_effect():
+	if dashing:
+		var frame : Texture2D = $Sprite.sprite_frames.get_frame_texture("run",$Sprite.frame)
+		var sprite = Sprite2D.new()
+		var tween = create_tween().bind_node(sprite)
+		tween.tween_property(sprite,"modulate",Color.TRANSPARENT,0.2)
+		tween.chain().tween_callback(sprite.queue_free)
+		sprite.position = position
+		sprite.texture = frame
+		sprite.flip_h = $Sprite.flip_h
+		sprite.scale = $Sprite.scale
+		Global.Main.add_child(sprite)
 
 func _input_update():
 	# Get movement input strength
@@ -137,7 +153,11 @@ func _input_update():
 						if move_tween and move_tween.is_running():
 							move_tween.stop()
 						move_tween = create_tween()
+						dashing = true
 						move_tween.tween_property(self,"position",move_vec*150*dash_modifier,0.2).as_relative()
+						move_tween.parallel().tween_property(self,"dashing",false,0.2)
+						
+						$AudioManager.play("Dash")
 					
 			if Input.is_action_pressed("p"+str(player_id)+"_action"):
 				if is_instance_valid(revival_target) and revival_target.fainted:
@@ -190,8 +210,10 @@ func shoot():
 	match character:
 		"darwin":
 			last_bullet = Global.spawn_projectile(self,"darwin_proj_1",position+Vector2(0,-mouse_aim_offset),aim_vec.normalized(),true)
+			$AudioManager.play("ShootDarwin")
 		"gun":
 			last_bullet = Global.spawn_projectile(self,"gun_proj_1",position+Vector2(0,-mouse_aim_offset),aim_vec.normalized(),true)
+			$AudioManager.play("ShootGun")
 		_:
 			last_bullet = Global.spawn_projectile(self,"gun_proj_1",position+Vector2(0,-mouse_aim_offset),aim_vec.normalized(),true)
 	last_bullet.damage_modifier = damage_modifier
@@ -215,7 +237,7 @@ func get_hurt(by:Object):
 		by.affect(self)
 		_injured_effect()
 		emit_signal("attacked")
-		
+		$AudioManager.play("Injured")
 		if decor_tween and decor_tween.is_running():
 			decor_tween.stop()
 		
@@ -226,6 +248,10 @@ func get_hurt(by:Object):
 		decor_tween.parallel().tween_property(healthbar,"modulate",Color.WHITE,3.0).from(Color.RED)
 		await injury_tween.finished
 		iframed = false
+
+func heal(amnt:int,by:Object):
+	health += amnt
+	$AudioManager.play("Heal")
 
 func revive():
 	$Guide.hide()

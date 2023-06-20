@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=3 uid="uid://dlpndwnncnijn"]
+[gd_scene load_steps=139 format=3 uid="uid://dlpndwnncnijn"]
 
 [ext_resource type="AudioStream" uid="uid://bl3tu345hbh37" path="res://music/The Lobby.mp3" id="1_4g0f4"]
 [ext_resource type="Texture2D" uid="uid://dv8c76rwlux0p" path="res://items/idCardGUI.png" id="2_e4464"]
@@ -24,12 +24,16 @@
 [ext_resource type="Script" path="res://PlayerInventory.gd" id="21_3xiss"]
 [ext_resource type="Texture2D" uid="uid://iu6iar47r7n0" path="res://gui/inventoryGUI.png" id="21_drtqb"]
 [ext_resource type="Texture2D" uid="uid://qk4xigecavl6" path="res://gui/inventoryHeadSlot.png" id="22_0aa0l"]
+[ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://audio_manager.tscn" id="23_8ixil"]
 [ext_resource type="Shader" path="res://pause_menu.gdshader" id="23_jl8kg"]
 [ext_resource type="Texture2D" uid="uid://uas65v7xroor" path="res://gui/iPadGUI.png" id="23_qefvt"]
 [ext_resource type="Script" path="res://PauseMenu.gd" id="23_yhhpu"]
+[ext_resource type="AudioStream" uid="uid://iwj6gni5ugho" path="res://sfx/Equip.mp3" id="24_htsth"]
 [ext_resource type="Texture2D" uid="uid://bghcrxm4th0pa" path="res://gui/inventoryGUIHover.png" id="24_vejm3"]
+[ext_resource type="AudioStream" uid="uid://cusy38pjh06e7" path="res://sfx/unEquip.mp3" id="25_t2yoa"]
 [ext_resource type="Texture2D" uid="uid://dt87a7n6trlcn" path="res://gui/resumeButton.png" id="25_yffer"]
 [ext_resource type="Texture2D" uid="uid://515cgx6i0ygs" path="res://gui/optionButton.png" id="26_diu8h"]
+[ext_resource type="AudioStream" uid="uid://dqsir2ahy7wxm" path="res://sfx/Consuming.mp3" id="26_kdrsa"]
 [ext_resource type="Texture2D" uid="uid://bebfa5wjlu236" path="res://gui/homeButton.png" id="27_atwa6"]
 [ext_resource type="Texture2D" uid="uid://ttq5mrq4ae03" path="res://gui/exitButton.png" id="28_04hgl"]
 [ext_resource type="Script" path="res://Notifier.gd" id="28_6orup"]
@@ -1086,16 +1090,21 @@ border_width_bottom = 10
 shader = ExtResource("23_jl8kg")
 shader_parameter/blur_amount = 2.5
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_23n1s"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5cxlr"]
+texture = ExtResource("63_4dcju")
+modulate_color = Color(0.294118, 0.294118, 0.294118, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uowoh"]
 texture = ExtResource("63_yfw3t")
 texture_margin_left = 4.0
 texture_margin_top = 4.0
 texture_margin_right = 4.0
 texture_margin_bottom = 4.0
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ike1u"]
-texture = ExtResource("63_4dcju")
-region_rect = Rect2(0, 0, -100, 0)
+[sub_resource type="Theme" id="Theme_kkwn8"]
+HSlider/icons/grabber = ExtResource("62_cpwue")
+HSlider/styles/grabber_area = SubResource("StyleBoxTexture_5cxlr")
+HSlider/styles/slider = SubResource("StyleBoxTexture_uowoh")
 
 [sub_resource type="Animation" id="Animation_achef"]
 length = 0.001
@@ -1449,6 +1458,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("3_r8jns")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="BarProgress" type="TextureProgressBar" parent="GUI/BossBar"]
 texture_filter = 1
@@ -2624,6 +2635,20 @@ theme_override_fonts/font = ExtResource("11_2h1l6")
 theme_override_font_sizes/font_size = 40
 text = "PAGE 1/1"
 
+[node name="AudioManager" parent="GUI/PlayerInventory" instance=ExtResource("23_8ixil")]
+
+[node name="Equip" type="AudioStreamPlayer" parent="GUI/PlayerInventory/AudioManager"]
+stream = ExtResource("24_htsth")
+bus = &"SFX"
+
+[node name="Unequip" type="AudioStreamPlayer" parent="GUI/PlayerInventory/AudioManager"]
+stream = ExtResource("25_t2yoa")
+bus = &"SFX"
+
+[node name="Eat" type="AudioStreamPlayer" parent="GUI/PlayerInventory/AudioManager"]
+stream = ExtResource("26_kdrsa")
+bus = &"SFX"
+
 [node name="Title" type="Label" parent="GUI"]
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
@@ -2777,7 +2802,7 @@ grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 text = "SkyWars Demo
-Alpha V.9-B | As of 17/6/2023
+Alpha V.9-B | As of 21/6/2023
 
 If any bugs or errors are found,
 please report to the Dev Team.
@@ -2809,10 +2834,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -616.0
-offset_top = -1000.0
-offset_right = 2776.0
-offset_bottom = 3054.0
+offset_left = -1576.0
+offset_top = -1540.0
+offset_right = 1816.0
+offset_bottom = 2514.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("35_u44vp")
@@ -3089,7 +3114,7 @@ And most importantly...
 
 
 
-It's YOU, Champ! Thank you for playing our game!
+It's YOU! Thank you for playing our game!
 [/color]
 
 
@@ -3207,10 +3232,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 64.0
-offset_top = 1080.0
-offset_right = 1856.0
-offset_bottom = 2012.03
+offset_left = -896.0
+offset_top = 540.0
+offset_right = 896.0
+offset_bottom = 1472.03
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -3400,6 +3425,11 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_2vqn0")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_luix7")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ghjbs")
 
+[node name="AudioManager" parent="GUI/PauseMenu" instance=ExtResource("23_8ixil")]
+
+[node name="click" type="AudioStreamPlayer" parent="GUI/PauseMenu/AudioManager"]
+stream = ExtResource("51_1moc3")
+
 [node name="CharacterSelection" type="Control" parent="GUI"]
 visible = false
 layout_mode = 3
@@ -3428,6 +3458,9 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("11_2h1l6")
 theme_override_font_sizes/font_size = 100
 theme_override_styles/normal = SubResource("StyleBoxFlat_2wwb3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2wwb3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2wwb3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_2wwb3")
 alignment = 1
 icon_alignment = 1
 item_count = 2
@@ -3472,8 +3505,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = 1077.0
-offset_right = 1920.0
-offset_bottom = 2157.0
+offset_bottom = 1077.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
@@ -3545,12 +3577,8 @@ offset_left = 16.0
 offset_top = 40.0
 offset_right = 288.0
 offset_bottom = 56.0
+theme = SubResource("Theme_kkwn8")
 theme_override_constants/grabber_offset = 0
-theme_override_icons/grabber = ExtResource("62_cpwue")
-theme_override_icons/grabber_highlight = ExtResource("62_cpwue")
-theme_override_styles/slider = SubResource("StyleBoxTexture_23n1s")
-theme_override_styles/grabber_area = SubResource("StyleBoxTexture_ike1u")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_ike1u")
 step = 5.0
 value = 50.0
 tick_count = 5
@@ -3569,12 +3597,8 @@ offset_left = 16.0
 offset_top = 80.0
 offset_right = 288.0
 offset_bottom = 96.0
+theme = SubResource("Theme_kkwn8")
 theme_override_constants/grabber_offset = 0
-theme_override_icons/grabber = ExtResource("62_cpwue")
-theme_override_icons/grabber_highlight = ExtResource("62_cpwue")
-theme_override_styles/slider = SubResource("StyleBoxTexture_23n1s")
-theme_override_styles/grabber_area = SubResource("StyleBoxTexture_ike1u")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_ike1u")
 step = 5.0
 value = 50.0
 tick_count = 5
@@ -3593,12 +3617,8 @@ offset_left = 16.0
 offset_top = 120.0
 offset_right = 288.0
 offset_bottom = 136.0
+theme = SubResource("Theme_kkwn8")
 theme_override_constants/grabber_offset = 0
-theme_override_icons/grabber = ExtResource("62_cpwue")
-theme_override_icons/grabber_highlight = ExtResource("62_cpwue")
-theme_override_styles/slider = SubResource("StyleBoxTexture_23n1s")
-theme_override_styles/grabber_area = SubResource("StyleBoxTexture_ike1u")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_ike1u")
 step = 5.0
 value = 50.0
 tick_count = 5
@@ -3617,12 +3637,8 @@ offset_left = 16.0
 offset_top = 160.0
 offset_right = 288.0
 offset_bottom = 176.0
+theme = SubResource("Theme_kkwn8")
 theme_override_constants/grabber_offset = 0
-theme_override_icons/grabber = ExtResource("62_cpwue")
-theme_override_icons/grabber_highlight = ExtResource("62_cpwue")
-theme_override_styles/slider = SubResource("StyleBoxTexture_23n1s")
-theme_override_styles/grabber_area = SubResource("StyleBoxTexture_ike1u")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxTexture_ike1u")
 step = 5.0
 value = 50.0
 tick_count = 5
@@ -3672,6 +3688,12 @@ libraries = {
 "": SubResource("AnimationLibrary_riier")
 }
 
+[node name="AudioManager" parent="GUI/SettingsMenu" instance=ExtResource("23_8ixil")]
+
+[node name="click" type="AudioStreamPlayer" parent="GUI/SettingsMenu/AudioManager"]
+stream = ExtResource("51_1moc3")
+bus = &"SFX"
+
 [node name="Splashscreen" type="Control" parent="GUI"]
 layout_mode = 3
 anchors_preset = 15
@@ -3708,10 +3730,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 330.0
-offset_top = 824.0
-offset_right = 1590.0
-offset_bottom = 1032.0
+offset_left = -630.0
+offset_top = 284.0
+offset_right = 630.0
+offset_bottom = 492.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(653.5, 52)
@@ -3728,10 +3750,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 554.0
-offset_top = 92.0
-offset_right = 1366.0
-offset_bottom = 804.997
+offset_left = -406.0
+offset_top = -448.0
+offset_right = 406.0
+offset_bottom = 264.997
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1e-05, 1e-05)

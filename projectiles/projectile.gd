@@ -34,24 +34,35 @@ func affect(victim:Object):
 		victim.latest_shooter = shooter
 		var dist = victim.position.distance_to(shooter.position)
 		calc_damage = (10-(snapped(dist,100)/200)) * damage_modifier
-#		victim.get_knockback(direction,knockback)
+	if victim.is_in_group("boss"):
+		hit_object_sound("Metal")
+	else:
+		hit_object_sound()
+			
 	for b in get_children():
 		if b.is_in_group("buff"):
 			remove_child(b)
 			victim.add_child(b)
 			b.activate()
 	victim.health -= calc_damage
-	
+
+func hit_object_sound(material_type:String=""):
+	if player_bullet and is_instance_valid(shooter):
+		$AudioManager.play("%sImpact%s" % [shooter.character.capitalize(),material_type.capitalize()])
+
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	Global.kill(self)
+	hit_object_sound()
 
 func _on_area_entered(area):
 	if area.is_in_group("projectile"):
 		if area.player_bullet != player_bullet:
 			Global.kill(area)
 			Global.kill(self)
+			hit_object_sound()
 #	elif area.is_in_group("interactable"):
 #		Global.kill(self)
 
 func _on_body_entered(_body):
 	Global.kill(self)
+	hit_object_sound()

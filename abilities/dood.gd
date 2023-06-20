@@ -42,6 +42,8 @@ func _process(delta):
 			target = targets_in_range.pick_random()
 			if !is_instance_valid(target):
 				target = null
+			elif target.get("awoken") and target.awoken == false:
+				target = null
 				
 	if !target and state != STATES.FOLLOWING:
 		change_state(STATES.FOLLOWING)
@@ -85,7 +87,6 @@ func _process(delta):
 				change_state(STATES.IDLE)
 		
 		STATES.DEATH:
-			$AudioManager.play("Death")
 			await $AnimatedSprite2D.animation_finished
 			master.minions.erase(self)
 			emit_signal("minion_died")
@@ -151,6 +152,7 @@ func change_state(new_state):
 			
 		STATES.DEATH:
 			$AnimatedSprite2D.play("death")
+			$AudioManager.play("Death")
 	
 func _on_enemy_detect_area_entered(area):
 	var entity = area.get_parent()

@@ -8,7 +8,6 @@ var shoot_speed = 1
 
 func _ready():
 	super()
-	shoot_speed = level
 
 func _physics_process(delta):
 	super(delta)

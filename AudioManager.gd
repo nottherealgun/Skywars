@@ -28,3 +28,8 @@ func stop_all():
 
 func set_stream(track:String,stream:AudioStream):
 	get_node(track).stream = stream
+
+func play_random(tracks:Array):
+	var rand_track = tracks.pick_random()
+	play(rand_track)
+	

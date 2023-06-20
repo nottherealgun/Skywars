@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bbv8t7mb52kv6"]
+[gd_scene load_steps=9 format=3 uid="uid://bbv8t7mb52kv6"]
 
 [ext_resource type="PackedScene" uid="uid://0anrpyccai4l" path="res://enemies/enemy.tscn" id="1_50q0j"]
 [ext_resource type="Script" path="res://PaperNest.gd" id="2_ewdaq"]
 [ext_resource type="Texture2D" uid="uid://fsk28vbw2yjn" path="res://enemies/paper_spawner.png" id="3_ojst1"]
 [ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://utility/shadow.png" id="4_ur3jd"]
+[ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://audio_manager.tscn" id="5_xy5e6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_446qh"]
 animations = [{
@@ -82,5 +83,9 @@ z_index = -1
 position = Vector2(0, 40)
 scale = Vector2(6.5, 10)
 texture = ExtResource("4_ur3jd")
+
+[node name="AudioManager" parent="." index="11" instance=ExtResource("5_xy5e6")]
+
+[node name="SpawnPaper1" type="AudioStreamPlayer" parent="AudioManager" index="0"]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

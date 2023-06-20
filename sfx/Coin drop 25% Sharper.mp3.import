@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://rd58prwwswkw"
+path="res://.godot/imported/Coin drop 25% Sharper.mp3-f66bf3ac64103728c62f49ceaa49f6ec.mp3str"
+
+[deps]
+
+source_file="res://sfx/Coin drop 25% Sharper.mp3"
+dest_files=["res://.godot/imported/Coin drop 25% Sharper.mp3-f66bf3ac64103728c62f49ceaa49f6ec.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

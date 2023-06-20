@@ -23,6 +23,7 @@ var in_map : Array
 
 @export var boss := ""
 var is_boss_door = false : set = _set_is_boss_door
+var has_key = false
 
 var players_in_vicinity = []
 
@@ -72,23 +73,44 @@ func enter_room(player):
 		GameManager.levels_cleared += 1
 	else:
 		if connected_door and is_instance_valid(connected_door) and !locked:
-			$Sprite.play()
-			await $Sprite.animation_finished
-			Global.exit_from_this_door(self,connected_door)
+			if (is_boss_door and has_key) or !is_boss_door:
+				$Sprite.play()
+				await $Sprite.animation_finished
+				Global.exit_from_this_door(self,connected_door)
+				$AudioManager.play("Door Open-Close")
+				
+			elif is_boss_door and !has_key:
+				Global.Notifier.display("Find a key to unlock this boss door.")
+				
 		else:
 			if !connected_door:
 				Global.Notifier.display("You cannot open this door.")
 			elif locked:
 				Global.Notifier.display("More enemies nearby...")
+			
 			var t = create_tween().set_loops(3)
 			t.tween_property($Sprite,"offset",Vector2(2,-32),0.1)
 			t.chain().tween_property($Sprite,"offset",Vector2(0,-30),0.1)
+			$AudioManager.play("Door Locked")
 		
 	$Sprite.frame = 0
 
 func _on_area_2d_area_entered(area):
 	var entity = area.get_parent()
 	if entity.is_in_group("player"):
+		if is_boss_door and !has_key:
+			if is_instance_valid(entity.key):
+				var key = entity.key
+				key.position = entity.to_global(key.position)
+				entity.remove_child(key)
+				Global.Main.call_deferred("add_child",key)
+				var t = create_tween().bind_node(key).set_trans(Tween.TRANS_CUBIC)
+				t.tween_property(key,"position",Global.current_map[1].to_global(position),2.0)
+				await t.finished
+				has_key = true
+				entity.key.queue_free()
+				$AudioManager.play("Unlock")
+		
 		if !entity.is_connected("does_action",enter_room):
 			entity.connect("does_action",enter_room)
 

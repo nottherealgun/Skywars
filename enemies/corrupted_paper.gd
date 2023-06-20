@@ -7,7 +7,6 @@ var shoot_speed = 1
 
 func _ready():
 	super()
-	shoot_speed = level
 	$Sprite.sprite_frames = load("res://enemies/corrupted_paper"+str(1+randi()%2)+".tres")
 
 func _physics_process(delta):

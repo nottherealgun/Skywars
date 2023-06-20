@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://28dajyl36cdc"
+path="res://.godot/imported/Gun shooting sound ability.mp3-d851ee9c74bd4c4e19814a89b0a4c4a2.mp3str"
+
+[deps]
+
+source_file="res://sfx/Gun shooting sound ability.mp3"
+dest_files=["res://.godot/imported/Gun shooting sound ability.mp3-d851ee9c74bd4c4e19814a89b0a4c4a2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

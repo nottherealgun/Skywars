@@ -1,6 +1,7 @@
 extends Control
 
 func _on_back_pressed():
+	$AudioManager.play("click")
 	$AnimationPlayer.play("exit")
 
 func show():

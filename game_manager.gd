@@ -115,6 +115,7 @@ func dev_vis():
 		if !e or !is_instance_of(e,Enemy):
 #			Global.current_room.get_meta("entities").erase(e)
 			continue
+			
 		var new = Line2D.new()
 		new.default_color = Color.DARK_RED
 		new.add_point(e.position)
@@ -148,16 +149,20 @@ func player_killed(player):
 	Global.build_lobby()
 	sec_elapsed = 0
 
-func entity_killed(entity):
+func entity_killed(entity:Object):
 	var active_enemies = []
 	for e in Global.current_map[1].get_meta("entities"):
-		if !is_instance_valid(e) or !e:
-			Global.active_entities.erase(e)
-		elif e.is_in_group("enemy"):
+		if !e or !is_instance_valid(e):
+			continue
+		elif e and e.is_in_group("enemy"):
 			active_enemies.append(e)
 	
-	if active_enemies.size() == 0:
-		Global.music_build_update(Global.current_map)
+	if active_enemies.size()-1 <= 0:
+		Global.current_map[1].set_meta("entities",[])
+		if Global.current_map[1].has_meta("boss"):
+			Global.music_play("victory")
+		else:
+			Global.music_build_update(Global.current_map)
 
 func boss_encounter(boss:Object):
 	boss_encountered = true
@@ -175,13 +180,21 @@ func game_reset():
 	Global.Inventory.reset_inv()
 	Global.Inventory.clean_player_slots()
 	
+	Global.Bossbar.get_node("BarProgress").position = Vector2(915.555,1200)
+	Global.Bossbar.get_node("BossName").position = Vector2(560.055,1080)
+	Global.Bossbar.get_node("BossDesc").position = Vector2(560.055,1128)
+	Global.Bossbar.get_node("BossHealth").position = Vector2(656,1160)
+	
 	for p in Global.active_players:
 		for m in p.minions:
 			m.queue_free()
 		p.minions.clear()
 		p.health = p.max_health
 		p.brainpower = 6
-		
+		for c in p.get_children():
+			if c.is_in_group("key"):
+				c.queue_free()
+				break
 		Global.active_players.erase(p)
 		p.queue_free()
 

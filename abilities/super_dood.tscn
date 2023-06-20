@@ -435,6 +435,7 @@ bus = &"SFX"
 
 [node name="Punch" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("7_utbfo")
+volume_db = -30.0
 bus = &"SFX"
 
 [connection signal="area_entered" from="EnemyDetect" to="." method="_on_enemy_detect_area_entered"]

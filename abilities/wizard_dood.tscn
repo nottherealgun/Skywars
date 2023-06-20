@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://dho1ln256yee4"]
+[gd_scene load_steps=49 format=3 uid="uid://dho1ln256yee4"]
 
 [ext_resource type="Script" path="res://abilities/wizard_dood.gd" id="1_21ckh"]
 [ext_resource type="Texture2D" uid="uid://b752aoyt6fi5n" path="res://abilities/dood_wiz_heal.png" id="2_0o4yk"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://abilities/HealCircle.gd" id="7_i6pho"]
 [ext_resource type="Texture2D" uid="uid://ditbbsbwdtvul" path="res://abilities/dood_wiz_circle.png" id="8_qletg"]
 [ext_resource type="AudioStream" uid="uid://ci8lsmwanws7t" path="res://sfx/sproutdude_death.mp3" id="9_f8m5l"]
-[ext_resource type="AudioStream" uid="uid://cqv1po6ddl2oh" path="res://sfx/sproutdude_healing_field.mp3" id="9_l2m1p"]
 [ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://audio_manager.tscn" id="9_mtvku"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5tgq"]
@@ -373,13 +372,6 @@ angular_velocity_max = 100.0
 scale_amount_max = 5.0
 color = Color(0.81631, 0.873881, 0.439411, 1)
 color_ramp = SubResource("Gradient_aw106")
-
-[node name="AudioManager" parent="HealCircle" instance=ExtResource("9_mtvku")]
-
-[node name="Heal" type="AudioStreamPlayer" parent="HealCircle/AudioManager"]
-stream = ExtResource("9_l2m1p")
-volume_db = 12.0
-bus = &"SFX"
 
 [node name="AudioManager" parent="." instance=ExtResource("9_mtvku")]
 

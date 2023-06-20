@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cadidmy5tmxmm"
+path="res://.godot/imported/Hp go down SFX.mp3-4f51b8ca56fec9d7f1e96d6673ef6a20.mp3str"
+
+[deps]
+
+source_file="res://sfx/Hp go down SFX.mp3"
+dest_files=["res://.godot/imported/Hp go down SFX.mp3-4f51b8ca56fec9d7f1e96d6673ef6a20.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

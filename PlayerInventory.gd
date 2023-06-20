@@ -73,6 +73,8 @@ func _input_update():
 					anim_tween = create_tween().set_trans(Tween.TRANS_CUBIC)
 					anim_tween.tween_property(slot,"scale",Vector2.ONE,0.25).from(Vector2.ONE*0.5)
 					break
+		
+		$AudioManager.play("Unequip")
 					
 	elif Input.is_action_just_pressed("p1_secondary"):
 		if anim_tween and anim_tween.is_running():
@@ -84,7 +86,9 @@ func _input_update():
 				Global.active_players[0].emit_signal("equips_item",player_equipped_slots[1])
 				Global.active_players[0].stat_gui.get_node("EquippedItem/Texture").texture =\
 				load("res://items/"+player_equipped_slots[1]["pic"])
-			
+				
+				$AudioManager.play("Equip")
+				
 				for i in shown_inventory.size():
 					var slot = get_node("ItemSlot"+str(i))
 					if i == player_hovering_slot_ids[1]:
@@ -104,6 +108,8 @@ func _input_update():
 			elif player_hovering_slots[1].type == "consumable":
 				Global.active_players[0].emit_signal("consumes_item",player_hovering_slots[1])
 				remove_item(player_hovering_slot_ids[1])
+				
+				$AudioManager.play("Eat")
 		
 func refresh_inv():
 	for i in shown_inventory.size():

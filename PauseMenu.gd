@@ -22,6 +22,7 @@ func _on_button_1_mouse_exited():
 func _on_button_1_pressed():
 	hide()
 	get_tree().paused = false
+	$AudioManager.play("click")
 
 func _on_button_2_mouse_entered():
 	tween = create_tween().set_trans(Tween.TRANS_CUBIC)
@@ -34,6 +35,7 @@ func _on_button_2_mouse_exited():
 
 func _on_button_2_pressed():
 	$"../SettingsMenu".show()
+	$AudioManager.play("click")
 	
 func _on_button_3_mouse_entered():
 	tween = create_tween().set_trans(Tween.TRANS_CUBIC)
@@ -52,6 +54,7 @@ func _on_button_3_pressed():
 	$"../MainMenu".show()
 	LevelManager.clear_level()
 	GameManager.game_reset()
+	$AudioManager.play("click")
 
 func _on_button_4_mouse_entered():
 	tween = create_tween().set_trans(Tween.TRANS_CUBIC)
@@ -62,4 +65,5 @@ func _on_button_4_mouse_exited():
 	tween.tween_property($Button4,"scale",Vector2(1,1),0.1)
 
 func _on_button_4_pressed():
+	$AudioManager.play("click")
 	get_tree().quit()

@@ -46,7 +46,8 @@ func buy(for_player):
 			item_slots[inspecting_item_id].get_node("../../Desc/Stats/Label").text = ""
 			item_slots[inspecting_item_id].get_node("../../Desc/ScrollContainer/Label").text = "Item Sold."
 			item_slots[inspecting_item_id].get_node("../../Desc/Cost").text = "Cost:   -"
-
+			$AudioManager.play("Purchase")
+			
 func _on_area_area_entered(area):
 	var entity = area.get_parent()
 	if entity.is_in_group("player"):

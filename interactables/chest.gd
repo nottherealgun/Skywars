@@ -54,6 +54,7 @@ func item_effect():
 		t.kill()
 		
 func money_effect():
+	$AudioManager.play_random(["Coin1","Coin2","Coin3"])
 	for i in 5:
 		var new_coin = $CoinTemplate.duplicate()
 		new_coin.template = false

@@ -1,10 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://c0ko6kf18waxn"]
+[gd_scene load_steps=14 format=3 uid="uid://c0ko6kf18waxn"]
 
 [ext_resource type="PackedScene" uid="uid://cni0dsstdjde" path="res://projectiles/projectile.tscn" id="1_krou7"]
 [ext_resource type="Script" path="res://projectiles/dood_vines.gd" id="2_j8pj3"]
 [ext_resource type="Texture2D" uid="uid://bwyfdx0byi7hj" path="res://abilities/dood_ranged_root.png" id="3_xpdqy"]
-[ext_resource type="AudioStream" uid="uid://dsjx5ra1ysca8" path="res://sfx/sproutdude_vine2.mp3" id="4_rw3wi"]
-[ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://audio_manager.tscn" id="4_sly6g"]
+[ext_resource type="AudioStream" uid="uid://b6dnpxhrer3tw" path="res://sfx/sproutdude_vine.mp3" id="4_y8ht6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3arh3"]
 atlas = ExtResource("3_xpdqy")
@@ -93,10 +92,9 @@ autoplay = "default"
 [node name="Shadow" parent="." index="4"]
 visible = false
 
-[node name="AudioManager" parent="." index="5" instance=ExtResource("4_sly6g")]
-
-[node name="Vines" type="AudioStreamPlayer" parent="AudioManager" index="0"]
-stream = ExtResource("4_rw3wi")
-volume_db = -5.0
+[node name="Vines" type="AudioStreamPlayer" parent="AudioManager" index="4"]
+stream = ExtResource("4_y8ht6")
+volume_db = -20.0
+bus = &"SFX"
 
 [connection signal="animation_finished" from="Sprite" to="." method="_on_sprite_animation_finished"]

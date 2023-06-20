@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://daeql3etvbgyq"]
+[gd_scene load_steps=21 format=3 uid="uid://daeql3etvbgyq"]
 
 [ext_resource type="Script" path="res://players/player.gd" id="1_2rdnx"]
 [ext_resource type="SpriteFrames" uid="uid://ut4kvd8lo60w" path="res://players/gun.tres" id="2_gfowo"]
@@ -7,6 +7,12 @@
 [ext_resource type="FontFile" uid="uid://im11hs0xx7wu" path="res://utility/RoadPixel.ttf" id="4_nv7os"]
 [ext_resource type="Script" path="res://players/TrinketManager.gd" id="6_fqbxb"]
 [ext_resource type="Script" path="res://players/Buff.gd" id="7_oj8un"]
+[ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://audio_manager.tscn" id="8_qjt5i"]
+[ext_resource type="AudioStream" uid="uid://dvrwta0dvcia8" path="res://sfx/player_heal.mp3" id="9_2hd5b"]
+[ext_resource type="AudioStream" uid="uid://dldfss342vxyj" path="res://sfx/player_injured.mp3" id="10_78lqm"]
+[ext_resource type="AudioStream" uid="uid://c3b0bxgyxijms" path="res://sfx/Dashing.mp3" id="11_bhglg"]
+[ext_resource type="AudioStream" uid="uid://54bi0oftlpxg" path="res://sfx/Gun shooting sound.mp3" id="12_qv7hf"]
+[ext_resource type="AudioStream" uid="uid://c1wd38ayokibd" path="res://sfx/Darwin Shooting sound.mp3" id="12_tk1mb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oscn4"]
 size = Vector2(40, 16)
@@ -200,6 +206,29 @@ script = ExtResource("6_fqbxb")
 script = ExtResource("7_oj8un")
 
 [node name="Timer" type="Timer" parent="TrinketManager/Buff"]
+
+[node name="AudioManager" parent="." instance=ExtResource("8_qjt5i")]
+
+[node name="Heal" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("9_2hd5b")
+bus = &"SFX"
+
+[node name="Injured" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("10_78lqm")
+bus = &"SFX"
+
+[node name="Dash" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("11_bhglg")
+bus = &"SFX"
+
+[node name="ShootGun" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("12_qv7hf")
+max_polyphony = 10
+bus = &"SFX"
+
+[node name="ShootDarwin" type="AudioStreamPlayer" parent="AudioManager"]
+stream = ExtResource("12_tk1mb")
+bus = &"SFX"
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

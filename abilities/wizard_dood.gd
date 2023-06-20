@@ -41,6 +41,9 @@ func _process(delta):
 			target = targets_in_range.pick_random()
 			if !is_instance_valid(target):
 				target = null
+			elif target.get("awoken") and target.awoken == false:
+				target = null
+				
 	if !target and state != STATES.FOLLOWING:
 		change_state(STATES.FOLLOWING)
 		
@@ -73,7 +76,7 @@ func _process(delta):
 				$AnimatedSprite2D.flip_h = (master.position.x < position.x)
 				
 				if $AnimatedSprite2D.frame == 10 and !shot:
-					master.health += damage
+					master.heal(damage,self)
 					spawn_circle()
 					shot = true
 					
@@ -84,7 +87,6 @@ func _process(delta):
 				change_state(STATES.IDLE)
 		
 		STATES.DEATH:
-			$AudioManager.play("Death")
 			await $AnimatedSprite2D.animation_finished
 			master.minions.erase(self)
 			emit_signal("minion_died")
@@ -150,6 +152,7 @@ func change_state(new_state):
 			
 		STATES.DEATH:
 			$AnimatedSprite2D.play("death")
+			$AudioManager.play("Death")
 
 func affect(victim:Object):
 	victim.health -= damage
