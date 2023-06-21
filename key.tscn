@@ -71,7 +71,7 @@ animations = [{
 radius = 46.0109
 
 [node name="Key" type="Area2D" groups=["collectable", "key"]]
-monitorable = false
+monitoring = false
 script = ExtResource("1_8ap30")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]

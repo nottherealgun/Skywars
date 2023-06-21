@@ -152,29 +152,25 @@ func player_killed(player):
 func entity_killed(entity:Object):
 	var active_enemies = []
 	for e in Global.current_map[1].get_meta("entities"):
-		if !e or !is_instance_valid(e):
-			continue
-		elif e and e.is_in_group("enemy"):
+		if is_instance_valid(e) and e.is_in_group("enemy"):
 			active_enemies.append(e)
 	
-	if active_enemies.size()-1 <= 0:
-		Global.current_map[1].set_meta("entities",[])
-		if Global.current_map[1].has_meta("boss"):
-			Global.music_play("victory")
-		else:
-			Global.music_build_update(Global.current_map)
+	if entity.is_in_group("enemy"):
+		if active_enemies.size()-1 <= 0:
+			if Global.current_map[1].has_meta("boss"):
+				Global.music_play("victory")
+			else:
+				Global.current_map[1].set_meta("entities",[])
+				Global.music_build_update(Global.current_map)
 
 func boss_encounter(boss:Object):
 	boss_encountered = true
 	var tween = create_tween().set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(cam,"position",boss.position,3.0).from(boss.position+Vector2(0,1000))
-#	tween.chain().tween_property(cam,"zoom",Vector2.ONE*2.5,1.0).from(Vector2(2,2)).set_trans(Tween.TRANS_ELASTIC)
-#	tween.chain().tween_property(cam,"zoom",Vector2.ONE*3,6.0).from(Vector2(2.5,2.5)).set_trans(Tween.TRANS_LINEAR)
-#	tween.chain().tween_property(cam,"zoom",Vector2.ONE*2,0.5).from(Vector2(4,4)).set_delay(2.0)
 	await boss.started
 	boss_encountered = false
 
-func game_reset():
+func game_reset(reset_player:=false):
 	GameManager.money = 0
 	Global.Inventory.hide()
 	Global.Inventory.reset_inv()
@@ -185,18 +181,19 @@ func game_reset():
 	Global.Bossbar.get_node("BossDesc").position = Vector2(560.055,1128)
 	Global.Bossbar.get_node("BossHealth").position = Vector2(656,1160)
 	
-	for p in Global.active_players:
-		for m in p.minions:
-			m.queue_free()
-		p.minions.clear()
-		p.health = p.max_health
-		p.brainpower = 6
-		for c in p.get_children():
-			if c.is_in_group("key"):
-				c.queue_free()
-				break
-		Global.active_players.erase(p)
-		p.queue_free()
+	if reset_player:
+		for p in Global.active_players:
+			for m in p.minions:
+				m.queue_free()
+			p.minions.clear()
+			p.health = p.max_health
+			p.brainpower = 6
+			for c in p.get_children():
+				if c.is_in_group("key"):
+					c.queue_free()
+					break
+			Global.active_players.erase(p)
+			p.queue_free()
 
 func _on_timer_timeout():
 	sec_elapsed += 1

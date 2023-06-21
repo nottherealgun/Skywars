@@ -92,7 +92,8 @@ func kill(entity:Object,immediate=false):
 		if immediate == false:
 			tween.tween_property(entity,"scale",Vector2.ZERO,0.2)
 			tween.chain().tween_callback(entity.queue_free)	
-
+		else:
+			entity.queue_free()
 		if entity.is_in_group("enemy"):
 			tween.parallel().tween_callback(emit_death_indicator.bind(entity.position))
 			if entity.health <= 0:
@@ -588,7 +589,7 @@ func build_lobby():
 	transitioning = true
 	await tween.step_finished
 	emit_signal("built_level")
-	var room_scene = load("res://rooms/"+Global.rooms[0]["file"]).instantiate()
+	var room_scene = load("res://rooms/"+Global.rooms[0]["file"]).instantiate().duplicate()
 	
 	var new_map = room_scene.duplicate()
 	var new_room = Node2D.new()
@@ -816,7 +817,9 @@ func populate():
 					for j in 4:
 						if new.move_and_collide(Vector2.ONE.rotated(deg_to_rad(i*90)),true):
 							ok = false
+							Global.kill(new,true)
 							break
+							
 				entities.append(new)
 				stage_enemies.append(new)
 		
@@ -1079,7 +1082,8 @@ func use_ability(character:String,by:Object):
 				by.emit_signal("spawns_minion",minion)
 				
 			"gun":
-				var aim_vec = by.position.direction_to(Main.get_global_mouse_position()+Vector2(0,by.mouse_aim_offset))
+#				var aim_vec = by.position.direction_to(Main.get_global_mouse_position()+Vector2(0,by.mouse_aim_offset))
+				var aim_vec = by.aim_vec
 				for i in 30:
 					var proj = Global.spawn_projectile(by,"gun_proj_1",by.position+Vector2(0,-by.mouse_aim_offset),aim_vec.normalized(),true)
 					await get_tree().create_timer(0.02).timeout

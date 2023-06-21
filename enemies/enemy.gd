@@ -40,10 +40,12 @@ func _physics_process(delta):
 	
 	while null in targets_in_range:
 		targets_in_range.erase(null)
-		
+	var trash = []
 	for t in targets_in_range:
 		if !is_instance_valid(t):
-			targets_in_range.erase(t)
+			trash.append(t)
+	for t in trash:
+		targets_in_range.erase(t)
 			
 	if !target:
 		if !targets_in_range.is_empty():

@@ -108,6 +108,8 @@ func _process(delta):
 
 var move_tween : Tween
 
+
+
 func dash_effect():
 	if dashing:
 		var frame : Texture2D = $Sprite.sprite_frames.get_frame_texture("run",$Sprite.frame)
@@ -120,6 +122,9 @@ func dash_effect():
 		sprite.flip_h = $Sprite.flip_h
 		sprite.scale = $Sprite.scale
 		Global.Main.add_child(sprite)
+	else:
+		if move_tween and move_tween.is_running():
+			move_tween.stop()
 
 func _input_update():
 	# Get movement input strength
@@ -155,7 +160,7 @@ func _input_update():
 						move_tween = create_tween()
 						dashing = true
 						move_tween.tween_property(self,"position",move_vec*150*dash_modifier,0.2).as_relative()
-						move_tween.parallel().tween_property(self,"dashing",false,0.2)
+						move_tween.chain().tween_callback(self.set.bind("dashing",false))
 						
 						$AudioManager.play("Dash")
 					

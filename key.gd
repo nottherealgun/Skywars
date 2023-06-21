@@ -5,6 +5,7 @@ var held_by_player = false
 
 func _ready():
 	holder.tree_exiting.connect(drop)
+	Global.active_entities.append(self)
 
 func _process(delta):
 	if !held_by_player and is_instance_valid(holder) and holder.is_in_group("player"):
@@ -21,7 +22,7 @@ func _process(delta):
 
 func drop():
 	show()
-	monitorable = true
+	monitoring = true
 	var pos = holder.position
 	get_parent().remove_child(self)
 	Global.Main.add_child.call_deferred(self)

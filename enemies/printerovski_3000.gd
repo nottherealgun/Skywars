@@ -71,7 +71,7 @@ func _physics_process(delta):
 		var dist = INF
 		var closest
 		for t in targets_in_range:
-			if targets_in_range.is_empty() or t.fainted:
+			if targets_in_range.is_empty() or t and t.fainted:
 				break
 			if t.position.distance_to(position) < dist:
 				dist = t.position.distance_to(position)

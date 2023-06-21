@@ -267,11 +267,18 @@ autoplay = "static"
 offset = Vector2(0, -24)
 
 [node name="HitboxShape" parent="Hitbox" index="0"]
+visible = false
 position = Vector2(4, 12)
 shape = SubResource("RectangleShape2D_ana4n")
 
 [node name="Timer" type="Timer" parent="." index="4"]
 one_shot = true
+
+[node name="PlayerDetectShape" parent="PlayerDetect" index="0"]
+visible = false
+
+[node name="AllyDetectShape" parent="AllyDetect" index="0"]
+visible = false
 
 [node name="NameTag" parent="." index="7"]
 offset_top = -87.0

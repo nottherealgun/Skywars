@@ -162,6 +162,12 @@ func reset_inv():
 		p.equipped_item = {}
 		p.stat_gui.get_node("EquippedItem/Texture").texture = null
 	
+		player_equipped_slots.append({})
+		player_hovering_slots.append(0)
+		player_hovering_slot_ids.append(-1)
+	
+	$Selector.position = get_node("ItemSlot0").position-Vector2(13,13)
+	
 func add_item(item:Dictionary):
 	inventory.append(item)
 	return item

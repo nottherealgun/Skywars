@@ -268,10 +268,8 @@ texture_filter = 1
 position = Vector2(0, 32)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_g3qmm")
-animation = &"death"
+animation = &"idle"
 autoplay = "idle"
-frame = 5
-frame_progress = 1.0
 offset = Vector2(0, -16)
 
 [node name="Hitbox" type="Area2D" parent="."]
@@ -279,12 +277,14 @@ metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Hitbox"]
+visible = false
 position = Vector2(0, 24)
 shape = SubResource("RectangleShape2D_h5wvl")
 
 [node name="EnemyDetect" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetect"]
+visible = false
 shape = SubResource("CircleShape2D_lipov")
 
 [node name="AllyDetect" type="Area2D" parent="."]
@@ -292,6 +292,7 @@ collision_layer = 32
 collision_mask = 32
 
 [node name="AllyDetectShape" type="CollisionShape2D" parent="AllyDetect"]
+visible = false
 shape = SubResource("CircleShape2D_jfcbb")
 
 [node name="Shadow" type="Sprite2D" parent="."]

@@ -29,10 +29,15 @@ animation = &"idle"
 autoplay = "idle"
 
 [node name="HitboxShape" parent="Hitbox" index="0"]
+visible = false
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_0ylbf")
 
+[node name="PlayerDetectShape" parent="PlayerDetect" index="0"]
+visible = false
+
 [node name="AllyDetectShape" parent="AllyDetect" index="0"]
+visible = false
 shape = SubResource("CircleShape2D_363mx")
 
 [node name="Shadow" type="Sprite2D" parent="." index="8"]

@@ -366,13 +366,16 @@ autoplay = "static"
 offset = Vector2(0, -16.4)
 
 [node name="HitboxShape" parent="Hitbox" index="0"]
+visible = false
 position = Vector2(0, 6.5)
 shape = SubResource("RectangleShape2D_cq0oo")
 
 [node name="PlayerDetectShape" parent="PlayerDetect" index="0"]
+visible = false
 shape = SubResource("CircleShape2D_utfun")
 
 [node name="AllyDetectShape" parent="AllyDetect" index="0"]
+visible = false
 shape = SubResource("CircleShape2D_ab1t4")
 
 [node name="PlayerViewRay" parent="." index="7"]
