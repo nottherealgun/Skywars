@@ -44,16 +44,24 @@ func button_pressed(button:String):
 			
 		"credits_back":
 			$AnimationPlayer.play("credits_back")
-		
-func start_game(character:String):
-	var new_player = load("res://players/player.tscn").instantiate()
-	new_player.character = character.to_lower()
-	Global.Main.add_child(new_player)
-	Global.active_players.append(new_player)
-#	Global.RNG.set_seed(int("test"))
+
+var player_chosen_chars = ["darwin","gun","darwin","darwin"]
+
+func start_game(character:String,player_amnt:int):
+	for p in range(player_amnt):
+		var new_player = load("res://players/player.tscn").instantiate()
+		new_player.character = player_chosen_chars[p]
+		new_player.player_id = p+1
+		Global.Main.add_child(new_player)
+		Global.active_players.append(new_player)
+	
 	GameManager._game_start()
 	Global.build_lobby()
 	await Global.built_level
 	$AnimationPlayer.play("opening")
 	hide()
-	
+
+func _on_character_selection_box_changed_player_chosen_chars(arr):
+	player_chosen_chars = arr
+	while len(arr) < 4:
+		player_chosen_chars.append("darwin")

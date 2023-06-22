@@ -11,8 +11,8 @@ func _on_timer_timeout():
 				continue
 			$AnimationPlayer.play("summon")
 			var paper = Global.call_deferred("spawn_enemy","corrupted_paper",position+get_parent().position+position.direction_to(target.position)*50)
-			Global.active_entities.append(paper)
-			var new_arr = Global.current_map[1].get_meta("entities")
-			new_arr.append(paper)
-			Global.current_map[1].set_meta("entities",new_arr)
+#			Global.active_entities.append(paper)
+#			var new_arr = Global.current_map[1].get_meta("entities")
+#			new_arr.append(paper)
+#			Global.current_map[1].set_meta("entities",new_arr)
 			await get_tree().create_timer(0.2).timeout

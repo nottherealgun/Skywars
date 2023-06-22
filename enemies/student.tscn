@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bs0h2fmnb8ptq"]
+[gd_scene load_steps=9 format=3 uid="uid://bs0h2fmnb8ptq"]
 
 [ext_resource type="PackedScene" uid="uid://0anrpyccai4l" path="res://enemies/enemy.tscn" id="1_u8cc3"]
 [ext_resource type="Script" path="res://enemies/student.gd" id="2_coljh"]
 [ext_resource type="SpriteFrames" uid="uid://dk73utyosr1wa" path="res://enemies/student1.tres" id="3_n61ad"]
 [ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://utility/shadow.png" id="4_ku66m"]
+[ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://audio_manager.tscn" id="5_ph8d0"]
+[ext_resource type="AudioStream" uid="uid://buev6vsao6ouk" path="res://sfx/Slaping.mp3" id="6_ygonw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cyl6t"]
 size = Vector2(48, 16)
@@ -76,3 +78,10 @@ visible = false
 z_index = 2
 points = PackedVector2Array(0, 0, 0, 0)
 default_color = Color(0.623529, 0, 0.309804, 1)
+
+[node name="AudioManager" parent="." index="13" instance=ExtResource("5_ph8d0")]
+
+[node name="Slap" type="AudioStreamPlayer" parent="AudioManager" index="0"]
+stream = ExtResource("6_ygonw")
+volume_db = -15.0
+bus = &"SFX"

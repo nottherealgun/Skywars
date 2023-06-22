@@ -170,7 +170,7 @@ func boss_encounter(boss:Object):
 	await boss.started
 	boss_encountered = false
 
-func game_reset(reset_player:=false):
+func game_reset(reset_player:=true):
 	GameManager.money = 0
 	Global.Inventory.hide()
 	Global.Inventory.reset_inv()

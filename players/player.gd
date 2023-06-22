@@ -11,7 +11,7 @@ signal spawns_minion(minion)
 # Player device settings
 @export var player_id = 1
 @export_enum("darwin","gun") var character = "darwin"
-@onready var player_color = [Color.DODGER_BLUE,Color.CORAL,Color.DARK_GREEN,Color.MEDIUM_PURPLE][player_id-1]
+@onready var player_color = [Color.DODGER_BLUE,Color.CORAL,Color.FOREST_GREEN,Color.MEDIUM_PURPLE][player_id-1]
 
 # Player stats
 @export var max_health = 	100
@@ -105,26 +105,28 @@ func _process(delta):
 	if move_tween and move_tween.is_running():
 		if move_and_collide(move_vec*2,true):
 			move_tween.stop()
+			dashing = false
 
 var move_tween : Tween
 
-
-
 func dash_effect():
 	if dashing:
-		var frame : Texture2D = $Sprite.sprite_frames.get_frame_texture("run",$Sprite.frame)
-		var sprite = Sprite2D.new()
-		var tween = create_tween().bind_node(sprite)
-		tween.tween_property(sprite,"modulate",Color.TRANSPARENT,0.2)
-		tween.chain().tween_callback(sprite.queue_free)
-		sprite.position = position
-		sprite.texture = frame
-		sprite.flip_h = $Sprite.flip_h
-		sprite.scale = $Sprite.scale
-		Global.Main.add_child(sprite)
+		if $DashEffectTimer.is_stopped():
+			$DashEffectTimer.start()
+			var frame : Texture2D = $Sprite.sprite_frames.get_frame_texture("run",$Sprite.frame)
+			var sprite = Sprite2D.new()
+			var tween = create_tween().bind_node(sprite)
+			tween.tween_property(sprite,"modulate",Color.TRANSPARENT,0.2)
+			tween.chain().tween_callback(sprite.queue_free)
+			sprite.position = position
+			sprite.texture = frame
+			sprite.flip_h = $Sprite.flip_h
+			sprite.scale = $Sprite.scale
+			Global.Main.add_child(sprite)
 	else:
 		if move_tween and move_tween.is_running():
 			move_tween.stop()
+			$DashEffectTimer.stop()
 
 func _input_update():
 	# Get movement input strength

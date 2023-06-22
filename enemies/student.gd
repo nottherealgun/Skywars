@@ -33,6 +33,7 @@ func _physics_process(delta):
 				change_state(States.IDLE)
 			if $Timer.is_stopped() and target:
 				target.get_hurt(self)
+				$AudioManager.play("Slap")
 				$Timer.start()
 
 func affect(victim:Object):

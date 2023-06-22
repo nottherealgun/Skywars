@@ -336,6 +336,7 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_88mrs")
 animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.221484
 offset = Vector2(0, -16)
 
 [node name="Hitbox" type="Area2D" parent="."]

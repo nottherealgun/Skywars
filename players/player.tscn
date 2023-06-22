@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://daeql3etvbgyq"]
+[gd_scene load_steps=22 format=3 uid="uid://daeql3etvbgyq"]
 
 [ext_resource type="Script" path="res://players/player.gd" id="1_2rdnx"]
 [ext_resource type="SpriteFrames" uid="uid://ut4kvd8lo60w" path="res://players/gun.tres" id="2_gfowo"]
@@ -49,12 +49,19 @@ _data = {
 "default": SubResource("Animation_245ad")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_67kpm"]
+bg_color = Color(0.368627, 0.368627, 0.368627, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c8qaq"]
 bg_color = Color(0.14902, 0.635294, 0.937255, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
@@ -67,6 +74,7 @@ position = Vector2(0, 44)
 shape = SubResource("RectangleShape2D_oscn4")
 
 [node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 65
 collision_mask = 3
 
 [node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
@@ -160,9 +168,11 @@ autostart = true
 
 [node name="DashGUI" type="ProgressBar" parent="."]
 offset_left = -32.0
-offset_top = -55.0
-offset_right = 32.0
-offset_bottom = -51.0
+offset_top = -58.0
+offset_right = 96.0
+offset_bottom = -42.0
+scale = Vector2(0.5, 0.5)
+theme_override_styles/background = SubResource("StyleBoxFlat_67kpm")
 theme_override_styles/fill = SubResource("StyleBoxFlat_c8qaq")
 show_percentage = false
 
@@ -229,6 +239,12 @@ bus = &"SFX"
 [node name="ShootDarwin" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("12_tk1mb")
 bus = &"SFX"
+
+[node name="GuideManager" type="Node" parent="."]
+
+[node name="DashEffectTimer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

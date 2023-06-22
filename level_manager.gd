@@ -11,7 +11,7 @@ func clear_level():
 		Global.kill(d)
 	
 	for e in Global.active_entities:
-		if e.is_in_group("minion"):
+		if (is_instance_valid(e) and e.is_in_group("minion")) or !is_instance_valid(e):
 			continue
 		Global.kill(e)
 	

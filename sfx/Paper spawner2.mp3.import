@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d8rh5d3unlxn"
+path="res://.godot/imported/Paper spawner2.mp3-b2f58fbd1034008fb45a504c1765dade.mp3str"
+
+[deps]
+
+source_file="res://sfx/Paper spawner2.mp3"
+dest_files=["res://.godot/imported/Paper spawner2.mp3-b2f58fbd1034008fb45a504c1765dade.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

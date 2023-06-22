@@ -52,7 +52,7 @@ func _process(delta):
 			if position.distance_to(master.position) > min_master_dist:
 				change_state(STATES.FOLLOWING)
 				
-			if is_instance_valid(target):
+			if is_instance_valid(target) and target != master:
 				change_state(STATES.CHASING)
 				
 		STATES.FOLLOWING:
@@ -74,8 +74,12 @@ func _process(delta):
 			move_vec = position.direction_to(target.position)
 			if $AnimatedSprite2D.frame >= 3:
 				move((move_vec).normalized()*delta*speed*200)
+				
 			if position.distance_to(target.position) < 25:
 				change_state(STATES.ATTACKING)
+				
+			if position.distance_to(master.position) > min_master_dist:
+				change_state(STATES.IDLE)
 		
 		STATES.ATTACKING:
 			if is_instance_valid(target):

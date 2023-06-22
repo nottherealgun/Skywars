@@ -35,6 +35,8 @@ gdscript/warnings/enable=false
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
+mouse_cursor/custom_image="res://utility/cursor_big.png"
+mouse_cursor/custom_image_hotspot=Vector2(15, 15)
 
 [editor]
 
@@ -192,3 +194,32 @@ scroll={
 , Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":5,"pressed":false,"double_click":false,"script":null)
 ]
 }
+p3_up={
+"deadzone": 0.5,
+"events": []
+}
+p3_down={
+"deadzone": 0.5,
+"events": []
+}
+p3_left={
+"deadzone": 0.5,
+"events": []
+}
+p3_right={
+"deadzone": 0.5,
+"events": []
+}
+p3_primary={
+"deadzone": 0.5,
+"events": []
+}
+p3_secondary={
+"deadzone": 0.5,
+"events": []
+}
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=3
+anti_aliasing/screen_space_roughness_limiter/enabled=false

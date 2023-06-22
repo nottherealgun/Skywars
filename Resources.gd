@@ -786,7 +786,7 @@ func recursive_room_build(map:Array):
 
 func populate():
 	var gen_dict = {
-		"corrupted_paper":6,
+		"corrupted_paper":1,
 		"mop":3,
 		"student":4,
 		"printer":2,
@@ -811,6 +811,11 @@ func populate():
 						is_near_spawnpoint = false
 						if pos.distance_to(map[3].position) <= 400:
 							is_near_spawnpoint = true
+						for e in map[1].get_children():
+							if e.is_in_group("enemy") or e.is_in_group("interactable"):
+								if e.position.distance_to(pos) <= 100:
+									is_near_spawnpoint = true
+									break
 							
 					new = spawn_enemy(d,pos)
 					ok = true
@@ -829,7 +834,6 @@ func populate():
 	var new_key = load("res://key.tscn").instantiate()
 	rand_enemy.add_child(new_key)
 	new_key.holder = rand_enemy
-
 
 func build_ends():
 	var locked = []
@@ -1073,6 +1077,9 @@ func use_ability(character:String,by:Object):
 		"darwin":
 			if by.minions.size() >= 3:
 				ok = false
+		"gun":
+			if by.aim_vec == Vector2.ZERO:
+				ok = false
 	
 	if ok:
 		by.brainpower -= ability_price.get(character)
@@ -1084,13 +1091,14 @@ func use_ability(character:String,by:Object):
 			"gun":
 #				var aim_vec = by.position.direction_to(Main.get_global_mouse_position()+Vector2(0,by.mouse_aim_offset))
 				var aim_vec = by.aim_vec
-				for i in 30:
-					var proj = Global.spawn_projectile(by,"gun_proj_1",by.position+Vector2(0,-by.mouse_aim_offset),aim_vec.normalized(),true)
-					await get_tree().create_timer(0.02).timeout
-					proj.t = create_tween().set_loops()
-					var deg = deg_to_rad(35*[-1,1].pick_random())
-					proj.t.tween_property(proj,"direction",aim_vec.rotated(deg),0.5)
-					proj.t.chain().tween_property(proj,"direction",aim_vec.rotated(deg_to_rad(randf_range(0,-10))),0.5)
-					proj.t.chain().tween_property(proj,"direction",aim_vec.rotated(deg*-1),0.5)
-					by.emit_signal("spawns_bullet",proj)
-					by.get_node("AudioManager").play("ShootGun")
+				if aim_vec != Vector2.ZERO:
+					for i in 30:
+						var proj = Global.spawn_projectile(by,"gun_proj_1",by.position+Vector2(0,-by.mouse_aim_offset),aim_vec.normalized(),true)
+						await get_tree().create_timer(0.02).timeout
+						proj.t = create_tween().set_loops()
+						var deg = deg_to_rad(35*[-1,1].pick_random())
+						proj.t.tween_property(proj,"direction",aim_vec.rotated(deg),0.5)
+						proj.t.chain().tween_property(proj,"direction",aim_vec.rotated(deg_to_rad(randf_range(0,-10))),0.5)
+						proj.t.chain().tween_property(proj,"direction",aim_vec.rotated(deg*-1),0.5)
+						by.emit_signal("spawns_bullet",proj)
+						by.get_node("AudioManager").play("ShootGun")

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://20yk2ierwsu6"
+path="res://.godot/imported/Print Mob Shoot.mp3-c2fed960d86e77c50c077b8f54a0cc48.mp3str"
+
+[deps]
+
+source_file="res://sfx/Print Mob Shoot.mp3"
+dest_files=["res://.godot/imported/Print Mob Shoot.mp3-c2fed960d86e77c50c077b8f54a0cc48.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

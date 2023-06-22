@@ -1,4 +1,4 @@
-[gd_scene load_steps=139 format=3 uid="uid://dlpndwnncnijn"]
+[gd_scene load_steps=147 format=3 uid="uid://dlpndwnncnijn"]
 
 [ext_resource type="AudioStream" uid="uid://bl3tu345hbh37" path="res://music/The Lobby.mp3" id="1_4g0f4"]
 [ext_resource type="Texture2D" uid="uid://dv8c76rwlux0p" path="res://items/idCardGUI.png" id="2_e4464"]
@@ -74,6 +74,12 @@
 [ext_resource type="Texture2D" uid="uid://cngsb0hojf7aj" path="res://gui/slider_knob.png" id="62_cpwue"]
 [ext_resource type="Texture2D" uid="uid://cooqpbluucqtf" path="res://gui/slider_fg.png" id="63_4dcju"]
 [ext_resource type="Texture2D" uid="uid://cmu6og5srg27p" path="res://gui/slider_bg.png" id="63_yfw3t"]
+[ext_resource type="Texture2D" uid="uid://bcs40r8v4p3ni" path="res://gui/player_1_circle.png" id="64_54lkt"]
+[ext_resource type="Script" path="res://CharacterSelectionBox.gd" id="64_x1ckp"]
+[ext_resource type="Texture2D" uid="uid://cqeblbht4e2eb" path="res://gui/player_2_circle.png" id="65_rjruo"]
+[ext_resource type="Texture2D" uid="uid://b2jvp1d2rfn1b" path="res://gui/player_3_circle.png" id="66_s2sd2"]
+[ext_resource type="Texture2D" uid="uid://b335kl1f1hjbt" path="res://gui/player_4_circle.png" id="67_xmikd"]
+[ext_resource type="Texture2D" uid="uid://cu3h3y6lofhvt" path="res://players/darwin_head.png" id="68_1h45m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sr40o"]
 atlas = ExtResource("10_xahcf")
@@ -1086,6 +1092,20 @@ border_width_top = 10
 border_width_right = 10
 border_width_bottom = 10
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqaim"]
+bg_color = Color(0.235294, 0.301961, 0.678431, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y1t6c"]
+bg_color = Color(0.686275, 0.4, 0.403922, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d7yox"]
 shader = ExtResource("23_jl8kg")
 shader_parameter/blur_amount = 2.5
@@ -1443,6 +1463,7 @@ mouse_filter = 2
 
 [node name="Cursor" type="Sprite2D" parent="GUI"]
 process_mode = 3
+visible = false
 z_index = 10
 texture_filter = 1
 scale = Vector2(4, 4)
@@ -2802,7 +2823,7 @@ grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 text = "SkyWars Demo
-Alpha V.9-C | As of 22/6/2023
+Beta V.1 | As of 23/6/2023
 
 If any bugs or errors are found,
 please report to the Dev Team.
@@ -2823,6 +2844,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("35_ntfof")
+skip_splashscreen = true
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
@@ -2967,6 +2989,7 @@ size_flags_horizontal = 3
 texture_normal = ExtResource("47_gh4hk")
 texture_pressed = ExtResource("48_32h6v")
 texture_hover = ExtResource("49_31eij")
+ignore_texture_size = true
 stretch_mode = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GUI/MainMenu"]
@@ -3020,6 +3043,12 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("56_ldiwf")
 
+[node name="TextureRect" type="TextureRect" parent="GUI/MainMenu/Credits"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("15_ln4oo")
+
 [node name="Back" type="TextureButton" parent="GUI/MainMenu/Credits"]
 texture_filter = 1
 layout_mode = 1
@@ -3040,7 +3069,7 @@ texture_hover = ExtResource("54_00pad")
 stretch_mode = 5
 
 [node name="Text" type="RichTextLabel" parent="GUI/MainMenu/Credits"]
-texture_filter = 1
+texture_filter = 5
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3049,11 +3078,15 @@ offset_left = 210.0
 offset_right = -210.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 16
 theme_override_fonts/normal_font = ExtResource("11_2h1l6")
-theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/normal_font_size = 40
 bbcode_enabled = true
-text = "[center][outline_size=18][outline_color=black]
-
+text = "[center]
 
 
 
@@ -3065,45 +3098,45 @@ text = "[center][outline_size=18][outline_color=black]
 
 
 [font_size=100][color=yellow]Credits[/color][/font_size]
-
-[font_size=75]Project Founders[/font_size]
+[img=200 region=15,15,36,36]res://players/darwin_head.png[/img] [img=200 region=15,15,33,36]res://players/gun_head.png[/img]
+[font_size=60]Project Founders[/font_size]
 [color=gray]
 Paramate Tangphichayaphothiwat
 Thanapat Nartthanarung
 [/color]
-[font_size=75]Creative Directors[/font_size]
+[font_size=60]Creative Directors[/font_size]
 [color=gray]
 Noppanat Ampas
 [/color]
-[font_size=75]Assets & Visuals Artists[/font_size]
+[font_size=60]Assets & Visuals Artists[/font_size]
 [color=gray]
 Paramate Tangphichayaphothiwat
 Pojsakul Muangsai
 [/color]
-[font_size=75]Programmers[/font_size]
+[font_size=60]Programmers[/font_size]
 [color=gray]
 Thanapat Nartthanarung
 [/color]
-[font_size=75]Music Composers[/font_size]
+[font_size=60]Music Composers[/font_size]
 [color=gray]
 Orion Walker
 [/color]
-[font_size=75]SFX Designers[/font_size]
+[font_size=60]SFX Designers[/font_size]
 [color=gray]
 Sitthipak Barame
 [/color]
-[font_size=75]Upcoming Voices[/font_size]
+[font_size=60]Upcoming Voices[/font_size]
 [color=gray]
 Asst. Prof. Dale Konstanz
 Dr. Pisit Praiwattana
 Niran Sachdev
 [/color]
-[font_size=75]Beta Testers[/font_size]
+[font_size=60]Beta Testers[/font_size]
 [color=gray]
 Athit Eakapapan
 Dennis Scheucher
-Sarawin Intaranan
-
+Sarawin Intaranan[/color]
+[color=yellow]
 
 
 
@@ -3114,7 +3147,10 @@ And most importantly...
 
 
 It's YOU! Thank you for playing our game!
-[/color]
+
+
+
+
 
 
 
@@ -3441,7 +3477,27 @@ script = ExtResource("58_pmmy4")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
+[node name="Label" type="Label" parent="GUI/CharacterSelection"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -492.0
+offset_right = 360.0
+offset_bottom = -389.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("11_2h1l6")
+theme_override_font_sizes/font_size = 100
+text = "Choose Your Character"
+
 [node name="Selector" type="OptionButton" parent="GUI/CharacterSelection"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -3470,32 +3526,162 @@ popup/item_0/id = 0
 popup/item_1/text = "Gun"
 popup/item_1/id = 1
 
-[node name="Label" type="Label" parent="GUI/CharacterSelection"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -360.0
-offset_top = -180.0
-offset_right = 360.0
-offset_bottom = -77.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("11_2h1l6")
-theme_override_font_sizes/font_size = 100
-text = "Choose Your Character"
-
-[node name="Button" type="Button" parent="GUI/CharacterSelection"]
+[node name="Begin" type="Button" parent="GUI/CharacterSelection"]
 layout_mode = 0
-offset_left = 753.0
-offset_top = 650.0
-offset_right = 1168.0
-offset_bottom = 758.0
+offset_left = 536.0
+offset_top = 856.0
+offset_right = 1064.0
+offset_bottom = 964.0
 theme_override_fonts/font = ExtResource("11_2h1l6")
 theme_override_font_sizes/font_size = 100
 text = "BEGIN!"
+
+[node name="1P" type="Button" parent="GUI/CharacterSelection"]
+layout_mode = 0
+offset_left = 1072.0
+offset_top = 856.0
+offset_right = 1224.0
+offset_bottom = 964.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("11_2h1l6")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_pqaim")
+disabled = true
+toggle_mode = true
+text = "1P"
+metadata/amnt = 1
+
+[node name="2P" type="Button" parent="GUI/CharacterSelection"]
+layout_mode = 0
+offset_left = 1232.0
+offset_top = 856.0
+offset_right = 1384.0
+offset_bottom = 964.0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("11_2h1l6")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_y1t6c")
+toggle_mode = true
+text = "2P"
+metadata/amnt = 2
+
+[node name="AudioManager" parent="GUI/CharacterSelection" instance=ExtResource("23_8ixil")]
+
+[node name="Click" type="AudioStreamPlayer" parent="GUI/CharacterSelection/AudioManager"]
+stream = ExtResource("51_1moc3")
+bus = &"SFX"
+
+[node name="CharacterSelectionBox" type="HFlowContainer" parent="GUI/CharacterSelection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 128.0
+offset_top = 176.0
+offset_right = -128.0
+offset_bottom = -264.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+alignment = 1
+script = ExtResource("64_x1ckp")
+
+[node name="Unchosen" type="Node" parent="GUI/CharacterSelection/CharacterSelectionBox"]
+
+[node name="PlayerCircle2" type="TextureRect" parent="GUI/CharacterSelection/CharacterSelectionBox/Unchosen"]
+visible = false
+custom_minimum_size = Vector2(40, 40)
+offset_left = 744.0
+offset_top = 160.0
+offset_right = 784.0
+offset_bottom = 200.0
+size_flags_horizontal = 0
+texture = ExtResource("65_rjruo")
+stretch_mode = 6
+metadata/char = "darwin"
+
+[node name="PlayerCircle3" type="TextureRect" parent="GUI/CharacterSelection/CharacterSelectionBox/Unchosen"]
+visible = false
+custom_minimum_size = Vector2(40, 40)
+offset_left = 788.0
+offset_top = 160.0
+offset_right = 828.0
+offset_bottom = 200.0
+size_flags_horizontal = 0
+texture = ExtResource("66_s2sd2")
+stretch_mode = 6
+metadata/char = "darwin"
+
+[node name="PlayerCircle4" type="TextureRect" parent="GUI/CharacterSelection/CharacterSelectionBox/Unchosen"]
+visible = false
+custom_minimum_size = Vector2(40, 40)
+offset_left = 832.0
+offset_top = 160.0
+offset_right = 872.0
+offset_bottom = 200.0
+size_flags_horizontal = 0
+texture = ExtResource("67_xmikd")
+stretch_mode = 6
+metadata/char = "darwin"
+
+[node name="PlayerCircle1" type="TextureRect" parent="GUI/CharacterSelection/CharacterSelectionBox/Unchosen"]
+visible = false
+custom_minimum_size = Vector2(40, 40)
+offset_left = 744.0
+offset_top = 160.0
+offset_right = 784.0
+offset_bottom = 200.0
+size_flags_horizontal = 0
+texture = ExtResource("64_54lkt")
+stretch_mode = 6
+metadata/char = "darwin"
+
+[node name="Darwin" type="Panel" parent="GUI/CharacterSelection/CharacterSelectionBox"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+metadata/players = [1, 2, 3, 4]
+
+[node name="Flowbox" type="HFlowContainer" parent="GUI/CharacterSelection/CharacterSelectionBox/Darwin"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+offset_left = -11.0
+offset_top = -16.0
+offset_right = 189.0
+offset_bottom = 34.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="GUI/CharacterSelection/CharacterSelectionBox/Darwin"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+offset_right = 200.0
+offset_bottom = 200.0
+texture = ExtResource("68_1h45m")
+stretch_mode = 5
+
+[node name="Gun" type="Panel" parent="GUI/CharacterSelection/CharacterSelectionBox"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+metadata/players = []
+
+[node name="TextureRect" type="TextureRect" parent="GUI/CharacterSelection/CharacterSelectionBox/Gun"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+offset_right = 200.0
+offset_bottom = 200.0
+texture = ExtResource("3_5ew25")
+stretch_mode = 5
+
+[node name="Flowbox" type="HFlowContainer" parent="GUI/CharacterSelection/CharacterSelectionBox/Gun"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+offset_left = -11.0
+offset_top = -16.0
+offset_right = 189.0
+offset_bottom = 34.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
 [node name="SettingsMenu" type="Control" parent="GUI"]
 process_mode = 3
@@ -3854,5 +4040,6 @@ metadata/_edit_lock_ = true
 [connection signal="mouse_entered" from="GUI/PauseMenu/Button4/Button4" to="GUI/PauseMenu" method="_on_button_4_mouse_entered"]
 [connection signal="mouse_exited" from="GUI/PauseMenu/Button4/Button4" to="GUI/PauseMenu" method="_on_button_4_mouse_exited"]
 [connection signal="pressed" from="GUI/PauseMenu/Button4/Button4" to="GUI/PauseMenu" method="_on_button_4_pressed"]
-[connection signal="pressed" from="GUI/CharacterSelection/Button" to="GUI/CharacterSelection" method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/CharacterSelection/Begin" to="GUI/CharacterSelection" method="_on_begin_pressed"]
+[connection signal="changed_player_chosen_chars" from="GUI/CharacterSelection/CharacterSelectionBox" to="GUI/MainMenu" method="_on_character_selection_box_changed_player_chosen_chars"]
 [connection signal="pressed" from="GUI/SettingsMenu/Back" to="GUI/SettingsMenu" method="_on_back_pressed"]

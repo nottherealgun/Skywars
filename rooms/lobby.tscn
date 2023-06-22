@@ -277,7 +277,7 @@ shape = SubResource("RectangleShape2D_0jigo")
 
 [node name="BroIsHerePoster" type="Sprite2D" parent="." index="18"]
 texture_filter = 1
-position = Vector2(-179, -80)
+position = Vector2(-171, -80)
 texture = ExtResource("17_0eqkn")
 offset = Vector2(-7.62939e-06, -46.6667)
 

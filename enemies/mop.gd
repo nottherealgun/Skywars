@@ -31,6 +31,7 @@ func _physics_process(delta):
 					change_state(States.ATTACKING)
 			else:
 				change_state(States.IDLE)
+				
 		States.ATTACKING:
 			if is_instance_valid(target):
 				if position.distance_to(target.position) > range:
@@ -48,6 +49,8 @@ func _physics_process(delta):
 					t = create_tween().set_trans(Tween.TRANS_CUBIC)
 					t.tween_property(self,"position",strafepoint,1.0)
 					$Timer.start()
+					$AudioManager.play("Dash")
+					$AudioManager.play("Spin")
 				else:
 					if !$Sprite.is_playing():
 						$Sprite.play("idle")
@@ -66,6 +69,8 @@ func change_state(new_state):
 		States.AWOKEN:
 #			$NameTag.show()
 			pass
+			
+	state = new_state
 	# Check new state
 	match new_state:
 		States.IDLE:
@@ -75,7 +80,6 @@ func change_state(new_state):
 		States.CHASING:
 			$Sprite.play("idle")
 			
-	state = new_state
 
 func _move_update(delta):
 	if is_instance_valid(target):
