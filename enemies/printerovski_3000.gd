@@ -100,8 +100,9 @@ func _physics_process(delta):
 				change_state(STATES.IDLE)
 				
 		STATES.FLYING:
-			$LandIndicator.modulate = Color.WHITE
-			$LandIndicator.position = target.position-position
+			if is_instance_valid(target):
+				$LandIndicator.modulate = Color.WHITE
+				$LandIndicator.position = target.position-position
 			
 		
 func change_state(new_state):

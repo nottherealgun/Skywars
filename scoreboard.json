@@ -1,13 +1,13 @@
 {
 	"highscore": {
 		"bosses_vanquished": 0,
-		"enemies_killed": 0,
+		"enemies_killed": 49,
 		"levels_cleared": 0,
 		"playtime": {
 			"hrs": 0,
-			"min": 0,
-			"sec": 0
+			"min": 1,
+			"sec": 9
 		},
-		"rooms_cleared": 0
+		"rooms_cleared": 1
 	}
 }

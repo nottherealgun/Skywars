@@ -14,8 +14,8 @@ func _input(event):
 		await t.finished
 		$AnimationPlayer.play("exit")
 		await $AnimationPlayer.animation_finished
-		emit_signal("reviewed")
 		GameManager.game_reset(false)
+		emit_signal("reviewed")
 
 func display(lvls,rooms,kills,bosses,time:Dictionary):
 	var f = FileAccess.open("res://scoreboard.json",1)

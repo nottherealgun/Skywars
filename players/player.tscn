@@ -15,7 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://c1wd38ayokibd" path="res://sfx/Darwin Shooting sound.mp3" id="12_tk1mb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oscn4"]
-size = Vector2(40, 16)
+size = Vector2(40, 27)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2i4hs"]
 size = Vector2(40, 52)
@@ -70,7 +70,7 @@ collision_mask = 48
 script = ExtResource("1_2rdnx")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(0, 44)
+position = Vector2(0, 38.5)
 shape = SubResource("RectangleShape2D_oscn4")
 
 [node name="Hitbox" type="Area2D" parent="."]

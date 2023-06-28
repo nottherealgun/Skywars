@@ -160,7 +160,8 @@ func reset_inv():
 	
 	for p in Global.active_players:
 		p.equipped_item = {}
-		p.stat_gui.get_node("EquippedItem/Texture").texture = null
+		if is_instance_valid(p.stat_gui) and p.stat_gui.get_node_or_null("EquippedItem/Texture") != null:
+			p.stat_gui.get_node("EquippedItem/Texture").texture = null
 	
 		player_equipped_slots.append({})
 		player_hovering_slots.append(0)

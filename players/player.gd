@@ -62,6 +62,7 @@ var mouse_aim_offset = 0
 var dashing = false
 
 func _ready():
+	stat_gui = Global.GUI.get_node("PlayerStats/PlayerStats"+str(player_id))
 	# Setup player appearance and GUI settings
 	$Arrow.modulate = player_color
 	$Sprite.sprite_frames = load("res://players/"+character+".tres")
@@ -87,6 +88,7 @@ func _process(delta):
 			
 	if fainted:
 		if $Revival.value == 100.0:
+			$ReviveTimer.stop()
 			revive()
 				
 	if !fainted and !transporting and !Global.PauseMenu.visible and !Global.Inventory.visible: # If player alive

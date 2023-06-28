@@ -181,6 +181,16 @@ func game_reset(reset_player:=true):
 	Global.Bossbar.get_node("BossDesc").position = Vector2(560.055,1128)
 	Global.Bossbar.get_node("BossHealth").position = Vector2(656,1160)
 	
+	LevelManager.clear_level()
+	
+	# Reset key on players
+	for p in Global.active_players:
+			for c in p.get_children():
+				if c.is_in_group("key"):
+					c.queue_free()
+					break
+		
+	# Reset player data
 	if reset_player:
 		for p in Global.active_players:
 			for m in p.minions:
@@ -188,10 +198,6 @@ func game_reset(reset_player:=true):
 			p.minions.clear()
 			p.health = p.max_health
 			p.brainpower = 6
-			for c in p.get_children():
-				if c.is_in_group("key"):
-					c.queue_free()
-					break
 			Global.active_players.erase(p)
 			p.queue_free()
 
