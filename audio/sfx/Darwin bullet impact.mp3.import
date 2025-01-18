@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://hthgs6t7h17v"
+path="res://.godot/imported/Darwin bullet impact.mp3-d557512c3db43649c6a00bcc85f81608.mp3str"
+
+[deps]
+
+source_file="res://audio/sfx/Darwin bullet impact.mp3"
+dest_files=["res://.godot/imported/Darwin bullet impact.mp3-d557512c3db43649c6a00bcc85f81608.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

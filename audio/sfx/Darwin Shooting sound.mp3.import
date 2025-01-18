@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c1wd38ayokibd"
+path="res://.godot/imported/Darwin Shooting sound.mp3-57e60d9a795f62dc3274501bf9698eac.mp3str"
+
+[deps]
+
+source_file="res://audio/sfx/Darwin Shooting sound.mp3"
+dest_files=["res://.godot/imported/Darwin Shooting sound.mp3-57e60d9a795f62dc3274501bf9698eac.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

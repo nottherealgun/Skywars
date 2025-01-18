@@ -1,0 +1,173 @@
+[gd_scene load_steps=10 format=3 uid="uid://c7iaa7t7dls2p"]
+
+[ext_resource type="Script" uid="uid://cnnwdaiv1wwmw" path="res://ScoreboardMenu.gd" id="1_winkk"]
+[ext_resource type="FontFile" uid="uid://byk80lambns8u" path="res://utility/MiniPixel.ttf" id="2_27xwp"]
+[ext_resource type="Shader" uid="uid://0ef154123qfy" path="res://pause_menu.gdshader" id="3_rooqm"]
+[ext_resource type="Texture2D" uid="uid://uas65v7xroor" path="res://gui/iPadGUI.png" id="4_fed02"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ys8be"]
+shader = ExtResource("3_rooqm")
+shader_parameter/blur_amount = 0.0
+
+[sub_resource type="Animation" id="Animation_jjgmq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ipad:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(64, 1080)]
+}
+
+[sub_resource type="Animation" id="Animation_qx1tk"]
+resource_name = "enter"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ipad:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(64, 1080), Vector2(64, 92.0001)]
+}
+
+[sub_resource type="Animation" id="Animation_qr1ik"]
+resource_name = "exit"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Ipad:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(64, 92.0001), Vector2(64, 1080)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eqnug"]
+_data = {
+&"RESET": SubResource("Animation_jjgmq"),
+&"enter": SubResource("Animation_qx1tk"),
+&"exit": SubResource("Animation_qr1ik")
+}
+
+[node name="ScoreboardMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_winkk")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Title" type="RichTextLabel" parent="."]
+top_level = true
+texture_filter = 5
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 384.0
+offset_top = 232.0
+offset_right = -384.0
+offset_bottom = -788.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("2_27xwp")
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "[center]Scoreboard"
+fit_content = true
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Info" type="RichTextLabel" parent="."]
+top_level = true
+texture_filter = 5
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 384.0
+offset_top = 256.0
+offset_right = -384.0
+offset_bottom = -184.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("2_27xwp")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[p align=center]
+[wave amp=50 freq=10][color=yellow]* NEW RECORD! *[/color][/wave]
+- You -
+Levels Cleared: 1
+Rooms Cleared: 1
+Enemies Killed: 1
+Bosses Vanquished: 1
+Total Playtime: 1 HR, 5 MIN, 0 SEC
+
+- Best Player -
+Levels Cleared: 1
+Rooms Cleared: 1
+Enemies Killed: 1
+Bosses Vanquished: 1
+Total Playtime: 1 HR, 5 MIN, 0 SEC"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Blur" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ys8be")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="Ipad" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -896.0
+offset_top = 540.0
+offset_right = 896.0
+offset_bottom = 1472.03
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_fed02")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_eqnug")
+}
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

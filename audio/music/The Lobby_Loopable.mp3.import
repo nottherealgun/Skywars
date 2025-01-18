@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bnw73i68y41ik"
+path="res://.godot/imported/The Lobby_Loopable.mp3-598de1352fab0d5cc039cf08b741d8b2.mp3str"
+
+[deps]
+
+source_file="res://audio/music/The Lobby_Loopable.mp3"
+dest_files=["res://.godot/imported/The Lobby_Loopable.mp3-598de1352fab0d5cc039cf08b741d8b2.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

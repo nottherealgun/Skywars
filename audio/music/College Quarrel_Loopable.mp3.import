@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cqjk3cp4fh2m7"
+path="res://.godot/imported/College Quarrel_Loopable.mp3-86ee10ff2d4e067fbfc111c18ee3051b.mp3str"
+
+[deps]
+
+source_file="res://audio/music/College Quarrel_Loopable.mp3"
+dest_files=["res://.godot/imported/College Quarrel_Loopable.mp3-86ee10ff2d4e067fbfc111c18ee3051b.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
