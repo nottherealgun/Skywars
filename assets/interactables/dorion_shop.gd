@@ -21,7 +21,7 @@ func refresh_stock():
 			new_item = Global.items[randi_range(7,17)]
 		items.append(new_item)
 		if new_item["pic"] != "":
-			item_slots[i].texture = load("res://items/"+new_item["pic"])
+			item_slots[i].texture = load("res://assets/items/"+new_item["pic"])
 			item_slots[i].get_node("../../Desc/Label").text = new_item["name"]
 			item_slots[i].get_node("../../Desc/ScrollContainer/Label").text = new_item["desc"]
 			item_slots[i].get_node("../../Desc/Stats/Label").text = "Stats:\n"+new_item["stats"]

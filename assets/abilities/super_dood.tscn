@@ -1,14 +1,14 @@
 [gd_scene load_steps=55 format=3 uid="uid://tmssw0cknnbk"]
 
-[ext_resource type="Script" uid="uid://vhl1th544fy2" path="res://abilities/super_dood.gd" id="1_pqk2u"]
-[ext_resource type="Texture2D" uid="uid://isyt1d2ichjf" path="res://abilities/dood_sup_attack.png" id="2_1dqg7"]
-[ext_resource type="Texture2D" uid="uid://bno8vm27fkh4f" path="res://abilities/dood_sup_dead.png" id="2_wnqgt"]
-[ext_resource type="Texture2D" uid="uid://cvu0qikm8fwj0" path="res://abilities/dood_sup_idle.png" id="3_qej56"]
-[ext_resource type="Texture2D" uid="uid://ct7j8fjuybpuw" path="res://abilities/dood_sup_walk.png" id="4_d62jk"]
-[ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://utility/shadow.png" id="5_02ejf"]
+[ext_resource type="Script" uid="uid://vhl1th544fy2" path="res://assets/abilities/super_dood.gd" id="1_pqk2u"]
+[ext_resource type="Texture2D" uid="uid://isyt1d2ichjf" path="res://assets/abilities/dood_sup_attack.png" id="2_1dqg7"]
+[ext_resource type="Texture2D" uid="uid://bno8vm27fkh4f" path="res://assets/abilities/dood_sup_dead.png" id="2_wnqgt"]
+[ext_resource type="Texture2D" uid="uid://cvu0qikm8fwj0" path="res://assets/abilities/dood_sup_idle.png" id="3_qej56"]
+[ext_resource type="Texture2D" uid="uid://ct7j8fjuybpuw" path="res://assets/abilities/dood_sup_walk.png" id="4_d62jk"]
+[ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://assets/utility/shadow.png" id="5_02ejf"]
 [ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://audio_manager.tscn" id="7_jbiyq"]
-[ext_resource type="AudioStream" uid="uid://fgdsuoei7o4q" path="res://sfx/sproutdude_superpunch.mp3" id="7_utbfo"]
-[ext_resource type="AudioStream" uid="uid://ci8lsmwanws7t" path="res://sfx/sproutdude_death.mp3" id="8_weg5k"]
+[ext_resource type="AudioStream" uid="uid://fgdsuoei7o4q" path="res://audio/sfx/sproutdude_superpunch.mp3" id="7_utbfo"]
+[ext_resource type="AudioStream" uid="uid://ci8lsmwanws7t" path="res://audio/sfx/sproutdude_death.mp3" id="8_weg5k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5c47r"]
 size = Vector2(48, 56)

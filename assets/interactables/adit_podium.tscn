@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bakr387l46lfw"]
 
-[ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://interactables/interactable.tscn" id="1_qf02v"]
-[ext_resource type="Texture2D" uid="uid://h0it5r41v387" path="res://interactables/adithPodiumBack.png" id="2_5tyvw"]
-[ext_resource type="Script" path="res://interactables/adit_podium.gd" id="2_lv0ie"]
+[ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://assets/interactables/interactable.tscn" id="1_qf02v"]
+[ext_resource type="Texture2D" uid="uid://h0it5r41v387" path="res://assets/interactables/adithPodiumBack.png" id="2_5tyvw"]
+[ext_resource type="Script" path="res://assets/interactables/adit_podium.gd" id="2_lv0ie"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ljgwx"]
 size = Vector2(96, 26)

@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" uid="uid://dfv88mkr47rmb" path="res://SettingsMenu.gd" id="1_2ctot"]
 [ext_resource type="Shader" uid="uid://0ef154123qfy" path="res://pause_menu.gdshader" id="2_jrqig"]
-[ext_resource type="Texture2D" uid="uid://uas65v7xroor" path="res://gui/iPadGUI.png" id="3_n0fy7"]
-[ext_resource type="FontFile" uid="uid://byk80lambns8u" path="res://utility/MiniPixel.ttf" id="4_jpbdv"]
+[ext_resource type="Texture2D" uid="uid://uas65v7xroor" path="res://assets/gui/iPadGUI.png" id="3_n0fy7"]
+[ext_resource type="FontFile" uid="uid://byk80lambns8u" path="res://assets/utility/MiniPixel.ttf" id="4_jpbdv"]
 [ext_resource type="Script" uid="uid://bgmv5v25ex0g8" path="res://Audio.gd" id="5_puhno"]
-[ext_resource type="Texture2D" uid="uid://cngsb0hojf7aj" path="res://gui/slider_knob.png" id="6_75x6d"]
-[ext_resource type="Texture2D" uid="uid://cooqpbluucqtf" path="res://gui/slider_fg.png" id="7_x0dr5"]
-[ext_resource type="Texture2D" uid="uid://cmu6og5srg27p" path="res://gui/slider_bg.png" id="8_gdgfw"]
+[ext_resource type="Texture2D" uid="uid://cngsb0hojf7aj" path="res://assets/gui/slider_knob.png" id="6_75x6d"]
+[ext_resource type="Texture2D" uid="uid://cooqpbluucqtf" path="res://assets/gui/slider_fg.png" id="7_x0dr5"]
+[ext_resource type="Texture2D" uid="uid://cmu6og5srg27p" path="res://assets/gui/slider_bg.png" id="8_gdgfw"]
 [ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://audio_manager.tscn" id="9_vymnv"]
-[ext_resource type="AudioStream" uid="uid://bk8uekbkue7c1" path="res://sfx/MainMenu SFX.mp3" id="10_2tyyr"]
+[ext_resource type="AudioStream" uid="uid://bk8uekbkue7c1" path="res://audio/sfx/MainMenu SFX.mp3" id="10_2tyyr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d7yox"]
 shader = ExtResource("2_jrqig")

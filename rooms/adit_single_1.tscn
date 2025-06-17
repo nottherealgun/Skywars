@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://yyuwfse1nkky"]
 
-[ext_resource type="PackedScene" uid="uid://cx7imnf85vue8" path="res://level.tscn" id="1_sy1jh"]
+[ext_resource type="PackedScene" uid="uid://cx7imnf85vue8" path="res://scenes/level.tscn" id="1_sy1jh"]
 [ext_resource type="PackedScene" uid="uid://bhsvoj5kcuifg" path="res://spawning_point.tscn" id="2_hp7ss"]
-[ext_resource type="PackedScene" uid="uid://6qdjvyw15lm4" path="res://interactables/door.tscn" id="3_u3pc6"]
-[ext_resource type="PackedScene" uid="uid://bakr387l46lfw" path="res://interactables/adit_podium.tscn" id="4_mp3me"]
-[ext_resource type="PackedScene" uid="uid://bbn41xawi3av5" path="res://interactables/adit_table.tscn" id="5_nkc8j"]
-[ext_resource type="PackedScene" uid="uid://7h0dudlrgsm1" path="res://interactables/adit_chair.tscn" id="6_k15gb"]
-[ext_resource type="PackedScene" uid="uid://ebilckvtvye6" path="res://interactables/box.tscn" id="8_fitb7"]
-[ext_resource type="PackedScene" uid="uid://dcopfs6ltbw3p" path="res://interactables/electricity_box.tscn" id="10_mrnyd"]
+[ext_resource type="PackedScene" uid="uid://6qdjvyw15lm4" path="res://assets/interactables/door.tscn" id="3_u3pc6"]
+[ext_resource type="PackedScene" uid="uid://bakr387l46lfw" path="res://assets/interactables/adit_podium.tscn" id="4_mp3me"]
+[ext_resource type="PackedScene" uid="uid://bbn41xawi3av5" path="res://assets/interactables/adit_table.tscn" id="5_nkc8j"]
+[ext_resource type="PackedScene" uid="uid://7h0dudlrgsm1" path="res://assets/interactables/adit_chair.tscn" id="6_k15gb"]
+[ext_resource type="PackedScene" uid="uid://ebilckvtvye6" path="res://assets/interactables/box.tscn" id="8_fitb7"]
+[ext_resource type="PackedScene" uid="uid://dcopfs6ltbw3p" path="res://assets/interactables/electricity_box.tscn" id="10_mrnyd"]
 
 [node name="SingleRoom1" instance=ExtResource("1_sy1jh")]
 

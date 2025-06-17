@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ceje6knjf6lby"]
 
-[ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://interactables/interactable.tscn" id="1_7w38u"]
-[ext_resource type="Texture2D" uid="uid://c31x2s6rh5027" path="res://interactables/orionBoothLeftSS.png" id="2_t6sjt"]
+[ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://assets/interactables/interactable.tscn" id="1_7w38u"]
+[ext_resource type="Texture2D" uid="uid://c31x2s6rh5027" path="res://assets/interactables/orionBoothLeftSS.png" id="2_t6sjt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_emsoc"]
 atlas = ExtResource("2_t6sjt")

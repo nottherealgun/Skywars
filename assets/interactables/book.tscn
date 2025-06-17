@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://dmier4l033rnd"]
 
-[ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://interactables/interactable.tscn" id="1_xni4f"]
-[ext_resource type="Script" path="res://interactables/book.gd" id="2_1mvkc"]
-[ext_resource type="Texture2D" uid="uid://c1x83ri8u8yb5" path="res://interactables/book1.png" id="2_i01us"]
+[ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://assets/interactables/interactable.tscn" id="1_xni4f"]
+[ext_resource type="Script" path="res://assets/interactables/book.gd" id="2_1mvkc"]
+[ext_resource type="Texture2D" uid="uid://c1x83ri8u8yb5" path="res://assets/interactables/book1.png" id="2_i01us"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yoh3c"]
 radius = 6.08276

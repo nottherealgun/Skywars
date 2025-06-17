@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://c8xgb6p7qsy45"]
 
-[ext_resource type="PackedScene" uid="uid://cni0dsstdjde" path="res://projectiles/projectile.tscn" id="1_5i05e"]
-[ext_resource type="Texture2D" uid="uid://cygx2ib2jencq" path="res://projectiles/dwProjectileSS.png" id="2_q28gk"]
-[ext_resource type="Script" path="res://projectiles/darwin_proj_1.gd" id="2_qt3qx"]
+[ext_resource type="PackedScene" uid="uid://cni0dsstdjde" path="res://assets/projectiles/projectile.tscn" id="1_5i05e"]
+[ext_resource type="Texture2D" uid="uid://cygx2ib2jencq" path="res://assets/projectiles/dwProjectileSS.png" id="2_q28gk"]
+[ext_resource type="Script" path="res://assets/projectiles/darwin_proj_1.gd" id="2_qt3qx"]
 
 [sub_resource type="Gradient" id="Gradient_773vt"]
 interpolation_mode = 2

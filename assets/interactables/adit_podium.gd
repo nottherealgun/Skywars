@@ -5,5 +5,5 @@ extends Interactable
 
 func _process(delta):
 	if Engine.is_editor_hint():
-		$Sprite.texture = load("res://interactables/adithPodium"+["Back","Side",""][facing]+".png")
+		$Sprite.texture = load("res://assets/interactables/adithPodium"+["Back","Side",""][facing]+".png")
 		

@@ -1,9 +1,9 @@
 [gd_resource type="SpriteFrames" load_steps=30 format=3 uid="uid://dk73utyosr1wa"]
 
-[ext_resource type="Texture2D" uid="uid://dy6glpvq7ct80" path="res://enemies/muicStu1Attack2SS.png" id="1_la4ry"]
-[ext_resource type="Texture2D" uid="uid://bx8xhyrk34pkx" path="res://enemies/muicStu1IdleSS.png" id="1_nkw5q"]
-[ext_resource type="Texture2D" uid="uid://cqio5t1j2y4wp" path="res://enemies/muicStu1RunSS.png" id="2_aer30"]
-[ext_resource type="Texture2D" uid="uid://chb5pmmnrjeya" path="res://enemies/muicStu1Attack1SS.png" id="4_ehcjf"]
+[ext_resource type="Texture2D" uid="uid://dy6glpvq7ct80" path="res://assets/enemies/muicStu1Attack2SS.png" id="1_la4ry"]
+[ext_resource type="Texture2D" uid="uid://bx8xhyrk34pkx" path="res://assets/enemies/muicStu1IdleSS.png" id="1_nkw5q"]
+[ext_resource type="Texture2D" uid="uid://cqio5t1j2y4wp" path="res://assets/enemies/muicStu1RunSS.png" id="2_aer30"]
+[ext_resource type="Texture2D" uid="uid://chb5pmmnrjeya" path="res://assets/enemies/muicStu1Attack1SS.png" id="4_ehcjf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uks58"]
 atlas = ExtResource("1_la4ry")

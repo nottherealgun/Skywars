@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bhsvoj5kcuifg"]
 
-[ext_resource type="Texture2D" uid="uid://ba6ktq5eioywu" path="res://players/darwin_still.png" id="1_njfg3"]
+[ext_resource type="Texture2D" uid="uid://ba6ktq5eioywu" path="res://assets/players/darwin_still.png" id="1_njfg3"]
 
 [node name="SpawningPoint" type="Marker2D"]
 

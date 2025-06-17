@@ -20,7 +20,7 @@ func dupe():
 	$Sprite.play()
 	if master:
 #		var next_vine = Global.spawn_projectile(shooter,"dood_vines",position+(direction*10),direction,true)
-		child = load("res://projectiles/dood_vines.tscn").instantiate()
+		child = load("res://assets/projectiles/dood_vines.tscn").instantiate()
 		child.shooter = shooter
 		child.position = position+(direction*30)
 		child.direction = direction

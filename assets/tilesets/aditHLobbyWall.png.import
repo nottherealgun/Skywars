@@ -10,7 +10,7 @@ metadata={
 
 [deps]
 
-source_file="res://tilesets/aditHLobbyWall.png"
+source_file="res://assets/tilesets/aditHLobbyWall.png"
 dest_files=["res://.godot/imported/aditHLobbyWall.png-fdfeeb00e5c2150fc2e2db85bb470a09.ctex"]
 
 [params]

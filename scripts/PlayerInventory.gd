@@ -46,7 +46,7 @@ func start():
 		var new_player_slot = $PlayerSlot.duplicate()
 		new_player_slot.show()
 		$HBox.add_child(new_player_slot)
-		new_player_slot.get_node("PlayerSlotIcon").texture = load("res://players/"+str(p.character)+"_head.png")
+		new_player_slot.get_node("PlayerSlotIcon").texture = load("res://assets/players/"+str(p.character)+"_head.png")
 		player_equipped_slots.append({})
 		player_hovering_slots.append(0)
 		player_hovering_slot_ids.append(-1)
@@ -85,7 +85,7 @@ func _input_update():
 				player_equipped_slots[1] = player_hovering_slots[1]
 				Global.active_players[0].emit_signal("equips_item",player_equipped_slots[1])
 				Global.active_players[0].stat_gui.get_node("EquippedItem/Texture").texture =\
-				load("res://items/"+player_equipped_slots[1]["pic"])
+				load("res://assets/items/"+player_equipped_slots[1]["pic"])
 				
 				$AudioManager.play("Equip")
 				
@@ -126,7 +126,7 @@ func refresh_inv():
 		var item = shown_inventory[i]
 		var slot = get_node("ItemSlot"+str(i))
 		
-		var texture = load("res://items/"+item["pic"]) as Texture2D
+		var texture = load("res://assets/items/"+item["pic"]) as Texture2D
 		slot.texture = texture
 		match texture.get_height():
 			32:
@@ -139,7 +139,7 @@ func refresh_inv():
 		var equip_slot_in_array = player_equipped_slots[$HBox.get_children().find(i)+1]
 		if equip_slot_in_array is Dictionary:
 			if equip_slot_in_array != {}:
-				equip_slot.texture = load("res://items/"+equip_slot_in_array["pic"])
+				equip_slot.texture = load("res://assets/items/"+equip_slot_in_array["pic"])
 
 func reset_inv():
 	for i in shown_inventory.size():

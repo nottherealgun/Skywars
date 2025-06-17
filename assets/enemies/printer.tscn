@@ -1,13 +1,13 @@
 [gd_scene load_steps=42 format=3 uid="uid://cmhrf827nfpky"]
 
-[ext_resource type="PackedScene" uid="uid://0anrpyccai4l" path="res://enemies/enemy.tscn" id="1_1ynln"]
-[ext_resource type="Script" path="res://enemies/printer.gd" id="2_owcnx"]
-[ext_resource type="Texture2D" uid="uid://mk0d1skckp7j" path="res://enemies/printerAttackSS.png" id="3_wgc6c"]
-[ext_resource type="Texture2D" uid="uid://bth4bvxjoej3q" path="res://enemies/printerIdleSS.png" id="4_xxh4f"]
-[ext_resource type="Texture2D" uid="uid://cotyq4yqnoypn" path="res://enemies/printerTransformSS.png" id="5_vgk5h"]
-[ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://utility/shadow.png" id="6_30iro"]
+[ext_resource type="PackedScene" uid="uid://0anrpyccai4l" path="res://assets/enemies/enemy.tscn" id="1_1ynln"]
+[ext_resource type="Script" path="res://assets/enemies/printer.gd" id="2_owcnx"]
+[ext_resource type="Texture2D" uid="uid://mk0d1skckp7j" path="res://assets/enemies/printerAttackSS.png" id="3_wgc6c"]
+[ext_resource type="Texture2D" uid="uid://bth4bvxjoej3q" path="res://assets/enemies/printerIdleSS.png" id="4_xxh4f"]
+[ext_resource type="Texture2D" uid="uid://cotyq4yqnoypn" path="res://assets/enemies/printerTransformSS.png" id="5_vgk5h"]
+[ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://assets/utility/shadow.png" id="6_30iro"]
 [ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://audio_manager.tscn" id="7_5cs7f"]
-[ext_resource type="AudioStream" uid="uid://20yk2ierwsu6" path="res://sfx/Print Mob Shoot.mp3" id="8_d708l"]
+[ext_resource type="AudioStream" uid="uid://20yk2ierwsu6" path="res://audio/sfx/Print Mob Shoot.mp3" id="8_d708l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gdykf"]
 size = Vector2(72, 22)

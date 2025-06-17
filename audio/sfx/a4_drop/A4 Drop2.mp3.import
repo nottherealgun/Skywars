@@ -7,7 +7,7 @@ path="res://.godot/imported/A4 Drop2.mp3-fda7d1195f46352a9a3e7c57646c154e.mp3str
 
 [deps]
 
-source_file="res://sfx/a4_drop/A4 Drop2.mp3"
+source_file="res://audio/sfx/a4_drop/A4 Drop2.mp3"
 dest_files=["res://.godot/imported/A4 Drop2.mp3-fda7d1195f46352a9a3e7c57646c154e.mp3str"]
 
 [params]

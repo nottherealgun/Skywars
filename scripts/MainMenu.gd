@@ -1,7 +1,7 @@
 extends Control
 
 @export var skip_splashscreen = false
-@onready var testmap = load("res://rooms/"+Global.rooms[2].file).instantiate()
+@export var testmap : PackedScene
 
 func _ready():
 	$PlayButton.pressed.connect(button_pressed.bind("play"))
@@ -49,7 +49,7 @@ var player_chosen_chars = ["darwin","gun","darwin","darwin"]
 
 func start_game(character:String,player_amnt:int):
 	for p in range(player_amnt):
-		var new_player = load("res://players/player.tscn").instantiate()
+		var new_player = load("res://assets/players/player.tscn").instantiate()
 		new_player.character = player_chosen_chars[p]
 		new_player.player_id = p+1
 		Global.Main.add_child(new_player)

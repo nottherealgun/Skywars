@@ -257,7 +257,7 @@ func _on_player_detect_area_exited(area):
 #		allies.erase(ally)
 
 func artillery_shot():
-	var f_new_proj = load("res://projectiles/printerovski_proj_thrown.tscn").instantiate()
+	var f_new_proj = load("res://assets/projectiles/printerovski_proj_thrown.tscn").instantiate()
 	f_new_proj.position = position+Vector2(136,-80)
 	f_new_proj.start_pos = position+Vector2(136,-80)
 	Global.Main.add_child(f_new_proj)
@@ -268,7 +268,7 @@ func artillery_shot():
 	while (rand_land_pos == null or Global.is_out_of_map(rand_land_pos)) and is_instance_valid(target):
 		rand_land_pos = target.position+Vector2(randf_range(-300,300),randf_range(-300,300))
 	
-	var new_proj = load("res://projectiles/printerovski_proj.tscn").instantiate()
+	var new_proj = load("res://assets/projectiles/printerovski_proj.tscn").instantiate()
 	new_proj.land_pos = rand_land_pos
 	new_proj.printer_boss = self
 	Global.active_entities.append(new_proj)

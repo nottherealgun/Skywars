@@ -1,7 +1,7 @@
 [gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://c83ovxor3knah"]
 
-[ext_resource type="Texture2D" uid="uid://dwqihk8k7cv4g" path="res://interactables/door_barricade_h.png" id="1_nmxb1"]
-[ext_resource type="Texture2D" uid="uid://dcquahembg4aw" path="res://interactables/door_barricade_v.png" id="2_sn6jh"]
+[ext_resource type="Texture2D" uid="uid://dwqihk8k7cv4g" path="res://assets/interactables/door_barricade_h.png" id="1_nmxb1"]
+[ext_resource type="Texture2D" uid="uid://dcquahembg4aw" path="res://assets/interactables/door_barricade_v.png" id="2_sn6jh"]
 
 [resource]
 animations = [{

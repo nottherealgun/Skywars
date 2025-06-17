@@ -1,7 +1,9 @@
 extends Control
 
+@export var audio_manager : Node
+
 func _on_back_pressed():
-	$AudioManager.play("click")
+	audio_manager.play("click")
 	$AnimationPlayer.play("exit")
 
 func show():

@@ -1,4 +1,4 @@
-@icon("res://projectiles/paperProjectile1.png")
+@icon("res://assets/projectiles/paperProjectile1.png")
 class_name Projectile extends Area2D
 
 var shooter : Object

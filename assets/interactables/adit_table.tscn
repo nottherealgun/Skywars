@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bbn41xawi3av5"]
 
-[ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://interactables/interactable.tscn" id="1_5qtgx"]
-[ext_resource type="Texture2D" uid="uid://dtv55qyl66qjq" path="res://interactables/adithTable.png" id="2_fylv0"]
+[ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://assets/interactables/interactable.tscn" id="1_5qtgx"]
+[ext_resource type="Texture2D" uid="uid://dtv55qyl66qjq" path="res://assets/interactables/adithTable.png" id="2_fylv0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkcao"]
 size = Vector2(144, 34)

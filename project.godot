@@ -18,13 +18,13 @@ boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
 boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
-config/icon="res://game_icon.png"
+config/icon="uid://bbot2ot8ynfx2"
 
 [autoload]
 
-Global="*res://Resources.gd"
-GameManager="*res://game_manager.tscn"
-LevelManager="*res://level_manager.tscn"
+GameManager="*res://scenes/game_manager.tscn"
+LevelManager="*res://scenes/level_manager.tscn"
+Global="*res://scripts/Resources.gd"
 
 [debug]
 
@@ -34,8 +34,8 @@ gdscript/warnings/enable=false
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/stretch/aspect="keep_width"
-mouse_cursor/custom_image="res://utility/cursor_big.png"
+window/stretch/mode="canvas_items"
+mouse_cursor/custom_image="uid://d0v0tged6w8tl"
 mouse_cursor/custom_image_hotspot=Vector2(15, 15)
 
 [editor]

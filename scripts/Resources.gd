@@ -49,7 +49,7 @@ func spawn_in(entity):
 	return entity
 
 func spawn_projectile(shooter:Object,proj_name:String,pos:Vector2,dir:Vector2,player_bullet=false,dmg:=10):
-	var new_proj = load("res://projectiles/"+proj_name+".tscn").instantiate()
+	var new_proj = load("res://assets/projectiles/"+proj_name+".tscn").instantiate()
 	new_proj.shooter = shooter
 	new_proj.position = pos
 	new_proj.direction = dir
@@ -59,15 +59,15 @@ func spawn_projectile(shooter:Object,proj_name:String,pos:Vector2,dir:Vector2,pl
 	Main.add_child(new_proj)
 	return new_proj
 
-func spawn_enemy(enemy_name:String,pos:Vector2):
-	var new_enemy = load("res://enemies/"+enemy_name+".tscn").instantiate()
+func spawn_enemy(enemy_name:String,pos:Vector2) -> Enemy:
+	var new_enemy : Enemy = load("res://assets/enemies/"+enemy_name+".tscn").instantiate()
 	new_enemy.position = pos
 	active_entities.append(new_enemy)
 	Main.add_child(new_enemy)
 	return new_enemy
 
 func spawn_from_ability(entity:String,pos:Vector2,user:Object):
-	var new_entity = load("res://abilities/"+entity+".tscn").instantiate()
+	var new_entity = load("res://assets/abilities/"+entity+".tscn").instantiate()
 	new_entity.position = pos
 	new_entity.master = user
 	user.minions.append(new_entity)
@@ -124,7 +124,7 @@ func kill_all(exceptions:=[]):
 # Bosses
 
 func spawn_boss(type:String,pos:Vector2):
-	var new_boss = load("res://enemies/bosses/"+type+".tscn").instantiate().duplicate()
+	var new_boss = load("res://assets/enemies/bosses/"+type+".tscn").instantiate().duplicate()
 	new_boss.position = pos
 	active_entities.append(new_boss)
 	Main.add_child(new_boss)
@@ -831,7 +831,7 @@ func populate():
 		map[1].set_meta("entities",entities)
 	
 	var rand_enemy = stage_enemies.pick_random()
-	var new_key = load("res://key.tscn").instantiate()
+	var new_key = load("res://scenes/key.tscn").instantiate()
 	rand_enemy.add_child(new_key)
 	new_key.holder = rand_enemy
 
@@ -969,7 +969,7 @@ func is_out_of_map(pos:Vector2) -> bool:
 # Utility
 
 func emit_indicator(amnt:float,pos:Vector2,p_bullet=false,heal:=false):
-	var new_indicator = load("res://utility/damage_indicator.tscn").instantiate()
+	var new_indicator = load("res://assets/utility/damage_indicator.tscn").instantiate()
 	new_indicator.position = pos
 	new_indicator.amount = roundi(amnt)
 	new_indicator.player_bullet = p_bullet
@@ -979,7 +979,7 @@ func emit_indicator(amnt:float,pos:Vector2,p_bullet=false,heal:=false):
 	Main.add_child.call_deferred(new_indicator)
 
 func emit_death_indicator(pos:Vector2):
-	var new_particle = load("res://utility/death_indicator.tscn").instantiate()
+	var new_particle = load("res://assets/utility/death_indicator.tscn").instantiate()
 	new_particle.position = pos
 	Main.add_child(new_particle)
 
@@ -1003,13 +1003,13 @@ func pick_by_percentage(ratios:Dictionary):
 # Music
 
 const tracks = {
-	"lobby":		"res://music/The Lobby.mp3",
-	"1stfloor":		"res://music/First Floor.mp3",
-	"2ndfloor":		"res://music/2nd Floor.mp3",
-	"dorion":		"res://music/D'Orion.mp3",
-	"combat":		"res://music/College Quarrel_Loopable.mp3",
-	"printerboss":	"res://music/Printing Issue_Loopable.mp3",
-	"victory":		"res://music/Victory.mp3",
+	"lobby":		"res://audio/music/The Lobby.mp3",
+	"1stfloor":		"res://audio/music/First Floor.mp3",
+	"2ndfloor":		"res://audio/music/2nd Floor.mp3",
+	"dorion":		"res://audio/music/D'Orion.mp3",
+	"combat":		"res://audio/music/College Quarrel_Loopable.mp3",
+	"printerboss":	"res://audio/music/Printing Issue_Loopable.mp3",
+	"victory":		"res://audio/music/Victory.mp3",
 }
 
 var current_track : String = "lobby"

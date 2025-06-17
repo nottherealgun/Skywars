@@ -19,8 +19,8 @@ func _ready():
 	tween2.tween_property($Indicator,"modulate",Color.TRANSPARENT,4.0/2)
 	
 	await tween.finished
-#	$Drop.stream = load("res://sfx/a4_drop/a4_drop"+str(randi_range(1,4))+".mp3")
-	$AudioManager.set_stream("Drop",load("res://sfx/a4_drop/a4_drop"+str(randi_range(1,4))+".mp3"))
+#	$Drop.stream = load("res://audio/sfx/a4_drop/a4_drop"+str(randi_range(1,4))+".mp3")
+	$AudioManager.set_stream("Drop",load("res://audio/sfx/a4_drop/a4_drop"+str(randi_range(1,4))+".mp3"))
 	$AudioManager.play("Drop")
 	
 	$"Body/Sprite".stop()

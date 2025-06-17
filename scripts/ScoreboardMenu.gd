@@ -18,7 +18,7 @@ func _input(event):
 		emit_signal("reviewed")
 
 func display(lvls,rooms,kills,bosses,time:Dictionary):
-	var f = FileAccess.open("res://scoreboard.json",1)
+	var f = FileAccess.open("res://data/scoreboard.json",1)
 	var raw = f.get_as_text()
 	var data = JSON.parse_string(raw)["highscore"] as Dictionary
 	f.close()
@@ -47,7 +47,7 @@ func display(lvls,rooms,kills,bosses,time:Dictionary):
 	$Info.text += "\nTotal Playtime: %s HRS, %s MIN, %s SEC" % [data.playtime.hrs,data.playtime.min,data.playtime.sec]
 	
 	if new_total > prev_total:
-		f = FileAccess.open("res://scoreboard.json",2)
+		f = FileAccess.open("res://data/scoreboard.json",2)
 		var temp = {"highscore":{
 				"levels_cleared":lvls,
 				"rooms_cleared":rooms,

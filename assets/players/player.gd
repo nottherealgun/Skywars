@@ -65,10 +65,10 @@ func _ready():
 	stat_gui = Global.GUI.get_node("PlayerStats/PlayerStats"+str(player_id))
 	# Setup player appearance and GUI settings
 	$Arrow.modulate = player_color
-	$Sprite.sprite_frames = load("res://players/"+character+".tres")
+	$Sprite.sprite_frames = load("res://assets/players/"+character+".tres")
 	$Sprite.play("idle")
 	stat_gui.show()
-	stat_gui.get_node("Icon").texture = load("res://players/"+character+"_head.png")
+	stat_gui.get_node("Icon").texture = load("res://assets/players/"+character+"_head.png")
 	stat_gui.get_node("NameTag").set("theme_override_colors/font_color",player_color)
 	stat_gui.get_node("NameTag").text = "Player "+str(player_id)
 	equips_item.connect(equip_item)

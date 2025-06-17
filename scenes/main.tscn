@@ -1,7 +1,8 @@
-[gd_scene load_steps=147 format=3 uid="uid://dlpndwnncnijn"]
+[gd_scene load_steps=148 format=3 uid="uid://dlpndwnncnijn"]
 
 [ext_resource type="AudioStream" uid="uid://bl3tu345hbh37" path="res://audio/music/The Lobby.mp3" id="1_4g0f4"]
 [ext_resource type="Texture2D" uid="uid://dv8c76rwlux0p" path="res://assets/items/idCardGUI.png" id="2_e4464"]
+[ext_resource type="Texture2D" uid="uid://d0v0tged6w8tl" path="res://assets/utility/cursor_big.png" id="2_xaipn"]
 [ext_resource type="Texture2D" uid="uid://bffxtkyh5d2av" path="res://assets/players/gun_head.png" id="3_5ew25"]
 [ext_resource type="Texture2D" uid="uid://2obg1drnmlyg" path="res://assets/enemies/printerboss_barbg.png" id="3_fdslt"]
 [ext_resource type="Script" uid="uid://ds5q8l0gabpgr" path="res://assets/enemies/bosses/BossBar.gd" id="3_r8jns"]
@@ -24,7 +25,7 @@
 [ext_resource type="Script" uid="uid://cyrk7oak3jq7h" path="res://scripts/PlayerInventory.gd" id="21_3xiss"]
 [ext_resource type="Texture2D" uid="uid://iu6iar47r7n0" path="res://assets/gui/inventoryGUI.png" id="21_drtqb"]
 [ext_resource type="Texture2D" uid="uid://qk4xigecavl6" path="res://assets/gui/inventoryHeadSlot.png" id="22_0aa0l"]
-[ext_resource type="PackedScene" path="res://scenes/audio_manager.tscn" id="23_8ixil"]
+[ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://scenes/audio_manager.tscn" id="23_8ixil"]
 [ext_resource type="Shader" uid="uid://d8k1nhjy3a8t" path="res://shaders/pause_menu.gdshader" id="23_jl8kg"]
 [ext_resource type="Texture2D" uid="uid://uas65v7xroor" path="res://assets/gui/iPadGUI.png" id="23_qefvt"]
 [ext_resource type="Script" uid="uid://q7lrndgr3ant" path="res://scripts/PauseMenu.gd" id="23_yhhpu"]
@@ -37,8 +38,8 @@
 [ext_resource type="Texture2D" uid="uid://bebfa5wjlu236" path="res://assets/gui/homeButton.png" id="27_atwa6"]
 [ext_resource type="Texture2D" uid="uid://ttq5mrq4ae03" path="res://assets/gui/exitButton.png" id="28_04hgl"]
 [ext_resource type="Script" uid="uid://bvpry2i28katn" path="res://scripts/Notifier.gd" id="28_6orup"]
-[ext_resource type="Texture2D" uid="uid://cfhc31r667nck" path="res://assets/utility/cursor.png" id="31_4q8pb"]
 [ext_resource type="Script" uid="uid://dy5r14njiyt0p" path="res://assets/utility/Cursor.gd" id="32_o3cct"]
+[ext_resource type="PackedScene" uid="uid://cjet56niiyss1" path="res://rooms/adit_treasure.tscn" id="34_ndrjj"]
 [ext_resource type="Script" uid="uid://ccsvgqfwnia51" path="res://scripts/SettingsMenu.gd" id="35_0fttp"]
 [ext_resource type="Script" uid="uid://cu2qy1hmagapc" path="res://scripts/MainMenu.gd" id="35_ntfof"]
 [ext_resource type="Texture2D" uid="uid://brfwg747imx2e" path="res://assets/utility/main_menu2.png" id="35_u44vp"]
@@ -1424,7 +1425,6 @@ y_sort_enabled = true
 process_mode = 3
 stream = ExtResource("1_4g0f4")
 volume_db = -15.0
-bus = &"Music"
 
 [node name="MainCam" type="Camera2D" parent="."]
 position = Vector2(192, 128)
@@ -1467,7 +1467,7 @@ visible = false
 z_index = 10
 texture_filter = 1
 scale = Vector2(4, 4)
-texture = ExtResource("31_4q8pb")
+texture = ExtResource("2_xaipn")
 script = ExtResource("32_o3cct")
 
 [node name="BossBar" type="Control" parent="GUI"]
@@ -1603,7 +1603,6 @@ offset_top = -24.0
 offset_right = 128.0
 offset_bottom = 176.0
 pivot_offset = Vector2(80, 96)
-texture = ExtResource("3_5ew25")
 stretch_mode = 6
 metadata/_edit_lock_ = true
 
@@ -1724,7 +1723,6 @@ offset_top = -24.0
 offset_right = 128.0
 offset_bottom = 176.0
 pivot_offset = Vector2(80, 96)
-texture = ExtResource("3_5ew25")
 stretch_mode = 6
 metadata/_edit_lock_ = true
 
@@ -1828,7 +1826,6 @@ offset_top = -24.0
 offset_right = 128.0
 offset_bottom = 176.0
 pivot_offset = Vector2(80, 96)
-texture = ExtResource("3_5ew25")
 stretch_mode = 6
 metadata/_edit_lock_ = true
 
@@ -1932,7 +1929,6 @@ offset_top = -24.0
 offset_right = 128.0
 offset_bottom = 176.0
 pivot_offset = Vector2(80, 96)
-texture = ExtResource("3_5ew25")
 stretch_mode = 6
 metadata/_edit_lock_ = true
 
@@ -2660,15 +2656,12 @@ text = "PAGE 1/1"
 
 [node name="Equip" type="AudioStreamPlayer" parent="GUI/PlayerInventory/AudioManager"]
 stream = ExtResource("24_htsth")
-bus = &"SFX"
 
 [node name="Unequip" type="AudioStreamPlayer" parent="GUI/PlayerInventory/AudioManager"]
 stream = ExtResource("25_t2yoa")
-bus = &"SFX"
 
 [node name="Eat" type="AudioStreamPlayer" parent="GUI/PlayerInventory/AudioManager"]
 stream = ExtResource("26_kdrsa")
-bus = &"SFX"
 
 [node name="Title" type="Label" parent="GUI"]
 modulate = Color(1, 1, 1, 0)
@@ -2845,6 +2838,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("35_ntfof")
+testmap = ExtResource("34_ndrjj")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
@@ -2857,9 +2851,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -1576.0
-offset_top = -1540.0
+offset_top = -3508.0
 offset_right = 1816.0
-offset_bottom = 2514.0
+offset_bottom = 546.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("35_u44vp")
@@ -3098,7 +3092,7 @@ text = "[center]
 
 
 [font_size=100][color=yellow]Credits[/color][/font_size]
-[img=200 region=15,15,36,36]res://players/darwin_head.png[/img] [img=200 region=15,15,33,36]res://players/gun_head.png[/img]
+[img=200 region=15,15,36,36]res://assets/players/darwin_head.png[/img] [img=200 region=15,15,33,36]res://assets/players/gun_head.png[/img]
 [font_size=60]Project Founders[/font_size]
 [color=gray]
 Paramate Tangphichayaphothiwat
@@ -3569,7 +3563,6 @@ metadata/amnt = 2
 
 [node name="Click" type="AudioStreamPlayer" parent="GUI/CharacterSelection/AudioManager"]
 stream = ExtResource("51_1moc3")
-bus = &"SFX"
 
 [node name="CharacterSelectionBox" type="HFlowContainer" parent="GUI/CharacterSelection"]
 layout_mode = 1
@@ -3655,8 +3648,8 @@ size_flags_vertical = 0
 [node name="TextureRect" type="TextureRect" parent="GUI/CharacterSelection/CharacterSelectionBox/Darwin"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
-offset_right = 200.0
-offset_bottom = 200.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 texture = ExtResource("68_1h45m")
 stretch_mode = 5
 
@@ -3668,22 +3661,22 @@ metadata/players = []
 [node name="TextureRect" type="TextureRect" parent="GUI/CharacterSelection/CharacterSelectionBox/Gun"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
-offset_right = 200.0
-offset_bottom = 200.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 texture = ExtResource("3_5ew25")
 stretch_mode = 5
+metadata/_edit_use_anchors_ = true
 
 [node name="Flowbox" type="HFlowContainer" parent="GUI/CharacterSelection/CharacterSelectionBox/Gun"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
-offset_left = -11.0
-offset_top = -16.0
-offset_right = 189.0
-offset_bottom = 34.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
+metadata/_edit_use_anchors_ = true
 
-[node name="SettingsMenu" type="Control" parent="GUI"]
+[node name="SettingsMenu" type="Control" parent="GUI" node_paths=PackedStringArray("audio_manager")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -3695,6 +3688,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("35_0fttp")
+audio_manager = NodePath("AudioManager")
 metadata/_edit_group_ = true
 
 [node name="Blur" type="ColorRect" parent="GUI/SettingsMenu"]
@@ -3903,7 +3897,6 @@ libraries = {
 
 [node name="click" type="AudioStreamPlayer" parent="GUI/SettingsMenu/AudioManager"]
 stream = ExtResource("51_1moc3")
-bus = &"SFX"
 
 [node name="Splashscreen" type="Control" parent="GUI"]
 layout_mode = 3
@@ -3977,7 +3970,6 @@ offset_left = -3650.0
 offset_top = -3219.5
 offset_right = 4467.0
 offset_bottom = 3908.5
-rotation = 5.47626
 scale = Vector2(0.1, 0.1)
 pivot_offset = Vector2(4059.96, 3564.96)
 texture = ExtResource("50_orti2")

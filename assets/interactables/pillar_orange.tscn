@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bsyv6u4flngyy"]
 
-[ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://interactables/interactable.tscn" id="1_7kona"]
-[ext_resource type="Texture2D" uid="uid://demo5eyo1qvy8" path="res://interactables/pillarOrange.png" id="2_dm7ed"]
+[ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://assets/interactables/interactable.tscn" id="1_7kona"]
+[ext_resource type="Texture2D" uid="uid://demo5eyo1qvy8" path="res://assets/interactables/pillarOrange.png" id="2_dm7ed"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ign08"]
 radius = 21.0

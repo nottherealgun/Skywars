@@ -1,15 +1,15 @@
 [gd_scene load_steps=39 format=3 uid="uid://cbc45vf2vhru6"]
 
-[ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://interactables/interactable.tscn" id="1_qrxcq"]
-[ext_resource type="Script" path="res://interactables/chest.gd" id="2_t8bf4"]
-[ext_resource type="Texture2D" uid="uid://bg6u1et0p3vq6" path="res://interactables/chest_open.png" id="3_ale5o"]
-[ext_resource type="Texture2D" uid="uid://cidue6voqpmoh" path="res://coinGroundSS.png" id="4_t15ob"]
-[ext_resource type="FontFile" uid="uid://byk80lambns8u" path="res://utility/MiniPixel.ttf" id="4_tn4xh"]
-[ext_resource type="Script" path="res://interactables/CoinTemplate.gd" id="5_us3kq"]
-[ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://audio_manager.tscn" id="7_rnurj"]
-[ext_resource type="AudioStream" uid="uid://dlqymrm6eraxp" path="res://sfx/Coin drop default.mp3" id="8_lgvxi"]
-[ext_resource type="AudioStream" uid="uid://rd58prwwswkw" path="res://sfx/Coin drop 25% Sharper.mp3" id="9_amm01"]
-[ext_resource type="AudioStream" uid="uid://cbbsii7e3ir23" path="res://sfx/Coin drop lower voice.mp3" id="10_cevt6"]
+[ext_resource type="PackedScene" uid="uid://dk0w3ht1xmbc6" path="res://assets/interactables/interactable.tscn" id="1_qrxcq"]
+[ext_resource type="Script" uid="uid://djejfm3uinalf" path="res://assets/interactables/chest.gd" id="2_t8bf4"]
+[ext_resource type="Texture2D" uid="uid://bg6u1et0p3vq6" path="res://assets/interactables/chest_open.png" id="3_ale5o"]
+[ext_resource type="Texture2D" uid="uid://bucg0okgf6phw" path="res://assets/coinGroundSS.png" id="4_t15ob"]
+[ext_resource type="FontFile" uid="uid://byk80lambns8u" path="res://assets/utility/MiniPixel.ttf" id="4_tn4xh"]
+[ext_resource type="Script" uid="uid://dr5ua8lbvrg4x" path="res://assets/interactables/CoinTemplate.gd" id="5_us3kq"]
+[ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://scenes/audio_manager.tscn" id="7_rnurj"]
+[ext_resource type="AudioStream" uid="uid://dlqymrm6eraxp" path="res://audio/sfx/Coin drop default.mp3" id="8_lgvxi"]
+[ext_resource type="AudioStream" uid="uid://rd58prwwswkw" path="res://audio/sfx/Coin drop 25% Sharper.mp3" id="9_amm01"]
+[ext_resource type="AudioStream" uid="uid://cbbsii7e3ir23" path="res://audio/sfx/Coin drop lower voice.mp3" id="10_cevt6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bxbwj"]
 size = Vector2(96, 64)
@@ -240,8 +240,8 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(128.5, 25)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 9
 theme_override_constants/line_spacing = 0
+theme_override_constants/outline_size = 9
 theme_override_fonts/font = ExtResource("4_tn4xh")
 theme_override_font_sizes/font_size = 40
 horizontal_alignment = 1
@@ -272,15 +272,12 @@ shape = SubResource("CircleShape2D_jvudv")
 
 [node name="Coin1" type="AudioStreamPlayer" parent="AudioManager" index="0"]
 stream = ExtResource("8_lgvxi")
-bus = &"SFX"
 
 [node name="Coin2" type="AudioStreamPlayer" parent="AudioManager" index="1"]
 stream = ExtResource("9_amm01")
-bus = &"SFX"
 
 [node name="Coin3" type="AudioStreamPlayer" parent="AudioManager" index="2"]
 stream = ExtResource("10_cevt6")
-bus = &"SFX"
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]

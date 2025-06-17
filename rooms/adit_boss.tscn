@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://des3xhancujs4"]
 
-[ext_resource type="PackedScene" uid="uid://cx7imnf85vue8" path="res://level.tscn" id="1_i666f"]
-[ext_resource type="PackedScene" uid="uid://6qdjvyw15lm4" path="res://interactables/door.tscn" id="2_y21lf"]
+[ext_resource type="PackedScene" uid="uid://cx7imnf85vue8" path="res://scenes/level.tscn" id="1_i666f"]
+[ext_resource type="PackedScene" uid="uid://6qdjvyw15lm4" path="res://assets/interactables/door.tscn" id="2_y21lf"]
 [ext_resource type="PackedScene" uid="uid://bhsvoj5kcuifg" path="res://spawning_point.tscn" id="3_k2axt"]
 
 [node name="adit_boss" groups=["boss", "special"] instance=ExtResource("1_i666f")]

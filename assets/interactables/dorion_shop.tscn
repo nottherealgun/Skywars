@@ -1,14 +1,14 @@
 [gd_scene load_steps=28 format=3 uid="uid://b50cdoiu11fvs"]
 
-[ext_resource type="PackedScene" uid="uid://bcco2p0tgv3vr" path="res://npcs/orion_npc.tscn" id="1_ejp17"]
-[ext_resource type="Script" uid="uid://brsy43dp4tcy4" path="res://interactables/dorion_shop.gd" id="1_rjnau"]
-[ext_resource type="Texture2D" uid="uid://b5j86ttd5iqyt" path="res://interactables/orionBoothBack.png" id="2_7gkim"]
-[ext_resource type="Texture2D" uid="uid://o1su0un7m3q8" path="res://interactables/orionBoothFront.png" id="3_n68mp"]
-[ext_resource type="PackedScene" uid="uid://ceje6knjf6lby" path="res://interactables/table_with_coffee.tscn" id="4_cjmlg"]
-[ext_resource type="FontFile" uid="uid://byk80lambns8u" path="res://utility/MiniPixel.ttf" id="6_x0ky8"]
-[ext_resource type="Texture2D" uid="uid://cidue6voqpmoh" path="res://coinGroundSS.png" id="7_cvmsb"]
-[ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://audio_manager.tscn" id="8_mwvo5"]
-[ext_resource type="AudioStream" uid="uid://cglq0ief0g4c4" path="res://sfx/Purchasing sound.mp3" id="9_jaes8"]
+[ext_resource type="PackedScene" uid="uid://bcco2p0tgv3vr" path="res://assets/npcs/orion_npc.tscn" id="1_ejp17"]
+[ext_resource type="Script" uid="uid://brsy43dp4tcy4" path="res://assets/interactables/dorion_shop.gd" id="1_rjnau"]
+[ext_resource type="Texture2D" uid="uid://b5j86ttd5iqyt" path="res://assets/interactables/orionBoothBack.png" id="2_7gkim"]
+[ext_resource type="Texture2D" uid="uid://o1su0un7m3q8" path="res://assets/interactables/orionBoothFront.png" id="3_n68mp"]
+[ext_resource type="PackedScene" uid="uid://ceje6knjf6lby" path="res://assets/interactables/table_with_coffee.tscn" id="4_cjmlg"]
+[ext_resource type="FontFile" uid="uid://byk80lambns8u" path="res://assets/utility/MiniPixel.ttf" id="6_x0ky8"]
+[ext_resource type="Texture2D" uid="uid://bucg0okgf6phw" path="res://assets/coinGroundSS.png" id="7_cvmsb"]
+[ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://scenes/audio_manager.tscn" id="8_mwvo5"]
+[ext_resource type="AudioStream" uid="uid://cglq0ief0g4c4" path="res://audio/sfx/Purchasing sound.mp3" id="9_jaes8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wggvf"]
 size = Vector2(237, 44)

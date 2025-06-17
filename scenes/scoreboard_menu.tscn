@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://c7iaa7t7dls2p"]
 
 [ext_resource type="Script" uid="uid://cnnwdaiv1wwmw" path="res://ScoreboardMenu.gd" id="1_winkk"]
-[ext_resource type="FontFile" uid="uid://byk80lambns8u" path="res://utility/MiniPixel.ttf" id="2_27xwp"]
+[ext_resource type="FontFile" uid="uid://byk80lambns8u" path="res://assets/utility/MiniPixel.ttf" id="2_27xwp"]
 [ext_resource type="Shader" uid="uid://0ef154123qfy" path="res://pause_menu.gdshader" id="3_rooqm"]
-[ext_resource type="Texture2D" uid="uid://uas65v7xroor" path="res://gui/iPadGUI.png" id="4_fed02"]
+[ext_resource type="Texture2D" uid="uid://uas65v7xroor" path="res://assets/gui/iPadGUI.png" id="4_fed02"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ys8be"]
 shader = ExtResource("3_rooqm")

@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://7bcbymaw5nvn"]
 
-[ext_resource type="PackedScene" uid="uid://cni0dsstdjde" path="res://projectiles/projectile.tscn" id="1_lj12i"]
-[ext_resource type="Texture2D" uid="uid://ctsdlagghjwfv" path="res://projectiles/paperProjectile2SS.png" id="2_46k0q"]
-[ext_resource type="Script" path="res://projectiles/printer_proj_2.gd" id="2_qv8gu"]
+[ext_resource type="PackedScene" uid="uid://cni0dsstdjde" path="res://assets/projectiles/projectile.tscn" id="1_lj12i"]
+[ext_resource type="Texture2D" uid="uid://ctsdlagghjwfv" path="res://assets/projectiles/paperProjectile2SS.png" id="2_46k0q"]
+[ext_resource type="Script" path="res://assets/projectiles/printer_proj_2.gd" id="2_qv8gu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_36gjk"]
 atlas = ExtResource("2_46k0q")

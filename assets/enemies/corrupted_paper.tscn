@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://hl2aphkhqo0e"]
 
-[ext_resource type="PackedScene" uid="uid://0anrpyccai4l" path="res://enemies/enemy.tscn" id="1_facoc"]
-[ext_resource type="Script" path="res://enemies/corrupted_paper.gd" id="2_4r6ka"]
-[ext_resource type="SpriteFrames" uid="uid://wwtbnfnkwoq8" path="res://enemies/corrupted_paper2.tres" id="3_o0kxc"]
-[ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://utility/shadow.png" id="5_3dlan"]
+[ext_resource type="PackedScene" uid="uid://0anrpyccai4l" path="res://assets/enemies/enemy.tscn" id="1_facoc"]
+[ext_resource type="Script" uid="uid://duuv6pqjow6g6" path="res://assets/enemies/corrupted_paper.gd" id="2_4r6ka"]
+[ext_resource type="SpriteFrames" uid="uid://wwtbnfnkwoq8" path="res://assets/enemies/corrupted_paper2.tres" id="3_o0kxc"]
+[ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://assets/utility/shadow.png" id="5_3dlan"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ylbf"]
 size = Vector2(30, 18)

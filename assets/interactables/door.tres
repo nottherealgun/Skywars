@@ -1,7 +1,7 @@
 [gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://cxvue3jq4m8wg"]
 
-[ext_resource type="Texture2D" uid="uid://d2y2gnp4q0ti3" path="res://interactables/aniDoorHorizontalSS.png" id="1_kud77"]
-[ext_resource type="Texture2D" uid="uid://baceu1lu7581p" path="res://interactables/aniDoorVerticalSS.png" id="2_er0q8"]
+[ext_resource type="Texture2D" uid="uid://d2y2gnp4q0ti3" path="res://assets/interactables/aniDoorHorizontalSS.png" id="1_kud77"]
+[ext_resource type="Texture2D" uid="uid://baceu1lu7581p" path="res://assets/interactables/aniDoorVerticalSS.png" id="2_er0q8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vknpa"]
 atlas = ExtResource("1_kud77")

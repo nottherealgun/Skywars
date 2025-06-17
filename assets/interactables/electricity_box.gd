@@ -5,5 +5,5 @@ extends Interactable
 @export var flip := false
 
 func _process(delta):
-	$Sprite.texture = load("res://interactables/electricity_box"+["","_side","_back"][facing]+".png")
+	$Sprite.texture = load("res://assets/interactables/electricity_box"+["","_side","_back"][facing]+".png")
 	$Sprite.flip_h = flip

@@ -1,11 +1,11 @@
 [gd_scene load_steps=16 format=3 uid="uid://6qdjvyw15lm4"]
 
-[ext_resource type="Script" path="res://interactables/door.gd" id="1_dfm2f"]
-[ext_resource type="SpriteFrames" uid="uid://cxvue3jq4m8wg" path="res://interactables/door.tres" id="2_mefga"]
-[ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://audio_manager.tscn" id="3_xydjx"]
-[ext_resource type="AudioStream" uid="uid://dbblin41d48wm" path="res://sfx/Key in door.mp3" id="4_d2ha7"]
-[ext_resource type="AudioStream" uid="uid://ova2voo3dc5d" path="res://sfx/Door open and close.mp3" id="5_skh32"]
-[ext_resource type="AudioStream" uid="uid://c0p8jfp1u4euq" path="res://sfx/door_open.mp3" id="6_jn6mq"]
+[ext_resource type="Script" uid="uid://dhhbu2u5itw8c" path="res://assets/interactables/door.gd" id="1_dfm2f"]
+[ext_resource type="SpriteFrames" uid="uid://cxvue3jq4m8wg" path="res://assets/interactables/door.tres" id="2_mefga"]
+[ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://scenes/audio_manager.tscn" id="3_xydjx"]
+[ext_resource type="AudioStream" uid="uid://dbblin41d48wm" path="res://audio/sfx/Key in door.mp3" id="4_d2ha7"]
+[ext_resource type="AudioStream" uid="uid://ova2voo3dc5d" path="res://audio/sfx/Door open and close.mp3" id="5_skh32"]
+[ext_resource type="AudioStream" uid="uid://c0p8jfp1u4euq" path="res://audio/sfx/door_open.mp3" id="6_jn6mq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l0wym"]
 size = Vector2(64, 8)

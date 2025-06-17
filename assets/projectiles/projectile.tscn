@@ -1,13 +1,13 @@
 [gd_scene load_steps=12 format=3 uid="uid://cni0dsstdjde"]
 
-[ext_resource type="Script" path="res://projectiles/projectile.gd" id="1_kv6im"]
-[ext_resource type="Texture2D" uid="uid://djdvskrx3w0id" path="res://projectiles/paperProjectile1.png" id="2_7ousg"]
-[ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://utility/shadow.png" id="3_fqft3"]
+[ext_resource type="Script" path="res://assets/projectiles/projectile.gd" id="1_kv6im"]
+[ext_resource type="Texture2D" uid="uid://djdvskrx3w0id" path="res://assets/projectiles/paperProjectile1.png" id="2_7ousg"]
+[ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://assets/utility/shadow.png" id="3_fqft3"]
 [ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://audio_manager.tscn" id="4_50bfq"]
-[ext_resource type="AudioStream" uid="uid://hthgs6t7h17v" path="res://sfx/Darwin bullet impact.mp3" id="5_1ywnw"]
-[ext_resource type="AudioStream" uid="uid://bxqay4i45j7al" path="res://sfx/Gun shooting impact.mp3" id="6_j1cmm"]
-[ext_resource type="AudioStream" uid="uid://bkl3xa4eoj6we" path="res://sfx/Darwin bullet impact metal.mp3" id="7_tmc35"]
-[ext_resource type="AudioStream" uid="uid://ctlmgrew0dldb" path="res://sfx/Gun shooting sounds impact metal.mp3" id="8_oexaa"]
+[ext_resource type="AudioStream" uid="uid://hthgs6t7h17v" path="res://audio/sfx/Darwin bullet impact.mp3" id="5_1ywnw"]
+[ext_resource type="AudioStream" uid="uid://bxqay4i45j7al" path="res://audio/sfx/Gun shooting impact.mp3" id="6_j1cmm"]
+[ext_resource type="AudioStream" uid="uid://bkl3xa4eoj6we" path="res://audio/sfx/Darwin bullet impact metal.mp3" id="7_tmc35"]
+[ext_resource type="AudioStream" uid="uid://ctlmgrew0dldb" path="res://audio/sfx/Gun shooting sounds impact metal.mp3" id="8_oexaa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bh81j"]
 size = Vector2(130, 80)

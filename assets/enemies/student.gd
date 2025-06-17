@@ -7,7 +7,7 @@ var knockback = 1
 
 func _ready():
 	super()
-	$Sprite.sprite_frames = load("res://enemies/student"+str((randi()%2)+1)+".tres")
+	$Sprite.sprite_frames = load("res://assets/enemies/student"+str((randi()%2)+1)+".tres")
 	$Sprite.play("idle")
 	
 func _physics_process(delta):

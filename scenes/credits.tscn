@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://bna0pxtfoxdw1"]
 
 [ext_resource type="Script" uid="uid://dtl0dd5eydesn" path="res://Credits.gd" id="1_mah5v"]
-[ext_resource type="Texture2D" uid="uid://bqjyiexgloh6b" path="res://utility/TransScreenBG.png" id="2_kyhnv"]
-[ext_resource type="Texture2D" uid="uid://8kudt5gvx2un" path="res://gui/back_default.png" id="3_ooihk"]
-[ext_resource type="Texture2D" uid="uid://0yk1xwbripns" path="res://gui/back_pressed.png" id="4_ih6pn"]
-[ext_resource type="Texture2D" uid="uid://6xmkatqahwq5" path="res://gui/back_hover.png" id="5_7lgdl"]
-[ext_resource type="FontFile" uid="uid://byk80lambns8u" path="res://utility/MiniPixel.ttf" id="6_c6kru"]
+[ext_resource type="Texture2D" uid="uid://bqjyiexgloh6b" path="res://assets/utility/TransScreenBG.png" id="2_kyhnv"]
+[ext_resource type="Texture2D" uid="uid://8kudt5gvx2un" path="res://assets/gui/back_default.png" id="3_ooihk"]
+[ext_resource type="Texture2D" uid="uid://0yk1xwbripns" path="res://assets/gui/back_pressed.png" id="4_ih6pn"]
+[ext_resource type="Texture2D" uid="uid://6xmkatqahwq5" path="res://assets/gui/back_hover.png" id="5_7lgdl"]
+[ext_resource type="FontFile" uid="uid://byk80lambns8u" path="res://assets/utility/MiniPixel.ttf" id="6_c6kru"]
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -73,7 +73,7 @@ text = "[center]
 
 
 [font_size=100][color=yellow]Credits[/color][/font_size]
-[img=200 region=15,15,36,36]res://players/darwin_head.png[/img] [img=200 region=15,15,33,36]res://players/gun_head.png[/img]
+[img=200 region=15,15,36,36]res://assets/players/darwin_head.png[/img] [img=200 region=15,15,33,36]res://assets/players/gun_head.png[/img]
 [font_size=60]Project Founders[/font_size]
 [color=gray]
 Paramate Tangphichayaphothiwat

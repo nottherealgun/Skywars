@@ -36,7 +36,7 @@ func _on_hitbox_area_exited(area):
 
 func item_effect():
 	var t = create_tween().set_trans(Tween.TRANS_CUBIC)
-	$ItemShow.texture = load("res://items/"+item.pic)
+	$ItemShow.texture = load("res://assets/items/"+item.pic)
 	$Label.text = item.name
 	$ItemShow/Par.emitting = true
 	t.tween_property($ItemShow,"position:y",-100,1.0).as_relative()

@@ -1,13 +1,13 @@
 [gd_scene load_steps=44 format=3 uid="uid://u01jccblb6wp"]
 
-[ext_resource type="Script" uid="uid://cg8wgq2rvobga" path="res://abilities/dood.gd" id="1_y7i1w"]
-[ext_resource type="Texture2D" uid="uid://csrvcyrt7j1ls" path="res://abilities/dood_ranged_attack.png" id="2_1rm18"]
-[ext_resource type="Texture2D" uid="uid://ds7gr3e3m4ia3" path="res://abilities/dood_ranged_idle.png" id="3_r4y2g"]
-[ext_resource type="Texture2D" uid="uid://e0pdynsl0t0p" path="res://abilities/dood_ranged_dead.png" id="3_x3ret"]
-[ext_resource type="Texture2D" uid="uid://b0vmhbttj3ema" path="res://abilities/dood_ranged_walk.png" id="4_8ie1c"]
-[ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://utility/shadow.png" id="5_21xil"]
+[ext_resource type="Script" uid="uid://cg8wgq2rvobga" path="res://assets/abilities/dood.gd" id="1_y7i1w"]
+[ext_resource type="Texture2D" uid="uid://csrvcyrt7j1ls" path="res://assets/abilities/dood_ranged_attack.png" id="2_1rm18"]
+[ext_resource type="Texture2D" uid="uid://ds7gr3e3m4ia3" path="res://assets/abilities/dood_ranged_idle.png" id="3_r4y2g"]
+[ext_resource type="Texture2D" uid="uid://e0pdynsl0t0p" path="res://assets/abilities/dood_ranged_dead.png" id="3_x3ret"]
+[ext_resource type="Texture2D" uid="uid://b0vmhbttj3ema" path="res://assets/abilities/dood_ranged_walk.png" id="4_8ie1c"]
+[ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://assets/utility/shadow.png" id="5_21xil"]
 [ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://audio_manager.tscn" id="7_lj3ey"]
-[ext_resource type="AudioStream" uid="uid://ci8lsmwanws7t" path="res://sfx/sproutdude_death.mp3" id="7_uwels"]
+[ext_resource type="AudioStream" uid="uid://ci8lsmwanws7t" path="res://audio/sfx/sproutdude_death.mp3" id="7_uwels"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sj6uq"]
 size = Vector2(48, 56)

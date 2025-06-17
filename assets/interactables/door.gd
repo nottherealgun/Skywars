@@ -39,7 +39,7 @@ func _set_is_boss_door(val):
 
 func lock_check():
 	if !connected_door:
-		$Sprite.sprite_frames = load("res://interactables/door_barricade.tres")
+		$Sprite.sprite_frames = load("res://assets/interactables/door_barricade.tres")
 		if facing_direction_idx == 2 and !front_facing:
 			$Sprite.flip_h = true
 
