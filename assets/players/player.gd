@@ -50,10 +50,10 @@ var revival_target : Player
 var key : Object
 
 # Player GUI setup
-@onready var stat_gui = Global.GUI.get_node("PlayerStats/PlayerStats"+str(player_id))
-@onready var healthbar = stat_gui.get_node("Healthbar")
-@onready var brainbar = stat_gui.get_node("Brainbar")
-@onready var brainbarBG = stat_gui.get_node("BrainbarBG")
+@onready var stat_gui = get_node_or_null(Global.main_path+"/GUI/PlayerStats/PlayerStats"+str(player_id))
+@onready var healthbar = stat_gui.get_node_or_null("Healthbar")
+@onready var brainbar = stat_gui.get_node_or_null("Brainbar")
+@onready var brainbarBG = stat_gui.get_node_or_null("BrainbarBG")
 
 # Tweens
 @onready var injury_tween : Tween

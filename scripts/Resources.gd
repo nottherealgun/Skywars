@@ -3,18 +3,18 @@ signal enemy_killed(enemy)
 signal built_level
 
 # Resources
-
-@onready var Main := get_node("/root/Main") 							as Node2D
-@onready var Map := get_node("/root/Main/Map") 							as TileMap
-@onready var GUI := get_node("/root/Main/GUI") 							as CanvasLayer
-@onready var Dev := get_node("/root/Main/GUI/Dev") 						as Label
-@onready var Music := get_node("/root/Main/Music") 						as AudioStreamPlayer
-@onready var Bossbar := get_node("/root/Main/GUI/BossBar") 				as Control
-@onready var PauseMenu := get_node("/root/Main/GUI/PauseMenu")			as Control
-@onready var Cam := get_node("/root/Main/MainCam") 						as Camera2D
-@onready var Inventory := get_node("/root/Main/GUI/PlayerInventory") 	as Control
-@onready var Scoreboard = get_node("/root/Main/GUI/ScoreboardMenu")		as Control
-@onready var Notifier = get_node("/root/Main/GUI/Notifier")				as Label
+const main_path = "/root/Main"
+@onready var Main := get_node(main_path+"") 							as Node2D
+@onready var Map := get_node(main_path+"/Map") 							as TileMapLayer
+@onready var GUI := get_node(main_path+"/GUI") 							as CanvasLayer
+@onready var Dev := get_node(main_path+"/GUI/Dev") 						as Label
+@onready var Music := get_node(main_path+"/Music") 						as AudioStreamPlayer
+@onready var Bossbar := get_node(main_path+"/GUI/BossBar") 				as Control
+@onready var PauseMenu := get_node(main_path+"/GUI/PauseMenu")			as Control
+@onready var Cam := get_node(main_path+"/MainCam") 						as Camera2D
+@onready var Inventory := get_node(main_path+"/GUI/PlayerInventory") 	as Control
+@onready var Scoreboard = get_node(main_path+"/GUI/ScoreboardMenu")		as Control
+@onready var Notifier = get_node(main_path+"/GUI/Notifier")				as Label
 @onready var MAP_RECT : Vector2 = Map.get_used_rect().size*128
 
 var RNG = RandomNumberGenerator.new()
@@ -600,7 +600,7 @@ func build_lobby():
 	var new_tilemap : Object
 	
 	for c in room_scene.get_children():
-		if is_instance_of(c,TileMap):
+		if is_instance_of(c,TileMapLayer):
 			new_tilemap = c
 	
 	# Clear old map tiles

@@ -101,7 +101,7 @@ func move(main_vec:Vector2):
 	for i in 10:
 		a = checked_vec.normalized().rotated(deg_to_rad(i*36))*200
 		c = move_and_collide(a,true)
-		if c and !is_instance_of(c.get_collider(),TileMap) and !c.get_collider().is_in_group("door"):
+		if c and !is_instance_of(c.get_collider(),TileMapLayer) and !c.get_collider().is_in_group("door"):
 			var dist = position.distance_to(c.get_collider().position)-100
 			var direc = position.direction_to(c.get_collider().position)
 			var vec = direc*dist

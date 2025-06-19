@@ -3,7 +3,7 @@ extends Control
 var tween : Tween
 
 func _process(delta):
-	if !Global.transitioning and !get_node("/root/Main/GUI/MainMenu").visible:
+	if !Global.transitioning and !get_node(Global.main_path+"/GUI/MainMenu").visible:
 		if Input.is_action_just_pressed("pause"):
 			visible = !visible
 			if visible:

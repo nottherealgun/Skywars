@@ -1,4 +1,4 @@
-[gd_scene load_steps=148 format=3 uid="uid://dlpndwnncnijn"]
+[gd_scene load_steps=152 format=3 uid="uid://dlpndwnncnijn"]
 
 [ext_resource type="AudioStream" uid="uid://bl3tu345hbh37" path="res://audio/music/The Lobby.mp3" id="1_4g0f4"]
 [ext_resource type="Texture2D" uid="uid://dv8c76rwlux0p" path="res://assets/items/idCardGUI.png" id="2_e4464"]
@@ -268,7 +268,7 @@ _data = {
 &"default": SubResource("Animation_aowxi")
 }
 
-[sub_resource type="Shader" id="Shader_4a7de"]
+[sub_resource type="Shader" id="Shader_ndrjj"]
 code = "shader_type canvas_item;
 
 uniform vec4 line_color : source_color = vec4(1);
@@ -292,7 +292,7 @@ void fragment() {
 }"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4yyxw"]
-shader = SubResource("Shader_4a7de")
+shader = SubResource("Shader_ndrjj")
 shader_parameter/line_color = Color(1, 1, 1, 1)
 shader_parameter/line_thickness = 10.0
 
@@ -1093,6 +1093,16 @@ border_width_top = 10
 border_width_right = 10
 border_width_bottom = 10
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_11yus"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ndrjj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6ruc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ih3m7"]
+bg_color = Color(0.740956, 0.573347, 0.13285, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqaim"]
 bg_color = Color(0.235294, 0.301961, 0.678431, 1)
 corner_radius_top_left = 10
@@ -1102,20 +1112,16 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y1t6c"]
 bg_color = Color(0.686275, 0.4, 0.403922, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d7yox"]
 shader = ExtResource("23_jl8kg")
 shader_parameter/blur_amount = 2.5
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5cxlr"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ih3m7"]
 texture = ExtResource("63_4dcju")
 modulate_color = Color(0.294118, 0.294118, 0.294118, 1)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uowoh"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_11yus"]
 texture = ExtResource("63_yfw3t")
 texture_margin_left = 4.0
 texture_margin_top = 4.0
@@ -1124,8 +1130,8 @@ texture_margin_bottom = 4.0
 
 [sub_resource type="Theme" id="Theme_kkwn8"]
 HSlider/icons/grabber = ExtResource("62_cpwue")
-HSlider/styles/grabber_area = SubResource("StyleBoxTexture_5cxlr")
-HSlider/styles/slider = SubResource("StyleBoxTexture_uowoh")
+HSlider/styles/grabber_area = SubResource("StyleBoxTexture_ih3m7")
+HSlider/styles/slider = SubResource("StyleBoxTexture_11yus")
 
 [sub_resource type="Animation" id="Animation_achef"]
 length = 0.001
@@ -2838,6 +2844,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("35_ntfof")
+skip_splashscreen = true
 testmap = ExtResource("34_ndrjj")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
@@ -2851,9 +2858,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -1576.0
-offset_top = -3508.0
+offset_top = -1540.0
 offset_right = 1816.0
-offset_bottom = 546.0
+offset_bottom = 2514.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("35_u44vp")
@@ -3526,8 +3533,14 @@ offset_left = 536.0
 offset_top = 856.0
 offset_right = 1064.0
 offset_bottom = 964.0
+focus_mode = 0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("11_2h1l6")
 theme_override_font_sizes/font_size = 100
+theme_override_styles/disabled = SubResource("StyleBoxFlat_11yus")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ndrjj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_b6ruc")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ih3m7")
 text = "BEGIN!"
 
 [node name="1P" type="Button" parent="GUI/CharacterSelection"]
@@ -3538,7 +3551,8 @@ offset_right = 1224.0
 offset_bottom = 964.0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("11_2h1l6")
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 96
+theme_override_styles/disabled = SubResource("StyleBoxFlat_11yus")
 theme_override_styles/normal = SubResource("StyleBoxFlat_pqaim")
 disabled = true
 toggle_mode = true
@@ -3553,7 +3567,8 @@ offset_right = 1384.0
 offset_bottom = 964.0
 focus_mode = 0
 theme_override_fonts/font = ExtResource("11_2h1l6")
-theme_override_font_sizes/font_size = 80
+theme_override_font_sizes/font_size = 96
+theme_override_styles/disabled = SubResource("StyleBoxFlat_11yus")
 theme_override_styles/normal = SubResource("StyleBoxFlat_y1t6c")
 toggle_mode = true
 text = "2P"
@@ -3584,7 +3599,7 @@ script = ExtResource("64_x1ckp")
 
 [node name="PlayerCircle2" type="TextureRect" parent="GUI/CharacterSelection/CharacterSelectionBox/Unchosen"]
 visible = false
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(40, 44)
 offset_left = 744.0
 offset_top = 160.0
 offset_right = 784.0
@@ -3596,7 +3611,7 @@ metadata/char = "darwin"
 
 [node name="PlayerCircle3" type="TextureRect" parent="GUI/CharacterSelection/CharacterSelectionBox/Unchosen"]
 visible = false
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(40, 44)
 offset_left = 788.0
 offset_top = 160.0
 offset_right = 828.0
@@ -3608,7 +3623,7 @@ metadata/char = "darwin"
 
 [node name="PlayerCircle4" type="TextureRect" parent="GUI/CharacterSelection/CharacterSelectionBox/Unchosen"]
 visible = false
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(40, 44)
 offset_left = 832.0
 offset_top = 160.0
 offset_right = 872.0
@@ -3620,7 +3635,7 @@ metadata/char = "darwin"
 
 [node name="PlayerCircle1" type="TextureRect" parent="GUI/CharacterSelection/CharacterSelectionBox/Unchosen"]
 visible = false
-custom_minimum_size = Vector2(40, 40)
+custom_minimum_size = Vector2(40, 44)
 offset_left = 744.0
 offset_top = 160.0
 offset_right = 784.0
@@ -3635,16 +3650,6 @@ custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 metadata/players = [1, 2, 3, 4]
 
-[node name="Flowbox" type="HFlowContainer" parent="GUI/CharacterSelection/CharacterSelectionBox/Darwin"]
-custom_minimum_size = Vector2(200, 50)
-layout_mode = 2
-offset_left = -11.0
-offset_top = -16.0
-offset_right = 189.0
-offset_bottom = 34.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
 [node name="TextureRect" type="TextureRect" parent="GUI/CharacterSelection/CharacterSelectionBox/Darwin"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
@@ -3652,6 +3657,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource("68_1h45m")
 stretch_mode = 5
+
+[node name="Flowbox" type="HFlowContainer" parent="GUI/CharacterSelection/CharacterSelectionBox/Darwin"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
 [node name="Gun" type="Panel" parent="GUI/CharacterSelection/CharacterSelectionBox"]
 custom_minimum_size = Vector2(200, 200)
@@ -4004,19 +4020,12 @@ libraries = {
 autoplay = "new_animation"
 speed_scale = 0.75
 
-[node name="Map" type="TileMap" parent="."]
+[node name="Map" type="TileMapLayer" parent="."]
 z_index = -1
 y_sort_enabled = true
 texture_filter = 1
 scale = Vector2(2, 2)
 tile_set = ExtResource("14_vmf2g")
-format = 2
-layer_0/name = "Floor"
-layer_0/y_sort_enabled = true
-layer_0/z_index = -1
-layer_1/name = "Walls"
-layer_1/y_sort_enabled = true
-layer_1/z_index = 1
 metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="GUI/PlayerInventory/Prev" to="GUI/PlayerInventory" method="_on_prev_pressed"]

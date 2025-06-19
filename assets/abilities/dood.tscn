@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://e0pdynsl0t0p" path="res://assets/abilities/dood_ranged_dead.png" id="3_x3ret"]
 [ext_resource type="Texture2D" uid="uid://b0vmhbttj3ema" path="res://assets/abilities/dood_ranged_walk.png" id="4_8ie1c"]
 [ext_resource type="Texture2D" uid="uid://c4io8nnvxdqgl" path="res://assets/utility/shadow.png" id="5_21xil"]
-[ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://audio_manager.tscn" id="7_lj3ey"]
+[ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://scenes/audio_manager.tscn" id="7_lj3ey"]
 [ext_resource type="AudioStream" uid="uid://ci8lsmwanws7t" path="res://audio/sfx/sproutdude_death.mp3" id="7_uwels"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sj6uq"]
@@ -254,10 +254,11 @@ radius = 256.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_jfcbb"]
 radius = 192.0
 
-[node name="Dood" type="CharacterBody2D" groups=["minion"]]
+[node name="Dood" type="CharacterBody2D" node_paths=PackedStringArray("sprite") groups=["minion"]]
 y_sort_enabled = true
 collision_mask = 16
 script = ExtResource("1_y7i1w")
+sprite = NodePath("AnimatedSprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
@@ -277,14 +278,12 @@ metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Hitbox"]
-visible = false
 position = Vector2(0, 24)
 shape = SubResource("RectangleShape2D_h5wvl")
 
 [node name="EnemyDetect" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetect"]
-visible = false
 shape = SubResource("CircleShape2D_lipov")
 
 [node name="AllyDetect" type="Area2D" parent="."]
@@ -292,7 +291,6 @@ collision_layer = 32
 collision_mask = 32
 
 [node name="AllyDetectShape" type="CollisionShape2D" parent="AllyDetect"]
-visible = false
 shape = SubResource("CircleShape2D_jfcbb")
 
 [node name="Shadow" type="Sprite2D" parent="."]
@@ -331,7 +329,6 @@ vertical_alignment = 1
 [node name="Death" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("7_uwels")
 volume_db = 5.0
-bus = &"SFX"
 
 [connection signal="area_entered" from="EnemyDetect" to="." method="_on_enemy_detect_area_entered"]
 [connection signal="area_exited" from="EnemyDetect" to="." method="_on_enemy_detect_area_exited"]

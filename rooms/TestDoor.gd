@@ -9,7 +9,8 @@ func _ready():
 func open_door(player:Object):
 	if player_in:
 		player_in = false
-		Global.build_stage()
+		#Global.build_stage()
+		Global.build_room(6)
 
 func _on_area_2d_area_entered(area):
 	$Sprite.play("forward")

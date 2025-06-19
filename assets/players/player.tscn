@@ -7,7 +7,7 @@
 [ext_resource type="FontFile" uid="uid://im11hs0xx7wu" path="res://assets/utility/RoadPixel.ttf" id="4_nv7os"]
 [ext_resource type="Script" uid="uid://b8ex7hvjynnrr" path="res://assets/players/TrinketManager.gd" id="6_fqbxb"]
 [ext_resource type="Script" uid="uid://b87eqmkncsej5" path="res://assets/players/Buff.gd" id="7_oj8un"]
-[ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://audio_manager.tscn" id="8_qjt5i"]
+[ext_resource type="PackedScene" uid="uid://devuw3hf8itil" path="res://scenes/audio_manager.tscn" id="8_qjt5i"]
 [ext_resource type="AudioStream" uid="uid://dvrwta0dvcia8" path="res://audio/sfx/player_heal.mp3" id="9_2hd5b"]
 [ext_resource type="AudioStream" uid="uid://dldfss342vxyj" path="res://audio/sfx/player_injured.mp3" id="10_78lqm"]
 [ext_resource type="AudioStream" uid="uid://c3b0bxgyxijms" path="res://audio/sfx/Dashing.mp3" id="11_bhglg"]
@@ -221,24 +221,19 @@ script = ExtResource("7_oj8un")
 
 [node name="Heal" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("9_2hd5b")
-bus = &"SFX"
 
 [node name="Injured" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("10_78lqm")
-bus = &"SFX"
 
 [node name="Dash" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("11_bhglg")
-bus = &"SFX"
 
 [node name="ShootGun" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("12_qv7hf")
 max_polyphony = 10
-bus = &"SFX"
 
 [node name="ShootDarwin" type="AudioStreamPlayer" parent="AudioManager"]
 stream = ExtResource("12_tk1mb")
-bus = &"SFX"
 
 [node name="GuideManager" type="Node" parent="."]
 

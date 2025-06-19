@@ -5,6 +5,7 @@ signal minion_died
 @onready var health = max_health
 @export var speed := 1
 @export var damage = 10
+@export var sprite : AnimatedSprite2D
 
 var DEFAULT = {
 	"max_health" = 100,
@@ -18,7 +19,7 @@ var min_master_dist = 100
 var shot = false
 
 enum STATES {IDLE,FOLLOWING,ATTACKING,DEATH}
-var state = STATES.IDLE
+var state : STATES = STATES.IDLE
 var targets_in_range = [] as Array
 var target : Object
 
@@ -26,6 +27,7 @@ var allies = []
 var last_bullet : Object
 
 func _process(delta):
+	$Label.text = str(STATES.keys()[state])
 	while null in targets_in_range:
 		targets_in_range.erase(null)
 	
@@ -58,8 +60,8 @@ func _process(delta):
 				
 		STATES.FOLLOWING:
 			move_vec = position.direction_to(master.position)
-			$AnimatedSprite2D.flip_h = (move_vec.x < 0)
-			if $AnimatedSprite2D.frame >= 3:
+			sprite.flip_h = (move_vec.x < 0)
+			if sprite.frame >= 3:
 				move((move_vec+detect_allies()).normalized()*delta*speed*200)
 				
 			if position.distance_to(master.position) <= min_master_dist:
@@ -73,21 +75,21 @@ func _process(delta):
 			
 		STATES.ATTACKING:
 			if is_instance_valid(target) and $BetweenShots.is_stopped():
-				$AnimatedSprite2D.play("attack")
-				$AnimatedSprite2D.flip_h = (target.position.x < position.x)
-				if $AnimatedSprite2D.frame == 6 and !shot:
+				sprite.play("attack")
+				sprite.flip_h = (target.position.x < position.x)
+				if sprite.frame == 6 and !shot:
 					last_bullet = Global.spawn_projectile(master,"dood_vines",position,position.direction_to(target.position),true)
 					last_bullet.damage = damage
 					shot = true
-				await $AnimatedSprite2D.animation_finished
-				$AnimatedSprite2D.play("idle")
+				await sprite.animation_finished
+				sprite.play("idle")
 				$BetweenShots.start()
 				
 			else:
 				change_state(STATES.IDLE)
 		
 		STATES.DEATH:
-			await $AnimatedSprite2D.animation_finished
+			await sprite.animation_finished
 			master.minions.erase(self)
 			emit_signal("minion_died")
 			Global.kill(self)
@@ -101,7 +103,7 @@ func move(main_vec:Vector2):
 	for i in 10:
 		a = checked_vec.normalized().rotated(deg_to_rad(i*36))*200
 		c = move_and_collide(a,true)
-		if c and !is_instance_of(c.get_collider(),TileMap) and !c.get_collider().is_in_group("door"):
+		if c and !is_instance_of(c.get_collider(),TileMapLayer) and !c.get_collider().is_in_group("door"):
 			var dist = position.distance_to(c.get_collider().position)-100
 			var direc = position.direction_to(c.get_collider().position)
 			var vec = direc*dist
@@ -142,16 +144,16 @@ func change_state(new_state):
 	# After
 	match state:
 		STATES.IDLE:
-			$AnimatedSprite2D.play("idle")
+			sprite.play("idle")
 			
 		STATES.FOLLOWING:
-			$AnimatedSprite2D.play("move")
+			sprite.play("move")
 			
 		STATES.ATTACKING:
 			pass
 			
 		STATES.DEATH:
-			$AnimatedSprite2D.play("death")
+			sprite.play("death")
 			$AudioManager.play("Death")
 	
 func _on_enemy_detect_area_entered(area):
